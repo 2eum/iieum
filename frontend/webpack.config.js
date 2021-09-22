@@ -8,6 +8,14 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: "file-loader",
+      },
+      {
+        test: /\.txt$/,
+        use: "raw-loader",
+      },
     ],
   },
 };

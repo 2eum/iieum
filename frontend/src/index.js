@@ -1,4 +1,4 @@
-import App from "./components/App";
+import App from "./App";
 import axios from "axios";
 
 axios.defaults.xsrfCookieName = "csrftoken";

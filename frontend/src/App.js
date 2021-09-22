@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import { Navbar, Home, Footer } from "./Containers";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
+import GlobalStyle from "./globalStyles";
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +24,7 @@ class App extends Component {
         Authorization: "Token ff59ee976035b0ade661ea26b7a2ec277ee752c6",
       },
       data: {
-        nickname: "wook8",
+        nickname: "wook10",
         password: "qwerty321",
       },
     })
@@ -46,6 +49,14 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Router>
+          <GlobalStyle />
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={Home} />
+          </Switch>
+          <Footer />
+        </Router>
         <p>{this.state.data.User}</p>
         <p>{this.state.data.Token}</p>
       </div>
