@@ -25,7 +25,7 @@ const Navbar = () => {
         <SearchBarContainer>
           <SearchBar placeholder="검색하기" />
           <SearchButton>
-            <i class="fas fa-search"></i>
+            <i className="fas fa-search"></i>
           </SearchButton>
         </SearchBarContainer>
         <NavLinkContainer>

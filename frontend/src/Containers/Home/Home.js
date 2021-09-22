@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import {
   TodayPostContainer,
@@ -19,35 +20,62 @@ import {
 import { MusicCard } from "..";
 import { BoldSpan } from "../../globalStyles";
 
-const Content = {
-  Title: "여행 가고 싶다",
-  Author: "Baro",
-  Summary:
-    "요즘 제주도행 비행기 값이 그렇게 저렴하던데 그냥 사서 날라버릴까...",
-};
-
 const Home = () => {
+  const [content, setContent] = useState(null);
+  const [loaded, setLoad] = useState(false);
+  const [contentIdx, setIdx] = useState(0);
+  const [placeholder, setPlaceholder] = useState("Loading Content");
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "/musicdiary/",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token ff59ee976035b0ade661ea26b7a2ec277ee752c6",
+      },
+    })
+      .then((response) => {
+        if (response.status > 400) {
+          setPlaceholder("Something went wrong!");
+        }
+        return response.data;
+      })
+      .then((data) => {
+        setContent(data);
+      })
+      .then(() => {
+        setLoad(true);
+      });
+  }, []);
+
   return (
     <>
       <TodayPostContainer>
-        <Date>2021년 9월 12일</Date>
-        <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
-        <PostContainer>
-          <PrevArrowContainer to="/">
-            <i class="fas fa-chevron-left"></i>
-          </PrevArrowContainer>
-          <MusicCard />
-          <ContentWrapper>
-            <ContentTitle>
-              {Content.Title}
-              <ContentAuthor>by {Content.Author}</ContentAuthor>
-            </ContentTitle>
-            <ContentSummary>{Content.Summary}</ContentSummary>
-          </ContentWrapper>
-          <NextArrowContainer to="/">
-            <i class="fas fa-chevron-right"></i>
-          </NextArrowContainer>
-        </PostContainer>
+        {loaded === false ? (
+          <p>{placeholder}</p>
+        ) : (
+          <>
+            <Date>2021년 9월 12일</Date>
+            <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
+            <PostContainer>
+              <PrevArrowContainer to="/">
+                <i className="fas fa-chevron-left"></i>
+              </PrevArrowContainer>
+              <MusicCard />
+              <ContentWrapper>
+                <ContentTitle>
+                  {content[contentIdx].title}
+                  <ContentAuthor>by {content[contentIdx].user}</ContentAuthor>
+                </ContentTitle>
+                <ContentSummary>{content[contentIdx].content}</ContentSummary>
+              </ContentWrapper>
+              <NextArrowContainer to="/">
+                <i className="fas fa-chevron-right"></i>
+              </NextArrowContainer>
+            </PostContainer>
+          </>
+        )}
       </TodayPostContainer>
       <CreateButtonArea>
         <CreateMessage>
