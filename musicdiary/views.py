@@ -12,6 +12,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 from django.conf import settings
 
+# 전체 글 보여주기(Viewset)
 class MusicdiaryViewSet(viewsets.ModelViewSet): 
     authentication_classes = (SessionAuthentication, BasicAuthentication )
     permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
@@ -22,6 +23,7 @@ class MusicdiaryViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+# 음악 검색(View)
 class SearchView(APIView):
     @csrf_exempt
     def post(self, request):
@@ -41,6 +43,7 @@ class SearchView(APIView):
         """
         return Response({"Search word": search_word, "Results": results})
 
+# 마이페이지(Viewset) => 얘로 한번에 하고 싶었는데 같은 모델에 대해 여러개의 viewset을 router에 등록을 못하는거 같다(절망)
 class MyPageViewSet(viewsets.ModelViewSet):
     queryset = Musicdiary.objects.all()
     serializer_class = MyPageSerializer
@@ -51,3 +54,13 @@ class MyPageViewSet(viewsets.ModelViewSet):
         else:
             qs = qs.none()      # empty result
         return qs
+
+# 마이페이지(View) => 임시방편으로 내가쓴글 목록만 보여주는 건데 목록 보여주기 이외의 기능이 전혀없다..(절망2)
+class MyPageView(APIView):
+    def get(self, request):
+        serializer_context = {
+            'request': request,
+        }
+        queryset = Musicdiary.objects.filter(user=self.request.user)
+        serializer_class = MusicdiarySerializer(queryset, many=True, context=serializer_context)
+        return Response(serializer_class.data)

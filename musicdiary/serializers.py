@@ -7,11 +7,11 @@ class MusicdiarySerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = Musicdiary
-        fields = ('id','title','user','content','pub_date')
+        fields = ('url', 'id','title','user','content','pub_date')
 
 
 class MyPageSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source = 'user.nickname')
     class Meta: 
         model = Musicdiary
-        fields = ('id','title','user','content','pub_date')
+        fields = ('url', 'id','title','user','content','pub_date')
