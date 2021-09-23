@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.conf.urls import include, url
 from django.urls import path
 from rest_framework import routers
-from musicdiary.views import MusicdiaryViewSet 
+from musicdiary.views import MusicdiaryViewSet,SearchView
 from account import views
 from rest_framework.authtoken import views as authViews 
 from rest_framework.authtoken.views import obtain_auth_token
@@ -34,11 +34,12 @@ musicdiary_detail = MusicdiaryViewSet.as_view({
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    path('', include('frontend.urls')),
+    #path('', include('frontend.urls')),
     url('', include(router.urls)),
     url('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url('api-token-auth/', authViews.obtain_auth_token),
     url('signup/', views.SignupView.as_view()),
     url('login/', views.LoginView.as_view()),
     url('musicdiary/<int:pk>/',musicdiary_detail), 
+    url('spotify/', SearchView.as_view()), #음악검색
 ]
