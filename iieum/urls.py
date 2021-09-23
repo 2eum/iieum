@@ -17,14 +17,15 @@ from django.contrib import admin
 from django.conf.urls import include, url
 from django.urls import path
 from rest_framework import routers
-from musicdiary.views import MusicdiaryViewSet,SearchView
+from musicdiary.views import MusicdiaryViewSet,SearchView,MyPageViewSet
 from account import views
 from rest_framework.authtoken import views as authViews 
 from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.DefaultRouter()
 router.register('users', views.UserViewSet)
-router.register('musicdiary',MusicdiaryViewSet)
+router.register('musicdiary', MusicdiaryViewSet)
+router.register('mypage', MyPageViewSet)
 
 musicdiary_detail = MusicdiaryViewSet.as_view({
     'get': 'retrieve',
@@ -42,4 +43,5 @@ urlpatterns = [
     url('login/', views.LoginView.as_view()),
     url('musicdiary/<int:pk>/',musicdiary_detail), 
     url('spotify/', SearchView.as_view()), #음악검색
+    #url('mypage/', MyPageView.as_view()),
 ]

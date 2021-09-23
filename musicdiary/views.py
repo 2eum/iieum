@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import MusicdiarySerializer 
+from .serializers import MusicdiarySerializer,MyPageSerializer
 from .models import Musicdiary
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -40,3 +40,14 @@ class SearchView(APIView):
             미리듣기: track.preview_url
         """
         return Response({"Search word": search_word, "Results": results})
+
+class MyPageViewSet(viewsets.ModelViewSet):
+    queryset = Musicdiary.objects.all()
+    serializer_class = MyPageSerializer
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.user.is_authenticated:
+            qs = qs.filter(user=self.request.user)
+        else:
+            qs = qs.none()      # empty result
+        return qs
