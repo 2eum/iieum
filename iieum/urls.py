@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.conf.urls import include, url
 from django.urls import path
 from rest_framework import routers
-from musicdiary.views import MusicdiaryViewSet,SearchView,MyPageViewSet,MyPageView
+from musicdiary.views import MusicdiaryViewSet,SearchView,MyPageView
 from account import views
 from rest_framework.authtoken import views as authViews 
 from rest_framework.authtoken.views import obtain_auth_token
@@ -25,7 +25,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 router = routers.DefaultRouter()
 router.register('users', views.UserViewSet)
 router.register('musicdiary', MusicdiaryViewSet)
-#router.register('mypage', MyPageViewSet) # Viewset으로 구현한 mypage 보려면 여기 주석 해제(대신 전체글을 못봄)
 
 musicdiary_detail = MusicdiaryViewSet.as_view({
     'get': 'retrieve',
@@ -43,5 +42,5 @@ urlpatterns = [
     url('login/', views.LoginView.as_view()),
     url('musicdiary/<int:pk>/',musicdiary_detail), 
     url('spotify/', SearchView.as_view()), #음악검색
-    url('mypage/', MyPageView.as_view()), # View로 구현한 mypage 보려면 여기 주석 해제(대신 아무 기능도 없음)
+    url('mypage/', MyPageView.as_view()), # 마이페이지
 ]

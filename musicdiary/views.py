@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import MusicdiarySerializer,MyPageSerializer
+from .serializers import MusicdiarySerializer
 from .models import Musicdiary
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 from django.conf import settings
+from rest_framework import status
 
 # 전체 글 보여주기(Viewset)
 class MusicdiaryViewSet(viewsets.ModelViewSet): 
@@ -43,24 +44,31 @@ class SearchView(APIView):
         """
         return Response({"Search word": search_word, "Results": results})
 
-# 마이페이지(Viewset) => 얘로 한번에 하고 싶었는데 같은 모델에 대해 여러개의 viewset을 router에 등록을 못하는거 같다(절망)
-class MyPageViewSet(viewsets.ModelViewSet):
-    queryset = Musicdiary.objects.all()
-    serializer_class = MyPageSerializer
-    def get_queryset(self):
-        qs = super().get_queryset()
-        if self.request.user.is_authenticated:
-            qs = qs.filter(user=self.request.user)
-        else:
-            qs = qs.none()      # empty result
-        return qs
-
-# 마이페이지(View) => 임시방편으로 내가쓴글 목록만 보여주는 건데 목록 보여주기 이외의 기능이 전혀없다..(절망2)
+# 마이페이지(View)
 class MyPageView(APIView):
+    authentication_classes = (SessionAuthentication, BasicAuthentication )
+    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    #내가 쓴 글 보여주기
     def get(self, request):
-        serializer_context = {
-            'request': request,
-        }
-        queryset = Musicdiary.objects.filter(user=self.request.user)
-        serializer_class = MusicdiarySerializer(queryset, many=True, context=serializer_context)
-        return Response(serializer_class.data)
+        if request.user.is_authenticated:
+            serializer_context = {
+                'request': request,
+            }
+            queryset = Musicdiary.objects.filter(user=self.request.user)
+            serializer_class = MusicdiarySerializer(queryset, many=True, context=serializer_context)
+            return Response(serializer_class.data)
+        else:
+            return Response({"detail":"Please login"})
+    #내페이지에서 글 쓰기
+    def post(self, request):
+        if request.user.is_authenticated:
+            serializer_context = {
+                'request': request,
+            }
+            serializer = MusicdiarySerializer(data=request.data, context=serializer_context)
+            if serializer.is_valid(): #유효성 검사
+                serializer.save(user=self.request.user) # 저장
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"detail":"Please login"})
