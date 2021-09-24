@@ -7,4 +7,4 @@ class MusicdiarySerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = Musicdiary
-        fields = ('id','title','user','content','pub_date')
+        fields = ('url', 'id','title','user','content','pub_date')
