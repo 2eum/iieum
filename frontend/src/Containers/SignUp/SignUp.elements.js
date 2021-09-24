@@ -10,7 +10,7 @@ export const RegisterSection = styled.main`
   text-align: center;
 `;
 
-export const RegisterForm = styled.form`
+export const RegisterForm = styled.div`
   width: 25%;
   margin: 5% auto;
 
@@ -45,21 +45,13 @@ export const InputContainer = styled.div`
   margin-bottom: 5%;
 `;
 
-export const NicknameContainer = styled(InputContainer)``;
-
-export const PasswordContainer = styled(InputContainer)``;
-
-export const RegisterLabel = styled.label`
+export const InputLabel = styled.label`
   align-self: flex-start;
 
   margin: 3% 0;
 
   text-align: left;
 `;
-
-export const NicknameLabel = styled(RegisterLabel)``;
-
-export const PasswordLabel = styled(RegisterLabel)``;
 
 export const RegisterInput = styled.input`
   padding: 0.5rem;
@@ -71,10 +63,6 @@ export const RegisterInput = styled.input`
     outline: none;
   }
 `;
-
-export const NicknameInput = styled(RegisterInput)``;
-
-export const PasswordInput = styled(RegisterInput)``;
 
 export const RegisterBtnContainer = styled.div`
   display: flex;
