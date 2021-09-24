@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { Navbar, Home, Footer } from "./Containers";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
+import SignUp from "./Containers/SignUp/SignUp";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/register" exact component={SignUp} />
         </Switch>
         <Footer />
       </Router>
