@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import MusicdiarySerializer
-from .models import Musicdiary
+from .serializers import MusicdiarySerializer, QuestionSerializer
+from .models import Musicdiary, Question
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
@@ -21,8 +21,11 @@ class MusicdiaryViewSet(viewsets.ModelViewSet):
     serializer_class = MusicdiarySerializer
 
     # serializer.save() 재정의
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    def perform_create(self, serializer): #쓰기
+        serializer.save(user=self.request.user)#, track_title=self.request.data['track_title'], track_artist=self.request.data['track_artist'], track_album_cover=self.request.data['track_album_cover'], track_audio=self.request.data['track_audio'])
+
+    #def perform_update(self, serializer): #수정하기
+        #serializer.save(user=self.request.user, track_title=self.request.data['track_title'], track_artist=self.request.data['track_artist'], track_album_cover=self.request.data['track_album_cover'], track_audio=self.request.data['track_audio'])
 
 # 음악 검색(View)
 class SearchView(APIView):
@@ -67,8 +70,18 @@ class MyPageView(APIView):
             }
             serializer = MusicdiarySerializer(data=request.data, context=serializer_context)
             if serializer.is_valid(): #유효성 검사
-                serializer.save(user=self.request.user) # 저장
+                serializer.save(user=self.request.user)#, track_title=self.request.data['track_title'], track_artist=self.request.data['track_artist'], track_album_cover=self.request.data['track_album_cover'], track_audio=self.request.data['track_audio']) # 저장
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"detail":"Please login"})
+
+class QuestionViewSet(viewsets.ModelViewSet): 
+    authentication_classes = (SessionAuthentication, BasicAuthentication )
+    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    queryset = Question.objects.all() 
+    serializer_class = QuestionSerializer
+
+    # serializer.save() 재정의
+    def perform_create(self, serializer): #쓰기
+        serializer.save(user=self.request.user)
