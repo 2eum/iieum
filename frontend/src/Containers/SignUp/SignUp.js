@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
+import CSRFToken from "../../Components/csrftoken";
+import { Redirect } from "react-router";
 
 import {
   RegisterSection,
@@ -14,40 +16,35 @@ import {
   ToLoginLink,
 } from "./SignUp.elements";
 
-const SignUp = () => {
+const SignUp = ({ token, saveUserData, currUser }) => {
   const [nickname, setNickname] = useState("");
   const [pwd, setPwd] = useState("");
   const [pwdConfirm, setConfirm] = useState("");
 
   const nicknameInputChange = (e) => {
     setNickname(e.target.value);
-    console.log(nickname);
   };
 
   const pwdInputChange = (e) => {
     setPwd(e.target.value);
-    console.log(pwd);
   };
 
   const pwdConfirmInputChange = (e) => {
     setConfirm(e.target.value);
-    console.log(pwdConfirm);
   };
 
   const validateInput = () => {
-    console.log(2);
     return nickname !== "" && pwd !== "" && pwd === pwdConfirm ? true : false;
   };
 
   const onRegisterClick = () => {
-    console.log(1);
     if (validateInput()) {
       axios({
         method: "post",
-        url: "/signup/",
+        url: "/api/signup/",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Token ff59ee976035b0ade661ea26b7a2ec277ee752c6",
+          Authorization: `Token ${token}`,
         },
         data: {
           nickname: nickname,
@@ -61,14 +58,17 @@ const SignUp = () => {
           return response.data;
         })
         .then((data) => {
-          console.log(data);
+          saveUserData(data.Token, data.User);
         });
     }
   };
 
-  return (
+  return currUser ? (
+    <Redirect to="/" />
+  ) : (
     <RegisterSection>
       <RegisterForm>
+        <CSRFToken />
         <RegisterLegend>회원가입</RegisterLegend>
         <RegisterFieldset>
           <InputContainer>

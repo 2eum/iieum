@@ -1,24 +1,42 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { render } from "react-dom";
 import { Navbar, Home, Footer } from "./Containers";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 import SignUp from "./Containers/SignUp/SignUp";
 
 const App = () => {
+  const [token, setToken] = useState(
+    "9e787f18c8487f3b34b200ad799dd30824712a5b"
+  );
+  const [currUser, setUser] = useState(null);
+
+  const saveUserData = (token, user) => {
+    setToken(token);
+    setUser(user);
+  };
+
   return (
     <div>
       <Router>
         <GlobalStyle />
-        <Navbar />
+        <Navbar currUser={currUser} />
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/register" exact component={SignUp} />
+          <Route path="/" exact component={Home} token={token} />
+          <Route
+            path="/register"
+            exact
+            render={() => (
+              <SignUp
+                token={token}
+                saveUserData={saveUserData}
+                currUser={currUser}
+              />
+            )}
+          />
         </Switch>
         <Footer />
       </Router>
-      {/* <p>{this.state.data.User}</p>
-        <p>{this.state.data.Token}</p> */}
     </div>
   );
 };
