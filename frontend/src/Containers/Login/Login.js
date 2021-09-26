@@ -9,11 +9,10 @@ import {
   LoginLegend,
   LoginFieldset,
   InputContainer,
-  InputLabel,
   LoginInput,
   LoginBtnContainer,
   LoginBtn,
-  ToLoginLink,
+  ToRegisterLink,
 } from "./Login.elements";
 
 const Login = ({ token, saveUserData, currUser }) => {
@@ -64,10 +63,9 @@ const Login = ({ token, saveUserData, currUser }) => {
     <LoginSection>
       <LoginForm>
         <CSRFToken />
-        <LoginLegend>로그인</LoginLegend>
+        <LoginLegend>이음에서 당신의 오늘을 기록하세요</LoginLegend>
         <LoginFieldset>
           <InputContainer>
-            <InputLabel htmlFor="nickname">닉네임</InputLabel>
             <LoginInput
               type="text"
               name="nickname"
@@ -78,7 +76,6 @@ const Login = ({ token, saveUserData, currUser }) => {
             />
           </InputContainer>
           <InputContainer>
-            <InputLabel htmlFor="password">비밀번호</InputLabel>
             <LoginInput
               type="password"
               name="password"
@@ -91,7 +88,7 @@ const Login = ({ token, saveUserData, currUser }) => {
         </LoginFieldset>
         <LoginBtnContainer>
           <LoginBtn onClick={() => onLoginClick()}>로그인</LoginBtn>
-          <ToLoginLink to="/signup">회원가입하기</ToLoginLink>
+          <ToRegisterLink to="/signup">회원가입하기</ToRegisterLink>
         </LoginBtnContainer>
       </LoginForm>
     </LoginSection>

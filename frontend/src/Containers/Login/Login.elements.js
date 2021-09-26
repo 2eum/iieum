@@ -11,10 +11,14 @@ export const LoginSection = styled.main`
 `;
 
 export const LoginForm = styled.div`
-  width: 25%;
+  width: 45%;
   margin: 5% auto;
+  padding: 2% 8%;
 
   text-align: center;
+
+  background-color: ${nearWhite};
+  box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
 `;
 
 export const LoginFieldset = styled.fieldset`
@@ -28,13 +32,10 @@ export const LoginFieldset = styled.fieldset`
 `;
 
 export const LoginLegend = styled.legend`
-  margin: 3% auto;
-  padding: 5%;
-
-  border-bottom: 2px solid ${lightBrown};
+  margin: 5% auto 10% auto;
 
   color: ${lightBrown};
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   text-align: center;
 `;
 
@@ -43,14 +44,6 @@ export const InputContainer = styled.div`
   flex-direction: column;
 
   margin-bottom: 5%;
-`;
-
-export const InputLabel = styled.label`
-  align-self: flex-start;
-
-  margin: 3% 0;
-
-  text-align: left;
 `;
 
 export const LoginInput = styled.input`
@@ -72,7 +65,7 @@ export const LoginBtnContainer = styled.div`
 export const LoginBtn = styled.button`
   width: 100%;
 
-  margin: 1rem auto;
+  margin: 0 auto 1rem auto;
   padding: 0.4rem 0;
 
   border-radius: 4px;
@@ -92,6 +85,8 @@ export const LoginBtn = styled.button`
   }
 `;
 
-export const ToLoginLink = styled(Link)`
-  font-size: 0.9rem;
+export const ToRegisterLink = styled(Link)`
+  align-self: flex-end;
+
+  font-size: 0.8rem;
 `;
