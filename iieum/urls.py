@@ -17,28 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include, url
 from django.urls import path
-from rest_framework import routers
-from musicdiary.views import MusicdiaryViewSet,SearchView,MyPageView,QuestionViewSet
-from account import views
 
-router = routers.DefaultRouter()
-router.register('users', views.UserViewSet)
-router.register('musicdiary', MusicdiaryViewSet)
-router.register('question', QuestionViewSet)
 
-musicdiary_detail = MusicdiaryViewSet.as_view({
-    'get': 'retrieve',
-    'put': 'update',
-    'delete': 'destroy'
-})
 
 urlpatterns = [
     url('admin/', admin.site.urls),
     path('', include('frontend.urls')),
-    url('', include(router.urls)),
-    url('signup/', views.SignupView.as_view()),
-    url('login/', views.LoginView.as_view()),
-    url('musicdiary/<int:pk>/', musicdiary_detail), 
-    url('spotify/', SearchView.as_view()), #음악검색
-    url('mypage/', MyPageView.as_view()), # 마이페이지
+    path('', include('account.urls')),
+    path('', include('musicdiary.urls')),
 ]
