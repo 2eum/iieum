@@ -34,11 +34,16 @@ const Navbar = ({ currUser }) => {
             어서오세요 {currUser ? `${currUser}님` : ""} :)
           </GreetMessage>
           <RightNavLinksWrapper>
-            <NavLink to="/">내 페이지</NavLink>
             {currUser ? (
-              <NavLink to="/">로그아웃</NavLink>
+              <>
+                <NavLink to="/">내 페이지</NavLink>
+                <NavLink to="/">로그아웃</NavLink>
+              </>
             ) : (
-              <NavLink to="/register">회원가입</NavLink>
+              <>
+                <NavLink to="/login">로그인</NavLink>
+                <NavLink to="/register">회원가입</NavLink>
+              </>
             )}
             <NavLink to="/">피드백 남기기</NavLink>
           </RightNavLinksWrapper>
