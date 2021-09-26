@@ -29,7 +29,7 @@ const Home = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "/musicdiary/",
+      url: "/api/musicdiary/",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Token ff59ee976035b0ade661ea26b7a2ec277ee752c6",
