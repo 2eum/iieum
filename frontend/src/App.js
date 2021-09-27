@@ -4,6 +4,7 @@ import { Navbar, Home, Footer } from "./Containers";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 import SignUp from "./Containers/SignUp/SignUp";
+import Login from "./Containers/Login/Login";
 
 const App = () => {
   const [token, setToken] = useState(
@@ -28,6 +29,17 @@ const App = () => {
             exact
             render={() => (
               <SignUp
+                token={token}
+                saveUserData={saveUserData}
+                currUser={currUser}
+              />
+            )}
+          />
+          <Route
+            path="/login"
+            exact
+            render={() => (
+              <Login
                 token={token}
                 saveUserData={saveUserData}
                 currUser={currUser}
