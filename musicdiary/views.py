@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .serializers import MusicdiarySerializer, QuestionSerializer
 from .models import Musicdiary, Question
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
@@ -15,8 +15,8 @@ from rest_framework import status
 
 # 전체 글 보여주기(Viewset)
 class MusicdiaryViewSet(viewsets.ModelViewSet): 
-    authentication_classes = (SessionAuthentication, BasicAuthentication )
-    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     queryset = Musicdiary.objects.all() 
     serializer_class = MusicdiarySerializer
 
@@ -49,7 +49,7 @@ class SearchView(APIView):
 
 # 마이페이지(View)
 class MyPageView(APIView):
-    authentication_classes = (SessionAuthentication, BasicAuthentication )
+    authentication_classes = [TokenAuthentication]
     permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
     #내가 쓴 글 보여주기
     def get(self, request):
@@ -77,7 +77,7 @@ class MyPageView(APIView):
             return Response({"detail":"Please login"})
 
 class QuestionViewSet(viewsets.ModelViewSet): 
-    authentication_classes = (SessionAuthentication, BasicAuthentication )
+    authentication_classes = [TokenAuthentication]
     permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
     queryset = Question.objects.all() 
     serializer_class = QuestionSerializer

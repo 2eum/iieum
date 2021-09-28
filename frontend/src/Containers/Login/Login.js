@@ -15,7 +15,7 @@ import {
   ToRegisterLink,
 } from "./Login.elements";
 
-const Login = ({ token, saveUserData, currUser }) => {
+const Login = ({ saveUserData, currUser }) => {
   const [nickname, setNickname] = useState("");
   const [pwd, setPwd] = useState("");
 
@@ -38,7 +38,6 @@ const Login = ({ token, saveUserData, currUser }) => {
         url: "/api/login/",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
         },
         data: {
           nickname: nickname,
