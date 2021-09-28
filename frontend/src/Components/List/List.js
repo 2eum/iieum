@@ -65,7 +65,9 @@ const List = () => {
   content.map((c) => {
     const itemDate = new Date(c.pub_date);
 
-    const dateString = `${itemDate.getFullYear()}년 ${itemDate.getMonth()}월 ${itemDate.getDate()}일`;
+    const dateString = `${itemDate.getFullYear()}년 ${
+      itemDate.getMonth() + 1
+    }월 ${itemDate.getDate()}일`;
 
     const item = (
       <Content>
