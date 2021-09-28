@@ -18,7 +18,7 @@ const Navbar = ({ currUser }) => {
   return (
     <>
       <NavContainer>
-        <LogoContainer>
+        <LogoContainer to="/">
           <Logo src={LogoImg} onClick={() => {}} />
         </LogoContainer>
 
@@ -36,7 +36,7 @@ const Navbar = ({ currUser }) => {
           <RightNavLinksWrapper>
             {currUser ? (
               <>
-                <NavLink to="/">내 페이지</NavLink>
+                <NavLink to="/mypage">내 페이지</NavLink>
                 <NavLink to="/">로그아웃</NavLink>
               </>
             ) : (
