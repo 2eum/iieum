@@ -24,7 +24,7 @@ const MyPage = ({ token }) => {
       <MyPageBanner>
         <Date>2021년 9월 12일</Date>
         <Message>오늘 하루는 어땠나요?</Message>
-        <CreateButton>오늘의 일기 쓰기</CreateButton>
+        <CreateButton to="/new">오늘의 일기 쓰기</CreateButton>
       </MyPageBanner>
 
       <MainContentContainer>

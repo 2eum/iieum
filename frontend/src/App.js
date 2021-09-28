@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import { render } from "react-dom";
-import { Navbar, Home, Footer, SignUp, Login, MyPage } from "./Containers";
+import { Navbar, Home, Footer, SignUp, Login, MyPage, New } from "./Containers";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 
@@ -23,6 +23,7 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} token={token} />
           <Route path="/mypage" exact render={() => <MyPage token={token} />} />
+          <Route path="/new" exact render={() => <New />} />
           <Route
             path="/register"
             exact

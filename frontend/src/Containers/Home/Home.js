@@ -82,7 +82,7 @@ const Home = () => {
           오늘, <BoldSpan>당신의 하루</BoldSpan> 어떤 <BoldSpan>선율</BoldSpan>
           이었나요?
         </CreateMessage>
-        <CreateButton>내 이야기 쓰러가기</CreateButton>
+        <CreateButton to="/new">내 이야기 쓰러가기</CreateButton>
       </CreateButtonArea>
     </>
   );
