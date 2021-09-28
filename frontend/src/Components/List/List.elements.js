@@ -12,7 +12,7 @@ export const Content = styled.article`
   margin-top: 2rem;
 `;
 
-export const Date = styled.p`
+export const ContentPubDate = styled.p`
   margin-bottom: 1.5rem;
   font-size: 1.25rem;
 `;
