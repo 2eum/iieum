@@ -43,7 +43,7 @@ export const FormBody = styled.textarea`
   border-radius: 0.125rem;
 `;
 
-export const SaveButton = styled.button`
+export const SaveButton = styled.p`
   padding: 0.5rem 1.5rem;
 
   border: none;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Redirect } from "react-router";
 import {
   FormArea,
   FormTopContainer,
@@ -9,26 +10,30 @@ import {
   SaveButton,
 } from "./DiaryForm.elements";
 
-const DiaryForm = () => {
+const DiaryForm = ({ token }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [submitStat, setSubmitStat] = useState(false);
 
   const handleSubmit = (e) => {
-    // axios({
-    //   method: "post",
-    //   url: "api/mypage/",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: "Token ff59ee976035b0ade661ea26b7a2ec277ee752c6",
-    //   },
-    //   data: {
-    //     title: title,
-    //     content: body,
-    //   },
-    // });
+    axios({
+      method: "post",
+      url: "api/musicdiary/",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+      data: {
+        title: title,
+        content: body,
+        question: 1,
+      },
+    }).then(() => setSubmitStat(true));
   };
 
-  return (
+  return submitStat ? (
+    <Redirect to="/" />
+  ) : (
     <>
       <FormArea onSubmit={handleSubmit}>
         <FormTopContainer>
