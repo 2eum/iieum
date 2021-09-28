@@ -6,13 +6,21 @@ import GlobalStyle from "./globalStyles";
 
 const App = () => {
   const [token, setToken] = useState(
-    "9e787f18c8487f3b34b200ad799dd30824712a5b"
+    JSON.parse(localStorage.getItem("token")).token
   );
-  const [currUser, setUser] = useState(null);
+  const [currUser, setUser] = useState(
+    JSON.parse(window.localStorage.getItem("user")).user
+  );
 
   const saveUserData = (token, user) => {
     setToken(token);
     setUser(user);
+
+    const tokenObj = { token: token };
+    window.localStorage.setItem("token", JSON.stringify(tokenObj));
+
+    const userObj = { user: user };
+    window.localStorage.setItem("user", JSON.stringify(userObj));
   };
 
   return (
@@ -21,7 +29,7 @@ const App = () => {
         <GlobalStyle />
         <Navbar currUser={currUser} />
         <Switch>
-          <Route path="/" exact component={Home} token={token} />
+          <Route path="/" exact render={() => <Home token={token} />} />
           <Route path="/mypage" exact render={() => <MyPage token={token} />} />
           <Route
             path="/register"
