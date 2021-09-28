@@ -36,17 +36,17 @@ import axios from "axios";
 //   },
 // ];
 
-const List = () => {
+const List = ({ token }) => {
   const [content, setContent] = useState([]);
 
   useEffect(() => {
     // get all music diary data
     axios({
       method: "get",
-      url: "/api/musicdiary/",
+      url: "/api/mypage/",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Token ff59ee976035b0ade661ea26b7a2ec277ee752c6",
+        Authorization: `Token ${token}`,
       },
     })
       .then((response) => {
