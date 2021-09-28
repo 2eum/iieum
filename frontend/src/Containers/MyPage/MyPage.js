@@ -13,7 +13,7 @@ import {
 import { MainContentContainer } from "../../globalStyles";
 
 const MyPage = ({ token }) => {
-  const [view, setView] = useState("cal");
+  const [view, setView] = useState("list");
 
   const changeView = (e) => {
     setView(e.target.value);
