@@ -18,13 +18,13 @@ import {
 const Calendar = () => {
   const [viewMonth, setMonth] = useState({ year: 2021, month: 8 });
 
+  // api content state
   const [content, setContent] = useState({});
-
-  const [loaded, setLoad] = useState(false);
 
   const [placeholder, setPlaceholder] = useState("Loading Content");
 
   useEffect(() => {
+    // get all music diary data
     axios({
       method: "get",
       url: "/api/musicdiary/",
@@ -34,12 +34,14 @@ const Calendar = () => {
       },
     })
       .then((response) => {
+        // error handling
         if (response.status > 400) {
           setPlaceholder("Something went wrong!");
         }
         return response.data;
       })
       .then((data) => {
+        // set up data for state
         const obj = {};
         data.forEach((d) => {
           const keyDate = new Date(d.pub_date);
@@ -48,31 +50,32 @@ const Calendar = () => {
         });
         return obj;
       })
-      .then((data) => setContent(data))
-      .then(() => {
-        setLoad(true);
-        getDateItems();
-      });
+      .then((data) => setContent(data)); // add data to state
   }, []);
 
+  // array for all dates in calendar
   const viewDates = [];
 
+  // get first and last week day of month
   const firstDate = new Date(viewMonth.year, viewMonth.month, 1);
   const beginDay = firstDate.getDay();
 
   const lastDate = new Date(viewMonth.year, viewMonth.month + 1, 0);
   const endDay = lastDate.getDay();
 
+  // prev month fill in
   for (let i = -1 * beginDay + 1; i <= 0; i++) {
     let prevDate = new Date(viewMonth.year, viewMonth.month, i);
     viewDates.push(prevDate);
   }
 
+  // current month dates
   for (let i = 1; i <= lastDate.getDate(); i++) {
     let currDate = new Date(viewMonth.year, viewMonth.month, i);
     viewDates.push(currDate);
   }
 
+  // next month dates fill in
   for (let i = 1; endDay + i <= 6; i++) {
     let nextDate = new Date(
       viewMonth.year,
@@ -82,6 +85,7 @@ const Calendar = () => {
     viewDates.push(nextDate);
   }
 
+  // create date items
   let items = viewDates.map((d) => {
     let date = `${d.getMonth() + 1}-${d.getDate()}`;
     return (
