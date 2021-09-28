@@ -1,10 +1,8 @@
 import React, { Component, useState } from "react";
 import { render } from "react-dom";
-import { Navbar, Home, Footer } from "./Containers";
+import { Navbar, Home, Footer, SignUp, Login, MyPage } from "./Containers";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
-import SignUp from "./Containers/SignUp/SignUp";
-import Login from "./Containers/Login/Login";
 
 const App = () => {
   const [token, setToken] = useState(
@@ -24,6 +22,7 @@ const App = () => {
         <Navbar currUser={currUser} />
         <Switch>
           <Route path="/" exact component={Home} token={token} />
+          <Route path="/mypage" exact component={MyPage} token={token} />
           <Route
             path="/register"
             exact
