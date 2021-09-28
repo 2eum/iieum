@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router";
 import {
   FormArea,
+  FormQuestion,
   FormTopContainer,
   FormTitle,
   FormBody,
@@ -13,7 +14,30 @@ import {
 const DiaryForm = ({ token }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [questionId, setQuestionId] = useState("");
   const [submitStat, setSubmitStat] = useState(false);
+
+  const [questionList, setQuestions] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "api/question/",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => {
+        const list = [];
+        response.data.map((d) => {
+          const qSet = { id: d.id, question: d.question_content };
+          list.push(qSet);
+        });
+        return list;
+      })
+      .then((data) => setQuestions(data));
+  }, []);
 
   const handleSubmit = (e) => {
     axios({
@@ -26,9 +50,26 @@ const DiaryForm = ({ token }) => {
       data: {
         title: title,
         content: body,
-        question: 1,
+        question: questionId,
       },
     }).then(() => setSubmitStat(true));
+  };
+
+  const qListComponent = [
+    <option disabled selected value>
+      질문을 선택해주세요
+    </option>,
+  ];
+  questionList.map((q) => {
+    qListComponent.push(
+      <option key={q.id} value={q.id}>
+        {q.question}
+      </option>
+    );
+  });
+
+  const onQuestionChange = (e) => {
+    setQuestionId(e.target.value);
   };
 
   return submitStat ? (
@@ -36,6 +77,9 @@ const DiaryForm = ({ token }) => {
   ) : (
     <>
       <FormArea onSubmit={handleSubmit}>
+        <FormQuestion onChange={(e) => onQuestionChange(e)}>
+          {qListComponent}
+        </FormQuestion>
         <FormTopContainer>
           <FormTitle
             type="text"

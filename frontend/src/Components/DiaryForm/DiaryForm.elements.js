@@ -14,10 +14,16 @@ export const FormArea = styled.form`
   }
 `;
 
+export const FormQuestion = styled.select`
+  width: 50%;
+  height: 2rem;
+
+  margin-top: 4rem;
+`;
 export const FormTopContainer = styled.section`
   display: flex;
   justify-content: space-between;
-  height: 8rem;
+  height: 6rem;
   align-items: center;
 `;
 
