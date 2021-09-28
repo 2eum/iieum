@@ -40,7 +40,7 @@ const MyPage = ({ token }) => {
             캘린더 보기
           </ViewSwitch>
         </ViewSwitchWrapper>
-        {view === "list" ? <List /> : <Calendar token={token} />}
+        {view === "list" ? <List token={token} /> : <Calendar token={token} />}
       </MainContentContainer>
     </>
   );
