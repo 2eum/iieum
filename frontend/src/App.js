@@ -22,7 +22,7 @@ const App = () => {
         <Navbar currUser={currUser} />
         <Switch>
           <Route path="/" exact component={Home} token={token} />
-          <Route path="/mypage" exact component={MyPage} token={token} />
+          <Route path="/mypage" exact render={() => <MyPage token={token} />} />
           <Route
             path="/register"
             exact

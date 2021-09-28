@@ -12,7 +12,7 @@ import {
 
 import { MainContentContainer } from "../../globalStyles";
 
-const MyPage = () => {
+const MyPage = ({ token }) => {
   const [view, setView] = useState("cal");
 
   const changeView = (e) => {
@@ -37,7 +37,7 @@ const MyPage = () => {
             캘린더 보기
           </ViewSwitch>
         </ViewSwitchWrapper>
-        {view === "list" ? <List /> : <Calendar />}
+        {view === "list" ? <List /> : <Calendar token={token} />}
       </MainContentContainer>
     </>
   );

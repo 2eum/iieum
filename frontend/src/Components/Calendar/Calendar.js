@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import blank from "./blank.png";
 
@@ -14,41 +15,45 @@ import {
   MonthChangeButton,
 } from "./Calendar.elements";
 
-const sampleData = {
-  "9-26": {
-    url: "http://127.0.0.1:8000/api/musicdiary/1/",
-    id: 1,
-    title: "피 피카츄~",
-    user: "wook",
-    content: "피까피까!",
-    pub_date: "2021-09-26T00:48:36.113238+09:00",
-    img_link:
-      "https://ww.namu.la/s/bded2b2e08e690ab4dafcf6931ca23742efa29aba60d55350816c3441e0d6208849b946c8d683aed2850de028019702746ab51626cc3d4a036d7c0d550c8d7c51fc5d800f17c264304e883c214107058",
-    question: {
-      url: "http://127.0.0.1:8000/api/question/1/",
-      id: 1,
-      question_content: "오늘의 포켓몬은 뭘까아아아요?",
-    },
-  },
-  "9-29": {
-    url: "http://127.0.0.1:8000/api/musicdiary/2/",
-    id: 2,
-    title: "라 라이츄~",
-    user: "wook",
-    content: "피까피까!",
-    pub_date: "2021-09-29T00:48:36.113238+09:00",
-    img_link:
-      "https://ww.namu.la/s/bded2b2e08e690ab4dafcf6931ca23742efa29aba60d55350816c3441e0d6208849b946c8d683aed2850de028019702746ab51626cc3d4a036d7c0d550c8d7c51fc5d800f17c264304e883c214107058",
-    question: {
-      url: "http://127.0.0.1:8000/api/question/1/",
-      id: 1,
-      question_content: "오늘의 포켓몬은 뭘까아아아요?",
-    },
-  },
-};
-
 const Calendar = () => {
   const [viewMonth, setMonth] = useState({ year: 2021, month: 8 });
+
+  const [content, setContent] = useState({});
+
+  const [loaded, setLoad] = useState(false);
+
+  const [placeholder, setPlaceholder] = useState("Loading Content");
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "/api/musicdiary/",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token ff59ee976035b0ade661ea26b7a2ec277ee752c6",
+      },
+    })
+      .then((response) => {
+        if (response.status > 400) {
+          setPlaceholder("Something went wrong!");
+        }
+        return response.data;
+      })
+      .then((data) => {
+        const obj = {};
+        data.forEach((d) => {
+          const keyDate = new Date(d.pub_date);
+          const key = `${keyDate.getMonth() + 1}-${keyDate.getDate()}`;
+          obj[key] = d;
+        });
+        return obj;
+      })
+      .then((data) => setContent(data))
+      .then(() => {
+        setLoad(true);
+        getDateItems();
+      });
+  }, []);
 
   const viewDates = [];
 
@@ -77,7 +82,7 @@ const Calendar = () => {
     viewDates.push(nextDate);
   }
 
-  const dates = viewDates.map((d) => {
+  let items = viewDates.map((d) => {
     let date = `${d.getMonth() + 1}-${d.getDate()}`;
     return (
       <DateItem
@@ -87,8 +92,11 @@ const Calendar = () => {
         <DateNum day={d.getDay() === 0 ? "sun" : d.getDay() === 6 ? "sat" : ""}>
           {d.getDate()}
         </DateNum>
-        {sampleData[date] ? (
-          <DateImg src={sampleData[date].img_link} alt="pikachu" />
+        {date in content ? (
+          <DateImg
+            src="https://ww.namu.la/s/bded2b2e08e690ab4dafcf6931ca23742efa29aba60d55350816c3441e0d6208849b946c8d683aed2850de028019702746ab51626cc3d4a036d7c0d550c8d7c51fc5d800f17c264304e883c214107058"
+            alt="pikachu"
+          />
         ) : (
           <DateImg src={blank} alt="pikachu" />
         )}
@@ -128,7 +136,7 @@ const Calendar = () => {
         <p>금</p>
         <p>토</p>
       </WeekDaysArea>
-      <DatesArea rows={viewDates.length / 7}>{dates}</DatesArea>
+      <DatesArea rows={viewDates.length / 7}>{items}</DatesArea>
     </CalendarArea>
   );
 };
