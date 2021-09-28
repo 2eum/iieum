@@ -12,9 +12,10 @@ import {
   NavLink,
   RightNavLinksWrapper,
   GreetMessage,
+  LogoutLink,
 } from "./Navbar.elements";
 
-const Navbar = ({ currUser }) => {
+const Navbar = ({ currUser, handleLogout }) => {
   return (
     <>
       <NavContainer>
@@ -37,7 +38,7 @@ const Navbar = ({ currUser }) => {
             {currUser ? (
               <>
                 <NavLink to="/mypage">내 페이지</NavLink>
-                <NavLink to="/">로그아웃</NavLink>
+                <LogoutLink onClick={() => handleLogout()}>로그아웃</LogoutLink>
               </>
             ) : (
               <>

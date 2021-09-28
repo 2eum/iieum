@@ -5,7 +5,8 @@ from .serializers import UserSerializer, LoginSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.csrf import csrf_exempt
+from rest_framework.permissions import AllowAny
 
 # 문법 나중에 바꾸기 !!! UserViewSet 까먹지마
 
@@ -18,7 +19,7 @@ class UserViewSet(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
 
 class SignupView(APIView):
-    @csrf_exempt
+    permission_classes = [AllowAny]
     def post(self, request):
         user = User.objects.create_user(nickname=request.data['nickname'], password=request.data['password'])
         user.save()
@@ -29,8 +30,8 @@ class SignupView(APIView):
 
 
 class LoginView(generics.GenericAPIView):
+    permission_classes = [AllowAny]
     serializer_class = LoginSerializer
-    @csrf_exempt
     def post(self, request):
         # req_nickname= request.data['nickname']
         # obj = User.objects.get(nickname=req_nickname)

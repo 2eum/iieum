@@ -1,27 +1,43 @@
 import React, { Component, useState } from "react";
 import { render } from "react-dom";
 import { Navbar, Home, Footer, SignUp, Login, MyPage, New } from "./Containers";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 
 const App = () => {
   const [token, setToken] = useState(
-    "9e787f18c8487f3b34b200ad799dd30824712a5b"
+    localStorage.getItem("token")
+      ? JSON.parse(localStorage.getItem("token")).token
+      : ""
   );
-  const [currUser, setUser] = useState(null);
+  const [currUser, setUser] = useState(
+    localStorage.getItem("user")
+      ? JSON.parse(window.localStorage.getItem("user")).user
+      : ""
+  );
 
   const saveUserData = (token, user) => {
     setToken(token);
     setUser(user);
+
+    const tokenObj = { token: token };
+    window.localStorage.setItem("token", JSON.stringify(tokenObj));
+
+    const userObj = { user: user };
+    window.localStorage.setItem("user", JSON.stringify(userObj));
+  };
+
+  const handleLogout = () => {
+    window.localStorage.clear();
+    location.reload();
   };
 
   return (
     <div>
       <Router>
         <GlobalStyle />
-        <Navbar currUser={currUser} />
+        <Navbar currUser={currUser} handleLogout={handleLogout} />
         <Switch>
-          <Route path="/" exact component={Home} token={token} />
+          <Route path="/" exact render={() => <Home token={token} />} />
           <Route path="/mypage" exact render={() => <MyPage token={token} />} />
           <Route path="/new" exact render={() => <New />} />
           <Route

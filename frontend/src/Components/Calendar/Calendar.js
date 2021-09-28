@@ -15,7 +15,7 @@ import {
   MonthChangeButton,
 } from "./Calendar.elements";
 
-const Calendar = () => {
+const Calendar = ({ token }) => {
   const [viewMonth, setMonth] = useState({ year: 2021, month: 8 });
 
   // api content state
@@ -27,10 +27,10 @@ const Calendar = () => {
     // get all music diary data
     axios({
       method: "get",
-      url: "/api/musicdiary/",
+      url: "/api/mypage/",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Token ff59ee976035b0ade661ea26b7a2ec277ee752c6",
+        Authorization: `Token ${token}`,
       },
     })
       .then((response) => {

@@ -44,7 +44,6 @@ const SignUp = ({ token, saveUserData, currUser }) => {
         url: "/api/signup/",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
         },
         data: {
           nickname: nickname,
