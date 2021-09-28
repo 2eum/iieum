@@ -91,7 +91,17 @@ export const NavLink = styled(Link)`
   }
 `;
 
+export const LogoutLink = styled.p`
+  cursor: pointer;
+
+  &:hover {
+    translate: scale(1.05);
+    color: #dba691;
+  }
+`;
+
 export const RightNavLinksWrapper = styled.div`
+  display: flex;
   & * {
     margin: 0 1rem;
     font-size: 0.9rem;

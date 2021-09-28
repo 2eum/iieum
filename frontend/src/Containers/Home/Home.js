@@ -20,7 +20,7 @@ import {
 import { MusicCard } from "..";
 import { BoldSpan } from "../../globalStyles";
 
-const Home = () => {
+const Home = ({ token }) => {
   const [content, setContent] = useState(null);
   const [loaded, setLoad] = useState(false);
   const [contentIdx, setIdx] = useState(0);
@@ -32,7 +32,6 @@ const Home = () => {
       url: "/api/musicdiary/",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Token ff59ee976035b0ade661ea26b7a2ec277ee752c6",
       },
     })
       .then((response) => {

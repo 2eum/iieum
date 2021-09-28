@@ -11,6 +11,7 @@ import {
 } from "./MyPage.elements";
 
 import { MainContentContainer } from "../../globalStyles";
+import { Redirect } from "react-router";
 
 const MyPage = ({ token }) => {
   const [view, setView] = useState("list");
@@ -19,7 +20,9 @@ const MyPage = ({ token }) => {
     setView(e.target.value);
   };
 
-  return (
+  return token === "" ? (
+    <Redirect to="/" />
+  ) : (
     <>
       <MyPageBanner>
         <Date>2021년 9월 12일</Date>
