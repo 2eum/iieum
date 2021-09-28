@@ -85,11 +85,6 @@ a {
 `;
 
 export const BannerContainer = styled.section`
-  background: linear-gradient(
-    to bottom,
-    rgba(196, 185, 157),
-    rgba(196, 185, 157, 0.82)
-  );
   padding: 3rem;
   text-align: center;
 `;
@@ -109,6 +104,13 @@ export const DefaultButton = styled.button`
   font-size: 1.3rem;
   font-weight: 600;
   color: ${nearWhite};
+
+  cursor: pointer;
+`;
+
+export const MainContentContainer = styled.div`
+  width: 80%;
+  margin: auto;
 `;
 
 export default GlobalStyle;

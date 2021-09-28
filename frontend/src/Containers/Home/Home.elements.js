@@ -3,7 +3,13 @@ import { BannerContainer, DefaultButton } from "../../globalStyles";
 import { nearWhite, gray } from "../../Colors";
 import { Link } from "react-router-dom";
 
-export const TodayPostContainer = styled(BannerContainer)``;
+export const TodayPostContainer = styled(BannerContainer)`
+  background: linear-gradient(
+    to bottom,
+    rgba(196, 185, 157),
+    rgba(196, 185, 157, 0.82)
+  );
+`;
 
 // Banner section
 export const Date = styled.p`

@@ -16,7 +16,7 @@ export const NavContainer = styled.nav`
 `;
 
 // Logo
-export const LogoContainer = styled.div`
+export const LogoContainer = styled(Link)`
   width: 10%;
 `;
 
