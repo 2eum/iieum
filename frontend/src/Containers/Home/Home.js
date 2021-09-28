@@ -32,7 +32,6 @@ const Home = ({ token }) => {
       url: "/api/musicdiary/",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
       },
     })
       .then((response) => {

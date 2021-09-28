@@ -1,15 +1,24 @@
 import React, { Component, useState } from "react";
 import { render } from "react-dom";
 import { Navbar, Home, Footer, SignUp, Login, MyPage } from "./Containers";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 
 const App = () => {
   const [token, setToken] = useState(
-    JSON.parse(localStorage.getItem("token")).token
+    localStorage.getItem("token")
+      ? JSON.parse(localStorage.getItem("token")).token
+      : ""
   );
   const [currUser, setUser] = useState(
-    JSON.parse(window.localStorage.getItem("user")).user
+    localStorage.getItem("user")
+      ? JSON.parse(window.localStorage.getItem("user")).user
+      : ""
   );
 
   const saveUserData = (token, user) => {
@@ -23,11 +32,16 @@ const App = () => {
     window.localStorage.setItem("user", JSON.stringify(userObj));
   };
 
+  const handleLogout = () => {
+    window.localStorage.clear();
+    location.reload();
+  };
+
   return (
     <div>
       <Router>
         <GlobalStyle />
-        <Navbar currUser={currUser} />
+        <Navbar currUser={currUser} handleLogout={handleLogout} />
         <Switch>
           <Route path="/" exact render={() => <Home token={token} />} />
           <Route path="/mypage" exact render={() => <MyPage token={token} />} />

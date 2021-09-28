@@ -16,7 +16,7 @@ from rest_framework import status
 # 전체 글 보여주기(Viewset)
 class MusicdiaryViewSet(viewsets.ModelViewSet): 
     authentication_classes = [TokenAuthentication]
-    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     queryset = Musicdiary.objects.all() 
     serializer_class = MusicdiarySerializer
 
