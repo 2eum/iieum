@@ -7,8 +7,7 @@ import {
   TodayMessage,
   PostContainer,
   ContentWrapper,
-  PrevArrowContainer,
-  NextArrowContainer,
+  ArrowContainer,
   ContentTitle,
   ContentAuthor,
   ContentSummary,
@@ -48,6 +47,27 @@ const Home = ({ token }) => {
       });
   }, []);
 
+  const changeArticle = (direction) => {
+    const last = content.length - 1;
+
+    const changeIdx = direction === "prev" ? contentIdx - 1 : contentIdx + 1;
+
+    if (changeIdx > last) {
+      setIdx(0);
+      return;
+    } else if (changeIdx < 0) {
+      setIdx(last);
+      return;
+    } else {
+      setIdx(changeIdx);
+    }
+  };
+
+  const today = new Date();
+  const todayString = `${today.getFullYear()}년 ${
+    today.getMonth() + 1
+  }월 ${today.getDate()}일`;
+
   return (
     <>
       <TodayPostContainer>
@@ -55,12 +75,12 @@ const Home = ({ token }) => {
           <p>{placeholder}</p>
         ) : (
           <>
-            <BannerDate>2021년 9월 12일</BannerDate>
+            <BannerDate>{todayString}</BannerDate>
             <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
             <PostContainer>
-              <PrevArrowContainer to="/">
+              <ArrowContainer onClick={() => changeArticle("prev")}>
                 <i className="fas fa-chevron-left"></i>
-              </PrevArrowContainer>
+              </ArrowContainer>
               <MusicCard />
               <ContentWrapper>
                 <ContentTitle to={`detail/${content[contentIdx].id}`}>
@@ -69,9 +89,9 @@ const Home = ({ token }) => {
                 </ContentTitle>
                 <ContentSummary>{content[contentIdx].content}</ContentSummary>
               </ContentWrapper>
-              <NextArrowContainer to="/">
+              <ArrowContainer onClick={() => changeArticle("next")}>
                 <i className="fas fa-chevron-right"></i>
-              </NextArrowContainer>
+              </ArrowContainer>
             </PostContainer>
           </>
         )}
