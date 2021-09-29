@@ -15,27 +15,6 @@ import {
 
 import axios from "axios";
 
-// const contents = [
-//   {
-//     title: "안녕하세요1",
-//     author: "May1",
-//     body: "1일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용",
-//     pubDate: "2021년 9월 27일 목요일",
-//   },
-//   {
-//     title: "안녕하세요2",
-//     author: "May2",
-//     body: "2일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용",
-//     pubDate: "2021년 9월 28일 금요일",
-//   },
-//   {
-//     title: "안녕하세요3",
-//     author: "May3",
-//     body: "3일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용일기내용",
-//     pubDate: "2021년 9월 29일 토요일",
-//   },
-// ];
-
 const List = ({ token }) => {
   const [content, setContent] = useState([]);
 
@@ -59,7 +38,6 @@ const List = ({ token }) => {
       .then((data) => setContent(data)); // add data to state
   }, []);
 
-  console.log(content);
   const listItems = [];
 
   content.map((c) => {
@@ -70,7 +48,7 @@ const List = ({ token }) => {
     }월 ${itemDate.getDate()}일`;
 
     const item = (
-      <Content>
+      <Content key={c.id}>
         <ContentPubDate>{dateString}</ContentPubDate>
         <Preview>
           <PreviewMusic>
@@ -79,7 +57,7 @@ const List = ({ token }) => {
             <MusicArtist>AKMU</MusicArtist>
           </PreviewMusic>
           <PreviewDiary>
-            <DiaryTitle>{c.title}</DiaryTitle>
+            <DiaryTitle to={`/detail/${c.id}`}>{c.title}</DiaryTitle>
             <DiaryBody>{c.content}</DiaryBody>
           </PreviewDiary>
         </Preview>

@@ -8,6 +8,7 @@ import {
   MonthArea,
   WeekDaysArea,
   DatesArea,
+  DateImgWrapper,
   DateItem,
   DateNum,
   DateImg,
@@ -97,10 +98,12 @@ const Calendar = ({ token }) => {
           {d.getDate()}
         </DateNum>
         {date in content ? (
-          <DateImg
-            src="https://ww.namu.la/s/bded2b2e08e690ab4dafcf6931ca23742efa29aba60d55350816c3441e0d6208849b946c8d683aed2850de028019702746ab51626cc3d4a036d7c0d550c8d7c51fc5d800f17c264304e883c214107058"
-            alt="pikachu"
-          />
+          <DateImgWrapper to={`/detail/${content[date].id}`}>
+            <DateImg
+              src="https://ww.namu.la/s/bded2b2e08e690ab4dafcf6931ca23742efa29aba60d55350816c3441e0d6208849b946c8d683aed2850de028019702746ab51626cc3d4a036d7c0d550c8d7c51fc5d800f17c264304e883c214107058"
+              alt="pikachu"
+            />
+          </DateImgWrapper>
         ) : (
           <DateImg src={blank} alt="pikachu" />
         )}

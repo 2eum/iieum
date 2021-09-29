@@ -63,7 +63,7 @@ const Home = ({ token }) => {
               </PrevArrowContainer>
               <MusicCard />
               <ContentWrapper>
-                <ContentTitle>
+                <ContentTitle to={`detail/${content[contentIdx].id}`}>
                   {content[contentIdx].title}
                   <ContentAuthor>by {content[contentIdx].user}</ContentAuthor>
                 </ContentTitle>

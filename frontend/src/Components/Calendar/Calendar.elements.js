@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const CalendarArea = styled.div`
@@ -92,6 +93,8 @@ export const DateNum = styled.p`
   text-align: center;
   font-size: 0.7rem;
 `;
+
+export const DateImgWrapper = styled(Link)``;
 
 export const DateImg = styled.img`
   width: 100%;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { nearWhite } from "../../Colors";
 
@@ -57,7 +58,7 @@ export const PreviewDiary = styled.div`
   justify-content: center;
 `;
 
-export const DiaryTitle = styled.h3`
+export const DiaryTitle = styled(Link)`
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
 `;
