@@ -1,6 +1,14 @@
 import React, { Component, useState } from "react";
 import { render } from "react-dom";
-import { Navbar, Home, Footer, SignUp, Login, MyPage } from "./Containers";
+import {
+  Navbar,
+  Home,
+  Footer,
+  SignUp,
+  Login,
+  MyPage,
+  Detail,
+} from "./Containers";
 import {
   HashRouter as Router,
   Switch,
@@ -45,6 +53,8 @@ const App = () => {
         <Switch>
           <Route path="/" exact render={() => <Home token={token} />} />
           <Route path="/mypage" exact render={() => <MyPage token={token} />} />
+          <Route path="/detail/:id" exact render={() => <Detail />} />
+          <Route path="/detail/" exact render={() => <h2>잘못된 접근</h2>} />
           <Route
             path="/register"
             exact
