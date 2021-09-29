@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BannerContainer, DefaultButton } from "../../globalStyles";
-import { nearWhite, gray } from "../../Colors";
+import { nearWhite, gray, pink } from "../../Colors";
 import { Link } from "react-router-dom";
 
 export const TodayPostContainer = styled(BannerContainer)`
@@ -71,16 +71,17 @@ export const ContentSummary = styled.p`
   color: ${nearWhite};
 `;
 
-const ArrowContainer = styled(Link)`
+export const ArrowContainer = styled.p`
   color: ${nearWhite};
   font-size: 1.5rem;
   align-self: center;
   margin: 0 1rem;
+  cursor: pointer;
+
+  &:hover {
+    color: ${pink};
+  }
 `;
-
-export const PrevArrowContainer = styled(ArrowContainer)``;
-
-export const NextArrowContainer = styled(ArrowContainer)``;
 
 // Create section
 export const CreateButtonArea = styled.section`
