@@ -7,14 +7,10 @@ import {
   SignUp,
   Login,
   MyPage,
+  New,
   Detail,
 } from "./Containers";
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 
 const App = () => {
@@ -55,6 +51,7 @@ const App = () => {
           <Route path="/mypage" exact render={() => <MyPage token={token} />} />
           <Route path="/detail/:id" exact render={() => <Detail />} />
           <Route path="/detail/" exact render={() => <h2>잘못된 접근</h2>} />
+          <Route path="/new" exact render={() => <New token={token} />} />
           <Route
             path="/register"
             exact
