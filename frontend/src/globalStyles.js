@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import { nearWhite, pink } from "./Colors";
 
@@ -93,7 +94,7 @@ export const BoldSpan = styled.span`
   color: ${pink};
 `;
 
-export const DefaultButton = styled.button`
+export const DefaultButton = styled(Link)`
   padding: 0.5rem 1.5rem;
 
   border: none;

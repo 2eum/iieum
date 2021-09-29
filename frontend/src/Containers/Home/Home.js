@@ -3,7 +3,7 @@ import axios from "axios";
 
 import {
   TodayPostContainer,
-  Date,
+  BannerDate,
   TodayMessage,
   PostContainer,
   ContentWrapper,
@@ -55,7 +55,7 @@ const Home = ({ token }) => {
           <p>{placeholder}</p>
         ) : (
           <>
-            <Date>2021년 9월 12일</Date>
+            <BannerDate>2021년 9월 12일</BannerDate>
             <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
             <PostContainer>
               <PrevArrowContainer to="/">
@@ -81,7 +81,7 @@ const Home = ({ token }) => {
           오늘, <BoldSpan>당신의 하루</BoldSpan> 어떤 <BoldSpan>선율</BoldSpan>
           이었나요?
         </CreateMessage>
-        <CreateButton>내 이야기 쓰러가기</CreateButton>
+        <CreateButton to="/new">내 이야기 쓰러가기</CreateButton>
       </CreateButtonArea>
     </>
   );

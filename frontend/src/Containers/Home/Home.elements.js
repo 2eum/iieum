@@ -12,7 +12,7 @@ export const TodayPostContainer = styled(BannerContainer)`
 `;
 
 // Banner section
-export const Date = styled.p`
+export const BannerDate = styled.p`
   margin: 1rem 0;
 
   font-size: 1.3rem;
