@@ -51,7 +51,7 @@ export const ContentWrapper = styled.div`
   text-align: left;
 `;
 
-export const ContentTitle = styled.p`
+export const ContentTitle = styled(Link)`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;

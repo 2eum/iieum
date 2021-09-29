@@ -57,7 +57,7 @@ const List = ({ token }) => {
             <MusicArtist>AKMU</MusicArtist>
           </PreviewMusic>
           <PreviewDiary>
-            <DiaryTitle>{c.title}</DiaryTitle>
+            <DiaryTitle to={`/detail/${c.id}`}>{c.title}</DiaryTitle>
             <DiaryBody>{c.content}</DiaryBody>
           </PreviewDiary>
         </Preview>
