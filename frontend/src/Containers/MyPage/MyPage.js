@@ -14,7 +14,7 @@ import { MainContentContainer } from "../../globalStyles";
 import { Redirect } from "react-router";
 
 const MyPage = ({ token }) => {
-  const [view, setView] = useState("cal");
+  const [view, setView] = useState("list");
 
   const changeView = (e) => {
     setView(e.target.value);
@@ -40,7 +40,7 @@ const MyPage = ({ token }) => {
             캘린더 보기
           </ViewSwitch>
         </ViewSwitchWrapper>
-        {view === "list" ? <List /> : <Calendar token={token} />}
+        {view === "list" ? <List token={token} /> : <Calendar token={token} />}
       </MainContentContainer>
     </>
   );
