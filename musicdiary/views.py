@@ -85,10 +85,6 @@ class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all() 
     serializer_class = QuestionSerializer
 
-    # serializer.save() 재정의
-    def perform_create(self, serializer): #쓰기
-        serializer.save(user=self.request.user)
-
 
 # 질문 랜덤돌리기(하루에 한번 호출해서 오늘의 질문 선택)
 class RandomQuestion(APIView):
@@ -127,6 +123,7 @@ class YesterdayQuestion(APIView):
             serializer_context = {'request': request,}
             serializer_class = QuestionSerializer(yesterday_question, many=False, context=serializer_context)
             return Response(serializer_class.data)
+
 
 # 2,3,4일 전 질문 보여주기 (HOME 4)
 class PastQuestion(APIView):
