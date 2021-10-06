@@ -28,6 +28,8 @@ export const Line = styled.hr`
   width: 16%;
 `;
 
+export const QuestionWrapper = styled.h1``;
+
 export const ContentArea = styled.div`
   width: 70%;
   margin-left: auto;

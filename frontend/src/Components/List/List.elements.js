@@ -9,6 +9,8 @@ export const ContentArea = styled.section`
   margin: auto;
 `;
 
+export const QuestionWrapper = styled.h1``;
+
 export const Content = styled.article`
   margin-top: 2rem;
 `;
