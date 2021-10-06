@@ -4,6 +4,7 @@ import {
   BackToList,
   MusicArea,
   Line,
+  QuestionWrapper,
   ContentArea,
   ContentTitle,
   ContentInfo,
@@ -65,6 +66,9 @@ const Detail = () => {
           placeholder
         ) : (
           <>
+            <QuestionWrapper>
+              질문: {content.question.question_content}
+            </QuestionWrapper>
             <ContentTitle>{content.title}</ContentTitle>
             <ContentInfo>
               <ContentAuthor>{content.user}</ContentAuthor>

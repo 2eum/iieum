@@ -14,6 +14,7 @@ import {
 } from "./List.elements";
 
 import axios from "axios";
+import { QuestionWrapper } from "../../Containers/Home/Home.elements";
 
 const List = ({ token }) => {
   const [content, setContent] = useState([]);
@@ -57,6 +58,9 @@ const List = ({ token }) => {
             <MusicArtist>AKMU</MusicArtist>
           </PreviewMusic>
           <PreviewDiary>
+            <QuestionWrapper>
+              질문: {c.question.question_content}
+            </QuestionWrapper>
             <DiaryTitle to={`/detail/${c.id}`}>{c.title}</DiaryTitle>
             <DiaryBody>{c.content}</DiaryBody>
           </PreviewDiary>

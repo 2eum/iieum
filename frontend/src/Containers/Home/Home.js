@@ -5,6 +5,7 @@ import {
   TodayPostContainer,
   BannerDate,
   TodayMessage,
+  QuestionWrapper,
   PostContainer,
   ContentWrapper,
   ArrowContainer,
@@ -21,11 +22,26 @@ import { BoldSpan } from "../../globalStyles";
 
 const Home = ({ token }) => {
   const [content, setContent] = useState(null);
+  const [question, setQuestion] = useState("");
   const [loaded, setLoad] = useState(false);
   const [contentIdx, setIdx] = useState(0);
   const [placeholder, setPlaceholder] = useState("Loading Content");
 
   useEffect(() => {
+    axios({
+      method: "get",
+      url: "/api/question/past",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status > 400) {
+          setPlaceholder("Something went wrong!");
+        }
+        return response.data;
+      })
+      .then((data) => setQuestion(data[0].question_content));
     axios({
       method: "get",
       url: "/api/musicdiary/",
@@ -77,22 +93,28 @@ const Home = ({ token }) => {
           <>
             <BannerDate>{todayString}</BannerDate>
             <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
-            <PostContainer>
-              <ArrowContainer onClick={() => changeArticle("prev")}>
-                <i className="fas fa-chevron-left"></i>
-              </ArrowContainer>
-              <MusicCard />
-              <ContentWrapper>
-                <ContentTitle to={`detail/${content[contentIdx].id}`}>
-                  {content[contentIdx].title}
-                  <ContentAuthor>by {content[contentIdx].user}</ContentAuthor>
-                </ContentTitle>
-                <ContentSummary>{content[contentIdx].content}</ContentSummary>
-              </ContentWrapper>
-              <ArrowContainer onClick={() => changeArticle("next")}>
-                <i className="fas fa-chevron-right"></i>
-              </ArrowContainer>
-            </PostContainer>
+            <QuestionWrapper>오늘의 질문: {question}</QuestionWrapper>
+
+            {content[contentIdx] ? (
+              <PostContainer>
+                <ArrowContainer onClick={() => changeArticle("prev")}>
+                  <i className="fas fa-chevron-left"></i>
+                </ArrowContainer>
+                <MusicCard />
+                <ContentWrapper>
+                  <ContentTitle to={`detail/${content[contentIdx].id}`}>
+                    {content[contentIdx].title}
+                    <ContentAuthor>by {content[contentIdx].user}</ContentAuthor>
+                  </ContentTitle>
+                  <ContentSummary>{content[contentIdx].content}</ContentSummary>
+                </ContentWrapper>
+                <ArrowContainer onClick={() => changeArticle("next")}>
+                  <i className="fas fa-chevron-right"></i>
+                </ArrowContainer>
+              </PostContainer>
+            ) : (
+              ""
+            )}
           </>
         )}
       </TodayPostContainer>
