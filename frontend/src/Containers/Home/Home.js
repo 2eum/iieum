@@ -43,7 +43,9 @@ const Home = ({ token }) => {
         setContent(data);
       })
       .then(() => {
-        setLoad(true);
+        if (data) {
+          setLoad(true);
+        }
       });
   }, []);
 
