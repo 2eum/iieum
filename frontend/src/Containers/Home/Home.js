@@ -5,6 +5,7 @@ import {
   TodayPostContainer,
   BannerDate,
   TodayMessage,
+  QuestionWrapper,
   PostContainer,
   ContentWrapper,
   ArrowContainer,
@@ -21,11 +22,26 @@ import { BoldSpan } from "../../globalStyles";
 
 const Home = ({ token }) => {
   const [content, setContent] = useState(null);
+  const [question, setQuestion] = useState("");
   const [loaded, setLoad] = useState(false);
   const [contentIdx, setIdx] = useState(0);
   const [placeholder, setPlaceholder] = useState("Loading Content");
 
   useEffect(() => {
+    axios({
+      method: "get",
+      url: "/api/today-question/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.status > 400) {
+          setPlaceholder("Something went wrong!");
+        }
+        return response.data;
+      })
+      .then((data) => setQuestion(data.question_content));
     axios({
       method: "get",
       url: "/api/musicdiary/",
@@ -77,6 +93,7 @@ const Home = ({ token }) => {
           <>
             <BannerDate>{todayString}</BannerDate>
             <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
+            <QuestionWrapper>오늘의 질문: {question}</QuestionWrapper>
 
             {content[contentIdx] ? (
               <PostContainer>
