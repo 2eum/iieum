@@ -43,9 +43,7 @@ const Home = ({ token }) => {
         setContent(data);
       })
       .then(() => {
-        if (data) {
-          setLoad(true);
-        }
+        setLoad(true);
       });
   }, []);
 
@@ -79,22 +77,27 @@ const Home = ({ token }) => {
           <>
             <BannerDate>{todayString}</BannerDate>
             <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
-            <PostContainer>
-              <ArrowContainer onClick={() => changeArticle("prev")}>
-                <i className="fas fa-chevron-left"></i>
-              </ArrowContainer>
-              <MusicCard />
-              <ContentWrapper>
-                <ContentTitle to={`detail/${content[contentIdx].id}`}>
-                  {content[contentIdx].title}
-                  <ContentAuthor>by {content[contentIdx].user}</ContentAuthor>
-                </ContentTitle>
-                <ContentSummary>{content[contentIdx].content}</ContentSummary>
-              </ContentWrapper>
-              <ArrowContainer onClick={() => changeArticle("next")}>
-                <i className="fas fa-chevron-right"></i>
-              </ArrowContainer>
-            </PostContainer>
+
+            {content[contentIdx] ? (
+              <PostContainer>
+                <ArrowContainer onClick={() => changeArticle("prev")}>
+                  <i className="fas fa-chevron-left"></i>
+                </ArrowContainer>
+                <MusicCard />
+                <ContentWrapper>
+                  <ContentTitle to={`detail/${content[contentIdx].id}`}>
+                    {content[contentIdx].title}
+                    <ContentAuthor>by {content[contentIdx].user}</ContentAuthor>
+                  </ContentTitle>
+                  <ContentSummary>{content[contentIdx].content}</ContentSummary>
+                </ContentWrapper>
+                <ArrowContainer onClick={() => changeArticle("next")}>
+                  <i className="fas fa-chevron-right"></i>
+                </ArrowContainer>
+              </PostContainer>
+            ) : (
+              ""
+            )}
           </>
         )}
       </TodayPostContainer>
