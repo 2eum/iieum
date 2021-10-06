@@ -103,7 +103,7 @@ class RandomQuestion(APIView):
 
 
 # 오늘의 질문 보여주기 (HOME 1)
-class TodayQuestion(APIView):
+"""class TodayQuestion(APIView):
     @csrf_exempt
     def get(self, request):
         today_question = Question.objects.filter(released_date=datetime.today().date()).first()
@@ -122,7 +122,7 @@ class YesterdayQuestion(APIView):
         if yesterday_question:
             serializer_context = {'request': request,}
             serializer_class = QuestionSerializer(yesterday_question, many=False, context=serializer_context)
-            return Response(serializer_class.data)
+            return Response(serializer_class.data)"""
 
 
 # 2,3,4일 전 질문 보여주기 (HOME 4)
@@ -130,7 +130,7 @@ class PastQuestion(APIView):
     @csrf_exempt
     def get(self, request):
         startdate = datetime.today().date() - timedelta(4)
-        enddate = startdate + timedelta(days=2)
+        enddate = startdate + timedelta(days=4)
 
         pastday_question = Question.objects.filter(released_date__range=[startdate, enddate])
 
