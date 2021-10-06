@@ -13,11 +13,10 @@ class MusicdiarySerializer(serializers.ModelSerializer):
         return super(MusicdiarySerializer, self).to_representation(instance)
 
 class QuestionSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source = 'user.nickname')
     musicdiary = MusicdiarySerializer(many=True, read_only=True)
     class Meta: 
         model = Question
-        fields = ('url', 'id','question_content','user','pub_date','musicdiary')
+        fields = ('url', 'id','question_content','released_date', 'musicdiary')
 
 class QuestionRepresentationSerializer(serializers.ModelSerializer):
     class Meta:

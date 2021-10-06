@@ -12,12 +12,15 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 from django.conf import settings
 from rest_framework import status
+from django.db.models import Max
+import random
+from datetime import datetime, timedelta
 
 # 전체 글 보여주기(Viewset)
 class MusicdiaryViewSet(viewsets.ModelViewSet): 
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
-    queryset = Musicdiary.objects.all() 
+    queryset = Musicdiary.objects.all().order_by('-pub_date')
     serializer_class = MusicdiarySerializer
 
     # serializer.save() 재정의
@@ -57,7 +60,7 @@ class MyPageView(APIView):
             serializer_context = {
                 'request': request,
             }
-            queryset = Musicdiary.objects.filter(user=self.request.user)
+            queryset = Musicdiary.objects.filter(user=self.request.user).order_by('-pub_date')
             serializer_class = MusicdiarySerializer(queryset, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
@@ -82,6 +85,56 @@ class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all() 
     serializer_class = QuestionSerializer
 
-    # serializer.save() 재정의
-    def perform_create(self, serializer): #쓰기
-        serializer.save(user=self.request.user)
+
+# 질문 랜덤돌리기(하루에 한번 호출해서 오늘의 질문 선택)
+class RandomQuestion(APIView):
+    @csrf_exempt
+    def get(self, request):
+        max_id = Question.objects.all().aggregate(max_id=Max("id"))['max_id']
+        while True:
+            pk = random.randint(1, max_id)
+            random_question = Question.objects.filter(pk=pk).first()
+            if random_question:
+                serializer_context = {'request': request,}
+                random_question.released_date = datetime.today().date() # 오늘 날짜
+                random_question.save()
+                serializer_class = QuestionSerializer(random_question, many=False, context=serializer_context)
+                return Response(serializer_class.data)
+
+
+# 오늘의 질문 보여주기 (HOME 1)
+class TodayQuestion(APIView):
+    @csrf_exempt
+    def get(self, request):
+        today_question = Question.objects.filter(released_date=datetime.today().date()).first()
+        if today_question:
+            serializer_context = {'request': request,}
+            serializer_class = QuestionSerializer(today_question, many=False, context=serializer_context)
+            return Response(serializer_class.data)
+
+
+# 어제의 질문 보여주기 (HOME 2)
+class YesterdayQuestion(APIView):
+    @csrf_exempt
+    def get(self, request):
+        yesterday = datetime.today().date() - timedelta(1)
+        yesterday_question = Question.objects.filter(released_date=yesterday).first()
+        if yesterday_question:
+            serializer_context = {'request': request,}
+            serializer_class = QuestionSerializer(yesterday_question, many=False, context=serializer_context)
+            return Response(serializer_class.data)
+
+
+# 2,3,4일 전 질문 보여주기 (HOME 4)
+class PastQuestion(APIView):
+    @csrf_exempt
+    def get(self, request):
+        startdate = datetime.today().date() - timedelta(4)
+        enddate = startdate + timedelta(days=2)
+
+        pastday_question = Question.objects.filter(released_date__range=[startdate, enddate])
+
+        if pastday_question:
+            serializer_context = {'request': request,}
+            serializer_class = QuestionSerializer(pastday_question, many=True, context=serializer_context)
+            return Response(serializer_class.data)
