@@ -30,7 +30,7 @@ const Home = ({ token }) => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "/api/today-question/",
+      url: "/api/question/past",
       headers: {
         "Content-Type": "application/json",
       },
@@ -41,7 +41,7 @@ const Home = ({ token }) => {
         }
         return response.data;
       })
-      .then((data) => setQuestion(data.question_content));
+      .then((data) => setQuestion(data[0].question_content));
     axios({
       method: "get",
       url: "/api/musicdiary/",
