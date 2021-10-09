@@ -1,4 +1,5 @@
-from rest_framework import viewsets
+from django.views.decorators import csrf
+from rest_framework import serializers, viewsets
 from .serializers import MusicdiarySerializer, QuestionSerializer
 from .models import Musicdiary, Question
 from rest_framework.authentication import TokenAuthentication 
@@ -16,16 +17,32 @@ import random
 from datetime import datetime, timedelta
 
 
-
 # 전체 글 보여주기
 class MusicdiaryViewSet(viewsets.ModelViewSet): 
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     queryset = Musicdiary.objects.all().order_by('-pub_date')
     serializer_class = MusicdiarySerializer
+    
     # serializer.save() 재정의
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        if self.request.data['auto_pk'] != 0: # '질문에 답하기' 눌러서 들어옴
+            auto_pk = self.request.data['auto_pk'] # 자동선택된 질문의 pk
+            user_pk = self.request.data['question'] # new 창에서 다시 선택한 질문의 pk
+            if auto_pk != user_pk: # 자동선택으로 들어왔는데 바꿈
+                serializer.save(user=self.request.user)
+            else: # 그대로 자동선택된 질문 유지
+                auto_q = Question.objects.filter(pk=auto_pk).first()
+                serializer.save(user=self.request.user, question=auto_q)
+
+        else: # 그냥 새글쓰기로 들어옴, 질문 자동선택하지 않았음
+            serializer.save(user=self.request.user)
+    """
+    <정리>
+    auto_pk != 0, auto_pk == user_pk     -> '질문에 답하기'로 들어와서 따로 질문 선택 다시 안 한 경우
+    auto_pk != 0, auto_pk != user_pk     -> '질문에 답하기'로 들어와서 따로 질문을 선택한 경우
+    auto_pk == 0                         -> '새글쓰기'로 들어온 경우
+    """
 
 
 
@@ -56,19 +73,6 @@ class MyPageView(APIView):
             queryset = Musicdiary.objects.filter(user=self.request.user).order_by('-pub_date')
             serializer_class = MusicdiarySerializer(queryset, many=True, context=serializer_context)
             return Response(serializer_class.data)
-        else:
-            return Response({"detail":"Please login"})
-    #내페이지에서 글 쓰기
-    def post(self, request):
-        if request.user.is_authenticated:
-            serializer_context = {
-                'request': request,
-            }
-            serializer = MusicdiarySerializer(data=request.data, context=serializer_context)
-            if serializer.is_valid(): #유효성 검사
-                serializer.save(user=self.request.user)
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"detail":"Please login"})
 
@@ -103,8 +107,8 @@ class RandomQuestion(APIView):
 class PastQuestion(APIView):
     @csrf_exempt
     def get(self, request):
-        startdate = datetime.today().date() - timedelta(4)
-        enddate = startdate + timedelta(days=4)
+        enddate = datetime.today().date();
+        startdate = enddate - timedelta(4)
 
         pastday_question = Question.objects.filter(released_date__range=[startdate, enddate])
 
