@@ -116,3 +116,31 @@ class PastQuestion(APIView):
             serializer_context = {'request': request,}
             serializer_class = QuestionSerializer(pastday_question, many=True, context=serializer_context)
             return Response(serializer_class.data)
+
+
+# 지난주 인기질문 (그 질문에 그 날 작성된 글의 개수)
+class LastWeekPopularQuestion(APIView):
+    @csrf_exempt
+    def get(self, request):
+        startdate = datetime.today().date()-timedelta(7);
+        enddate = datetime.today().date()- timedelta(1);
+
+        lastweek_question = Question.objects.filter(released_date__range=[startdate, enddate])
+
+        if lastweek_question:
+            musicdiary_count = -1
+            musicdiary_max = -1
+            popular_pk = 0
+            for last_q in lastweek_question:
+                date_range1 = datetime.combine(last_q.released_date, datetime.min.time())
+                date_range2 = datetime.combine(last_q.released_date+timedelta(1), datetime.min.time())
+                musicdiary_count = Musicdiary.objects.filter(question=last_q.id).filter(pub_date__range=[date_range1, date_range2]).count()
+                #print(last_q.question_content, last_q.released_date, musicdiary_count)
+                if musicdiary_count > musicdiary_max:
+                    musicdiary_max = musicdiary_count
+                    popular_pk = last_q.id
+
+            popular_question = Question.objects.filter(pk=popular_pk).first()
+            serializer_context = {'request': request,}
+            serializer_class = QuestionSerializer(popular_question, many=False, context=serializer_context)
+            return Response(serializer_class.data)
