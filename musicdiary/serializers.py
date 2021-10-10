@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Musicdiary, Question
 
-
 class MusicdiarySerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source = 'user.nickname')
     class Meta: 
