@@ -9,7 +9,7 @@ const New = ({ token }) => {
         <PageHeader>나의 이야기 작성하기</PageHeader>
         <Line />
 
-        <DiaryForm token={token} />
+        <DiaryForm token={token} type={"POST"} />
       </MainContentContainer>
     </>
   );

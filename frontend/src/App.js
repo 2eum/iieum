@@ -9,6 +9,7 @@ import {
   MyPage,
   New,
   Detail,
+  Edit,
 } from "./Containers";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
@@ -49,9 +50,18 @@ const App = () => {
         <Switch>
           <Route path="/" exact render={() => <Home token={token} />} />
           <Route path="/mypage" exact render={() => <MyPage token={token} />} />
-          <Route path="/detail/:id" exact render={() => <Detail />} />
+          <Route
+            path="/detail/:id"
+            exact
+            render={() => <Detail currUser={currUser} />}
+          />
           <Route path="/detail/" exact render={() => <h2>잘못된 접근</h2>} />
           <Route path="/new" exact render={() => <New token={token} />} />
+          <Route
+            path="/edit/:id"
+            exact
+            render={() => <Edit token={token} currUser={currUser} />}
+          />
           <Route
             path="/register"
             exact

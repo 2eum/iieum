@@ -72,4 +72,5 @@ export const UDBtn = styled(Link)`
   font-size: 1rem;
   margin-right: 1.5rem;
   margin-top: 1rem;
+  cursor: pointer;
 `;

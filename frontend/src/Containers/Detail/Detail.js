@@ -17,7 +17,7 @@ import { MusicCard } from "../";
 import { useParams } from "react-router";
 import axios from "axios";
 
-const Detail = () => {
+const Detail = ({ currUser }) => {
   let { id } = useParams();
 
   const [content, setContent] = useState(null);
@@ -76,6 +76,16 @@ const Detail = () => {
             </ContentInfo>
             <ContentBody>{content.content}</ContentBody>
           </>
+        )}
+        {!loaded ? (
+          placeholder
+        ) : content.user === currUser ? (
+          <>
+            <UDBtn to={`/edit/${content.id}`}>Edit</UDBtn>
+            <UDBtn t>Delete</UDBtn>
+          </>
+        ) : (
+          ""
         )}
       </ContentArea>
     </>

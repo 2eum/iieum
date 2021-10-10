@@ -11,10 +11,10 @@ import {
   SaveButton,
 } from "./DiaryForm.elements";
 
-const DiaryForm = ({ token }) => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [questionId, setQuestionId] = useState("");
+const DiaryForm = ({ token, c_title, c_body, c_questionId, type }) => {
+  const [title, setTitle] = useState(c_title || "");
+  const [body, setBody] = useState(c_body || "");
+  const [questionId, setQuestionId] = useState(c_questionId || "");
   const [submitStat, setSubmitStat] = useState(false);
 
   const [questionList, setQuestions] = useState([]);
@@ -41,7 +41,7 @@ const DiaryForm = ({ token }) => {
 
   const handleSubmit = (e) => {
     axios({
-      method: "post",
+      method: type,
       url: "api/musicdiary/",
       headers: {
         "Content-Type": "application/json",
@@ -56,16 +56,24 @@ const DiaryForm = ({ token }) => {
   };
 
   const qListComponent = [
-    <option disabled selected value>
+    <option key="0" disabled selected>
       질문을 선택해주세요
     </option>,
   ];
   questionList.map((q) => {
-    qListComponent.push(
-      <option key={q.id} value={q.id}>
-        {q.question}
-      </option>
-    );
+    if (q.id === questionId) {
+      qListComponent.push(
+        <option key={q.id} value={q.id} selected>
+          {q.question}
+        </option>
+      );
+    } else {
+      qListComponent.push(
+        <option key={q.id} value={q.id}>
+          {q.question}
+        </option>
+      );
+    }
   });
 
   const onQuestionChange = (e) => {
@@ -87,6 +95,7 @@ const DiaryForm = ({ token }) => {
             placeholder="제목"
             maxLength={120}
             onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
           <MusicSearch type="text" placeholder="음악 검색.." />
           {/* <MusicChoice/> */}
@@ -96,6 +105,7 @@ const DiaryForm = ({ token }) => {
           name="body"
           autoComplete="off"
           onChange={(e) => setBody(e.target.value)}
+          value={body}
         />
         <SaveButton onClick={(e) => handleSubmit(e)}>저장하기</SaveButton>
       </FormArea>
