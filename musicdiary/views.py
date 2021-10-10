@@ -1,5 +1,4 @@
-from django.views.decorators import csrf
-from rest_framework import serializers, viewsets
+from rest_framework import viewsets
 from .serializers import MusicdiarySerializer, QuestionSerializer
 from .models import Musicdiary, Question
 from rest_framework.authentication import TokenAuthentication 
@@ -11,7 +10,6 @@ from rest_framework.views import APIView
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 from django.conf import settings
-from rest_framework import status
 from django.db.models import Max
 import random
 from datetime import datetime, timedelta
@@ -26,24 +24,7 @@ class MusicdiaryViewSet(viewsets.ModelViewSet):
     
     # serializer.save() 재정의
     def perform_create(self, serializer):
-        if self.request.data['auto_pk'] != 0: # '질문에 답하기' 눌러서 들어옴
-            auto_pk = self.request.data['auto_pk'] # 자동선택된 질문의 pk
-            user_pk = self.request.data['question'] # new 창에서 다시 선택한 질문의 pk
-            if auto_pk != user_pk: # 자동선택으로 들어왔는데 바꿈
-                serializer.save(user=self.request.user)
-            else: # 그대로 자동선택된 질문 유지
-                auto_q = Question.objects.filter(pk=auto_pk).first()
-                serializer.save(user=self.request.user, question=auto_q)
-
-        else: # 그냥 새글쓰기로 들어옴, 질문 자동선택하지 않았음
-            serializer.save(user=self.request.user)
-    """
-    <정리>
-    auto_pk != 0, auto_pk == user_pk     -> '질문에 답하기'로 들어와서 따로 질문 선택 다시 안 한 경우
-    auto_pk != 0, auto_pk != user_pk     -> '질문에 답하기'로 들어와서 따로 질문을 선택한 경우
-    auto_pk == 0                         -> '새글쓰기'로 들어온 경우
-    """
-
+        serializer.save(user=self.request.user)
 
 
 # 음악 검색
@@ -133,9 +114,8 @@ class LastWeekPopularQuestion(APIView):
             popular_pk = 0
             for last_q in lastweek_question:
                 date_range1 = datetime.combine(last_q.released_date, datetime.min.time())
-                date_range2 = datetime.combine(last_q.released_date+timedelta(1), datetime.min.time())
+                date_range2 = datetime.combine(last_q.released_date, datetime.max.time())
                 musicdiary_count = Musicdiary.objects.filter(question=last_q.id).filter(pub_date__range=[date_range1, date_range2]).count()
-                #print(last_q.question_content, last_q.released_date, musicdiary_count)
                 if musicdiary_count > musicdiary_max:
                     musicdiary_max = musicdiary_count
                     popular_pk = last_q.id

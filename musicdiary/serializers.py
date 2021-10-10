@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Musicdiary, Question
-from rest_framework.exceptions import ValidationError
 
 class MusicdiarySerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source = 'user.nickname')
