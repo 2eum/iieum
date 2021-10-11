@@ -11,18 +11,20 @@ import {
   ContentAuthor,
   PubDate,
   ContentBody,
-  UDBtn,
+  EditBtn,
+  DeleteBtn,
 } from "./Detail.elements";
 import { MusicCard } from "../";
-import { useParams } from "react-router";
+import { useParams, Redirect } from "react-router";
 import axios from "axios";
 
-const Detail = ({ currUser }) => {
+const Detail = ({ currUser, token }) => {
   let { id } = useParams();
 
   const [content, setContent] = useState(null);
   const [loaded, setLoad] = useState(false);
   const [placeholder, setPlaceholder] = useState("Loading Content");
+  const [deleted, setDelete] = useState(false);
 
   useEffect(() => {
     axios({
@@ -51,7 +53,29 @@ const Detail = ({ currUser }) => {
     pubDateObj.getMonth() + 1
   }월 ${pubDateObj.getDate()}일`;
 
-  return (
+  const handleDelete = () => {
+    axios({
+      method: "delete",
+      url: `/api/musicdiary/${id}/`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.status > 400) {
+          setPlaceholder("Something went wrong!");
+        }
+        return response.data;
+      })
+      .then(() => {
+        setDelete(true);
+      });
+  };
+
+  return deleted ? (
+    <Redirect to="/" />
+  ) : (
     <>
       <DetailHeader>
         <BackToList to="/mypage">&lt; 내 글 목록으로</BackToList>
@@ -81,8 +105,8 @@ const Detail = ({ currUser }) => {
           placeholder
         ) : content.user === currUser ? (
           <>
-            <UDBtn to={`/edit/${content.id}`}>Edit</UDBtn>
-            <UDBtn t>Delete</UDBtn>
+            <EditBtn to={`/edit/${content.id}`}>Edit</EditBtn>
+            <DeleteBtn onClick={() => handleDelete()}>Delete</DeleteBtn>
           </>
         ) : (
           ""
