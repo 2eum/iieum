@@ -11,7 +11,8 @@ import {
   SaveButton,
 } from "./DiaryForm.elements";
 
-const DiaryForm = ({ token, c_title, c_body, c_questionId, type }) => {
+const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
+  const [id, setId] = useState(c_id || "");
   const [title, setTitle] = useState(c_title || "");
   const [body, setBody] = useState(c_body || "");
   const [questionId, setQuestionId] = useState(c_questionId || "");
@@ -42,7 +43,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type }) => {
   const handleSubmit = (e) => {
     axios({
       method: type,
-      url: "api/musicdiary/",
+      url: type === "post" ? "api/musicdiary/" : `api/musicdiary/${id}/`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -52,7 +53,9 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type }) => {
         content: body,
         question: questionId,
       },
-    }).then(() => setSubmitStat(true));
+    })
+      .then((res) => setId(res.data.id))
+      .then(() => setSubmitStat(true));
   };
 
   const qListComponent = [
@@ -81,7 +84,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type }) => {
   };
 
   return submitStat ? (
-    <Redirect to="/" />
+    <Redirect to={`/detail/${id}`} />
   ) : (
     <>
       <FormArea onSubmit={handleSubmit}>

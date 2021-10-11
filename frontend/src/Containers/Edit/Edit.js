@@ -53,6 +53,7 @@ const Edit = ({ token, currUser }) => {
           c_body={content.content}
           c_questionId={content.question.id}
           type={"PUT"}
+          c_id={content.id}
         />
       </MainContentContainer>
     </>
