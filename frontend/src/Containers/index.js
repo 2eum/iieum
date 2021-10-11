@@ -4,6 +4,7 @@ export { default as MusicCard } from "./MusicCard/MusicCard";
 export { default as MyPage } from "./MyPage/MyPage";
 export { default as Detail } from "./Detail/Detail";
 export { default as New } from "./New/New";
+export { default as Edit } from "./Edit/Edit";
 export { default as SignUp } from "./SignUp/SignUp";
 export { default as Login } from "./Login/Login";
 export { default as Footer } from "./Footer/Footer";
