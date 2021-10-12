@@ -73,3 +73,6 @@ export const UDBtn = styled(Link)`
   margin-right: 1.5rem;
   margin-top: 1rem;
 `;
+
+export const Like = styled.button`
+`;

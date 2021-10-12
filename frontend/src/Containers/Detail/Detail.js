@@ -12,38 +12,71 @@ import {
   PubDate,
   ContentBody,
   UDBtn,
+  Like,
+  BtnArea
 } from "./Detail.elements";
 import { MusicCard } from "../";
+import { LikeButton } from "../../Components";
 import { useParams } from "react-router";
 import axios from "axios";
 
-const Detail = () => {
+const Detail = ({token, currUser}) => { //token 받아오기 추가
   let { id } = useParams();
 
   const [content, setContent] = useState(null);
   const [loaded, setLoad] = useState(false);
   const [placeholder, setPlaceholder] = useState("Loading Content");
 
+  const [isLiked, setIsLiked] = useState(false);
+  const [likedUsers, setLikedUsers] = useState([]);
+  // const [likeCount, setLikeCount] = useState(0);
+
+  const diary = [
+  {
+    id: 1,
+    title: "첫번째 가짜일기",
+    user: "가짜지은이",
+    content: "여기는 아마도 본문? 오늘 좋아요 다 만들 수 있을까 디자인도 해야 해 바쁘다 바빠!",
+    pub_date: "2021-10-10T00:00:00.000Z",
+    question: {question_id: 1, question_content: "오늘은 뭐 했어요?"},
+    liked_users: ["hyojinki", "may"],
+    like_count: 0
+  },
+  {
+    id: 2,
+    title: "두번째 가짜일기",
+    user: "가짜지은이",
+    content: "여기는 아마도 본문? 오늘 좋아요 다 만들 수 있을까 디자인도 해야 해 바쁘다 바빠!",
+    pub_date: "2021-10-10T00:00:00.000Z",
+    question: {question_id: 1, question_content: "오늘은 뭐 했어요?"},
+    liked_users: ["woos"],
+    like_count: 5
+  }
+];
+
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `/api/musicdiary/${id}/`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.status > 400) {
-          setPlaceholder("Something went wrong!");
-        }
-        return response.data;
-      })
-      .then((data) => {
-        setContent(data);
-      })
-      .then(() => {
-        setLoad(true);
-      });
+    // axios({
+    //   method: "GET",
+    //   // url: `/api/musicdiary/${id}/`,
+    //   url: `/diary/1`,
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((response) => {
+    //     if (response.status > 400) {
+    //       setPlaceholder("Something went wrong!");
+    //     }
+    //     return response.data;
+    //   })
+    //   .then((data) => {
+    //     setContent(data);
+    //   })
+    //   .then(() => {
+    //     setLoad(true);
+    //   });
+    setContent(diary[0]);
+    setLoad(true);
   }, []);
 
   const pubDateObj = new Date(content ? content.pub_date : "");
@@ -51,6 +84,78 @@ const Detail = () => {
     pubDateObj.getMonth() + 1
   }월 ${pubDateObj.getDate()}일`;
 
+  ///////////////LIKE////////////////
+
+  const checkLiked = (likeList) => {
+    for(let i = 0; i < likeList.length; i++){
+      if (likeList[i] === currUser){
+        setIsLiked(true);
+      }
+    }
+  }
+
+  //초기 렌더링 시, 내가 좋아요를 눌렀는지 여부를 가져옴
+  const getLiked = (e) => {
+    // const apiUrl = `/api/musicdiary/${id}/`;
+    // axios({
+    //   method : "get",
+    //   url : apiUrl,
+    //   headers : {
+    //     Authorization : `Token ${token}`,
+    //   },
+    // })
+    // .then((response) => {
+    //   checkLiked(response.data.liked_users);
+    //   // setLikeCount(response.data.like_count); //liked, like_count : 유저가 좋아요한 여부를 백에서 받아옴
+    // })
+    // .catch((response) => {
+    //   console.error(response);
+    // })
+
+    setContent(diary[0]);
+    // setLikeCount(content.like_count);
+  }
+
+  //diaryLiked가 업데이트될 때마다 리렌더링
+  useEffect(()=>{
+    getLiked();
+    setLikedUsers(content.liked_users);
+    checkLiked(likedUsers);
+  },[content, likedUsers]);
+
+
+  //좋아요 누르기 (생성/삭제)
+  const postLike = (e) => {
+    // const apiUrl = `/api/musicdiary/${id}/`;
+    // axios({
+    //   method: "post",
+    //   // url: apiUrl,
+    //   url: `diary/1`,
+    //   headers: {
+    //     Authorization: `Token ${token}`,
+    //   },
+    //  data : {
+    //  // 글 id와 user 전달
+    //    content_id : content.id,
+    //    liked_user : currUser
+    //  }
+    // })
+    // .then((response) => {
+    //   checkLiked(response.data.liked_users);
+    //   // setLikeCount(response.data.like_count);
+    //   console.log("like 호출 결과:", response);
+    // })
+    // .catch((response) => {
+    //   console.error(response);
+    // })
+
+    console.log("postLike to backend");
+    diary[0].liked_users.push(currUser);
+    checkLiked(diary[0].liked_users);
+    console.log(diary[0].liked_users);
+    // isLiked ? setIsLiked(false) : setIsLiked(true);
+    // isLiked ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);    
+  }
   return (
     <>
       <DetailHeader>
@@ -67,7 +172,7 @@ const Detail = () => {
         ) : (
           <>
             <QuestionWrapper>
-              질문: {content.question.question_content}
+              {/* 질문: {content.question.question_content} */}
             </QuestionWrapper>
             <ContentTitle>{content.title}</ContentTitle>
             <ContentInfo>
@@ -77,6 +182,12 @@ const Detail = () => {
             <ContentBody>{content.content}</ContentBody>
           </>
         )}
+        <BtnArea>
+          {isLiked ? 
+              <Like onClick={postLike}><i class="fa fa-heart"/> 좋아요</Like> :
+              <Like onClick={postLike}><i class="fa fa-heart-o"/> 안좋아요</Like>
+          }
+        </BtnArea>
       </ContentArea>
     </>
   );
