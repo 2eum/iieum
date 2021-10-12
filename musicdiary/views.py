@@ -5,6 +5,9 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
+#밑의 문장
+from django.shortcuts import get_object_or_404, redirect
+
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -124,3 +127,16 @@ class LastWeekPopularQuestion(APIView):
             serializer_context = {'request': request,}
             serializer_class = QuestionSerializer(popular_question, many=False, context=serializer_context)
             return Response(serializer_class.data)
+
+class LikeToggle(APIView):
+    def post(request, post_id):
+        like_list = get_object_or_404(Musicdiary, pk=post_id) #id=nickname ??
+        if request.user in like_list.like.all():
+            like_list.like.remove(request.user)
+            like_list.like_count -= 1
+            like_list.save()
+        else:
+            like_list.like.add(request.user)
+            like_list.like_count += 1
+            like_list.save()
+        return redirect('api/mypage/'+ str(post_id))
