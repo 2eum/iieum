@@ -18,8 +18,6 @@ class Musicdiary(models.Model):
     content = models.TextField(max_length= 1000)
     pub_date = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey("Question", related_name="musicdiary", on_delete=models.DO_NOTHING, db_column="question")
-    # 좋아요
-    liked_user = models.ManyToManyField(User, related_name='likes',blank=True)
-    like_count = models.PositiveIntegerField(default=0) #PositiveIntegerField는 0과 양수만 받는 필드이다
+    liked_user = models.ManyToManyField(User, related_name='like', blank=True)
     def __str__(self):
         return self.title
