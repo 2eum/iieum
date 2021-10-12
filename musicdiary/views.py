@@ -129,14 +129,16 @@ class LastWeekPopularQuestion(APIView):
             return Response(serializer_class.data)
 
 class LikeToggle(APIView):
-    def post(request, post_id):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    def post(self, request, post_id):
         like_list = get_object_or_404(Musicdiary, pk=post_id) #id=nickname ??
-        if request.user in like_list.like.all():
-            like_list.like.remove(request.user)
+        if self.request.user in like_list.liked_user.all():
+            like_list.liked_user.remove(self.request.user)
             like_list.like_count -= 1
             like_list.save()
         else:
-            like_list.like.add(request.user)
+            like_list.liked_user.add(self.request.user)
             like_list.like_count += 1
             like_list.save()
-        return redirect('api/mypage/'+ str(post_id))
+        return redirect('/api/musicdiary/'+ str(post_id)+"/")

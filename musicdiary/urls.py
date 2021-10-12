@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf.urls import include, url
 from .views import *
 from rest_framework import routers
-from api_basic import musicdiary
+# from api_basic import musicdiary
 from musicdiary import views # 종아요 추가 
 
 router = routers.DefaultRouter()
