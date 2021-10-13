@@ -18,6 +18,6 @@ class Musicdiary(models.Model):
     content = models.TextField(max_length= 1000)
     pub_date = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey("Question", related_name="musicdiary", on_delete=models.DO_NOTHING, db_column="question")
-
+    liked_user = models.ManyToManyField(User, related_name='like', blank=True)
     def __str__(self):
         return self.title

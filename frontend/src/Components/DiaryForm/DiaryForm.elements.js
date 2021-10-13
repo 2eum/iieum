@@ -17,6 +17,7 @@ export const FormArea = styled.form`
 export const FormQuestion = styled.select`
   width: 50%;
   height: 2rem;
+  padding-left: 0.5rem;
 
   margin-top: 4rem;
 `;

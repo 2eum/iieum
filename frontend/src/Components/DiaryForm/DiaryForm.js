@@ -11,10 +11,11 @@ import {
   SaveButton,
 } from "./DiaryForm.elements";
 
-const DiaryForm = ({ token }) => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [questionId, setQuestionId] = useState("");
+const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
+  const [id, setId] = useState(c_id || "");
+  const [title, setTitle] = useState(c_title || "");
+  const [body, setBody] = useState(c_body || "");
+  const [questionId, setQuestionId] = useState(c_questionId || "");
   const [submitStat, setSubmitStat] = useState(false);
 
   const [questionList, setQuestions] = useState([]);
@@ -41,8 +42,8 @@ const DiaryForm = ({ token }) => {
 
   const handleSubmit = (e) => {
     axios({
-      method: "post",
-      url: "api/musicdiary/",
+      method: type,
+      url: type === "post" ? "api/musicdiary/" : `api/musicdiary/${id}/`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -52,20 +53,30 @@ const DiaryForm = ({ token }) => {
         content: body,
         question: questionId,
       },
-    }).then(() => setSubmitStat(true));
+    })
+      .then((res) => setId(res.data.id))
+      .then(() => setSubmitStat(true));
   };
 
   const qListComponent = [
-    <option disabled selected value>
+    <option key="0" disabled selected>
       질문을 선택해주세요
     </option>,
   ];
   questionList.map((q) => {
-    qListComponent.push(
-      <option key={q.id} value={q.id}>
-        {q.question}
-      </option>
-    );
+    if (q.id === questionId) {
+      qListComponent.push(
+        <option key={q.id} value={q.id} selected>
+          {q.question}
+        </option>
+      );
+    } else {
+      qListComponent.push(
+        <option key={q.id} value={q.id}>
+          {q.question}
+        </option>
+      );
+    }
   });
 
   const onQuestionChange = (e) => {
@@ -73,7 +84,7 @@ const DiaryForm = ({ token }) => {
   };
 
   return submitStat ? (
-    <Redirect to="/" />
+    <Redirect to={`/detail/${id}`} />
   ) : (
     <>
       <FormArea onSubmit={handleSubmit}>
@@ -87,6 +98,7 @@ const DiaryForm = ({ token }) => {
             placeholder="제목"
             maxLength={120}
             onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
           <MusicSearch type="text" placeholder="음악 검색.." />
           {/* <MusicChoice/> */}
@@ -96,6 +108,7 @@ const DiaryForm = ({ token }) => {
           name="body"
           autoComplete="off"
           onChange={(e) => setBody(e.target.value)}
+          value={body}
         />
         <SaveButton onClick={(e) => handleSubmit(e)}>저장하기</SaveButton>
       </FormArea>

@@ -67,11 +67,20 @@ export const ContentBody = styled.div`
 
 export const BtnArea = styled.div``;
 
-export const UDBtn = styled(Link)`
+export const EditBtn = styled(Link)`
   color: ${darkGray};
   font-size: 1rem;
   margin-right: 1.5rem;
   margin-top: 1rem;
+  cursor: pointer;
+`;
+
+export const DeleteBtn = styled.a`
+  color: ${darkGray};
+  font-size: 1rem;
+  margin-right: 1.5rem;
+  margin-top: 1rem;
+  cursor: pointer;
 `;
 
 export const Like = styled.button`

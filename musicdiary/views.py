@@ -10,11 +10,9 @@ from rest_framework.views import APIView
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 from django.conf import settings
-from rest_framework import status
 from django.db.models import Max
 import random
 from datetime import datetime, timedelta
-
 
 
 # 전체 글 보여주기
@@ -23,10 +21,10 @@ class MusicdiaryViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     queryset = Musicdiary.objects.all().order_by('-pub_date')
     serializer_class = MusicdiarySerializer
+    
     # serializer.save() 재정의
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-
 
 
 # 음악 검색
@@ -56,19 +54,6 @@ class MyPageView(APIView):
             queryset = Musicdiary.objects.filter(user=self.request.user).order_by('-pub_date')
             serializer_class = MusicdiarySerializer(queryset, many=True, context=serializer_context)
             return Response(serializer_class.data)
-        else:
-            return Response({"detail":"Please login"})
-    #내페이지에서 글 쓰기
-    def post(self, request):
-        if request.user.is_authenticated:
-            serializer_context = {
-                'request': request,
-            }
-            serializer = MusicdiarySerializer(data=request.data, context=serializer_context)
-            if serializer.is_valid(): #유효성 검사
-                serializer.save(user=self.request.user)
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"detail":"Please login"})
 
@@ -103,8 +88,8 @@ class RandomQuestion(APIView):
 class PastQuestion(APIView):
     @csrf_exempt
     def get(self, request):
-        startdate = datetime.today().date() - timedelta(4)
-        enddate = startdate + timedelta(days=4)
+        enddate = datetime.today().date();
+        startdate = enddate - timedelta(4)
 
         pastday_question = Question.objects.filter(released_date__range=[startdate, enddate])
 
@@ -112,3 +97,47 @@ class PastQuestion(APIView):
             serializer_context = {'request': request,}
             serializer_class = QuestionSerializer(pastday_question, many=True, context=serializer_context)
             return Response(serializer_class.data)
+
+
+# 지난주 인기질문 (그 질문에 그 날 작성된 글의 개수)
+class LastWeekPopularQuestion(APIView):
+    @csrf_exempt
+    def get(self, request):
+        startdate = datetime.today().date()-timedelta(7);
+        enddate = datetime.today().date()- timedelta(1);
+
+        lastweek_question = Question.objects.filter(released_date__range=[startdate, enddate])
+
+        if lastweek_question:
+            musicdiary_count = -1
+            musicdiary_max = -1
+            popular_pk = 0
+            for last_q in lastweek_question:
+                date_range1 = datetime.combine(last_q.released_date, datetime.min.time())
+                date_range2 = datetime.combine(last_q.released_date, datetime.max.time())
+                musicdiary_count = Musicdiary.objects.filter(question=last_q.id).filter(pub_date__range=[date_range1, date_range2]).count()
+                if musicdiary_count > musicdiary_max:
+                    musicdiary_max = musicdiary_count
+                    popular_pk = last_q.id
+
+            popular_question = Question.objects.filter(pk=popular_pk).first()
+            serializer_context = {'request': request,}
+            serializer_class = QuestionSerializer(popular_question, many=False, context=serializer_context)
+            return Response(serializer_class.data)
+
+# 좋아요 기능 
+class LikeToggle(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    def post(self, request, post_id):
+        like_list = Musicdiary.objects.filter(id=post_id).first()  
+        if self.request.user in like_list.liked_user.all():
+            like_list.liked_user.remove(self.request.user)
+            like_list.save()
+        else:
+            like_list.liked_user.add(self.request.user)
+            like_list.save()
+
+        serializer_context = {'request': request,}
+        serializer_class = MusicdiarySerializer(like_list, many=False, context=serializer_context)
+        return Response(serializer_class.data)
