@@ -59,24 +59,16 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   };
 
   const qListComponent = [
-    <option key="0" disabled selected>
+    <option key="0" disabled>
       질문을 선택해주세요
     </option>,
   ];
   questionList.map((q) => {
-    if (q.id === questionId) {
-      qListComponent.push(
-        <option key={q.id} value={q.id} selected>
-          {q.question}
-        </option>
-      );
-    } else {
-      qListComponent.push(
-        <option key={q.id} value={q.id}>
-          {q.question}
-        </option>
-      );
-    }
+    qListComponent.push(
+      <option key={q.id} value={q.id}>
+        {q.question}
+      </option>
+    );
   });
 
   const onQuestionChange = (e) => {
@@ -88,7 +80,10 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   ) : (
     <>
       <FormArea onSubmit={handleSubmit}>
-        <FormQuestion onChange={(e) => onQuestionChange(e)}>
+        <FormQuestion
+          defaultValue={questionId || 0}
+          onChange={(e) => onQuestionChange(e)}
+        >
           {qListComponent}
         </FormQuestion>
         <FormTopContainer>

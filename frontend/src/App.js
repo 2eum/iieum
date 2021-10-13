@@ -56,6 +56,7 @@ const App = () => {
             render={() => <Detail currUser={currUser} token={token} />}
           />
           <Route path="/detail/" exact render={() => <h2>잘못된 접근</h2>} />
+          <Route path="/new/:id" exact render={() => <New token={token} />} />
           <Route path="/new" exact render={() => <New token={token} />} />
           <Route
             path="/edit/:id"

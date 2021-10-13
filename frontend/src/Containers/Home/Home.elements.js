@@ -34,7 +34,9 @@ export const TodayMessage = styled.p`
   color: #ffffff;
 `;
 
-export const QuestionWrapper = styled.h1``;
+export const QuestionWrapper = styled.a``;
+
+export const QuestionAnswerLink = styled(Link)``;
 
 export const PostContainer = styled.section`
   width: 70%;

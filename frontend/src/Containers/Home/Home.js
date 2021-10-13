@@ -15,6 +15,7 @@ import {
   CreateButtonArea,
   CreateMessage,
   CreateButton,
+  QuestionAnswerLink,
 } from "./Home.elements";
 
 import { MusicCard } from "..";
@@ -23,6 +24,7 @@ import { BoldSpan } from "../../globalStyles";
 const Home = ({ token }) => {
   const [content, setContent] = useState(null);
   const [question, setQuestion] = useState("");
+  const [questionId, setQuestionId] = useState("");
   const [loaded, setLoad] = useState(false);
   const [contentIdx, setIdx] = useState(0);
   const [placeholder, setPlaceholder] = useState("Loading Content");
@@ -41,7 +43,13 @@ const Home = ({ token }) => {
         }
         return response.data;
       })
-      .then((data) => setQuestion(data[0].question_content));
+      .then((data) => {
+        setQuestion(data[0].question_content);
+        return data;
+      })
+      .then((data) => {
+        setQuestionId(data[0].id);
+      });
     axios({
       method: "get",
       url: "/api/musicdiary/",
@@ -94,7 +102,9 @@ const Home = ({ token }) => {
             <BannerDate>{todayString}</BannerDate>
             <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
             <QuestionWrapper>오늘의 질문: {question}</QuestionWrapper>
-
+            <QuestionAnswerLink to={`/new/${questionId}`}>
+              질문에 답하기
+            </QuestionAnswerLink>
             {content[contentIdx] ? (
               <PostContainer>
                 <ArrowContainer onClick={() => changeArticle("prev")}>
