@@ -28,8 +28,8 @@ const Detail = ({token, currUser}) => { //token 받아오기 추가
   const [placeholder, setPlaceholder] = useState("Loading Content");
 
   const [isLiked, setIsLiked] = useState(false);
-  const [likedUsers, setLikedUsers] = useState([]);
-  // const [likeCount, setLikeCount] = useState(0);
+  // const [likedUsers, setLikedUsers] = useState([]);
+  const [likeCount, setLikeCount] = useState(0);
 
   const diary = [
   {
@@ -55,28 +55,34 @@ const Detail = ({token, currUser}) => { //token 받아오기 추가
 ];
 
   useEffect(() => {
-    // axios({
-    //   method: "GET",
-    //   // url: `/api/musicdiary/${id}/`,
-    //   url: `/diary/1`,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((response) => {
-    //     if (response.status > 400) {
-    //       setPlaceholder("Something went wrong!");
-    //     }
-    //     return response.data;
-    //   })
-    //   .then((data) => {
-    //     setContent(data);
-    //   })
-    //   .then(() => {
-    //     setLoad(true);
-    //   });
-    setContent(diary[0]);
-    setLoad(true);
+    axios({
+      method: "GET",
+      url: `api/musicdiary/${id}`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization : `Token ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.status > 400) {
+          setPlaceholder("Something went wrong!");
+        }
+        return response.data;
+      })
+      .then((data) => {
+        setContent(data);
+        return data;
+      })
+      .then((data) => {
+        checkLiked(data.liked_users);
+        setLikeCount(data.liked_users.length);
+      })
+      .then(() => {
+        setLoad(true);
+      });
+      
+    // setContent(diary[0]);
+    // setLoad(true);
   }, []);
 
   const pubDateObj = new Date(content ? content.pub_date : "");
@@ -95,64 +101,53 @@ const Detail = ({token, currUser}) => { //token 받아오기 추가
   }
 
   //초기 렌더링 시, 내가 좋아요를 눌렀는지 여부를 가져옴
-  const getLiked = (e) => {
-    // const apiUrl = `/api/musicdiary/${id}/`;
-    // axios({
-    //   method : "get",
-    //   url : apiUrl,
-    //   headers : {
-    //     Authorization : `Token ${token}`,
-    //   },
-    // })
-    // .then((response) => {
-    //   checkLiked(response.data.liked_users);
-    //   // setLikeCount(response.data.like_count); //liked, like_count : 유저가 좋아요한 여부를 백에서 받아옴
-    // })
-    // .catch((response) => {
-    //   console.error(response);
-    // })
-
-    setContent(diary[0]);
-    // setLikeCount(content.like_count);
-  }
-
-  //diaryLiked가 업데이트될 때마다 리렌더링
-  useEffect(()=>{
-    getLiked();
-    setLikedUsers(content.liked_users);
-    checkLiked(likedUsers);
-  },[content, likedUsers]);
+  // const getLiked = (e) => {
+  //   const apiUrl = `/api/like/${id}/`;
+  //   axios({
+  //     method : "get",
+  //     url : apiUrl,
+  //     headers : {
+  //       Authorization : `Token ${token}`,
+  //     },
+  //   })
+  //   .then((response) => {
+  //     checkLiked(response.data.liked_users);
+  //     // setLikeCount(response.data.like_count); //liked, like_count : 유저가 좋아요한 여부를 백에서 받아옴
+  //   })
+  //   .catch((response) => {
+  //     console.error(response);
+  //   })
+  // }
 
 
   //좋아요 누르기 (생성/삭제)
   const postLike = (e) => {
-    // const apiUrl = `/api/musicdiary/${id}/`;
-    // axios({
-    //   method: "post",
-    //   // url: apiUrl,
-    //   url: `diary/1`,
-    //   headers: {
-    //     Authorization: `Token ${token}`,
-    //   },
-    //  data : {
-    //  // 글 id와 user 전달
-    //    content_id : content.id,
-    //    liked_user : currUser
-    //  }
-    // })
-    // .then((response) => {
-    //   checkLiked(response.data.liked_users);
-    //   // setLikeCount(response.data.like_count);
-    //   console.log("like 호출 결과:", response);
-    // })
-    // .catch((response) => {
-    //   console.error(response);
-    // })
+    axios({
+      method: "post",
+      url: `/api/like/${id}/`,
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      data : {
+     // 글 id와 user 전달
+        content_id : content.id,
+        liked_user : currUser
+      }
+    })
+    .then((response) => {
+      // setLikedUsers(response.data.liked_users);
+      checkLiked(response.data.liked_users);
+      setLikeCount(response.data.liked_users.length);
+      console.log("like 호출 결과:", response);
+    })
+    .catch((response) => {
+      console.error(response);
+    })
 
-    console.log("postLike to backend");
-    diary[0].liked_users.push(currUser);
-    checkLiked(diary[0].liked_users);
-    console.log(diary[0].liked_users);
+    // console.log("postLike to backend");
+    // diary[0].liked_users.push(currUser);
+    // checkLiked(diary[0].liked_users);
+    // console.log(diary[0].liked_users);
     // isLiked ? setIsLiked(false) : setIsLiked(true);
     // isLiked ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);    
   }
@@ -172,7 +167,7 @@ const Detail = ({token, currUser}) => { //token 받아오기 추가
         ) : (
           <>
             <QuestionWrapper>
-              {/* 질문: {content.question.question_content} */}
+              질문: {content.question.question_content}
             </QuestionWrapper>
             <ContentTitle>{content.title}</ContentTitle>
             <ContentInfo>
@@ -184,8 +179,8 @@ const Detail = ({token, currUser}) => { //token 받아오기 추가
         )}
         <BtnArea>
           {isLiked ? 
-              <Like onClick={postLike}><i class="fa fa-heart"/> 좋아요</Like> :
-              <Like onClick={postLike}><i class="fa fa-heart-o"/> 안좋아요</Like>
+              <Like onClick={postLike}><i class="fa fa-heart"/> 좋아요 {likeCount}</Like> :
+              <Like onClick={postLike}><i class="fa fa-heart-o"/> 안좋아요 {likeCount}</Like>
           }
         </BtnArea>
       </ContentArea>
