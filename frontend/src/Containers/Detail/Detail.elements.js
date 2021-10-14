@@ -84,4 +84,6 @@ export const DeleteBtn = styled.a`
 `;
 
 export const Like = styled.button`
+  margin-right: 1.5rem;
+  padding: 0.5rem;
 `;

@@ -29,7 +29,6 @@ const Detail = ({ currUser, token }) => {
   const [deleted, setDelete] = useState(false);
 
   const [isLiked, setIsLiked] = useState(false);
-  // const [likedUser, setLikedUser] = useState([]);
   const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
@@ -68,6 +67,7 @@ const Detail = ({ currUser, token }) => {
     pubDateObj.getMonth() + 1
   }월 ${pubDateObj.getDate()}일`;
 
+
   ///////////////LIKE////////////////
 
   const checkLiked = (likeList) => {
@@ -85,17 +85,12 @@ const Detail = ({ currUser, token }) => {
       url: `/api/like/${id}/`,
       headers: {
         Authorization: `Token ${token}`,
-      },
-      data : {
-      // 글 id와 user 전달 ?
-        content_id : content.id,
-        liked_user : currUser
       }
     })
     .then((response) => {
       checkLiked(response.data.liked_user);
       setLikeCount(response.data.liked_user.length);
-      console.log("like 호출 결과:", response);
+      //console.log("like 호출 결과:", response);
     })
     .catch((response) => {
       console.error(response);
