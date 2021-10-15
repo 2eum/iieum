@@ -14,13 +14,13 @@ import {
   BtnArea,
   EditBtn,
   DeleteBtn,
-  Like
+  Like,
 } from "./Detail.elements";
 import { MusicCard } from "../";
 import { useParams, Redirect } from "react-router";
 import axios from "axios";
 
-const Detail = ({ currUser, token }) => {
+const Detail = ({ currUser, token, userId }) => {
   let { id } = useParams();
 
   const [content, setContent] = useState(null);
@@ -32,7 +32,6 @@ const Detail = ({ currUser, token }) => {
   const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
-    console.log("useeffect");
     axios({
       method: "get",
       url: `/api/musicdiary/${id}/`,
@@ -42,7 +41,6 @@ const Detail = ({ currUser, token }) => {
       },
     })
       .then((response) => {
-        console.log(response.data);
         if (response.status > 400) {
           setPlaceholder("Something went wrong!");
         }
@@ -67,16 +65,14 @@ const Detail = ({ currUser, token }) => {
     pubDateObj.getMonth() + 1
   }월 ${pubDateObj.getDate()}일`;
 
-
-  ///////////////LIKE////////////////
-
   const checkLiked = (likeList) => {
-    for(let i = 0; i < likeList.length; i++){
-      if (likeList[i] === currUser){
-        setIsLiked(true);
-      }
+    const intId = userId * 1;
+    if (likeList.includes(intId)) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
     }
-  }
+  };
 
   //좋아요 누르기 (생성/삭제)
   const postLike = (e) => {
@@ -85,17 +81,17 @@ const Detail = ({ currUser, token }) => {
       url: `/api/like/${id}/`,
       headers: {
         Authorization: `Token ${token}`,
-      }
+      },
     })
-    .then((response) => {
-      checkLiked(response.data.liked_user);
-      setLikeCount(response.data.liked_user.length);
-      //console.log("like 호출 결과:", response);
-    })
-    .catch((response) => {
-      console.error(response);
-    }) 
-  }
+      .then((response) => {
+        checkLiked(response.data.liked_user);
+        setLikeCount(response.data.liked_user.length);
+        //console.log("like 호출 결과:", response);
+      })
+      .catch((response) => {
+        console.error(response);
+      });
+  };
 
   const handleDelete = () => {
     axios({
@@ -117,10 +113,9 @@ const Detail = ({ currUser, token }) => {
       });
   };
 
-  return (
-    deleted ? (
+  return deleted ? (
     <Redirect to="/" />
-    ) : (
+  ) : (
     <>
       <DetailHeader>
         <BackToList to="/mypage">&lt; 내 글 목록으로</BackToList>
@@ -147,24 +142,29 @@ const Detail = ({ currUser, token }) => {
           </>
         )}
         <BtnArea>
-          {isLiked ? 
-              <Like onClick={postLike}><i class="fa fa-heart"/> 좋아요 {likeCount}</Like> :
-              <Like onClick={postLike}><i class="fa fa-heart-o"/> 안좋아요 {likeCount}</Like>
-          }
+          {isLiked ? (
+            <Like onClick={postLike}>
+              <i className="fa fa-heart" /> 좋아요 {likeCount}
+            </Like>
+          ) : (
+            <Like onClick={postLike}>
+              <i className="fa fa-heart-o" /> 안좋아요 {likeCount}
+            </Like>
+          )}
           {!loaded ? (
-          placeholder
+            placeholder
           ) : content.user === currUser ? (
-          <>
-            <EditBtn to={`/edit/${content.id}`}>Edit</EditBtn>
-            <DeleteBtn onClick={() => handleDelete()}>Delete</DeleteBtn>
-          </>
+            <>
+              <EditBtn to={`/edit/${content.id}`}>Edit</EditBtn>
+              <DeleteBtn onClick={() => handleDelete()}>Delete</DeleteBtn>
+            </>
           ) : (
             ""
           )}
         </BtnArea>
       </ContentArea>
     </>
-  ))
-}
+  );
+};
 
 export default Detail;
