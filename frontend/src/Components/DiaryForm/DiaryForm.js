@@ -81,7 +81,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
     <>
       <FormArea onSubmit={handleSubmit}>
         <FormQuestion
-          defaultValue={questionId || 0}
+          value={questionId || 0}
           onChange={(e) => onQuestionChange(e)}
         >
           {qListComponent}
