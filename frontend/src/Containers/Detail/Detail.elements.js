@@ -82,3 +82,8 @@ export const DeleteBtn = styled.a`
   margin-top: 1rem;
   cursor: pointer;
 `;
+
+export const Like = styled.button`
+  margin-right: 1.5rem;
+  padding: 0.5rem;
+`;

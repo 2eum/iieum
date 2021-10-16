@@ -51,7 +51,7 @@ const Login = ({ saveUserData, currUser }) => {
           return response.data;
         })
         .then((data) => {
-          saveUserData(data.Token, data.User);
+          saveUserData(data.Token, data.User, data.Id);
         });
     }
   };

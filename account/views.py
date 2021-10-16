@@ -26,27 +26,19 @@ class SignupView(APIView):
 
         token = Token.objects.create(user=user)
         token.save()
-        return Response({"Token": token.key, "User": user.nickname})
+        return Response({"Id": user.id, "Token": token.key, "User": user.nickname})
 
 
 class LoginView(generics.GenericAPIView):
     permission_classes = [AllowAny]
     serializer_class = LoginSerializer
     def post(self, request):
-        # req_nickname= request.data['nickname']
-        # obj = User.objects.get(nickname=req_nickname)
-        # print(obj.password, request.data['password'])
-    
-        # if request.data['password'] == obj.password:
-        #     token = Token.objects.create(user=obj)
-        #     return Response({"Token": token.key, "User": obj.nickname})
-        # else:
-        #     return Response({"wrong nickname or password"})
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
         token = Token.objects.get(user=user)
         return Response({
+            "Id": user.id,
             "User": user.nickname,
             "Token": token.key
         })
