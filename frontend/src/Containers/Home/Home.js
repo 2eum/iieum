@@ -15,6 +15,7 @@ import {
   CreateButtonArea,
   CreateMessage,
   CreateButton,
+  QuestionAnswerLink,
 } from "./Home.elements";
 
 import { MusicCard } from "..";
@@ -22,11 +23,14 @@ import { BoldSpan } from "../../globalStyles";
 
 const Home = ({ token }) => {
   const [content, setContent] = useState(null);
+  const [questionList, setQList] = useState([]);
   const [question, setQuestion] = useState("");
+  const [questionId, setQuestionId] = useState("");
   const [loaded, setLoad] = useState(false);
   const [contentIdx, setIdx] = useState(0);
   const [placeholder, setPlaceholder] = useState("Loading Content");
 
+  // on Mount
   useEffect(() => {
     axios({
       method: "get",
@@ -41,7 +45,12 @@ const Home = ({ token }) => {
         }
         return response.data;
       })
-      .then((data) => setQuestion(data[0].question_content));
+      .then((data) => {
+        const sortedArray = [...data];
+        sortedArray.sort((a, b) => sortByLatest(a, b));
+        setQList(sortedArray);
+      });
+
     axios({
       method: "get",
       url: "/api/musicdiary/",
@@ -62,6 +71,27 @@ const Home = ({ token }) => {
         setLoad(true);
       });
   }, []);
+
+  // on question list change
+  useEffect(() => {
+    if (questionList[0]) {
+      setQuestion(questionList[0].question_content);
+      setQuestionId(questionList[0].id);
+    }
+  }, [questionList]);
+
+  const sortByLatest = (a, b) => {
+    const a_date = new Date(a.released_date);
+    const b_date = new Date(b.released_date);
+
+    if (a_date > b_date) {
+      return -1;
+    } else if (b_date > a_date) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
 
   const changeArticle = (direction) => {
     const last = content.length - 1;
@@ -94,7 +124,9 @@ const Home = ({ token }) => {
             <BannerDate>{todayString}</BannerDate>
             <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
             <QuestionWrapper>오늘의 질문: {question}</QuestionWrapper>
-
+            <QuestionAnswerLink to={`/new/${questionId}`}>
+              질문에 답하기
+            </QuestionAnswerLink>
             {content[contentIdx] ? (
               <PostContainer>
                 <ArrowContainer onClick={() => changeArticle("prev")}>
@@ -120,7 +152,8 @@ const Home = ({ token }) => {
       </TodayPostContainer>
       <CreateButtonArea>
         <CreateMessage>
-          오늘, <BoldSpan>당신의 하루는</BoldSpan> 어떤 <BoldSpan>선율</BoldSpan>
+          오늘, <BoldSpan>당신의 하루는</BoldSpan> 어떤{" "}
+          <BoldSpan>선율</BoldSpan>
           이었나요?
         </CreateMessage>
         <CreateButton to="/new">내 이야기 쓰러가기</CreateButton>
