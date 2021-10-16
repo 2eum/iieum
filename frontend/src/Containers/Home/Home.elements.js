@@ -34,7 +34,7 @@ export const TodayMessage = styled.p`
   color: #ffffff;
 `;
 
-export const QuestionWrapper = styled.a``;
+export const QuestionWrapper = styled.p``;
 
 export const QuestionAnswerLink = styled(Link)``;
 

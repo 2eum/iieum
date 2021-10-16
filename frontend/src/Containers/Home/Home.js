@@ -23,12 +23,14 @@ import { BoldSpan } from "../../globalStyles";
 
 const Home = ({ token }) => {
   const [content, setContent] = useState(null);
+  const [questionList, setQList] = useState([]);
   const [question, setQuestion] = useState("");
   const [questionId, setQuestionId] = useState("");
   const [loaded, setLoad] = useState(false);
   const [contentIdx, setIdx] = useState(0);
   const [placeholder, setPlaceholder] = useState("Loading Content");
 
+  // on Mount
   useEffect(() => {
     axios({
       method: "get",
@@ -44,12 +46,11 @@ const Home = ({ token }) => {
         return response.data;
       })
       .then((data) => {
-        setQuestion(data[0].question_content);
-        return data;
-      })
-      .then((data) => {
-        setQuestionId(data[0].id);
+        const sortedArray = [...data];
+        sortedArray.sort((a, b) => sortByLatest(a, b));
+        setQList(sortedArray);
       });
+
     axios({
       method: "get",
       url: "/api/musicdiary/",
@@ -70,6 +71,27 @@ const Home = ({ token }) => {
         setLoad(true);
       });
   }, []);
+
+  // on question list change
+  useEffect(() => {
+    if (questionList[0]) {
+      setQuestion(questionList[0].question_content);
+      setQuestionId(questionList[0].id);
+    }
+  }, [questionList]);
+
+  const sortByLatest = (a, b) => {
+    const a_date = new Date(a.released_date);
+    const b_date = new Date(b.released_date);
+
+    if (a_date > b_date) {
+      return -1;
+    } else if (b_date > a_date) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
 
   const changeArticle = (direction) => {
     const last = content.length - 1;
@@ -130,7 +152,8 @@ const Home = ({ token }) => {
       </TodayPostContainer>
       <CreateButtonArea>
         <CreateMessage>
-          오늘, <BoldSpan>당신의 하루는</BoldSpan> 어떤 <BoldSpan>선율</BoldSpan>
+          오늘, <BoldSpan>당신의 하루는</BoldSpan> 어떤{" "}
+          <BoldSpan>선율</BoldSpan>
           이었나요?
         </CreateMessage>
         <CreateButton to="/new">내 이야기 쓰러가기</CreateButton>
