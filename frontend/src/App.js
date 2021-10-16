@@ -16,25 +16,28 @@ import GlobalStyle from "./globalStyles";
 
 const App = () => {
   const [token, setToken] = useState(
-    localStorage.getItem("token")
-      ? JSON.parse(localStorage.getItem("token")).token
-      : ""
+    localStorage.getItem("token") ? localStorage.getItem("token") : ""
   );
   const [currUser, setUser] = useState(
-    localStorage.getItem("user")
-      ? JSON.parse(window.localStorage.getItem("user")).user
+    localStorage.getItem("nickname")
+      ? window.localStorage.getItem("nickname")
       : ""
   );
 
-  const saveUserData = (token, user) => {
+  const [userId, setUserId] = useState(
+    localStorage.getItem("userId") ? window.localStorage.getItem("userId") : ""
+  );
+
+  const saveUserData = (token, nickname, userId) => {
     setToken(token);
-    setUser(user);
+    setUser(nickname);
+    setUserId(userId);
 
-    const tokenObj = { token: token };
-    window.localStorage.setItem("token", JSON.stringify(tokenObj));
+    window.localStorage.setItem("token", token);
 
-    const userObj = { user: user };
-    window.localStorage.setItem("user", JSON.stringify(userObj));
+    window.localStorage.setItem("nickname", nickname);
+
+    window.localStorage.setItem("userId", userId);
   };
 
   const handleLogout = () => {
@@ -53,7 +56,9 @@ const App = () => {
           <Route
             path="/detail/:id"
             exact
-            render={() => <Detail currUser={currUser} token={token} />}
+            render={() => (
+              <Detail currUser={currUser} token={token} userId={userId} />
+            )}
           />
           <Route path="/detail/" exact render={() => <h2>잘못된 접근</h2>} />
           <Route path="/new/:id" exact render={() => <New token={token} />} />

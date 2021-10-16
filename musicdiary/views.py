@@ -124,3 +124,20 @@ class LastWeekPopularQuestion(APIView):
             serializer_context = {'request': request,}
             serializer_class = QuestionSerializer(popular_question, many=False, context=serializer_context)
             return Response(serializer_class.data)
+
+# 좋아요 기능 
+class LikeToggle(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    def post(self, request, post_id):
+        like_list = Musicdiary.objects.filter(id=post_id).first()  
+        if self.request.user in like_list.liked_user.all():
+            like_list.liked_user.remove(self.request.user)
+            like_list.save()
+        else:
+            like_list.liked_user.add(self.request.user)
+            like_list.save()
+
+        serializer_context = {'request': request,}
+        serializer_class = MusicdiarySerializer(like_list, many=False, context=serializer_context)
+        return Response(serializer_class.data)
