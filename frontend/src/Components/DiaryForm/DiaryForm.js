@@ -8,8 +8,11 @@ import {
   FormTitle,
   FormBody,
   MusicSearch,
+  SearchedContainer,
   SaveButton,
 } from "./DiaryForm.elements";
+
+import { SearchedItem } from "..";
 
 const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   const [id, setId] = useState(c_id || "");
@@ -19,6 +22,11 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   const [submitStat, setSubmitStat] = useState(false);
 
   const [questionList, setQuestions] = useState([]);
+
+  const [searchCount, setSearchCount] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchReady, setSearchReady] = useState(false);
 
   useEffect(() => {
     axios({
@@ -40,6 +48,37 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
       .then((data) => setQuestions(data));
   }, []);
 
+  useEffect(() => {
+    if (searchQuery !== "") {
+      axios({
+        method: "post",
+        url: "api/spotify/",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        data: {
+          search: searchQuery,
+        },
+      })
+        .then((res) => {
+          const results = res.data.Results.tracks.items;
+          const arr = [];
+          for (let m of results) {
+            const info = {};
+            info.img = m.album.images[1].url;
+            info.url = m.external_urls.spotify;
+            info.title = m.name;
+            info.preview = m.preview_url;
+            info.artist = m.artists.map((x) => x.name).join(", ");
+            arr.push(info);
+          }
+          setSearchResult(arr);
+        })
+        .then(() => setSearchReady(true));
+    }
+  }, [searchQuery]);
+
   const handleSubmit = (e) => {
     axios({
       method: type,
@@ -58,6 +97,16 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
       .then(() => setSubmitStat(true));
   };
 
+  const updateSearchInput = (e) => {
+    setSearchCount(searchCount + 1);
+    let count = searchCount;
+    setTimeout(() => {
+      if (count === searchCount) {
+        setSearchQuery(e.target.value);
+      }
+    }, 1000);
+  };
+
   const qListComponent = [
     <option key="0" disabled>
       질문을 선택해주세요
@@ -68,6 +117,18 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
       <option key={q.id} value={q.id}>
         {q.question}
       </option>
+    );
+  });
+
+  let search = searchResult.map((s) => {
+    return (
+      <SearchedItem
+        title={s.title}
+        artists={s.artists}
+        img={s.img}
+        url={s.url}
+        preview={s.preview}
+      />
     );
   });
 
@@ -95,7 +156,12 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
-          <MusicSearch type="text" placeholder="음악 검색.." />
+          <MusicSearch
+            type="text"
+            placeholder="음악 검색.."
+            onChange={(e) => updateSearchInput(e)}
+          />
+          {searchReady ? <SearchedContainer>{search}</SearchedContainer> : ""}
           {/* <MusicChoice/> */}
         </FormTopContainer>
         <FormBody

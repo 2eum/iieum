@@ -40,6 +40,8 @@ export const MusicSearch = styled.input`
   padding: 1rem;
 `;
 
+export const SearchedContainer = styled.div``;
+
 export const FormBody = styled.textarea`
   margin: 1.5rem 10% 2rem 10%;
   width: 100%;
