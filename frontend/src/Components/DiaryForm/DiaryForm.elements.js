@@ -34,13 +34,37 @@ export const FormTitle = styled.input`
   padding: 1rem;
 `;
 
+export const SearchSection = styled.section`
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
+
 export const MusicSearch = styled.input`
   height: 2rem;
-  width: 30%;
+  width: 100%;
   padding: 1rem;
 `;
 
-export const SearchedContainer = styled.div``;
+export const SearchedContainer = styled.div`
+  background-color: #ffffff;
+  overflow-y: scroll;
+  width: 100%;
+  height: 30vh;
+  position: absolute;
+  top: 2.5rem;
+  z-index: 5;
+  border: 1px solid #000;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 export const FormBody = styled.textarea`
   margin: 1.5rem 10% 2rem 10%;
@@ -71,4 +95,8 @@ export const SaveButton = styled.p`
   display: inline;
   align-self: flex-end;
   text-align: center;
+`;
+
+export const SelectionContainer = styled.div`
+  width: 30%;
 `;

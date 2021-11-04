@@ -5,7 +5,6 @@ export const Container = styled.div`
   padding: 1vh;
   display: flex;
   gap: 5%;
-  border-bottom: 1px solid #000;
 `;
 
 export const RightWrapper = styled.div`
@@ -40,8 +39,4 @@ export const Link = styled.img`
 `;
 export const Preview = styled.audio``;
 
-export const SelectButton = styled.p`
-  border: 1px solid #000;
-  background-color: #ccc;
-  cursor: pointer;
-`;
+export const SelectButton = styled.button``;

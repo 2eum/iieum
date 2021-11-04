@@ -7,11 +7,14 @@ import {
   FormTopContainer,
   FormTitle,
   FormBody,
+  SearchSection,
   MusicSearch,
   SearchedContainer,
   SaveButton,
+  SelectionContainer,
 } from "./DiaryForm.elements";
 
+import MusicSelection from "../MusicSelection/MusicSelection";
 import { SearchedItem } from "..";
 
 const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
@@ -27,6 +30,10 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [searchReady, setSearchReady] = useState(false);
+
+  const [selected, setSelected] = useState(false);
+
+  const [mObject, setMObject] = useState({});
 
   useEffect(() => {
     axios({
@@ -66,7 +73,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
           const arr = [];
           for (let m of results) {
             const info = {};
-            info.img = m.album.images[1].url;
+            info.img = m.album.images[2].url;
             info.url = m.external_urls.spotify;
             info.title = m.name;
             info.preview = m.preview_url;
@@ -102,6 +109,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
     let count = searchCount;
     setTimeout(() => {
       if (count === searchCount) {
+        setSelected(false);
         setSearchQuery(e.target.value);
       }
     }, 1000);
@@ -120,14 +128,28 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
     );
   });
 
-  let search = searchResult.map((s) => {
+  const selectMusic = (i) => {
+    const musicInfo = {
+      title: searchResult[i].title,
+      artist: searchResult[i].artist,
+      img: searchResult[i].img,
+      url: searchResult[i].url,
+      preview: searchResult[i].preview,
+    };
+    setMObject(musicInfo);
+    setSelected(true);
+  };
+
+  let search = searchResult.map((s, i) => {
     return (
       <SearchedItem
+        key={i}
+        index={i}
         title={s.title}
-        artists={s.artists}
+        artist={s.artist}
         img={s.img}
         url={s.url}
-        preview={s.preview}
+        selectMusic={selectMusic}
       />
     );
   });
@@ -156,13 +178,31 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
-          <MusicSearch
-            type="text"
-            placeholder="음악 검색.."
-            onChange={(e) => updateSearchInput(e)}
-          />
-          {searchReady ? <SearchedContainer>{search}</SearchedContainer> : ""}
-          {/* <MusicChoice/> */}
+          <SelectionContainer>
+            {selected ? (
+              <MusicSelection
+                title={mObject.title}
+                artist={mObject.artist}
+                img={mObject.img}
+                url={mObject.url}
+                preview={mObject.preview}
+              />
+            ) : (
+              ""
+            )}
+          </SelectionContainer>
+          <SearchSection>
+            <MusicSearch
+              type="text"
+              placeholder="음악 검색.."
+              onChange={(e) => updateSearchInput(e)}
+            />
+            {searchReady && !selected ? (
+              <SearchedContainer>{search}</SearchedContainer>
+            ) : (
+              ""
+            )}
+          </SearchSection>
         </FormTopContainer>
         <FormBody
           placeholder="오늘의 이야기를 들려주세요"

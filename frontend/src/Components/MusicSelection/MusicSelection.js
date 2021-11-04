@@ -1,11 +1,10 @@
 import React from "react";
-import * as S from "./SearchedItem.elements";
-import spotifyIcon from "./Spotify_Icon.png";
+import * as S from "./MusicSelection.elements";
+import spotifyIcon from "../SearchedItem/Spotify_Icon.png";
 
-const SearchedItem = ({ index, title, artist, img, url, selectMusic }) => {
+const MusicSelection = ({ title, artist, img, url, preview }) => {
   return (
     <S.Container>
-      <S.SelectButton onClick={() => selectMusic(index)}>선택</S.SelectButton>
       <S.Cover src={img} alt="cover-art" />
       <S.RightWrapper>
         <S.Title>{title}</S.Title>
@@ -19,4 +18,4 @@ const SearchedItem = ({ index, title, artist, img, url, selectMusic }) => {
   );
 };
 
-export default SearchedItem;
+export default MusicSelection;
