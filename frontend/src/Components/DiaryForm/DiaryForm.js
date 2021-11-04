@@ -7,9 +7,15 @@ import {
   FormTopContainer,
   FormTitle,
   FormBody,
+  SearchSection,
   MusicSearch,
+  SearchedContainer,
   SaveButton,
+  SelectionContainer,
 } from "./DiaryForm.elements";
+
+import MusicSelection from "../MusicSelection/MusicSelection";
+import { SearchedItem } from "..";
 
 const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   const [id, setId] = useState(c_id || "");
@@ -19,6 +25,15 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   const [submitStat, setSubmitStat] = useState(false);
 
   const [questionList, setQuestions] = useState([]);
+
+  const [searchCount, setSearchCount] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchReady, setSearchReady] = useState(false);
+
+  const [selected, setSelected] = useState(false);
+
+  const [mObject, setMObject] = useState({});
 
   useEffect(() => {
     axios({
@@ -40,6 +55,37 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
       .then((data) => setQuestions(data));
   }, []);
 
+  useEffect(() => {
+    if (searchQuery !== "") {
+      axios({
+        method: "post",
+        url: "api/spotify/",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        data: {
+          search: searchQuery,
+        },
+      })
+        .then((res) => {
+          const results = res.data.Results.tracks.items;
+          const arr = [];
+          for (let m of results) {
+            const info = {};
+            info.img = m.album.images[2].url;
+            info.url = m.external_urls.spotify;
+            info.title = m.name;
+            info.preview = m.preview_url;
+            info.artist = m.artists.map((x) => x.name).join(", ");
+            arr.push(info);
+          }
+          setSearchResult(arr);
+        })
+        .then(() => setSearchReady(true));
+    }
+  }, [searchQuery]);
+
   const handleSubmit = (e) => {
     axios({
       method: type,
@@ -58,6 +104,17 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
       .then(() => setSubmitStat(true));
   };
 
+  const updateSearchInput = (e) => {
+    setSearchCount(searchCount + 1);
+    let count = searchCount;
+    setTimeout(() => {
+      if (count === searchCount) {
+        setSelected(false);
+        setSearchQuery(e.target.value);
+      }
+    }, 1000);
+  };
+
   const qListComponent = [
     <option key="0" disabled>
       질문을 선택해주세요
@@ -68,6 +125,32 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
       <option key={q.id} value={q.id}>
         {q.question}
       </option>
+    );
+  });
+
+  const selectMusic = (i) => {
+    const musicInfo = {
+      title: searchResult[i].title,
+      artist: searchResult[i].artist,
+      img: searchResult[i].img,
+      url: searchResult[i].url,
+      preview: searchResult[i].preview,
+    };
+    setMObject(musicInfo);
+    setSelected(true);
+  };
+
+  let search = searchResult.map((s, i) => {
+    return (
+      <SearchedItem
+        key={i}
+        index={i}
+        title={s.title}
+        artist={s.artist}
+        img={s.img}
+        url={s.url}
+        selectMusic={selectMusic}
+      />
     );
   });
 
@@ -95,8 +178,31 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
-          <MusicSearch type="text" placeholder="음악 검색.." />
-          {/* <MusicChoice/> */}
+          <SelectionContainer>
+            {selected ? (
+              <MusicSelection
+                title={mObject.title}
+                artist={mObject.artist}
+                img={mObject.img}
+                url={mObject.url}
+                preview={mObject.preview}
+              />
+            ) : (
+              ""
+            )}
+          </SelectionContainer>
+          <SearchSection>
+            <MusicSearch
+              type="text"
+              placeholder="음악 검색.."
+              onChange={(e) => updateSearchInput(e)}
+            />
+            {searchReady && !selected ? (
+              <SearchedContainer>{search}</SearchedContainer>
+            ) : (
+              ""
+            )}
+          </SearchSection>
         </FormTopContainer>
         <FormBody
           placeholder="오늘의 이야기를 들려주세요"
