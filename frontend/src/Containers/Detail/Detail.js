@@ -16,7 +16,7 @@ import {
   DeleteBtn,
   Like,
 } from "./Detail.elements";
-import { MusicCard } from "../";
+import { MusicCard } from "../../Components";
 import { useParams, Redirect } from "react-router";
 import axios from "axios";
 

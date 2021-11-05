@@ -5,7 +5,7 @@ import {
   MusicTitle,
   MusicArtist,
 } from "./MusicCard.elements";
-import { MusicPlayer } from "../../Components";
+import { MusicPlayer } from "..";
 
 const MusicCard = () => {
   return (

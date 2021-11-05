@@ -17,7 +17,11 @@ import {
 } from "./Calendar.elements";
 
 const Calendar = ({ token }) => {
-  const [viewMonth, setMonth] = useState({ year: 2021, month: 8 });
+  const today = new Date();
+  const [viewMonth, setMonth] = useState({
+    year: today.getFullYear(),
+    month: today.getMonth(),
+  });
 
   // api content state
   const [content, setContent] = useState({});

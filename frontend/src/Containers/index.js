@@ -1,6 +1,5 @@
 export { default as Navbar } from "./Navbar/Navbar";
 export { default as Home } from "./Home/Home";
-export { default as MusicCard } from "./MusicCard/MusicCard";
 export { default as MyPage } from "./MyPage/MyPage";
 export { default as Detail } from "./Detail/Detail";
 export { default as New } from "./New/New";

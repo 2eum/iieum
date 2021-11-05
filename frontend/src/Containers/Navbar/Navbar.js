@@ -30,11 +30,11 @@ const Navbar = ({ currUser, handleLogout }) => {
           </SearchButton>
         </SearchBarContainer>
         <NavLinkContainer>
-          <NavLink to="/">사용 안내</NavLink>
           <GreetMessage>
             어서오세요 {currUser ? `${currUser}님` : ""} :)
           </GreetMessage>
           <RightNavLinksWrapper>
+            <NavLink to="/">둘러보기</NavLink>
             {currUser ? (
               <>
                 <NavLink to="/mypage">내 페이지</NavLink>
@@ -46,7 +46,6 @@ const Navbar = ({ currUser, handleLogout }) => {
                 <NavLink to="/register">회원가입</NavLink>
               </>
             )}
-            <NavLink to="/">피드백 남기기</NavLink>
           </RightNavLinksWrapper>
         </NavLinkContainer>
       </NavContainer>

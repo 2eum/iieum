@@ -21,7 +21,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   const [id, setId] = useState(c_id || "");
   const [title, setTitle] = useState(c_title || "");
   const [body, setBody] = useState(c_body || "");
-  const [questionId, setQuestionId] = useState(c_questionId || "");
+  const [questionId, setQuestionId] = useState(c_questionId || 1);
   const [submitStat, setSubmitStat] = useState(false);
 
   const [questionList, setQuestions] = useState([]);
@@ -87,6 +87,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   }, [searchQuery]);
 
   const handleSubmit = (e) => {
+    console.log(questionId);
     axios({
       method: type,
       url: type === "post" ? "api/musicdiary/" : `api/musicdiary/${id}/`,
@@ -155,6 +156,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   });
 
   const onQuestionChange = (e) => {
+    console.log(e.target.value);
     setQuestionId(e.target.value);
   };
 

@@ -11,7 +11,11 @@ const New = ({ token }) => {
         <PageHeader>나의 이야기 작성하기</PageHeader>
         <Line />
 
-        <DiaryForm token={token} type={"post"} c_questionId={id * 1} />
+        <DiaryForm
+          token={token}
+          type={"post"}
+          c_questionId={id ? id * 1 : ""}
+        />
       </MainContentContainer>
     </>
   );
