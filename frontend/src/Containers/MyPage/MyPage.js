@@ -31,16 +31,18 @@ const MyPage = ({ token }) => {
       </MyPageBanner>
 
       <MainContentContainer>
+        {/* detail cards */}
         <MyPageTitle>나의 이야기</MyPageTitle>
-        <ViewSwitchWrapper>
+        {/* <ViewSwitchWrapper>
           <ViewSwitch value="list" onClick={(e) => changeView(e)}>
             리스트 보기
           </ViewSwitch>
           <ViewSwitch value="cal" onClick={(e) => changeView(e)}>
             캘린더 보기
           </ViewSwitch>
-        </ViewSwitchWrapper>
-        {view === "list" ? <List token={token} /> : <Calendar token={token} />}
+        </ViewSwitchWrapper> */}
+        <Calendar token={token} />
+        <List token={token} />
       </MainContentContainer>
     </>
   );

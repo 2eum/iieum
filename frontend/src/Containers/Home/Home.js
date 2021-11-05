@@ -18,7 +18,8 @@ import {
   QuestionAnswerLink,
 } from "./Home.elements";
 
-import { MusicCard } from "..";
+import { MusicCard } from "../../Components";
+import { New } from "..";
 import { BoldSpan } from "../../globalStyles";
 
 const Home = ({ token }) => {
@@ -150,14 +151,19 @@ const Home = ({ token }) => {
           </>
         )}
       </TodayPostContainer>
-      <CreateButtonArea>
+      {/* <CreateButtonArea>
         <CreateMessage>
           오늘, <BoldSpan>당신의 하루는</BoldSpan> 어떤{" "}
           <BoldSpan>선율</BoldSpan>
           이었나요?
         </CreateMessage>
         <CreateButton to="/new">내 이야기 쓰러가기</CreateButton>
-      </CreateButtonArea>
+      </CreateButtonArea> */}
+      <New token={token} />
+
+      {/* Question List */}
+
+      {/* Music List */}
     </>
   );
 };
