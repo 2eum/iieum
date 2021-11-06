@@ -160,7 +160,7 @@ const Home = ({ token }) => {
         </CreateMessage>
         <CreateButton to="/new">내 이야기 쓰러가기</CreateButton>
       </CreateButtonArea> */}
-      <PostCardL/>
+      <PostCardL />
       <New token={token} />
 
       {/* Question List */}
