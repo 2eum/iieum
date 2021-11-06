@@ -18,7 +18,7 @@ import {
   QuestionAnswerLink,
 } from "./Home.elements";
 
-import { MusicCard } from "../../Components";
+import { MusicCard, PostCardL } from "../../Components";
 import { New } from "..";
 import { BoldSpan } from "../../globalStyles";
 
@@ -128,6 +128,7 @@ const Home = ({ token }) => {
             <QuestionAnswerLink to={`/new/${questionId}`}>
               질문에 답하기
             </QuestionAnswerLink>
+            <PostCardL/>
             {content[contentIdx] ? (
               <PostContainer>
                 <ArrowContainer onClick={() => changeArticle("prev")}>
@@ -159,6 +160,7 @@ const Home = ({ token }) => {
         </CreateMessage>
         <CreateButton to="/new">내 이야기 쓰러가기</CreateButton>
       </CreateButtonArea> */}
+      <PostCardL/>
       <New token={token} />
 
       {/* Question List */}
