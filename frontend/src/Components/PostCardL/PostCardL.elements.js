@@ -68,7 +68,7 @@ export const ContentArea = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 50%;
+  height: 40%;
 `;
 
 export const ContentTitle = styled.h2`
