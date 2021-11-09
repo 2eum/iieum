@@ -6,6 +6,7 @@ class Question(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False)
     question_content = models.CharField(max_length=150)
     released_date = models.DateField(null=True, blank=True)
+    explain = models.TextField(max_length=200)
 
     def __str__(self):
         return self.question_content

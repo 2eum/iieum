@@ -72,9 +72,20 @@ class RandomQuestion(APIView):
     @csrf_exempt
     def get(self, request):
         max_id = Question.objects.all().aggregate(max_id=Max("id"))['max_id']
+        # 쿨타임이 오늘 날짜로 등록됐던 질문들은 다시 null로 바꿈(쿨타임 끝남, 다시 랜덤 범위에 포함) & 에러 처리 겸용
+        free_question = Question.objects.filter(released_date=datetime.today().date())
+        for fq in free_question:
+            fq.released_date = None
+            fq.save()
+        # 어제 질문은 일주일 뒤 날짜로 바꿈(쿨타임 시작)
+        deleted_question = Question.objects.filter(released_date=datetime.today().date() - timedelta(1))
+        for dq in deleted_question:
+            dq.released_date = dq.released_date + timedelta(weeks=1)
+            dq.save()
         while True:
             pk = random.randint(1, max_id)
-            random_question = Question.objects.filter(pk=pk).first()
+            # released_date가 null이면서 pk가 해당 랜덤값인 질문들
+            random_question = Question.objects.filter(released_date=None).filter(pk=pk).first()
             if random_question:
                 serializer_context = {'request': request,}
                 random_question.released_date = datetime.today().date() # 오늘 날짜
@@ -84,14 +95,14 @@ class RandomQuestion(APIView):
 
 
 
-# 최근 5일 간의 질문 불러오기 (오늘, 어제, 2,3,4일 전)
+# 최근 5일 간의 질문 불러오기
 class PastQuestion(APIView):
     @csrf_exempt
     def get(self, request):
         enddate = datetime.today().date();
         startdate = enddate - timedelta(4)
 
-        pastday_question = Question.objects.filter(released_date__range=[startdate, enddate])
+        pastday_question = Question.objects.filter(released_date__range=[startdate, enddate]).order_by('-released_date')
 
         if pastday_question:
             serializer_context = {'request': request,}
@@ -99,8 +110,9 @@ class PastQuestion(APIView):
             return Response(serializer_class.data)
 
 
+
 # 지난주 인기질문 (그 질문에 그 날 작성된 글의 개수)
-class LastWeekPopularQuestion(APIView):
+"""class LastWeekPopularQuestion(APIView):
     @csrf_exempt
     def get(self, request):
         startdate = datetime.today().date()-timedelta(7);
@@ -123,7 +135,7 @@ class LastWeekPopularQuestion(APIView):
             popular_question = Question.objects.filter(pk=popular_pk).first()
             serializer_context = {'request': request,}
             serializer_class = QuestionSerializer(popular_question, many=False, context=serializer_context)
-            return Response(serializer_class.data)
+            return Response(serializer_class.data)"""
 
 # 좋아요 기능 
 class LikeToggle(APIView):

@@ -15,7 +15,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     Post = PostSerializer(many=True, read_only=True)
     class Meta: 
         model = Question
-        fields = ('url', 'id','question_content','released_date', 'Post')
+        fields = ('url', 'id','question_content','released_date', 'explain', 'Post')
 
 class QuestionRepresentationSerializer(serializers.ModelSerializer):
     class Meta:
