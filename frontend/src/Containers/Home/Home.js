@@ -54,7 +54,7 @@ const Home = ({ token }) => {
 
     axios({
       method: "get",
-      url: "/api/musicdiary/",
+      url: "/api/post/",
       headers: {
         "Content-Type": "application/json",
       },

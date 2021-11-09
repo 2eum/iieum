@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .serializers import MusicdiarySerializer, QuestionSerializer
-from .models import Musicdiary, Question
+from .serializers import PostSerializer, QuestionSerializer
+from .models import Post, Question
 from rest_framework.authentication import TokenAuthentication 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
@@ -16,11 +16,11 @@ from datetime import datetime, timedelta
 
 
 # 전체 글 보여주기
-class MusicdiaryViewSet(viewsets.ModelViewSet): 
+class PostViewSet(viewsets.ModelViewSet): 
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
-    queryset = Musicdiary.objects.all().order_by('-pub_date')
-    serializer_class = MusicdiarySerializer
+    queryset = Post.objects.all().order_by('-pub_date')
+    serializer_class = PostSerializer
     
     # serializer.save() 재정의
     def perform_create(self, serializer):
@@ -51,8 +51,8 @@ class MyPageView(APIView):
             serializer_context = {
                 'request': request,
             }
-            queryset = Musicdiary.objects.filter(user=self.request.user).order_by('-pub_date')
-            serializer_class = MusicdiarySerializer(queryset, many=True, context=serializer_context)
+            queryset = Post.objects.filter(user=self.request.user).order_by('-pub_date')
+            serializer_class = PostSerializer(queryset, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
             return Response({"detail":"Please login"})
@@ -109,15 +109,15 @@ class LastWeekPopularQuestion(APIView):
         lastweek_question = Question.objects.filter(released_date__range=[startdate, enddate])
 
         if lastweek_question:
-            musicdiary_count = -1
-            musicdiary_max = -1
+            Post_count = -1
+            Post_max = -1
             popular_pk = 0
             for last_q in lastweek_question:
                 date_range1 = datetime.combine(last_q.released_date, datetime.min.time())
                 date_range2 = datetime.combine(last_q.released_date, datetime.max.time())
-                musicdiary_count = Musicdiary.objects.filter(question=last_q.id).filter(pub_date__range=[date_range1, date_range2]).count()
-                if musicdiary_count > musicdiary_max:
-                    musicdiary_max = musicdiary_count
+                Post_count = Post.objects.filter(question=last_q.id).filter(pub_date__range=[date_range1, date_range2]).count()
+                if Post_count > Post_max:
+                    Post_max = Post_count
                     popular_pk = last_q.id
 
             popular_question = Question.objects.filter(pk=popular_pk).first()
@@ -130,7 +130,7 @@ class LikeToggle(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
     def post(self, request, post_id):
-        like_list = Musicdiary.objects.filter(id=post_id).first()  
+        like_list = Post.objects.filter(id=post_id).first()  
         if self.request.user in like_list.liked_user.all():
             like_list.liked_user.remove(self.request.user)
             like_list.save()
@@ -139,5 +139,5 @@ class LikeToggle(APIView):
             like_list.save()
 
         serializer_context = {'request': request,}
-        serializer_class = MusicdiarySerializer(like_list, many=False, context=serializer_context)
+        serializer_class = PostSerializer(like_list, many=False, context=serializer_context)
         return Response(serializer_class.data)

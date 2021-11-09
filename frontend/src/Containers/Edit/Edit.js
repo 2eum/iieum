@@ -14,7 +14,7 @@ const Edit = ({ token, currUser }) => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/api/musicdiary/${id}/`,
+      url: `/api/post/${id}/`,
       headers: {
         "Content-Type": "application/json",
       },

@@ -4,7 +4,7 @@ from .views import *
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register('api/musicdiary', MusicdiaryViewSet)
+router.register('api/post', PostViewSet)
 router.register('api/question', QuestionViewSet)
 
 urlpatterns = [
