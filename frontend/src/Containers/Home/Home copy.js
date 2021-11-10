@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import * as e from "./Home.elements";
-import * as com from "../../Components";
-import { LoadMoreButtonL, LoadMoreButtonR } from "../../Components/LoadMoreButton/LoadMoreButton";
+import {
+  TodayPostContainer,
+  BannerDate,
+  TodayMessage,
+  QuestionWrapper,
+  PostContainer,
+  ContentWrapper,
+  ArrowContainer,
+  ContentTitle,
+  ContentAuthor,
+  ContentSummary,
+  CreateButtonArea,
+  CreateMessage,
+  CreateButton,
+  QuestionAnswerLink,
+} from "./Home.elements";
+
+import { MusicCard, PostCardL, PostCardS } from "../../Components";
 import { New } from "..";
 import { BoldSpan } from "../../globalStyles";
 
@@ -102,28 +117,55 @@ const Home = ({ currUser, token, userId }) => {
 
   return (
     <>
-      <e.Background>
-        <e.QuestionPageContainer>
-            <com.PostCardL/>
-            <e.RightContainer>
-              <e.QuestionArea>
-                <com.ShuffleButton/>
-                <e.TodayQuestion>
-                  <e.QDate>오늘의 질문</e.QDate>
-                  <e.Question>내 인생에서 가장 더웠던 날의 기억</e.Question>
-                </e.TodayQuestion>
-              </e.QuestionArea>
-              <e.PostCardSArea>
-                <e.PostCardSWrapper>
-                  <LoadMoreButtonL/>
-                  <com.PostCardS/><com.PostCardS/>
-                  <LoadMoreButtonR/>
-                </e.PostCardSWrapper>
-                <com.Indicator/>
-              </e.PostCardSArea>
-            </e.RightContainer>
-          </e.QuestionPageContainer>
-      </e.Background>
+      <TodayPostContainer>
+        {loaded === false ? (
+          <p>{placeholder}</p>
+        ) : (
+          <>
+            <BannerDate>{todayString}</BannerDate>
+            <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
+            <QuestionWrapper>오늘의 질문: {question}</QuestionWrapper>
+            <QuestionAnswerLink to={`/new/${questionId}`}>
+              질문에 답하기
+            </QuestionAnswerLink>
+            <PostCardL />
+            <PostCardS />
+            {content[contentIdx] ? (
+              <PostContainer>
+                <ArrowContainer onClick={() => changeArticle("prev")}>
+                  <i className="fas fa-chevron-left"></i>
+                </ArrowContainer>
+                <MusicCard />
+                <ContentWrapper>
+                  <ContentTitle to={`detail/${content[contentIdx].id}`}>
+                    {content[contentIdx].title}
+                    <ContentAuthor>by {content[contentIdx].user}</ContentAuthor>
+                  </ContentTitle>
+                  <ContentSummary>{content[contentIdx].content}</ContentSummary>
+                </ContentWrapper>
+                <ArrowContainer onClick={() => changeArticle("next")}>
+                  <i className="fas fa-chevron-right"></i>
+                </ArrowContainer>
+              </PostContainer>
+            ) : (
+              ""
+            )}
+          </>
+        )}
+      </TodayPostContainer>
+      {/* <CreateButtonArea>
+        <CreateMessage>
+          오늘, <BoldSpan>당신의 하루는</BoldSpan> 어떤{" "}
+          <BoldSpan>선율</BoldSpan>
+          이었나요?
+        </CreateMessage>
+        <CreateButton to="/new">내 이야기 쓰러가기</CreateButton>
+      </CreateButtonArea> */}
+      <New token={token} />
+
+      {/* Question List */}
+
+      {/* Music List */}
     </>
   );
 };

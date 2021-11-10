@@ -5,8 +5,8 @@ import * as g from "../../globalStyles";
 export const PostCardArea = styled.section`
   width: 530px;
   height: 720px;
-  margin: 2% auto;
   padding: 50px;
+  margin: auto 4%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

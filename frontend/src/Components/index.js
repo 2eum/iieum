@@ -7,3 +7,5 @@ export { default as SearchedItem } from "./SearchedItem/SearchedItem";
 export { default as PostCardL } from "./PostCardL/PostCardL";
 export { default as PostCardS } from "./PostCardS/PostCardS";
 export { default as QuestionCard } from "./QuestionCard/QuestionCard";
+export { default as Indicator } from "./Indicator/Indicator";
+export { default as ShuffleButton } from "./ShuffleButton/ShuffleButton";
