@@ -14,7 +14,16 @@ export const PostCardArea = styled.section`
   background-color: ${colors.nearWhite};
   box-shadow: ${g.CardShadow};
   border-radius: 8px;
-  border: 1px solid #ABAAA6;
+  border: 1px solid #abaaa6;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const TopArea = styled.section`
@@ -22,12 +31,11 @@ export const TopArea = styled.section`
   margin: 1.2%;
 `;
 
-export const Author = styled.h6`
-`;
+export const Author = styled.h6``;
 
 export const MusicArea = styled.section`
   height: 70%;
-  width:100%;
+  width: 100%;
   margin: 1% auto;
 `;
 

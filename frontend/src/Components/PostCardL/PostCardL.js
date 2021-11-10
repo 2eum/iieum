@@ -4,7 +4,7 @@ import { MusicCard } from "..";
 import { useParams, Redirect } from "react-router";
 import axios from "axios";
 
-const PostCardL = ({ currUser, token, userId }) => {
+const PostCardL = ({ currUser, token, userId, handleCardClose }) => {
   // let { id } = useParams();
 
   // const [content, setContent] = useState(null);
@@ -99,7 +99,7 @@ const PostCardL = ({ currUser, token, userId }) => {
       <S.PostCardArea>
         <S.HeaderArea>
           <S.CloseBtnArea>
-            <S.CloseBtn>닫기</S.CloseBtn>
+            <S.CloseBtn onClick={handleCardClose}>닫기</S.CloseBtn>
           </S.CloseBtnArea>
           <S.PostTop>
             <S.LikeArea>

@@ -22,6 +22,7 @@ export const CloseBtnArea = styled.section`
   text-align: right;
   margin: 2%;
   margin-bottom: 5%;
+  cursor: pointer;
 `;
 
 export const CloseBtn = styled.div``;

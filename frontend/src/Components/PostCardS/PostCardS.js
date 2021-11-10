@@ -1,14 +1,14 @@
 import React from "react";
 import * as S from "./PostCardS.elements";
 
-const PostCardS = () => {
+const PostCardS = ({ handleCardOpen }) => {
   return (
-    <S.PostCardArea>
+    <S.PostCardArea onClick={handleCardOpen}>
       <S.TopArea>
         <S.Author>Mayzel</S.Author>
       </S.TopArea>
       <S.MusicArea>
-        <S.MusicCover src="https://imagS.bugsm.co.kr/album/images/500/40591/4059180.jpg"></S.MusicCover>
+        <S.MusicCover src="https://image.bugsm.co.kr/album/images/500/40591/4059180.jpg"></S.MusicCover>
         <S.MusicInfoArea>
           <S.MusicTitleWrapper>
             <S.MusicTitle>KNOCK(With 박문치dddd)</S.MusicTitle>
