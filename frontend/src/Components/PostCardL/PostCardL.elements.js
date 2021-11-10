@@ -1,10 +1,9 @@
-import React from "react";
 import styled from "styled-components";
 import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const PostCardArea = styled.section`
-  width: 28%;
+  width: 530px;
   height: 720px;
   margin: 2% auto;
   padding: 2%;
@@ -34,8 +33,8 @@ export const PostTop = styled.section`
 `;
 
 export const LikeArea = styled.div`
+  width: 10%;
   display: flex;
-  margin: auto 15% auto 0;
 `;
 
 export const LikeBtn = styled.div`
@@ -48,7 +47,8 @@ export const LikeCount = styled.div`
 
 export const Question = styled.h5`
   text-align: right;
-  color: rgba(56, 29, 0, .5);
+  color: ${colors.iiBrown};
+  opacity: 0.5;
 `;
 
 export const MiddleArea = styled.section`
@@ -68,7 +68,7 @@ export const ContentArea = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 50%;
+  height: 70%;
 `;
 
 export const ContentTitle = styled.h2`
@@ -82,15 +82,13 @@ export const PubDate = styled.h5`
 `;
 
 export const BodyWrapper = styled.div`
-  
+  margin: 2%;
+  overflow-y: scroll;
 `;
 
-export const ContentBody = styled.div`
+export const ContentBody = styled.p`
   line-height: 1.8;
-  margin: 2%;
   font-weight: 400;
-  height: 45%;
-  overflow: scroll;
 `;
 
 export const PostBottom = styled.section`
@@ -100,15 +98,16 @@ export const PostBottom = styled.section`
 `;
 
 export const BtnArea = styled.div`
+  width: 50%;
   display: flex;
 `;
 
 export const EditBtn = styled.div`
-  margin: auto 20%;
+  margin: auto 5%;
 `;
 
 export const DeleteBtn = styled.div`
-  margin: auto 20%;
+  margin: auto 5%;
 `;
 
 export const Signature = styled.h2`
