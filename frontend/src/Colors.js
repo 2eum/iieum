@@ -10,3 +10,9 @@ export const lightGray = "#d1cfcb";
 export const nearWhite = "#fffcf8";
 export const pink = "#ebb29b";
 export const brown = "#998f76";
+
+
+export const iiPurple = "#A8426D";
+export const iiBG = "#FAF8F2";
+export const iiBrown = "#381D00";
+export const iiBeige = "#fffcf8";

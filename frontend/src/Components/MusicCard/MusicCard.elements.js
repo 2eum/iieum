@@ -2,31 +2,36 @@ import styled from "styled-components";
 import { nearWhite } from "../../Colors";
 
 export const MusicWrapper = styled.section`
-  width: 20%;
+  width: 40%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  margin-left: 55%;
+  margin-right: 10%;
 `;
 
 export const MusicCover = styled.img`
-  width: 80%;
+  width: 50%;
 
   margin: auto;
 
-  filter: drop-shadow(3px 3px 3px #000);
+  filter: drop-shadow(3psx 3px 3px #000);
+`;
+
+export const MusicInfo = styled.div`
+  margin-right: 5%;
 `;
 
 export const MusicTitle = styled.p`
   margin: 0.5rem auto;
 
-  text-align: center;
-  color: ${(props) => (props.fontColor === "black" ? "#000" : { nearWhite })};
+  text-align: right;
+  // color: ${(props) => (props.fontColor === "black" ? "#000" : { nearWhite })};
 `;
 
 export const MusicArtist = styled.p`
   margin: 0.5rem auto;
 
   font-size: 0.8rem;
-  text-align: center;
-  color: ${(props) => (props.fontColor === "black" ? "#000" : { nearWhite })};
+  text-align: right;
+  // color: ${(props) => (props.fontColor === "black" ? "#000" : { nearWhite })};
 `;

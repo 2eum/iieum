@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import { nearWhite, pink } from "./Colors";
+import * as colors from "./Colors";
 
 const GlobalStyle = createGlobalStyle`
 
 // import web font
+
+  //noto serif kr
+  // font-family: 'Noto Serif KR'
+  // font-weight로 조절
+@import url(https://cdn.rawgit.com/kattergil/NotoSerifKR-Web/76eb9ebf/stylesheet/NotoSerif-Web.css);
+
+
+
 @font-face {
   font-family: "Pretendard-Thin";
   src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff")
@@ -68,7 +76,13 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
 
-  font-family: Pretendard-Regular, Arial, Helvetica, sans-serif;
+  font-family: Noto Serif KR;
+  font-weight: 400;
+  color: ${colors.iiBrown};
+}
+
+.fa {
+  color: ${colors.iiPurple};
 }
 
 li {
@@ -77,12 +91,16 @@ li {
 
 a {
   text-decoration: none;
-  color: #000000;
 
   &:hover {
-    color: ${pink}
+    color: ${colors.iiPurple};
   }
 }
+
+h1, h2, h3 {
+  font-weight: 500;
+}
+
 `;
 
 export const BannerContainer = styled.section`
@@ -91,7 +109,7 @@ export const BannerContainer = styled.section`
 `;
 
 export const BoldSpan = styled.span`
-  color: ${pink};
+  color: ${colors.iiPurple};
 `;
 
 export const DefaultButton = styled(Link)`
@@ -100,11 +118,11 @@ export const DefaultButton = styled(Link)`
   border: none;
   border-radius: 5px;
 
-  background-color: ${pink};
+  background-color: ${colors.iiPurple};
 
   font-size: 1.3rem;
   font-weight: 600;
-  color: ${nearWhite};
+  color: ${colors.iiBeige};
 
   cursor: pointer;
 `;
@@ -113,5 +131,7 @@ export const MainContentContainer = styled.div`
   width: 80%;
   margin: auto;
 `;
+
+export const CardShadow = "8px 8px 8px 1px rgba(0, 0, 0, .15)";
 
 export default GlobalStyle;
