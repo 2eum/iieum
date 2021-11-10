@@ -18,7 +18,7 @@ import {
   QuestionAnswerLink,
 } from "./Home.elements";
 
-import { MusicCard, PostCardL } from "../../Components";
+import { MusicCard, PostCardL, PostCardS } from "../../Components";
 import { New } from "..";
 import { BoldSpan } from "../../globalStyles";
 
@@ -129,6 +129,7 @@ const Home = ({ currUser, token, userId }) => {
               질문에 답하기
             </QuestionAnswerLink>
             <PostCardL />
+            <PostCardS />
             {content[contentIdx] ? (
               <PostContainer>
                 <ArrowContainer onClick={() => changeArticle("prev")}>

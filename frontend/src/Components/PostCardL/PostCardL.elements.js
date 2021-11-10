@@ -6,7 +6,7 @@ export const PostCardArea = styled.section`
   width: 530px;
   height: 720px;
   margin: 2% auto;
-  padding: 2%;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,8 +52,8 @@ export const Question = styled.h5`
 `;
 
 export const MiddleArea = styled.section`
-  height: 70%;
-  margin-bottom: 10%;
+  height: 76%;
+  margin-bottom: 5%;
 `;
 
 export const MusicArea = styled.section`
