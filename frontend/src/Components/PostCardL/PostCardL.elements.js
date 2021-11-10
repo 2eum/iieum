@@ -13,7 +13,7 @@ export const PostCardArea = styled.section`
   background-color: ${colors.nearWhite};
   box-shadow: ${g.CardShadow};
   border-radius: 8px;
-  border: 1px solid #ABAAA6;
+  border: 1px solid #abaaa6;
 `;
 
 export const HeaderArea = styled.section``;
@@ -113,5 +113,3 @@ export const DeleteBtn = styled.div`
 export const Signature = styled.h2`
   margin: 2%;
 `;
-
-
