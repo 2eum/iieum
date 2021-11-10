@@ -17,8 +17,8 @@ class Post(models.Model):
     title = models.CharField(max_length=70)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=CASCADE)
     content = models.TextField(max_length= 1000)
-    #pub_date = models.DateTimeField(auto_now_add=True)
-    pub_date = models.DateTimeField(auto_now_add=False)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    #pub_date = models.DateTimeField(auto_now_add=False)
     question = models.ForeignKey("Question", related_name="Post", on_delete=models.DO_NOTHING, db_column="question")
     liked_user = models.ManyToManyField(User, related_name='like', blank=True)
     def __str__(self):
