@@ -13,6 +13,7 @@ from django.conf import settings
 from django.db.models import Max
 import random
 from datetime import datetime, timedelta
+from account.models import *
 
 # 전체 글
 class PostViewSet(viewsets.ModelViewSet): 
@@ -215,6 +216,67 @@ class PostList_question(APIView):
         if postlist:
             serializer_context = {'request': request,}
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
+            return Response(serializer_class.data)
+        else:
+            return Response({"detail":"No post exist"})
+
+# 좋아요한 사람들 목록 (req: 글 아이디, res: 좋아요한 사람들 목록)
+class LikeUserList(APIView):
+    @csrf_exempt
+    def get(self, request):
+        pk = request.data['pk']
+        post = Post.objects.filter(pk=pk).first()
+        if post:
+            serializer_context = {'request': request,}
+            serializer_class = PostSerializer(post, many=False, context=serializer_context)
+            if serializer_class.data['liked_user']:
+                return Response(serializer_class.data['liked_user'])
+            else:
+                return Response({"detail":"No liked user exist"})
+        else:
+            return Response({"detail":"No post exist"})
+
+# 유저가 쓴 글의 개수와 좋아요한 글의 개수(req: 유저 아이디, res: 글/좋아요 개수)
+class UserInfo(APIView):
+    @csrf_exempt
+    def get(self, request):
+        pk = request.data['pk']
+        postCount = Post.objects.filter(user=pk).count()
+        likeCount = User.objects.prefetch_related('like').get(pk=pk).like.all().count()
+        return Response({"post-count":postCount, "like-count":likeCount})
+
+# 유저가 좋아요 표시한 글 목록(req: 유저 아이디, res: 좋아요 누른 글 목록)
+class Likelist(APIView):
+    @csrf_exempt
+    def get(self, request):
+        pk = request.data['pk']
+        likelist = User.objects.prefetch_related('like').get(pk=pk).like.all()
+        if likelist:
+            serializer_context = {'request': request,}
+            serializer_class = PostSerializer(likelist, many=True, context=serializer_context)
+            return Response(serializer_class.data)
+        else:
+            return Response({"detail":"No like post exist"})
+
+# 유저의 각 월별 마지막 글(req: 유저 아이디, res: 월별 마지막글)
+class LastPost(APIView):
+    @csrf_exempt
+    def get(self, request):
+        pk = request.data['pk']
+        postlist = Post.objects.filter(user=pk).order_by('-pub_date')
+        lastpostlist = []
+        lastpostlist.append(postlist[0])
+        m = postlist[0].pub_date.month # m은 가장 최근에 찾은 월말 글의 month
+        if postlist:
+            serializer_context = {'request': request,}
+            for post in postlist:
+                if post.pub_date.month != m:
+                    lastpostlist.append(post)
+                    m = post.pub_date.month
+                if m < 1:
+                    m = 12
+                
+            serializer_class = PostSerializer(lastpostlist, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
             return Response({"detail":"No post exist"})

@@ -21,4 +21,8 @@ urlpatterns = [
     path('api/postlist-date', PostList_date.as_view()),
     path('api/postlist-user-date', PostList_user_date.as_view()),
     path('api/postlist-question', PostList_question.as_view()),
+    path('api/likeuserlist', LikeUserList.as_view()),
+    path('api/userinfo', UserInfo.as_view()),
+    path('api/likelist', Likelist.as_view()),
+    path('api/lastpost', LastPost.as_view()),
 ]
