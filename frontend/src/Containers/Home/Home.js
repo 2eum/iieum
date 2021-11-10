@@ -18,11 +18,11 @@ import {
   QuestionAnswerLink,
 } from "./Home.elements";
 
-import { MusicCard } from "../../Components";
+import { MusicCard, PostCardL } from "../../Components";
 import { New } from "..";
 import { BoldSpan } from "../../globalStyles";
 
-const Home = ({ token }) => {
+const Home = ({ currUser, token, userId }) => {
   const [content, setContent] = useState(null);
   const [questionList, setQList] = useState([]);
   const [question, setQuestion] = useState("");
@@ -128,6 +128,7 @@ const Home = ({ token }) => {
             <QuestionAnswerLink to={`/new/${questionId}`}>
               질문에 답하기
             </QuestionAnswerLink>
+            <PostCardL />
             {content[contentIdx] ? (
               <PostContainer>
                 <ArrowContainer onClick={() => changeArticle("prev")}>

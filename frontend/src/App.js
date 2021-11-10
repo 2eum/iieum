@@ -51,7 +51,7 @@ const App = () => {
         <GlobalStyle />
         <Navbar currUser={currUser} handleLogout={handleLogout} />
         <Switch>
-          <Route path="/" exact render={() => <Home token={token} />} />
+          <Route path="/" exact render={() => <Home currUser={currUser} token={token} userId={userId} />} />
           <Route path="/mypage" exact render={() => <MyPage token={token} />} />
           <Route
             path="/detail/:id"
