@@ -90,7 +90,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
     console.log(questionId);
     axios({
       method: type,
-      url: type === "post" ? "api/musicdiary/" : `api/musicdiary/${id}/`,
+      url: type === "post" ? "api/post/" : `api/post/${id}/`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,

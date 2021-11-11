@@ -24,5 +24,5 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     path('', include('frontend.urls')),
     path('', include('account.urls')),
-    path('', include('musicdiary.urls')),
+    path('', include('post.urls')),
 ]
