@@ -130,11 +130,13 @@ const PostCardL = ({ currUser, token, userId, handleCardClose }) => {
         </S.HeaderArea>
         <S.MiddleArea>
           <S.MusicArea>
-            <MusicCard></MusicCard>
+            <MusicCard />
           </S.MusicArea>
           <S.ContentArea>
             <S.PubDate>2021년 11월 7일</S.PubDate>
-            <S.ContentTitle>비에 흠뻑 젖은 날</S.ContentTitle>
+            <S.ContentTitle>
+              비에 흠뻑 젖은 날비에 흠뻑 젖은 날비에 흠뻑 젖은 날
+            </S.ContentTitle>
             <S.BodyWrapper>
               <S.ContentBody>
                 올해는 유난히 장마가 긴 것 같다. 오늘은 엄청 바쁘고 동선도

@@ -22,10 +22,9 @@ export const MusicInfo = styled.div`
 `;
 
 export const MusicTitle = styled.p`
-  margin: 0.5rem auto;
+  margin: auto;
 
   text-align: right;
-  // color: ${(props) => (props.fontColor === "black" ? "#000" : { nearWhite })};
 `;
 
 export const MusicArtist = styled.p`
@@ -33,5 +32,4 @@ export const MusicArtist = styled.p`
 
   font-size: 0.8rem;
   text-align: right;
-  // color: ${(props) => (props.fontColor === "black" ? "#000" : { nearWhite })};
 `;
