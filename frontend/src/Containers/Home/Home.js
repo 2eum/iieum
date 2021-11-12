@@ -19,7 +19,7 @@ import {
 } from "./Home.elements";
 
 import { MusicCard, PostCardL, PostCardS } from "../../Components";
-import { New } from "..";
+import { New, PostCardList } from "..";
 import { BoldSpan } from "../../globalStyles";
 
 const Home = ({ currUser, token, userId }) => {
@@ -128,9 +128,10 @@ const Home = ({ currUser, token, userId }) => {
             <QuestionAnswerLink to={`/new/${questionId}`}>
               질문에 답하기
             </QuestionAnswerLink>
-            <PostCardL />
-            <PostCardS />
-            {content[contentIdx] ? (
+
+            {/* <PostCardL />
+            <PostCardS /> */}
+            {/* {content[contentIdx] ? (
               <PostContainer>
                 <ArrowContainer onClick={() => changeArticle("prev")}>
                   <i className="fas fa-chevron-left"></i>
@@ -149,10 +150,11 @@ const Home = ({ currUser, token, userId }) => {
               </PostContainer>
             ) : (
               ""
-            )}
+            )} */}
           </>
         )}
       </TodayPostContainer>
+      <PostCardList currUser={currUser} token={token} userId={userId} />
       {/* <CreateButtonArea>
         <CreateMessage>
           오늘, <BoldSpan>당신의 하루는</BoldSpan> 어떤{" "}
