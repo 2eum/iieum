@@ -116,10 +116,11 @@ class LikeToggle(APIView):
 # 특정 날짜/개수 범위 내의 질문리스트 (req: 날짜, 개수제한 / res: 질문 리스트)
 class QuestionList(APIView):
     @csrf_exempt
-    def get(self, request):
-        startdate = request.data['startdate']   # 이날부터
-        enddate = request.data['enddate']       # 이날까지
-        limit = request.data['limit']           # 최대 몇개
+    def get(self, request, s_year, s_month, s_day, e_year, e_month, e_day, limit):
+        startdate_string = str(s_year)+"-"+str(s_month)+"-"+str(s_day)
+        startdate = datetime.strptime(startdate_string, "%Y-%m-%d")
+        enddate_string = str(e_year)+"-"+str(e_month)+"-"+str(e_day)
+        enddate = datetime.strptime(enddate_string, "%Y-%m-%d")
         if int(limit) == 0: # 한계없음
             questionlist = Question.objects.filter(released_date__range=[startdate, enddate]).order_by('-released_date')
         else:
@@ -135,8 +136,7 @@ class QuestionList(APIView):
 # 타겟 글 객체 하나 (req: 글 id, res: 글 객체)
 class GetOnePost(APIView):
     @csrf_exempt
-    def get(self, request):
-        pk = request.data['pk']
+    def get(self, request, pk):
         post = Post.objects.filter(pk=pk).first()
         if post:
             serializer_context = {'request': request,}
@@ -149,9 +149,7 @@ class GetOnePost(APIView):
 # 타겟 유저의 글목록 (req: 유저 id(숫자값), 개수 제한 res: 해당 유저의 글 목록)
 class PostList_user(APIView):
     @csrf_exempt
-    def get(self, request):
-        pk = request.data['pk']
-        limit = request.data['limit']
+    def get(self, request, pk, limit):
         if int(limit) == 0: # 한계없음
             postlist = Post.objects.filter(user=pk).order_by('-pub_date')
         else:
@@ -167,10 +165,11 @@ class PostList_user(APIView):
 # 특정 날짜 범위 내의 글목록, 유저 구분X (req: 날짜, 개수 제한 / res: 해당 기간 동안의 글 목록)
 class PostList_date(APIView):
     @csrf_exempt
-    def get(self, request):
-        startdate = request.data['startdate']   # 이날부터
-        enddate = request.data['enddate']       # 이날까지
-        limit = request.data['limit']
+    def get(self, request, s_year, s_month, s_day, e_year, e_month, e_day, limit):
+        startdate_string = str(s_year)+"-"+str(s_month)+"-"+str(s_day)
+        startdate = datetime.strptime(startdate_string, "%Y-%m-%d")
+        enddate_string = str(e_year)+"-"+str(e_month)+"-"+str(e_day)
+        enddate = datetime.strptime(enddate_string, "%Y-%m-%d")
         if int(limit) == 0: # 한계없음
             postlist = Post.objects.filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')
         else:
@@ -186,11 +185,11 @@ class PostList_date(APIView):
 # 타겟 유저의 특정 날짜 범위 내의 글 목록 (req: 유저 아이디, 날짜 범위, 개수 제한 / res: 해당 기간 동안 유저의 글 목록)
 class PostList_user_date(APIView):
     @csrf_exempt
-    def get(self, request):
-        pk = request.data['pk']                 # 이 사람의
-        startdate = request.data['startdate']   # 이날부터
-        enddate = request.data['enddate']       # 이날까지의 글
-        limit = request.data['limit']
+    def get(self, request, pk, s_year, s_month, s_day, e_year, e_month, e_day, limit):
+        startdate_string = str(s_year)+"-"+str(s_month)+"-"+str(s_day)
+        startdate = datetime.strptime(startdate_string, "%Y-%m-%d")
+        enddate_string = str(e_year)+"-"+str(e_month)+"-"+str(e_day)
+        enddate = datetime.strptime(enddate_string, "%Y-%m-%d")
         if int(limit) == 0: # 한계없음
             postlist = Post.objects.filter(user=pk).filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')
         else:
@@ -206,9 +205,7 @@ class PostList_user_date(APIView):
 # 질문에 달린 글 목록 (req: 질문 id, 개수 제한 / res: 그 질문에 달린 글 목록)
 class PostList_question(APIView):
     @csrf_exempt
-    def get(self, request):
-        pk = request.data['pk']
-        limit = request.data['limit']
+    def get(self, request, pk, limit):
         if int(limit) == 0: # 한계없음
             postlist = Post.objects.filter(question=pk).order_by('-pub_date')
         else:
@@ -223,8 +220,7 @@ class PostList_question(APIView):
 # 좋아요한 사람들 목록 (req: 글 아이디, res: 좋아요한 사람들 목록)
 class LikeUserList(APIView):
     @csrf_exempt
-    def get(self, request):
-        pk = request.data['pk']
+    def get(self, request, pk):
         post = Post.objects.filter(pk=pk).first()
         if post:
             serializer_context = {'request': request,}
@@ -239,8 +235,7 @@ class LikeUserList(APIView):
 # 유저가 쓴 글의 개수와 좋아요한 글의 개수(req: 유저 아이디, res: 글/좋아요 개수)
 class UserInfo(APIView):
     @csrf_exempt
-    def get(self, request):
-        pk = request.data['pk']
+    def get(self, request, pk):
         postCount = Post.objects.filter(user=pk).count()
         likeCount = User.objects.prefetch_related('like').get(pk=pk).like.all().count()
         return Response({"post-count":postCount, "like-count":likeCount})
@@ -248,8 +243,7 @@ class UserInfo(APIView):
 # 유저가 좋아요 표시한 글 목록(req: 유저 아이디, res: 좋아요 누른 글 목록)
 class Likelist(APIView):
     @csrf_exempt
-    def get(self, request):
-        pk = request.data['pk']
+    def get(self, request, pk):
         likelist = User.objects.prefetch_related('like').get(pk=pk).like.all()
         if likelist:
             serializer_context = {'request': request,}
@@ -261,8 +255,7 @@ class Likelist(APIView):
 # 유저의 각 월별 마지막 글(req: 유저 아이디, res: 월별 마지막글)
 class LastPost(APIView):
     @csrf_exempt
-    def get(self, request):
-        pk = request.data['pk']
+    def get(self, request, pk):
         postlist = Post.objects.filter(user=pk).order_by('-pub_date')
         lastpostlist = []
         lastpostlist.append(postlist[0])
