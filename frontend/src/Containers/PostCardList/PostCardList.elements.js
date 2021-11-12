@@ -16,6 +16,7 @@ export const GridContainer = styled.div`
   height: 50vw;
   overflow-y: scroll;
   grid-row-gap: 3%;
+  margin-top: 3%;
 `;
 
 export const PostCardLContainer = styled.div`
