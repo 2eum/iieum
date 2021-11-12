@@ -113,4 +113,5 @@ export const DeleteBtn = styled.div`
 
 export const Signature = styled.h3`
   margin: 2%;
+  justify-self: flex-end;
 `;

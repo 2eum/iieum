@@ -154,7 +154,7 @@ const Home = ({ currUser, token, userId }) => {
           </>
         )}
       </TodayPostContainer>
-      <PostCardList />
+      <PostCardList currUser={currUser} token={token} userId={userId} />
       {/* <CreateButtonArea>
         <CreateMessage>
           오늘, <BoldSpan>당신의 하루는</BoldSpan> 어떤{" "}
