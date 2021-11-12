@@ -21,10 +21,13 @@ export const HeaderArea = styled.section``;
 export const CloseBtnArea = styled.section`
   text-align: right;
   margin: 2%;
-  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
 `;
 
-export const CloseBtn = styled.div``;
+export const CloseBtn = styled.p`
+  cursor: pointer;
+`;
 
 export const PostTop = styled.section`
   display: flex;
@@ -94,6 +97,7 @@ export const ContentBody = styled.p`
 
 export const PostBottom = styled.section`
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   margin: 2%;
 `;
@@ -109,6 +113,7 @@ export const EditBtn = styled.div`
 
 export const DeleteBtn = styled.div`
   margin: auto 5%;
+  cursor: pointer;
 `;
 
 export const Signature = styled.h3`

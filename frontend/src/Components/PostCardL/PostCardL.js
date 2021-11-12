@@ -73,9 +73,10 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
   };
 
   const handleDelete = () => {
+    console.log(1);
     axios({
       method: "delete",
-      url: `/api/post/${id}/`,
+      url: `/api/post/${postId}/`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -88,7 +89,7 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
         return response.data;
       })
       .then(() => {
-        setDelete(true);
+        handleCardClose();
       });
   };
 
@@ -134,20 +135,19 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
             </S.ContentArea>
           </S.MiddleArea>
           <S.PostBottom>
+            <S.Signature>{content.user}</S.Signature>
             {currUser === content.user ? (
               <S.BtnArea>
                 <S.EditBtn>
                   <i className="fa fa-pen fa-lg" />
                 </S.EditBtn>
-                <S.DeleteBtn>
+                <S.DeleteBtn onClick={handleDelete}>
                   <i className="fa fa-trash fa-lg" />
                 </S.DeleteBtn>
               </S.BtnArea>
             ) : (
               ""
             )}
-
-            <S.Signature>{content.user}</S.Signature>
           </S.PostBottom>
         </S.PostCardArea>
       ) : (

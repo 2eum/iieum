@@ -26,7 +26,7 @@ const PostCardList = ({ currUser, token, userId }) => {
         setContent(data);
         return data;
       });
-  }, []);
+  }, [cols]);
 
   const handleCardOpen = (id) => {
     if (cols === 4) setCols(2);
