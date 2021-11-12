@@ -39,7 +39,7 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
       .then(() => {
         setLoad(true);
       });
-  }, []);
+  }, [postId]);
 
   const pubDateObj = new Date(content ? content.pub_date : "");
   let formattedDate = `${pubDateObj.getFullYear()}년
@@ -94,7 +94,7 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
 
   return (
     <>
-      {content ? (
+      {content && postId ? (
         <S.PostCardArea>
           <S.HeaderArea>
             <S.CloseBtnArea>

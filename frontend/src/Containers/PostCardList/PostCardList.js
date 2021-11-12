@@ -6,17 +6,14 @@ import axios from "axios";
 const PostCardList = ({ currUser, token, userId }) => {
   const [cols, setCols] = useState(4);
   const [content, setContent] = useState(null);
+  const [cardLIndex, setCardLIndex] = useState();
 
   useEffect(() => {
     axios({
       method: "get",
-      url: `/api/postlist-question`,
+      url: `/api/postlist-question/2/0`,
       headers: {
         "Content-Type": "application/json",
-      },
-      data: {
-        pk: "1",
-        limit: "0",
       },
     })
       .then((response) => {
@@ -28,46 +25,47 @@ const PostCardList = ({ currUser, token, userId }) => {
       .then((data) => {
         setContent(data);
         return data;
-      })
-      .then(() => {
-        setLoad(true);
       });
   }, []);
 
-  const handleCardOpen = () => {
+  const handleCardOpen = (id) => {
     if (cols === 4) setCols(2);
+    setCardLIndex(id);
   };
 
   const handleCardClose = () => {
     setCols(4);
   };
 
+  const PostCardSItems = content
+    ? content.map((c) => {
+        return (
+          <PostCardS
+            key={c.id}
+            user={c.user}
+            title={c.title}
+            handleCardOpen={(e) => handleCardOpen(c.id)}
+          />
+        );
+      })
+    : "";
+
   return (
     <S.CardListContainer>
-      <S.GridContainer cols={cols}>
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-        <PostCardS handleCardOpen={handleCardOpen} />
-      </S.GridContainer>
-      <S.PostCardLContainer cols={cols}>
-        <PostCardL
-          currUser={currUser}
-          token={token}
-          userId={userId}
-          postId={1}
-          handleCardClose={handleCardClose}
-        />
-      </S.PostCardLContainer>
+      <S.GridContainer cols={cols}>{PostCardSItems}</S.GridContainer>
+      {cardLIndex ? (
+        <S.PostCardLContainer cols={cols}>
+          <PostCardL
+            currUser={currUser}
+            token={token}
+            userId={userId}
+            postId={cardLIndex}
+            handleCardClose={handleCardClose}
+          />
+        </S.PostCardLContainer>
+      ) : (
+        ""
+      )}
     </S.CardListContainer>
   );
 };
