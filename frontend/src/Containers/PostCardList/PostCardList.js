@@ -11,7 +11,7 @@ const PostCardList = ({ currUser, token, userId }) => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/api/postlist-question/2/0`,
+      url: `/api/postlist-question/1/0`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -23,8 +23,7 @@ const PostCardList = ({ currUser, token, userId }) => {
         return response.data;
       })
       .then((data) => {
-        setContent(data);
-        return data;
+        if (Array.isArray(data)) setContent(data);
       });
   }, [cols]);
 
