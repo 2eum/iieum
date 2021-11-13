@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { nearWhite } from "../../Colors";
+import * as colors from "../../Colors";
 
-export const MusicWrapper = styled.section`
+export const Wrapper = styled.section`
   display: flex;
   width: 70%;
 `;
 
-export const MusicCover = styled.img`
+export const Cover = styled.img`
   width: 30%;
 
   margin: auto;
@@ -14,20 +14,33 @@ export const MusicCover = styled.img`
   filter: drop-shadow(3psx 3px 3px #000);
 `;
 
-export const MusicInfo = styled.div`
-  margin-right: 5%;
+export const Info = styled.div`
+  margin-right: 3%;
   width: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
-export const MusicTitle = styled.p`
-  margin: auto;
-
+export const Title = styled.p`
   text-align: right;
 `;
 
-export const MusicArtist = styled.p`
-  margin: 0.5rem auto;
+export const MiddleWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10%;
+`;
 
-  font-size: 0.8rem;
+export const Artist = styled.p`
   text-align: right;
+  color: ${colors.littleDarkGray};
+`;
+
+export const SourceLink = styled.a`
+  width: 10%;
+  & img {
+    width: 100%;
+    object-fit: contain;
+  }
 `;
