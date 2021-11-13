@@ -27,7 +27,7 @@ export const TodayMessage = styled.p`
 
   margin: 2rem auto;
 
-  font-family: Pretendard-Thin;
+  /* font-family: Pretendard-Thin; */
   font-size: 3rem;
 
   background: rgba(255, 213, 196, 0.5);
