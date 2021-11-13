@@ -22,6 +22,7 @@ class Post(models.Model):
     track_artist = models.CharField(max_length=100, null=True)
     track_album_cover = models.CharField(max_length=200, null=True)
     track_audio = models.CharField(max_length=200, null=True)
+    spotify_link = models.CharField(max_length=200, null=True)
     question = models.ForeignKey("Question", related_name="Post", on_delete=models.DO_NOTHING, db_column="question")
     liked_user = models.ManyToManyField(User, related_name='like', blank=True)
     def __str__(self):

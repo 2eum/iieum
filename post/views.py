@@ -28,13 +28,15 @@ class PostViewSet(viewsets.ModelViewSet):
                         track_title=self.request.data['track_title'],
 						track_artist=self.request.data['track_artist'],
 						track_album_cover=self.request.data['track_album_cover'],
-						track_audio=self.request.data['track_audio'])
+						track_audio=self.request.data['track_audio'],
+                        spotify_link=self.request.data['spotify_link'])
     def perform_update(self, serializer): #수정하기
         serializer.save(user=self.request.user,
 						track_title=self.request.data['track_title'],
 						track_artist=self.request.data['track_artist'],
 						track_album_cover=self.request.data['track_album_cover'],
-						track_audio=self.request.data['track_audio'])
+						track_audio=self.request.data['track_audio'],
+                        spotify_link=self.request.data['spotify_link'])
 
 # 음악 검색
 class SearchView(APIView):
@@ -284,3 +286,7 @@ class LastPost(APIView):
             return Response(serializer_class.data)
         else:
             raise Http404("Post does not exist")
+
+# 최근에 선택된 음악
+
+# 해당 음악이 포함된 글 목록 (req: 음악 제목, 아티스트 / res: 글 목록)
