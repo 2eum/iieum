@@ -63,6 +63,8 @@ export const MiddleArea = styled.section`
 
 export const MusicArea = styled.section`
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const ContentArea = styled.section`

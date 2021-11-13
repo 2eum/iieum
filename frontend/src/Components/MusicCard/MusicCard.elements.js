@@ -2,15 +2,12 @@ import styled from "styled-components";
 import { nearWhite } from "../../Colors";
 
 export const MusicWrapper = styled.section`
-  width: 40%;
   display: flex;
-  justify-content: center;
-  margin-left: 55%;
-  margin-right: 10%;
+  width: 70%;
 `;
 
 export const MusicCover = styled.img`
-  width: 50%;
+  width: 30%;
 
   margin: auto;
 
@@ -19,6 +16,7 @@ export const MusicCover = styled.img`
 
 export const MusicInfo = styled.div`
   margin-right: 5%;
+  width: 65%;
 `;
 
 export const MusicTitle = styled.p`
