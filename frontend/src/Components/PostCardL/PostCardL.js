@@ -4,7 +4,14 @@ import { MusicCard } from "..";
 import { useParams } from "react-router";
 import axios from "axios";
 
-const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
+const PostCardL = ({
+  currUser,
+  token,
+  userId,
+  handleCardClose,
+  postId,
+  order,
+}) => {
   const [content, setContent] = useState(null);
   const [loaded, setLoad] = useState(false);
   const [placeholder, setPlaceholder] = useState("Loading Content");
@@ -96,10 +103,14 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
   return (
     <>
       {content && postId ? (
-        <S.PostCardArea>
+        <S.PostCardArea order={order}>
           <S.HeaderArea>
             <S.CloseBtnArea>
-              <S.CloseBtn onClick={handleCardClose}>닫기</S.CloseBtn>
+              {handleCardClose ? (
+                <S.CloseBtn onClick={handleCardClose}>닫기</S.CloseBtn>
+              ) : (
+                ""
+              )}
             </S.CloseBtnArea>
             <S.PostTop>
               <S.LikeArea>

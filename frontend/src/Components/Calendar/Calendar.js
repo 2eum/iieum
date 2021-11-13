@@ -1,22 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import blank from "./blank.png";
+import * as S from "./Calendar.elements";
+import { PostCardL } from "..";
 
-import {
-  CalendarArea,
-  MonthArea,
-  WeekDaysArea,
-  DatesArea,
-  DateImgWrapper,
-  DateItem,
-  DateNum,
-  DateImg,
-  MonthChangeArea,
-  MonthChangeButton,
-} from "./Calendar.elements";
-
-const Calendar = ({ token }) => {
+const Calendar = ({ currUser, token, userId }) => {
   const today = new Date();
   const [viewMonth, setMonth] = useState({
     year: today.getFullYear(),
@@ -25,14 +13,19 @@ const Calendar = ({ token }) => {
 
   // api content state
   const [content, setContent] = useState({});
+  const [showPostId, setPostId] = useState([]);
 
-  const [placeholder, setPlaceholder] = useState("Loading Content");
-
+  const prevMonthSearch = new Date(viewMonth.year, viewMonth.month - 1, 23);
+  const nextMonthSearch = new Date(viewMonth.year, viewMonth.month + 1, 6);
   useEffect(() => {
     // get all music diary data
     axios({
       method: "get",
-      url: "/api/mypage/",
+      url: `api/postlist-user-date/${userId}/${prevMonthSearch.getFullYear()}/${
+        prevMonthSearch.getMonth() + 1
+      }/23/${nextMonthSearch.getFullYear()}/${
+        nextMonthSearch.getMonth() + 1
+      }/6/0`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -41,18 +34,24 @@ const Calendar = ({ token }) => {
       .then((response) => {
         // error handling
         if (response.status > 400) {
-          setPlaceholder("Something went wrong!");
         }
         return response.data;
       })
       .then((data) => {
         // set up data for state
         const obj = {};
-        data.forEach((d) => {
+
+        for (let d of data) {
           const keyDate = new Date(d.pub_date);
           const key = `${keyDate.getMonth() + 1}-${keyDate.getDate()}`;
-          obj[key] = d;
-        });
+          if (obj[key]) {
+            obj[key].push(d);
+          } else {
+            obj[key] = [];
+            obj[key].push(d);
+          }
+        }
+
         return obj;
       })
       .then((data) => setContent(data)); // add data to state
@@ -90,29 +89,50 @@ const Calendar = ({ token }) => {
     viewDates.push(nextDate);
   }
 
+  const handleDatePick = (date) => {
+    let ids = content[date].map((d) => d.id);
+    setPostId(ids);
+  };
+
   // create date items
   let items = viewDates.map((d) => {
     let date = `${d.getMonth() + 1}-${d.getDate()}`;
-    return (
-      <DateItem
-        key={date}
-        curr={d.getMonth() === viewMonth.month ? "curr" : ""}
-      >
-        <DateNum day={d.getDay() === 0 ? "sun" : d.getDay() === 6 ? "sat" : ""}>
-          {d.getDate()}
-        </DateNum>
-        {date in content ? (
-          <DateImgWrapper to={`/detail/${content[date].id}`}>
-            <DateImg
-              src="https://ww.namu.la/s/bded2b2e08e690ab4dafcf6931ca23742efa29aba60d55350816c3441e0d6208849b946c8d683aed2850de028019702746ab51626cc3d4a036d7c0d550c8d7c51fc5d800f17c264304e883c214107058"
-              alt="pikachu"
+    if (date in content) {
+      let lastItem = content[date][content[date].length - 1];
+      return (
+        <S.DateItem
+          key={date}
+          curr={d.getMonth() === viewMonth.month ? "curr" : ""}
+          onClick={() => handleDatePick(date)}
+        >
+          <S.DateNum
+            day={d.getDay() === 0 ? "sun" : d.getDay() === 6 ? "sat" : ""}
+          >
+            {d.getDate()}
+          </S.DateNum>
+          <S.DateImgWrapper>
+            <S.DateImg
+              src={lastItem.track_album_cover}
+              alt={`album cover image of ${lastItem.track_title}`}
             />
-          </DateImgWrapper>
-        ) : (
-          <DateImg src={blank} alt="pikachu" />
-        )}
-      </DateItem>
-    );
+          </S.DateImgWrapper>
+        </S.DateItem>
+      );
+    } else {
+      return (
+        <S.DateItem
+          key={date}
+          curr={d.getMonth() === viewMonth.month ? "curr" : ""}
+        >
+          <S.DateNum
+            day={d.getDay() === 0 ? "sun" : d.getDay() === 6 ? "sat" : ""}
+          >
+            {d.getDate()}
+          </S.DateNum>
+          <S.DateImgWrapper></S.DateImgWrapper>
+        </S.DateItem>
+      );
+    }
   });
 
   const toPrevMonth = () => {
@@ -127,28 +147,70 @@ const Calendar = ({ token }) => {
     setMonth({ year: dayOne.getFullYear(), month: dayOne.getMonth() });
   };
 
+  const CardLs = showPostId.map((id, i) => {
+    return (
+      <PostCardL
+        key={i}
+        token={token}
+        currUser={currUser}
+        userId={userId}
+        postId={id}
+        order={i}
+      />
+    );
+  });
+
+  const handleCardSwitch = (d) => {
+    const arr = showPostId;
+    if (d > 0) {
+      let move = arr.shift();
+      arr.push(move);
+    } else {
+      let move = arr.pop();
+      arr.unshift(move);
+    }
+    setPostId([...arr]);
+  };
+
   return (
-    <CalendarArea>
-      <MonthArea>{`${viewMonth.year} . ${viewMonth.month + 1}`}</MonthArea>
-      <MonthChangeArea>
-        <MonthChangeButton onClick={() => toPrevMonth()}>
-          지난 달 보기
-        </MonthChangeButton>
-        <MonthChangeButton onClick={() => toNextMonth()}>
-          다음 달 보기
-        </MonthChangeButton>
-      </MonthChangeArea>
-      <WeekDaysArea>
-        <p>일</p>
-        <p>월</p>
-        <p>화</p>
-        <p>수</p>
-        <p>목</p>
-        <p>금</p>
-        <p>토</p>
-      </WeekDaysArea>
-      <DatesArea rows={viewDates.length / 7}>{items}</DatesArea>
-    </CalendarArea>
+    <S.CalendarSection>
+      <S.CardContainer>
+        <S.CardWrapper>{CardLs}</S.CardWrapper>
+        {CardLs.length > 1 ? (
+          <S.CardSwitchButtonWrapper>
+            <S.CardSwitchButton onClick={() => handleCardSwitch(-1)}>
+              <i className="fas fa-chevron-left" />
+            </S.CardSwitchButton>
+            <S.CardSwitchButton onClick={() => handleCardSwitch(1)}>
+              <i className="fas fa-chevron-right" />
+            </S.CardSwitchButton>
+          </S.CardSwitchButtonWrapper>
+        ) : (
+          ""
+        )}
+      </S.CardContainer>
+      <S.CalendarContainer>
+        <S.MonthChangeArea>
+          <S.MonthChangeButton onClick={() => toPrevMonth()}>
+            <i className="fas fa-chevron-left" />
+          </S.MonthChangeButton>
+          <S.Month>{`${viewMonth.year}년 ${viewMonth.month + 1}월`}</S.Month>
+          <S.MonthChangeButton>
+            <i className="fas fa-chevron-right" />
+          </S.MonthChangeButton>
+        </S.MonthChangeArea>
+        <S.WeekDaysArea>
+          <p>일</p>
+          <p>월</p>
+          <p>화</p>
+          <p>수</p>
+          <p>목</p>
+          <p>금</p>
+          <p>토</p>
+        </S.WeekDaysArea>
+        <S.DatesArea rows={viewDates.length / 7}>{items}</S.DatesArea>
+      </S.CalendarContainer>
+    </S.CalendarSection>
   );
 };
 
