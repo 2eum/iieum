@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./PostCardL.elements";
 import { MusicCard } from "..";
-import { useParams } from "react-router";
 import axios from "axios";
 
 const PostCardL = ({
@@ -39,9 +38,6 @@ const PostCardL = ({
         checkLiked(data.liked_user);
         setLikeCount(data.liked_user.length);
         return data;
-      })
-      .then(() => {
-        setLoad(true);
       });
   }, [postId]);
 

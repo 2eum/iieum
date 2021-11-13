@@ -98,7 +98,7 @@ const Calendar = ({ currUser, token, userId }) => {
   let items = viewDates.map((d) => {
     let date = `${d.getMonth() + 1}-${d.getDate()}`;
     if (date in content) {
-      let lastItem = content[date][content[date].length - 1];
+      let latestItem = content[date][0];
       return (
         <S.DateItem
           key={date}
@@ -112,8 +112,8 @@ const Calendar = ({ currUser, token, userId }) => {
           </S.DateNum>
           <S.DateImgWrapper>
             <S.DateImg
-              src={lastItem.track_album_cover}
-              alt={`album cover image of ${lastItem.track_title}`}
+              src={latestItem.track_album_cover}
+              alt={`album cover image of ${latestItem.track_title}`}
             />
           </S.DateImgWrapper>
         </S.DateItem>
@@ -161,15 +161,11 @@ const Calendar = ({ currUser, token, userId }) => {
   });
 
   const handleCardSwitch = (d) => {
-    const arr = showPostId;
     if (d > 0) {
-      let move = arr.shift();
-      arr.push(move);
+      CardLs.shift();
     } else {
-      let move = arr.pop();
-      arr.unshift(move);
+      CardLs.pop();
     }
-    setPostId([...arr]);
   };
 
   return (
@@ -196,7 +192,7 @@ const Calendar = ({ currUser, token, userId }) => {
           </S.MonthChangeButton>
           <S.Month>{`${viewMonth.year}년 ${viewMonth.month + 1}월`}</S.Month>
           <S.MonthChangeButton>
-            <i className="fas fa-chevron-right" />
+            <i className="fas fa-chevron-right" onClick={() => toNextMonth()} />
           </S.MonthChangeButton>
         </S.MonthChangeArea>
         <S.WeekDaysArea>
