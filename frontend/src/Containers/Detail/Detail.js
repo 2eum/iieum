@@ -34,7 +34,7 @@ const Detail = ({ currUser, token, userId }) => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/api/musicdiary/${id}/`,
+      url: `/api/post/${id}/`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -96,7 +96,7 @@ const Detail = ({ currUser, token, userId }) => {
   const handleDelete = () => {
     axios({
       method: "delete",
-      url: `/api/musicdiary/${id}/`,
+      url: `/api/post/${id}/`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,

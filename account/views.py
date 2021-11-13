@@ -21,12 +21,12 @@ class UserViewSet(viewsets.ModelViewSet):
 class SignupView(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
-        user = User.objects.create_user(nickname=request.data['nickname'], password=request.data['password'])
+        user = User.objects.create_user(nickname=request.data['nickname'], password=request.data['password'], email=request.data['email'], name=request.data['name'])
         user.save()
 
         token = Token.objects.create(user=user)
         token.save()
-        return Response({"Id": user.id, "Token": token.key, "User": user.nickname})
+        return Response({"Id": user.id, "Token": token.key, "User ID": user.nickname, "Email": user.email, "name": user.name})
 
 
 class LoginView(generics.GenericAPIView):
@@ -38,7 +38,9 @@ class LoginView(generics.GenericAPIView):
         user = serializer.validated_data
         token = Token.objects.get(user=user)
         return Response({
+            "Token": token.key,
             "Id": user.id,
             "User": user.nickname,
-            "Token": token.key
+            "Email": user.email,
+            "Name": user.name,
         })

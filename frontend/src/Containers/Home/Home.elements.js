@@ -120,4 +120,4 @@ export const QuestionHeaderContainer = styled.div``;
 
 export const QuestionHeader = styled.h3``;
 
-export const ToQuestionListButton = styled.section(Link)``;
+export const ToQuestionListButton = styled(Link)``;

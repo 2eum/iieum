@@ -3,17 +3,24 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const PostCardArea = styled.section`
+<<<<<<< HEAD
   width: 530px;
   height: 720px;
   padding: 50px;
   margin: auto 4%;
+=======
+  width: 90%;
+  height: 45vw;
+  margin: 2% auto;
+  padding: 5%;
+>>>>>>> af4fcf2a1211a289d2c403613cae720c9ac0a76d
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: ${colors.nearWhite};
   box-shadow: ${g.CardShadow};
   border-radius: 8px;
-  border: 1px solid #ABAAA6;
+  border: 1px solid #abaaa6;
 `;
 
 export const HeaderArea = styled.section``;
@@ -21,10 +28,13 @@ export const HeaderArea = styled.section``;
 export const CloseBtnArea = styled.section`
   text-align: right;
   margin: 2%;
-  margin-bottom: 5%;
+  display: flex;
+  justify-content: flex-end;
 `;
 
-export const CloseBtn = styled.div``;
+export const CloseBtn = styled.p`
+  cursor: pointer;
+`;
 
 export const PostTop = styled.section`
   display: flex;
@@ -52,23 +62,23 @@ export const Question = styled.h5`
 `;
 
 export const MiddleArea = styled.section`
-  height: 76%;
+  height: 70%;
+  width: 90%;
+  margin: auto;
   margin-bottom: 5%;
 `;
 
 export const MusicArea = styled.section`
-  margin: 4%;
   text-align: right;
 `;
 
 export const ContentArea = styled.section`
   text-align: left;
   margin: 2%;
-  margin-top: 7%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 70%;
+  height: 80%;
 `;
 
 export const ContentTitle = styled.h2`
@@ -84,6 +94,7 @@ export const PubDate = styled.h5`
 export const BodyWrapper = styled.div`
   margin: 2%;
   overflow-y: scroll;
+  height: 20vw;
 `;
 
 export const ContentBody = styled.p`
@@ -93,6 +104,7 @@ export const ContentBody = styled.p`
 
 export const PostBottom = styled.section`
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   margin: 2%;
 `;
@@ -108,10 +120,10 @@ export const EditBtn = styled.div`
 
 export const DeleteBtn = styled.div`
   margin: auto 5%;
+  cursor: pointer;
 `;
 
-export const Signature = styled.h2`
+export const Signature = styled.h3`
   margin: 2%;
+  justify-self: flex-end;
 `;
-
-

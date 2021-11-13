@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import * as S from "./Home.elements";
+import {LoadMoreButtonL, LoadMoreButtonR} from "../../Components/LoadMoreButton/LoadMoreButton";
 import * as com from "../../Components";
 
-const Home = ({ currUser, token, userId }) => {
+const Home = ({ currUser, token, userId, postId }) => {
   const [content, setContent] = useState(null);
   const [questionList, setQList] = useState([]);
   const [question, setQuestion] = useState("");
@@ -36,7 +37,7 @@ const Home = ({ currUser, token, userId }) => {
 
     axios({
       method: "get",
-      url: "/api/musicdiary/",
+      url: "/api/post/",
       headers: {
         "Content-Type": "application/json",
       },
@@ -175,6 +176,8 @@ const Home = ({ currUser, token, userId }) => {
           </S.QuestionListSection>
 
       </S.Background>
+
+      {/* Music List */}
     </>
   );
 };
