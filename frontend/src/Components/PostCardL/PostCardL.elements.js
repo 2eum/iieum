@@ -3,21 +3,14 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const PostCardArea = styled.section`
-<<<<<<< HEAD
-  width: 530px;
-  height: 720px;
-  padding: 50px;
-  margin: auto 4%;
-=======
   width: 90%;
   height: 45vw;
   margin: 2% auto;
   padding: 5%;
->>>>>>> af4fcf2a1211a289d2c403613cae720c9ac0a76d
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: ${colors.nearWhite};
+  background-color: ${colors.iiBeige};
   box-shadow: ${g.CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
@@ -49,6 +42,7 @@ export const LikeArea = styled.div`
 
 export const LikeBtn = styled.div`
   margin-right: 20%;
+  cursor: pointer;
 `;
 
 export const LikeCount = styled.div`
@@ -70,6 +64,8 @@ export const MiddleArea = styled.section`
 
 export const MusicArea = styled.section`
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const ContentArea = styled.section`

@@ -6,9 +6,6 @@ import axios from "axios";
 
 const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
   const [content, setContent] = useState(null);
-  const [loaded, setLoad] = useState(false);
-  const [placeholder, setPlaceholder] = useState("Loading Content");
-  const [deleted, setDelete] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
@@ -124,7 +121,13 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
           </S.HeaderArea>
           <S.MiddleArea>
             <S.MusicArea>
-              <MusicCard />
+              <MusicCard
+                title={content.track_title}
+                artist={content.track_artist}
+                source={content.track_audio}
+                link={content.spotify_link}
+                cover={content.track_album_cover}
+              />
             </S.MusicArea>
             <S.ContentArea>
               <S.PubDate>{formattedDate}</S.PubDate>

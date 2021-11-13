@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import * as S from "./Home.elements";
-import {LoadMoreButtonL, LoadMoreButtonR} from "../../Components/LoadMoreButton/LoadMoreButton";
+import { LoadMoreButtonL, LoadMoreButtonR } from "../../Components/LoadMoreButton/LoadMoreButton";
 import * as com from "../../Components";
 
 const Home = ({ currUser, token, userId, postId }) => {
@@ -103,7 +103,7 @@ const Home = ({ currUser, token, userId, postId }) => {
       <S.Background>
 
         {/* 1.Question Page */}
-        <S.TodayQuestionSection>
+        <S.TodayQuestionPageSection>
             <com.PostCardL/>
             <S.RightContainer>
               <S.QuestionArea>
@@ -122,10 +122,10 @@ const Home = ({ currUser, token, userId, postId }) => {
                 <com.Indicator/>
               </S.PostCardSArea>
             </S.RightContainer>
-          </S.TodayQuestionSection>
+          </S.TodayQuestionPageSection>
 
           {/* 2.Create Page */}
-          <S.CreateSection>
+          <S.CreatePageSection>
             <S.CreateCardLeft>
               <S.HelperQuestionArea/>
               <S.HelperSearchArea/>
@@ -153,7 +153,6 @@ const Home = ({ currUser, token, userId, postId }) => {
                   직접 골라주세요.
                 </S.HelperRight>
               </S.HelperSearchArea>
-              <S.HelperContentArea/>
               <S.HelperDoneArea>
                 <S.HelperRight>
                   이제 당신의 이야기를<br/>
@@ -164,20 +163,45 @@ const Home = ({ currUser, token, userId, postId }) => {
                 <com.DoneButton/>
               </S.DoneButtonArea>
             </S.CreateCardRight>
-          </S.CreateSection>
+          </S.CreatePageSection>
 
           {/* 3.Question List Page */}
-          <S.QuestionListSection>
-            <S.QuestionHeaderContainer>
-              <S.QuestionHeader>다른 질문 둘러보기</S.QuestionHeader>
+          <S.QuestionListPageSection>
+            <S.PageHeaderContainer>
+              <S.PageHeader>다른 질문 둘러보기</S.PageHeader>
               <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
-            </S.QuestionHeaderContainer>
+            </S.PageHeaderContainer>
+            <S.QuestionListContainer>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+            </S.QuestionListContainer>
+          </S.QuestionListPageSection>
 
-          </S.QuestionListSection>
+          {/* 4. Music List Page*/}
+          <S.MusicListPageSection>
+            <S.PageHeaderContainer>
+              <S.PageHeader>
+                최근에 선택된 음악
+              </S.PageHeader>
+            </S.PageHeaderContainer>
+            <S.MusicListContainer>
+              <com.MusicCard/><com.MusicCard/>
+              <com.MusicCard/><com.MusicCard/>
+              <com.MusicCard/><com.MusicCard/>
+            </S.MusicListContainer>
+          </S.MusicListPageSection>
 
       </S.Background>
 
-      {/* Music List */}
+      
+
     </>
   );
 };

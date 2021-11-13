@@ -3,14 +3,23 @@ import * as colors from "../../Colors";
 import { Link } from "react-router-dom";
 
 export const Background = styled.div`
-  // height: 100vh;
   background-color: ${colors.iiBG};
   padding: 10% 15%;
 `;
 
+export const PageHeader = styled.h3`
+  font-size: 3rem;
+`;
+
+export const PageHeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
 //1. Question Page
 
-export const TodayQuestionSection = styled.section`
+export const TodayQuestionPageSection = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -25,7 +34,9 @@ export const RightContainer = styled.section`
   justify-content: space-between;
 `;
 
-export const QuestionArea = styled.section``;
+export const QuestionArea = styled.section`
+  font-size: 3rem;
+`;
 
 export const TodayQuestion = styled.div`
   margin-top: 5%;
@@ -52,7 +63,7 @@ export const PostCardSWrapper = styled.section`
 
 
 //2. Create Page
-export const CreateSection = styled.section`
+export const CreatePageSection = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -112,12 +123,42 @@ export const DoneButtonArea = styled.div`
 
 //3.Question List Page
 
-export const QuestionListSection = styled.section`
-
+export const QuestionListPageSection = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 15% auto;
 `;
 
-export const QuestionHeaderContainer = styled.div``;
+export const ToQuestionListButton = styled(Link)`
+  margin: 2%;
+  font-size: 1.2rem;
+`;
 
-export const QuestionHeader = styled.h3``;
+export const QuestionListContainer = styled.div`
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8%;
+  margin: 3% 0;
+`;
 
-export const ToQuestionListButton = styled(Link)``;
+
+//4. Music List Page
+
+export const MusicListPageSection = styled.section`
+  margin-top: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const MusicListContainer = styled.div`
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8%;
+  margin: 5% 10%;
+`;

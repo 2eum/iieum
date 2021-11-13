@@ -1,24 +1,24 @@
 import React from "react";
-import {
-  MusicWrapper,
-  MusicCover,
-  MusicTitle,
-  MusicArtist,
-  MusicInfo
-} from "./MusicCard.elements";
+import * as S from "./MusicCard.elements";
 import { MusicPlayer } from "..";
+import spotifyIcon from "../../Components/SearchedItem/Spotify_Icon.png";
 
-const MusicCard = () => {
+const MusicCard = ({ title, artist, source, link, cover }) => {
   return (
     <>
-      <MusicWrapper>
-        <MusicInfo>
-          <MusicTitle>Cheapest Flight</MusicTitle>
-          <MusicArtist>PREP</MusicArtist>
-          <MusicPlayer />
-        </MusicInfo>
-        <MusicCover src="https://i.scdn.co/image/ab67616d0000b273ef383114d44a889364922113" />
-      </MusicWrapper>
+      <S.Wrapper>
+        <S.Info>
+          <S.Title>{title}</S.Title>
+          <S.MiddleWrapper>
+            <S.SourceLink href={link} target="_blank">
+              <img src={spotifyIcon} />
+            </S.SourceLink>
+            <S.Artist>{artist}</S.Artist>
+          </S.MiddleWrapper>
+          <MusicPlayer source={source} />
+        </S.Info>
+        <S.Cover src={cover} />
+      </S.Wrapper>
     </>
   );
 };

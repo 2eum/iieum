@@ -73,7 +73,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
           const arr = [];
           for (let m of results) {
             const info = {};
-            info.img = m.album.images[2].url;
+            info.img = m.album.images[0].url;
             info.url = m.external_urls.spotify;
             info.title = m.name;
             info.preview = m.preview_url;
@@ -98,6 +98,11 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
       data: {
         title: title,
         content: body,
+        track_title: mObject.title,
+        track_artist: mObject.artist,
+        track_album_cover: mObject.img,
+        spotify_link: mObject.url,
+        track_audio: mObject.preview,
         question: questionId,
       },
     })
