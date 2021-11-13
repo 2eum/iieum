@@ -5,7 +5,7 @@ class PostSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source = 'user.nickname')
     class Meta: 
         model = Post
-        fields = ('url', 'id','title','user','content','pub_date','question','liked_user')
+        fields = ('url', 'id','title','user','content','pub_date','track_title','track_artist','track_album_cover','track_audio','question','liked_user')
 
     def to_representation(self, instance):
         self.fields['question'] = QuestionRepresentationSerializer(read_only=True)

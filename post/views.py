@@ -24,7 +24,17 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     # serializer.save() 재정의
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user,
+                        track_title=self.request.data['track_title'],
+						track_artist=self.request.data['track_artist'],
+						track_album_cover=self.request.data['track_album_cover'],
+						track_audio=self.request.data['track_audio'])
+    def perform_update(self, serializer): #수정하기
+        serializer.save(user=self.request.user,
+						track_title=self.request.data['track_title'],
+						track_artist=self.request.data['track_artist'],
+						track_album_cover=self.request.data['track_album_cover'],
+						track_audio=self.request.data['track_audio'])
 
 # 음악 검색
 class SearchView(APIView):
