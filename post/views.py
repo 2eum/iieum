@@ -134,10 +134,10 @@ class QuestionList(APIView):
         startdate = datetime.strptime(startdate_string, "%Y-%m-%d")
         enddate_string = str(e_year)+"-"+str(e_month)+"-"+str(e_day)
         enddate = datetime.strptime(enddate_string, "%Y-%m-%d")
-        if int(limit) == 0: # 한계없음
+        if limit == 0: # 한계없음
             questionlist = Question.objects.filter(released_date__range=[startdate, enddate]).order_by('-released_date')
         else:
-            questionlist = Question.objects.filter(released_date__range=[startdate, enddate]).order_by('-released_date')[:int(limit)]
+            questionlist = Question.objects.filter(released_date__range=[startdate, enddate]).order_by('-released_date')[:limit]
         if questionlist:
             serializer_context = {'request': request,}
             serializer_class = QuestionSerializer(questionlist, many=True, context=serializer_context)
@@ -163,10 +163,10 @@ class GetOnePost(APIView):
 class PostList_user(APIView):
     @csrf_exempt
     def get(self, request, pk, limit):
-        if int(limit) == 0: # 한계없음
+        if limit == 0: # 한계없음
             postlist = Post.objects.filter(user=pk).order_by('-pub_date')
         else:
-            postlist = Post.objects.filter(user=pk).order_by('-pub_date')[:int(limit)]
+            postlist = Post.objects.filter(user=pk).order_by('-pub_date')[:limit]
         if postlist:
             serializer_context = {'request': request,}
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
@@ -183,10 +183,10 @@ class PostList_date(APIView):
         startdate = datetime.strptime(startdate_string, "%Y-%m-%d")
         enddate_string = str(e_year)+"-"+str(e_month)+"-"+str(e_day)
         enddate = datetime.strptime(enddate_string, "%Y-%m-%d")
-        if int(limit) == 0: # 한계없음
+        if limit == 0: # 한계없음
             postlist = Post.objects.filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')
         else:
-            postlist = Post.objects.filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')[:int(limit)]
+            postlist = Post.objects.filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')[:limit]
         if postlist:
             serializer_context = {'request': request,}
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
@@ -203,10 +203,10 @@ class PostList_user_date(APIView):
         startdate = datetime.strptime(startdate_string, "%Y-%m-%d")
         enddate_string = str(e_year)+"-"+str(e_month)+"-"+str(e_day)
         enddate = datetime.strptime(enddate_string, "%Y-%m-%d")
-        if int(limit) == 0: # 한계없음
+        if limit == 0: # 한계없음
             postlist = Post.objects.filter(user=pk).filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')
         else:
-            postlist = Post.objects.filter(user=pk).filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')[:int(limit)]
+            postlist = Post.objects.filter(user=pk).filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')[:limit]
         if postlist:
             serializer_context = {'request': request,}
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
@@ -219,10 +219,10 @@ class PostList_user_date(APIView):
 class PostList_question(APIView):
     @csrf_exempt
     def get(self, request, pk, limit):
-        if int(limit) == 0: # 한계없음
+        if limit == 0: # 한계없음
             postlist = Post.objects.filter(question=pk).order_by('-pub_date')
         else:
-            postlist = Post.objects.filter(question=pk).order_by('-pub_date')[:int(limit)]
+            postlist = Post.objects.filter(question=pk).order_by('-pub_date')[:limit]
         if postlist:
             serializer_context = {'request': request,}
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
@@ -287,6 +287,30 @@ class LastPost(APIView):
         else:
             raise Http404("Post does not exist")
 
-# 최근에 선택된 음악
+# 최근에 선택된 음악 (req: 개수, res: 음악정보만 추출한 리스트(중복제외))
+class RecentMusic(APIView):
+    @csrf_exempt
+    def get(self, request, limit):
+        postlist = Post.objects.all().order_by('-pub_date')
+        targetlist = []
+        musiclist = []
+
+        if limit == 0: # 다 불러오기
+            limit = len(postlist)
+
+        for post in postlist:
+            target = [post.track_title, post.track_artist]
+            if target not in targetlist:
+                targetlist.append(target)
+                music = [post.track_title, post.track_artist, post.track_album_cover, post.track_audio, post.spotify_link]
+                musiclist.append(music)
+                limit -= 1
+                if limit <= 0:
+                    break
+        
+        if musiclist:
+            return Response({"music list": musiclist})
+        else:
+            raise Http404("Music does not exist")
 
 # 해당 음악이 포함된 글 목록 (req: 음악 제목, 아티스트 / res: 글 목록)

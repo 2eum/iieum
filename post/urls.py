@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/userinfo/<int:pk>', UserInfo.as_view()),
     path('api/likelist/<int:pk>', Likelist.as_view()),
     path('api/lastpost/<int:pk>', LastPost.as_view()),
+    path('api/recentmusic/<int:limit>', RecentMusic.as_view())
 ]
