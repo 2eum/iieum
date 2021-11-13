@@ -25,7 +25,8 @@ export const CardWrapper = styled.div`
   }
 
   & > *:nth-child(2) {
-    transform: rotate(5deg);
+    transform: rotate(3deg);
+    transform-origin: bottom right;
   }
 `;
 

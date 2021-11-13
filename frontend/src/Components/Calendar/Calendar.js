@@ -139,12 +139,14 @@ const Calendar = ({ currUser, token, userId }) => {
     const dayOne = new Date(viewMonth.year, viewMonth.month - 1, 1);
 
     setMonth({ year: dayOne.getFullYear(), month: dayOne.getMonth() });
+    setPostId([]);
   };
 
   const toNextMonth = () => {
     const dayOne = new Date(viewMonth.year, viewMonth.month + 1, 1);
 
     setMonth({ year: dayOne.getFullYear(), month: dayOne.getMonth() });
+    setPostId([]);
   };
 
   const CardLs = showPostId.map((id, i) => {
@@ -161,11 +163,16 @@ const Calendar = ({ currUser, token, userId }) => {
   });
 
   const handleCardSwitch = (d) => {
+    let arr = showPostId;
+    let move;
     if (d > 0) {
-      CardLs.shift();
+      move = arr.shift();
+      arr.push(move);
     } else {
-      CardLs.pop();
+      move = arr.pop();
+      arr.unshift(move);
     }
+    setPostId([...arr]);
   };
 
   return (
