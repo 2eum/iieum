@@ -14,6 +14,7 @@ from django.db.models import Max
 import random
 from datetime import datetime, timedelta
 from account.models import *
+from django.http import Http404
 
 # 전체 글
 class PostViewSet(viewsets.ModelViewSet): 
@@ -130,7 +131,7 @@ class QuestionList(APIView):
             serializer_class = QuestionSerializer(questionlist, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
-            return Response({"detail":"No question exist"})
+            raise Http404("Question does not exist")
 
 
 # 타겟 글 객체 하나 (req: 글 id, res: 글 객체)
@@ -143,7 +144,7 @@ class GetOnePost(APIView):
             serializer_class = PostSerializer(post, many=False, context=serializer_context)
             return Response(serializer_class.data)
         else:
-            return Response({"detail":"No post exist"})
+            raise Http404("Post does not exist")
 
 
 # 타겟 유저의 글목록 (req: 유저 id(숫자값), 개수 제한 res: 해당 유저의 글 목록)
@@ -159,7 +160,7 @@ class PostList_user(APIView):
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
-            return Response({"detail":"No post exist"})
+            raise Http404("Post does not exist")
 
 
 # 특정 날짜 범위 내의 글목록, 유저 구분X (req: 날짜, 개수 제한 / res: 해당 기간 동안의 글 목록)
@@ -179,7 +180,7 @@ class PostList_date(APIView):
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
-            return Response({"detail":"No post exist"})
+            raise Http404("Post does not exist")
 
 
 # 타겟 유저의 특정 날짜 범위 내의 글 목록 (req: 유저 아이디, 날짜 범위, 개수 제한 / res: 해당 기간 동안 유저의 글 목록)
@@ -199,7 +200,7 @@ class PostList_user_date(APIView):
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
-            return Response({"detail":"No post exist"})
+            raise Http404("Post does not exist")
 
 
 # 질문에 달린 글 목록 (req: 질문 id, 개수 제한 / res: 그 질문에 달린 글 목록)
@@ -215,7 +216,7 @@ class PostList_question(APIView):
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
-            return Response({"detail":"No post exist"})
+            raise Http404("Post does not exist")
 
 # 좋아요한 사람들 목록 (req: 글 아이디, res: 좋아요한 사람들 목록)
 class LikeUserList(APIView):
@@ -228,9 +229,9 @@ class LikeUserList(APIView):
             if serializer_class.data['liked_user']:
                 return Response(serializer_class.data['liked_user'])
             else:
-                return Response({"detail":"No liked user exist"})
+                raise Http404("User does not exist")
         else:
-            return Response({"detail":"No post exist"})
+            raise Http404("Post does not exist")
 
 # 유저가 쓴 글의 개수와 좋아요한 글의 개수(req: 유저 아이디, res: 글/좋아요 개수)
 class UserInfo(APIView):
@@ -250,7 +251,7 @@ class Likelist(APIView):
             serializer_class = PostSerializer(likelist, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
-            return Response({"detail":"No like post exist"})
+            raise Http404("Post does not exist")
 
 # 유저의 각 월별 마지막 글(req: 유저 아이디, res: 월별 마지막글)
 class LastPost(APIView):
@@ -272,4 +273,4 @@ class LastPost(APIView):
             serializer_class = PostSerializer(lastpostlist, many=True, context=serializer_context)
             return Response(serializer_class.data)
         else:
-            return Response({"detail":"No post exist"})
+            raise Http404("Post does not exist")
