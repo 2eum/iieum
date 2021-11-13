@@ -1,5 +1,5 @@
 import React from "react";
-import * as e from "./PostCardL.elements";
+import * as S from "./PostCardL.elements";
 import { MusicCard } from "..";
 import { useParams, Redirect } from "react-router";
 import axios from "axios";
@@ -96,13 +96,13 @@ const PostCardL = ({ currUser, token, userId }) => {
 
   return (
     <>
-      <e.PostCardArea>
-        <e.HeaderArea>
-          <e.CloseBtnArea>
-            <e.CloseBtn>닫기</e.CloseBtn>
-          </e.CloseBtnArea>
-          <e.PostTop>
-            <e.LikeArea>
+      <S.PostCardArea>
+        <S.HeaderArea>
+          <S.CloseBtnArea>
+            <S.CloseBtn>닫기</S.CloseBtn>
+          </S.CloseBtnArea>
+          <S.PostTop>
+            <S.LikeArea>
               {/* {isLiked ? (
                 <>
                   <e.LikeBtn onClick={postLike}>
@@ -119,47 +119,40 @@ const PostCardL = ({ currUser, token, userId }) => {
                 </>
               )} */}
               <>
-                <e.LikeBtn>
+                <S.LikeBtn>
                   <i className="fa fa-heart-o fa-lg" />
-                </e.LikeBtn>
-                <e.LikeCount>15</e.LikeCount>
+                </S.LikeBtn>
+                <S.LikeCount>15</S.LikeCount>
               </>
-            </e.LikeArea>
-            <e.Question>오늘 가장 잘한 일은 무엇인가요?</e.Question>
-          </e.PostTop>
-        </e.HeaderArea>
-        <e.MiddleArea>
-          <e.MusicArea>
+            </S.LikeArea>
+            <S.Question>오늘 가장 잘한 일은 무엇인가요?</S.Question>
+          </S.PostTop>
+        </S.HeaderArea>
+        <S.MiddleArea>
+          <S.MusicArea>
             <MusicCard></MusicCard>
-          </e.MusicArea>
-          <e.ContentArea>
-            <e.PubDate>2021년 11월 7일</e.PubDate>
-            <e.ContentTitle>비에 흠뻑 젖은 날</e.ContentTitle>
-            <e.BodyWrapper>
-              <e.ContentBody>올해는 유난히 장마가 긴 것 같다. 오늘은 엄청 바쁘고 동선도 복잡한 날이었는데, 
-                하필 깜빡하고 우산을 안 챙겨나왔다. 학원에 가야 하는데 비를 피했다가 가기에는 시간이 애매해서 
-                별 수 없이 홀딱 젖으며 역까지 뛰었다. 정신없는데 비까지 맞으니까 왠지 처량해서 눈물이 날 뻔했다. 
-                비 오는 날이면 꼭 우산 챙기라고 메시지를 보내주던 그 애가 생각났다. 
-                등굣길에 저멀리 그 애의 우산이 보이면 내 우산을 접고 그 속으로 뛰어들고는 했다. 
-                가끔은 문득 그 순간이 그리워진다.
-                올해는 유난히 장마가 긴 것 같다. 오늘은 엄청 바쁘고 동선도 복잡한 날이었는데, 
-                하필 깜빡하고 우산을 안 챙겨나왔다. 학원에 가야 하는데 비를 피했다가 가기에는 시간이 애매해서 
-                별 수 없이 홀딱 젖으며 역까지 뛰었다. 정신없는데 비까지 맞으니까 왠지 처량해서 눈물이 날 뻔했다. 
-                비 오는 날이면 꼭 우산 챙기라고 메시지를 보내주던 그 애가 생각났다. 
-                등굣길에 저멀리 그 애의 우산이 보이면 내 우산을 접고 그 속으로 뛰어들고는 했다. 
-                가끔은 문득 그 순간이 그리워진다.
-              </e.ContentBody>
-            </e.BodyWrapper>
-          </e.ContentArea>
-        </e.MiddleArea>
-        <e.PostBottom>
-            <e.BtnArea>
-              <e.EditBtn><i className="fa fa-pen fa-lg"/></e.EditBtn>
-              <e.DeleteBtn><i className="fa fa-trash fa-lg"/></e.DeleteBtn>
-            </e.BtnArea>
-          <e.Signature>효진</e.Signature>
-        </e.PostBottom>
-      </e.PostCardArea>
+          </S.MusicArea>
+          <S.ContentArea>
+            <S.PubDate>2021년 11월 7일</S.PubDate>
+            <S.ContentTitle>난 뜨거운 태양 아래서도 씩씩하게 걷지</S.ContentTitle>
+            <S.BodyWrapper>
+              <S.ContentBody>미칠듯이 더운 날이어도 휴가의 낭만은 포기할 수 없어.
+          땀을 뻘뻘 흘리며 걸어도 여전히 눈앞에 펼쳐진 바다는 시원하고 아름다웠다.
+          바다에 풍덩 빠져버리면, 눈에 보이는 온도만큼이나 시원할까?
+          잠시동안 상상 속에서 상쾌한 헤엄을 치다가 이내 씩씩하게 발걸음을 옮겼다.
+          저멀리 조그맣게 보이는 카페에서 시원한 빙수를 먹을 거야!
+              </S.ContentBody>
+            </S.BodyWrapper>
+          </S.ContentArea>
+        </S.MiddleArea>
+        <S.PostBottom>
+            <S.BtnArea>
+              <S.EditBtn><i className="fa fa-pen fa-lg"/></S.EditBtn>
+              <S.DeleteBtn><i className="fa fa-trash fa-lg"/></S.DeleteBtn>
+            </S.BtnArea>
+          <S.Signature>효진</S.Signature>
+        </S.PostBottom>
+      </S.PostCardArea>
     </>
   )};
 

@@ -103,6 +103,10 @@ h1, h2, h3 {
 
 `;
 
+export const CardShadow = "8px 8px 8px 1px rgba(0, 0, 0, .15)";
+
+export const ButtonShadow = "2px 2px 4px 0 rgba(0, 0, 0, .25)";
+
 export const BannerContainer = styled.section`
   padding: 3rem;
   text-align: center;
@@ -113,17 +117,17 @@ export const BoldSpan = styled.span`
 `;
 
 export const DefaultButton = styled(Link)`
-  padding: 0.5rem 1.5rem;
-
+  padding: 0.5rem 1.2rem;
+  display: flex;
+  justify-content: center;
+  height: 44px;
   border: none;
   border-radius: 5px;
-
   background-color: ${colors.iiPurple};
-
-  font-size: 1.3rem;
-  font-weight: 600;
+  box-shadow: ${ButtonShadow};
+  font-size: 1rem;
+  font-weight: 300;
   color: ${colors.iiBeige};
-
   cursor: pointer;
 `;
 
@@ -132,6 +136,6 @@ export const MainContentContainer = styled.div`
   margin: auto;
 `;
 
-export const CardShadow = "8px 8px 8px 1px rgba(0, 0, 0, .15)";
+
 
 export default GlobalStyle;

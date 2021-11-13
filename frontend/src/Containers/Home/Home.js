@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import * as e from "./Home.elements";
+import * as S from "./Home.elements";
 import * as com from "../../Components";
-import { LoadMoreButtonL, LoadMoreButtonR } from "../../Components/LoadMoreButton/LoadMoreButton";
-import { New } from "..";
-import { BoldSpan } from "../../globalStyles";
 
 const Home = ({ currUser, token, userId }) => {
   const [content, setContent] = useState(null);
@@ -102,28 +99,82 @@ const Home = ({ currUser, token, userId }) => {
 
   return (
     <>
-      <e.Background>
-        <e.QuestionPageContainer>
+      <S.Background>
+
+        {/* 1.Question Page */}
+        <S.TodayQuestionSection>
             <com.PostCardL/>
-            <e.RightContainer>
-              <e.QuestionArea>
+            <S.RightContainer>
+              <S.QuestionArea>
                 <com.ShuffleButton/>
-                <e.TodayQuestion>
-                  <e.QDate>오늘의 질문</e.QDate>
-                  <e.Question>내 인생에서 가장 더웠던 날의 기억</e.Question>
-                </e.TodayQuestion>
-              </e.QuestionArea>
-              <e.PostCardSArea>
-                <e.PostCardSWrapper>
+                <S.TodayQuestion>
+                  <S.QDate>오늘의 질문</S.QDate>
+                  <S.Question>내 인생에서 가장 더웠던 날의 기억</S.Question>
+                </S.TodayQuestion>
+              </S.QuestionArea>
+              <S.PostCardSArea>
+                <S.PostCardSWrapper>
                   <LoadMoreButtonL/>
                   <com.PostCardS/><com.PostCardS/>
                   <LoadMoreButtonR/>
-                </e.PostCardSWrapper>
+                </S.PostCardSWrapper>
                 <com.Indicator/>
-              </e.PostCardSArea>
-            </e.RightContainer>
-          </e.QuestionPageContainer>
-      </e.Background>
+              </S.PostCardSArea>
+            </S.RightContainer>
+          </S.TodayQuestionSection>
+
+          {/* 2.Create Page */}
+          <S.CreateSection>
+            <S.CreateCardLeft>
+              <S.HelperQuestionArea/>
+              <S.HelperSearchArea/>
+              <S.HelperContentArea>
+                <S.HelperLeft>
+                  당신의 이야기를 들려주세요.
+                  어떤 내용이든 좋아요.
+                  아주 사소한 것부터 깊은 속마음까지,
+                  떠오르는 대로 적어볼까요?
+                </S.HelperLeft>
+              </S.HelperContentArea>
+              <S.HelperDoneArea/>
+            </S.CreateCardLeft>
+            <com.CreateCard/>
+            <S.CreateCardRight>
+              <S.HelperQuestionArea>
+                <S.HelperRight>
+                  질문을 듣고,<br/>
+                  떠오르는 음악이나 이야기가 있나요?
+                </S.HelperRight>
+              </S.HelperQuestionArea>
+              <S.HelperSearchArea>
+                <S.HelperRight>
+                  당신의 이야기에 어울리는 음악을<br/>
+                  직접 골라주세요.
+                </S.HelperRight>
+              </S.HelperSearchArea>
+              <S.HelperContentArea/>
+              <S.HelperDoneArea>
+                <S.HelperRight>
+                  이제 당신의 이야기를<br/>
+                  다른 사람들과 나눠보세요!
+                </S.HelperRight>
+              </S.HelperDoneArea>
+              <S.DoneButtonArea>
+                <com.DoneButton/>
+              </S.DoneButtonArea>
+            </S.CreateCardRight>
+          </S.CreateSection>
+
+          {/* 3.Question List Page */}
+          <S.QuestionListSection>
+            <S.QuestionHeaderContainer>
+              <S.QuestionHeader>다른 질문 둘러보기</S.QuestionHeader>
+              <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
+            </S.QuestionHeaderContainer>
+
+          </S.QuestionListSection>
+
+      </S.Background>
     </>
   );
 };
