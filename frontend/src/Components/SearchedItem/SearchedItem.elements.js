@@ -33,7 +33,9 @@ export const Artist = styled.p`
     max-width: 100px;
   }
 `;
-export const Cover = styled.img``;
+export const Cover = styled.img`
+  width: 40%;
+`;
 export const Link = styled.img`
   width: 1rem;
   margin-right: 1vh;

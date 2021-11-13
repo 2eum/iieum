@@ -13,9 +13,6 @@ const PostCardL = ({
   order,
 }) => {
   const [content, setContent] = useState(null);
-  const [loaded, setLoad] = useState(false);
-  const [placeholder, setPlaceholder] = useState("Loading Content");
-  const [deleted, setDelete] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
@@ -136,11 +133,11 @@ const PostCardL = ({
           <S.MiddleArea>
             <S.MusicArea>
               <MusicCard
-                title="Cheapest Flight"
-                artist="PREP"
-                source="https://p.scdn.co/mp3-preview/c291a40cd256f1381f0c42f6246047e23d59a74c?cid=cf0635b8ba9c4fb79c950f97b20e353e"
-                link="https://open.spotify.com/track/63cgeMV2nSl851R7jy4lxw"
-                cover="https://i.scdn.co/image/ab67616d0000b273ef383114d44a889364922113"
+                title={content.track_title}
+                artist={content.track_artist}
+                source={content.track_audio}
+                link={content.spotify_link}
+                cover={content.track_album_cover}
               />
             </S.MusicArea>
             <S.ContentArea>

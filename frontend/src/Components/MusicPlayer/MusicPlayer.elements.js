@@ -19,6 +19,7 @@ export const PlayerButton = styled.div`
   border-radius: 50%;
   display: flex;
   justify-content: center;
+  cursor: pointer;
   i {
     font-size: 0.8rem;
     /* padding-left: 2px; */

@@ -35,7 +35,7 @@ export const FormTitle = styled.input`
 `;
 
 export const SearchSection = styled.section`
-  width: 30%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   position: relative;

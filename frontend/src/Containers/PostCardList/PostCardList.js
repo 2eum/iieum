@@ -43,6 +43,9 @@ const PostCardList = ({ currUser, token, userId }) => {
             key={c.id}
             user={c.user}
             title={c.title}
+            track_title={c.track_title}
+            track_artist={c.track_artist}
+            track_album_cover={c.track_album_cover}
             handleCardOpen={(e) => handleCardOpen(c.id)}
           />
         );

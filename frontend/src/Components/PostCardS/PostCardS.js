@@ -1,19 +1,26 @@
 import React from "react";
 import * as S from "./PostCardS.elements";
 
-const PostCardS = ({ user, title, handleCardOpen }) => {
+const PostCardS = ({
+  user,
+  title,
+  track_title,
+  track_artist,
+  track_album_cover,
+  handleCardOpen,
+}) => {
   return (
     <S.PostCardArea onClick={handleCardOpen}>
       <S.TopArea>
         <S.Author>{user}</S.Author>
       </S.TopArea>
       <S.MusicArea>
-        <S.MusicCover src="https://image.bugsm.co.kr/album/images/500/40591/4059180.jpg"></S.MusicCover>
+        <S.MusicCover src={track_album_cover}></S.MusicCover>
         <S.MusicInfoArea>
           <S.MusicTitleWrapper>
-            <S.MusicTitle>KNOCK(With 박문치dddd)</S.MusicTitle>
+            <S.MusicTitle>{track_title}</S.MusicTitle>
           </S.MusicTitleWrapper>
-          <S.MusicArtist>권진아</S.MusicArtist>
+          <S.MusicArtist>{track_artist}</S.MusicArtist>
         </S.MusicInfoArea>
       </S.MusicArea>
       <S.TitleArea>
