@@ -42,6 +42,7 @@ export const LikeArea = styled.div`
 
 export const LikeBtn = styled.div`
   margin-right: 20%;
+  cursor: pointer;
 `;
 
 export const LikeCount = styled.div`
