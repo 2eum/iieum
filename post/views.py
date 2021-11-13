@@ -313,4 +313,18 @@ class RecentMusic(APIView):
         else:
             raise Http404("Music does not exist")
 
-# 해당 음악이 포함된 글 목록 (req: 음악 제목, 아티스트 / res: 글 목록)
+# 해당 음악이 포함된 글 목록 (req: 음악 제목, 아티스트, 개수제한 / res: 글 목록)
+class Postlist_music(APIView):
+    @csrf_exempt
+    def get(self, request, title, artist, limit):
+        if int(limit) == 0:
+            postlist = Post.objects.filter(track_title=title).filter(track_artist=artist).order_by('-pub_date')
+        else:
+            postlist = Post.objects.filter(track_title=title).filter(track_artist=artist).order_by('-pub_date')[:int(limit)]
+
+        if postlist:
+            serializer_context = {'request': request,}
+            serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
+            return Response(serializer_class.data)
+        else:
+            raise Http404("Music does not exist")
