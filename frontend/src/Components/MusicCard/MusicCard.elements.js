@@ -4,7 +4,8 @@ import * as g from "../../globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
-  width: 15vw;
+  // width: 15vw;
+  width: 100%;
   height: 6vw;
   padding: 5%;
   background-color: ${colors.iiBeige};
