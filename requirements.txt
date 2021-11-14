@@ -13,13 +13,7 @@ debugpy==1.4.3
 decorator==5.1.0
 defusedxml==0.7.1
 Django==3.2.7
-<<<<<<< HEAD
 django-filter==21.1
-=======
-django-allauth==0.45.0
-django-cors-headers==3.8.0
-django-rest-auth==0.9.5
->>>>>>> bb932f27799f9eb0449a30b338f83414483e04fd
 djangorestframework==3.12.4
 djangorestframework-jwt==1.11.0
 entrypoints==0.3
