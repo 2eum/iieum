@@ -38,6 +38,10 @@ export const QuestionArea = styled.section`
   font-size: 3rem;
 `;
 
+export const ShuffleButton = styled.i`
+
+`;
+
 export const TodayQuestion = styled.div`
   margin-top: 5%;
 `;
@@ -60,6 +64,8 @@ export const PostCardSWrapper = styled.section`
   display: flex;
   justify-content: center;
 `;
+
+export const IndicatorWrapper = styled.div``;
 
 
 //2. Create Page
@@ -120,6 +126,9 @@ export const DoneButtonArea = styled.div`
   margin: 16px 0;
 `;
 
+export const LoadMoreButtonContainer = styled.div`
+  margin: 25% auto;
+`;
 
 //3.Question List Page
 

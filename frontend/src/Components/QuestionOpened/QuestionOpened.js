@@ -13,7 +13,12 @@ const QuestionStories = () => {
         </S.QuestionDetails>
       </S.QuestionContainer>
       <S.CreateButtonContainer>
-        <CreateButton/>
+        <g.DefaultButton>
+          <g.ButtonIconArea>
+            <g.ButtonIcon className="fa fa-pen"/>
+          </g.ButtonIconArea>
+          질문에 답하기
+        </g.DefaultButton>
       </S.CreateButtonContainer>
       <S.CardListContainer>
         

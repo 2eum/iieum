@@ -138,7 +138,6 @@ export const MainContentContainer = styled.div`
 `;
 
 
-
 // text slide animation
 export const slide = keyframes`
     0% {
@@ -148,5 +147,29 @@ export const slide = keyframes`
       left: -200%;
     }
 `;
+
+
+//Buttons
+export const ButtonWrapper = styled.div`
+  width: 135px;
+  height: 45px;
+`;
+
+export const ButtonIconArea = styled.div``;
+
+export const ButtonIcon = styled.i`
+  color: ${colors.iiBeige};
+  margin-right: 8px;
+`;
+
+export const ButtonName = styled.p`
+
+`;
+
+export const OpenListButtonWrapper = styled.div`
+  margin: 2%;
+  margin-top: 20%;
+`;
+
 
 export default GlobalStyle;
