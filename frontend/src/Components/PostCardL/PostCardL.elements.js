@@ -5,7 +5,7 @@ import * as g from "../../globalStyles";
 export const PostCardArea = styled.section`
   width: 90%;
   height: 45vw;
-  margin: 2% auto;
+  margin: auto;
   padding: 5%;
   display: flex;
   flex-direction: column;
@@ -14,6 +14,8 @@ export const PostCardArea = styled.section`
   box-shadow: ${g.CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
+  // if card is stacked, set z-index according to order
+  z-index: ${(p) => p.order * -1};
 `;
 
 export const HeaderArea = styled.section``;

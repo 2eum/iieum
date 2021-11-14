@@ -5,7 +5,7 @@ import * as g from "../../globalStyles";
 export const PostCardArea = styled.section`
   width: 17vw;
   height: 23vw;
-  margin: auto;
+  margin: 0 auto;
   padding: 2vw;
   display: flex;
   flex-direction: column;
@@ -56,21 +56,39 @@ export const MusicInfoArea = styled.div`
 
 export const MusicTitleWrapper = styled.div`
   width: 100%;
+  height: 1.8rem;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  position: relative;
 `;
 
 export const MusicTitle = styled.h3`
   margin-bottom: 1%;
   font-weight: 400;
-  opacity: 0.75;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
+`;
+
+export const MusicArtistWrapper = styled.div`
+  width: 100%;
+  height: 1.6rem;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
 `;
 
 export const MusicArtist = styled.h4`
   margin: 1%;
   font-weight: 400;
   opacity: 0.75;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
 
 export const TitleArea = styled.section`

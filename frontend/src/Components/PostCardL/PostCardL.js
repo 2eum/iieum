@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./PostCardL.elements";
 import { MusicCard } from "..";
-import { useParams } from "react-router";
 import axios from "axios";
 
-const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
+const PostCardL = ({
+  currUser,
+  token,
+  userId,
+  handleCardClose,
+  postId,
+  order,
+  cols,
+}) => {
   const [content, setContent] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
+  // get content info from api
   useEffect(() => {
     axios({
       method: "get",
@@ -32,17 +40,16 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
         checkLiked(data.liked_user);
         setLikeCount(data.liked_user.length);
         return data;
-      })
-      .then(() => {
-        setLoad(true);
       });
   }, [postId]);
 
+  // set date form
   const pubDateObj = new Date(content ? content.pub_date : "");
   let formattedDate = `${pubDateObj.getFullYear()}년
   ${pubDateObj.getMonth() + 1}월
   ${pubDateObj.getDate()}일`;
 
+  // check if liked post
   const checkLiked = (likeList) => {
     const intId = userId * 1;
     if (likeList.includes(intId)) {
@@ -52,6 +59,7 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
     }
   };
 
+  // like post request
   const postLike = (e) => {
     axios({
       method: "post",
@@ -69,6 +77,7 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
       });
   };
 
+  // delete request
   const handleDelete = () => {
     console.log(1);
     axios({
@@ -92,29 +101,28 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
 
   return (
     <>
+      {/* load only if content is loaded */}
       {content && postId ? (
-        <S.PostCardArea>
+        <S.PostCardArea order={order}>
           <S.HeaderArea>
             <S.CloseBtnArea>
-              <S.CloseBtn onClick={handleCardClose}>닫기</S.CloseBtn>
+              {/* render close button only on card list */}
+              {handleCardClose ? (
+                <S.CloseBtn onClick={handleCardClose}>닫기</S.CloseBtn>
+              ) : (
+                ""
+              )}
             </S.CloseBtnArea>
             <S.PostTop>
               <S.LikeArea>
-                {isLiked ? (
-                  <>
-                    <S.LikeBtn onClick={postLike}>
-                      <i className="fa fa-heart" />
-                    </S.LikeBtn>
-                    <S.LikeCount>{likeCount}</S.LikeCount>
-                  </>
-                ) : (
-                  <>
-                    <S.LikeBtn onClick={postLike}>
-                      <i className="fa fa-heart-o" />
-                    </S.LikeBtn>
-                    <S.LikeCount>{likeCount}</S.LikeCount>
-                  </>
-                )}
+                <S.LikeBtn onClick={postLike}>
+                  {/* toggle full, empty heart icon */}
+                  {isLiked ? (
+                    <i className="fa fa-heart" />
+                  ) : (
+                    <i className="fa fa-heart-o" />
+                  )}
+                </S.LikeBtn>
               </S.LikeArea>
               <S.Question>{content.question.question_content}</S.Question>
             </S.PostTop>
@@ -127,6 +135,8 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
                 source={content.track_audio}
                 link={content.spotify_link}
                 cover={content.track_album_cover}
+                cols={cols}
+                postId={postId}
               />
             </S.MusicArea>
             <S.ContentArea>
@@ -139,6 +149,7 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
           </S.MiddleArea>
           <S.PostBottom>
             <S.Signature>{content.user}</S.Signature>
+            {/* show edit, delete button only when user is post card owner */}
             {currUser === content.user ? (
               <S.BtnArea>
                 <S.EditBtn>
