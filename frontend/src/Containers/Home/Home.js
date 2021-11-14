@@ -4,6 +4,7 @@ import axios from "axios";
 import * as S from "./Home.elements";
 import { LoadMoreButtonL, LoadMoreButtonR } from "../../Components/LoadMoreButton/LoadMoreButton";
 import * as com from "../../Components";
+import { PostCardList } from "..";
 
 const Home = ({ currUser, token, userId, postId }) => {
   const [content, setContent] = useState(null);
@@ -104,25 +105,26 @@ const Home = ({ currUser, token, userId, postId }) => {
 
         {/* 1.Question Page */}
         <S.TodayQuestionPageSection>
-            <com.PostCardL/>
+            {/* <com.PostCardL/> */}
             <S.RightContainer>
               <S.QuestionArea>
                 <com.ShuffleButton/>
                 <S.TodayQuestion>
                   <S.QDate>오늘의 질문</S.QDate>
-                  <S.Question>내 인생에서 가장 더웠던 날의 기억</S.Question>
+                  <S.Question>{question}</S.Question>
                 </S.TodayQuestion>
               </S.QuestionArea>
               <S.PostCardSArea>
-                <S.PostCardSWrapper>
+                {/* <S.PostCardSWrapper>
                   <LoadMoreButtonL/>
                   <com.PostCardS/><com.PostCardS/>
                   <LoadMoreButtonR/>
-                </S.PostCardSWrapper>
+                </S.PostCardSWrapper> */}
                 <com.Indicator/>
               </S.PostCardSArea>
             </S.RightContainer>
           </S.TodayQuestionPageSection>
+          <PostCardList currUser={currUser} token={token} userId={userId} />
 
           {/* 2.Create Page */}
           <S.CreatePageSection>
@@ -192,9 +194,9 @@ const Home = ({ currUser, token, userId, postId }) => {
               </S.PageHeader>
             </S.PageHeaderContainer>
             <S.MusicListContainer>
+              {/* <com.MusicCard/><com.MusicCard/>
               <com.MusicCard/><com.MusicCard/>
-              <com.MusicCard/><com.MusicCard/>
-              <com.MusicCard/><com.MusicCard/>
+              <com.MusicCard/><com.MusicCard/> */}
             </S.MusicListContainer>
           </S.MusicListPageSection>
 
