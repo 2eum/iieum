@@ -4,7 +4,8 @@ from django.contrib.auth.models import UserManager, AbstractUser
 class User(AbstractUser):
     objects = UserManager()
     nickname = models.CharField(blank=True, max_length=50)
-
+    def __str__(self):
+        return self.username
 
 
 
