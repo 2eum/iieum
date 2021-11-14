@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import * as colors from "../../Colors";
 
@@ -19,11 +18,13 @@ export const CardWrapper = styled.div`
   position: relative;
   margin: auto;
 
+  // cards stack
   & > * {
     position: absolute;
     transition: all 500ms;
   }
 
+  // tilted card rotate
   & > *:nth-child(2) {
     transform: rotate(3deg);
     transform-origin: bottom right;
@@ -52,6 +53,7 @@ export const CalendarContainer = styled.div`
   border: 1px solid ${colors.cardStroke};
   border-radius: 5px;
 `;
+
 export const Month = styled.p`
   margin: 0;
 
@@ -131,9 +133,8 @@ export const DateItem = styled.div`
 export const DateNum = styled.p`
   width: 100%;
   margin-bottom: 5%;
-
   color: ${(props) =>
-    props.day === "sun" ? "#FF8D8D" : props.day === "sat" ? "#56A4FF" : "#000"};
+    props.day === 0 ? "#FF8D8D" : props.day === 6 ? "#56A4FF" : colors.iiBrown};
   text-align: center;
 `;
 

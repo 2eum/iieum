@@ -1,5 +1,5 @@
 import React from "react";
-import LogoImg from "./1eum_logo.png";
+import LogoImg from "./iieum_logo.png";
 
 import {
   NavContainer,

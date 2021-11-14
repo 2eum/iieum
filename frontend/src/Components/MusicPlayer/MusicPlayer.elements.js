@@ -22,11 +22,11 @@ export const PlayerButton = styled.div`
   cursor: pointer;
   i {
     font-size: 0.8rem;
-    /* padding-left: 2px; */
     color: ${colors.iiBeige};
     align-self: center;
   }
 
+  // center play button
   & .fa-play {
     padding-left: 2px;
   }
