@@ -167,10 +167,11 @@ export const OpenListButtonWrapper = styled.div`
   margin-top: 20%;
 `;
 
-export const indicatorDot = styled.div`
+export const IndicatorDot = styled.div`
   width: 10px;
   height: 10px;
-  background-color: ${colors.iiPurple};
+  background-color: ${(p) =>
+    p.selected ? colors.iiPurple : colors.iiPurpleOpacity};
   border-radius: 100%;
   content: "";
 `;

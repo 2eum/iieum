@@ -15,12 +15,15 @@ import {
 } from "../../Components";
 
 const Home = ({ currUser, token, userId, postId }) => {
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState([]);
   const [questionList, setQList] = useState([]);
-  const [question, setQuestion] = useState("");
-  const [questionId, setQuestionId] = useState("");
+  const [question, setQuestion] = useState();
+  const [questionId, setQuestionId] = useState();
+  const [todayQCards, setTodayQCards] = useState([]);
+  const [indicators, setIndicators] = useState([]);
+  const [contentIdx, setIdx] = useState();
+  const [cardLId, setCardLId] = useState();
   const [loaded, setLoad] = useState(false);
-  const [contentIdx, setIdx] = useState(0);
   const [placeholder, setPlaceholder] = useState("Loading Content");
 
   // on Mount
@@ -43,26 +46,6 @@ const Home = ({ currUser, token, userId, postId }) => {
         sortedArray.sort((a, b) => sortByLatest(a, b));
         setQList(sortedArray);
       });
-
-    axios({
-      method: "get",
-      url: "/api/post/",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.status > 400) {
-          setPlaceholder("Something went wrong!");
-        }
-        return response.data;
-      })
-      .then((data) => {
-        setContent(data);
-      })
-      .then(() => {
-        setLoad(true);
-      });
   }, []);
 
   // on question list change
@@ -72,6 +55,76 @@ const Home = ({ currUser, token, userId, postId }) => {
       setQuestionId(questionList[0].id);
     }
   }, [questionList]);
+
+  // get 10 post of selected question
+  useEffect(() => {
+    if (questionId) {
+      axios({
+        method: "get",
+        url: `api/postlist-question/${questionId}/10`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.status > 400) {
+            setPlaceholder("Something went wrong!");
+          }
+          return response.data;
+        })
+        .then((data) => {
+          setContent(data);
+        })
+        .then(() => {
+          setLoad(true);
+        });
+    }
+  }, [questionId]);
+
+  useEffect(() => {
+    let arr = [];
+    for (let c of content) {
+      arr.push(
+        <PostCardS
+          key={c.id}
+          id={c.id}
+          user={c.user}
+          title={c.title}
+          track_title={c.track_title}
+          track_artist={c.track_artist}
+          track_album_cover={c.track_album_cover}
+          handleCardOpen={switchCardL}
+        />
+      );
+    }
+    setTodayQCards([...arr]);
+    setIdx(0);
+    if (content[0]) {
+      setCardLId(content[0].id);
+    }
+  }, [content]);
+
+  useEffect(() => {
+    let indArr = [];
+    for (let i = 0; i < Math.ceil(content.length / 2); i++) {
+      indArr.push(<g.IndicatorDot key={i} selected={i * 2 === contentIdx} />);
+    }
+    setIndicators([...indArr]);
+  }, [contentIdx, content]);
+
+  const handleTodayQCard = (d) => {
+    let idx;
+    if (d > 0) {
+      idx =
+        contentIdx === todayQCards.length - 1 ||
+        contentIdx + 1 === todayQCards.length - 1
+          ? 0
+          : contentIdx + 2;
+    } else {
+      idx = contentIdx === 0 ? todayQCards.length - 1 : contentIdx - 2;
+    }
+    setIdx(idx);
+  };
 
   const sortByLatest = (a, b) => {
     const a_date = new Date(a.released_date);
@@ -86,26 +139,19 @@ const Home = ({ currUser, token, userId, postId }) => {
     }
   };
 
-  const changeArticle = (direction) => {
-    const last = content.length - 1;
+  const randomQuestion = () => {
+    let qIdx;
+    do {
+      qIdx = Math.floor(Math.random() * 100) % questionList.length;
+    } while (questionList[qIdx].id === questionId);
 
-    const changeIdx = direction === "prev" ? contentIdx - 1 : contentIdx + 1;
-
-    if (changeIdx > last) {
-      setIdx(0);
-      return;
-    } else if (changeIdx < 0) {
-      setIdx(last);
-      return;
-    } else {
-      setIdx(changeIdx);
-    }
+    setQuestion(questionList[qIdx].question_content);
+    setQuestionId(questionList[qIdx].id);
   };
 
-  const today = new Date();
-  const todayString = `${today.getFullYear()}년 ${
-    today.getMonth() + 1
-  }월 ${today.getDate()}일`;
+  const switchCardL = (id) => {
+    setCardLId(id);
+  };
 
   return (
     <>
@@ -113,12 +159,12 @@ const Home = ({ currUser, token, userId, postId }) => {
         {/* 1.Question Page */}
         <S.TodayQuestionSection>
           <S.TodayLeftContainer>
-            <PostCardL postId="3" token={token} />
+            {content.length ? <PostCardL postId={cardLId} token={token} /> : ""}
           </S.TodayLeftContainer>
 
           <S.TodayRightContainer>
             <S.QuestionArea>
-              <S.ShuffleButton>
+              <S.ShuffleButton onClick={randomQuestion}>
                 <i className="fas fa-random"></i>
               </S.ShuffleButton>
               <S.TodayQuestion>
@@ -128,36 +174,20 @@ const Home = ({ currUser, token, userId, postId }) => {
             </S.QuestionArea>
             <S.PostCardSArea>
               <S.TodaySTop>
-                <S.LoadMoreButtonContainer>
+                <S.LoadMoreButtonContainer onClick={() => handleTodayQCard(-1)}>
                   <i className="fas fa-chevron-left" />
                 </S.LoadMoreButtonContainer>
                 <S.PostCardSWrapper>
-                  <PostCardS
-                    user=""
-                    title=""
-                    track_title=""
-                    track_artist=""
-                    track_album_cover=""
-                    handleCardOpen={console.log()}
-                  />
-                  <PostCardS
-                    user=""
-                    title=""
-                    track_title=""
-                    track_artist=""
-                    track_album_cover=""
-                    handleCardOpen={console.log()}
-                  />
+                  {todayQCards[contentIdx]}
+                  {contentIdx + 1 < todayQCards.length - 1
+                    ? todayQCards[contentIdx + 1]
+                    : ""}
                 </S.PostCardSWrapper>
-                <S.LoadMoreButtonContainer>
+                <S.LoadMoreButtonContainer onClick={() => handleTodayQCard(1)}>
                   <i className="fas fa-chevron-right" />
                 </S.LoadMoreButtonContainer>
               </S.TodaySTop>
-              <S.IndicatorWrapper>
-                <g.indicatorDot />
-                <g.indicatorDot />
-                <g.indicatorDot />
-              </S.IndicatorWrapper>
+              <S.IndicatorWrapper>{indicators}</S.IndicatorWrapper>
             </S.PostCardSArea>
           </S.TodayRightContainer>
         </S.TodayQuestionSection>

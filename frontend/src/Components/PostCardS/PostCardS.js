@@ -2,6 +2,7 @@ import React from "react";
 import * as S from "./PostCardS.elements";
 
 const PostCardS = ({
+  id,
   user,
   title,
   track_title,
@@ -10,7 +11,7 @@ const PostCardS = ({
   handleCardOpen,
 }) => {
   return (
-    <S.PostCardArea onClick={handleCardOpen}>
+    <S.PostCardArea onClick={() => handleCardOpen(id)}>
       <S.TopArea>
         <S.Author>{user}</S.Author>
       </S.TopArea>

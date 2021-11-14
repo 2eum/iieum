@@ -42,7 +42,9 @@ export const QuestionArea = styled.section`
   font-size: 3rem;
 `;
 
-export const ShuffleButton = styled.div``;
+export const ShuffleButton = styled.div`
+  cursor: pointer;
+`;
 
 export const TodayQuestion = styled.div`
   margin-top: 5%;
@@ -64,10 +66,12 @@ export const PostCardSArea = styled.section`
 
 export const TodaySTop = styled.div`
   display: flex;
+  align-items: center;
   gap: 5%;
 `;
 
 export const PostCardSWrapper = styled.section`
+  width: 80%;
   margin: 5% 0;
   display: flex;
   justify-content: center;
@@ -78,6 +82,11 @@ export const IndicatorWrapper = styled.div`
   display: flex;
   justify-content: center;
   gap: 5%;
+`;
+
+export const LoadMoreButtonContainer = styled.div`
+  width: 5%;
+  cursor: pointer;
 `;
 
 //2. Create Page
@@ -136,10 +145,6 @@ export const HelperRight = styled.p`
 
 export const DoneButtonArea = styled.div`
   margin: 16px 0;
-`;
-
-export const LoadMoreButtonContainer = styled.div`
-  margin: 25% auto;
 `;
 
 //3.Question List Page
