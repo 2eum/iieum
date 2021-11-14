@@ -30,8 +30,22 @@ export const Info = styled.div`
   justify-content: space-around;
 `;
 
+export const TitleWrapper = styled.div`
+  height: 1.6rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+`;
+
 export const Title = styled.p`
   text-align: right;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  //slide animation
+  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
 
 export const MiddleWrapper = styled.div`
@@ -40,9 +54,23 @@ export const MiddleWrapper = styled.div`
   gap: 10%;
 `;
 
+export const ArtistWrapper = styled.div`
+  height: 1.6rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+`;
+
 export const Artist = styled.p`
   text-align: right;
   color: ${colors.littleDarkGray};
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  //slide animation
+  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
 
 export const SourceLink = styled.a`
@@ -51,4 +79,9 @@ export const SourceLink = styled.a`
     width: 100%;
     object-fit: contain;
   }
+`;
+
+export const NoPreviewSrc = styled.p`
+  font-size: 0.8rem;
+  color: ${colors.darkGray};
 `;

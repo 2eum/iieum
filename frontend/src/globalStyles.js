@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, keyframes } from "styled-components";
 import * as colors from "./Colors";
 
 const GlobalStyle = createGlobalStyle`
@@ -9,7 +9,8 @@ const GlobalStyle = createGlobalStyle`
   //noto serif kr
   // font-family: 'Noto Serif KR'
   // font-weight로 조절
-@import url(https://cdn.rawgit.com/kattergil/NotoSerifKR-Web/76eb9ebf/stylesheet/NotoSerif-Web.css);
+/* @import url('https://cdn.rawgit.com/kattergil/NotoSerifKR-Web/76eb9ebf/stylesheet/NotoSerif-Web.css'); */
+
 
 
 
@@ -76,7 +77,7 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
 
-  font-family: Noto Serif KR;
+  font-family: 'Noto Serif KR';
   font-weight: 400;
   color: ${colors.iiBrown};
 }
@@ -137,5 +138,15 @@ export const MainContentContainer = styled.div`
 `;
 
 
+
+// text slide animation
+export const slide = keyframes`
+    0% {
+      left: 100%;
+    }
+    100% {
+      left: -200%;
+    }
+`;
 
 export default GlobalStyle;
