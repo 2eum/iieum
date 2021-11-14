@@ -10,7 +10,7 @@ export const PostCardArea = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: ${colors.nearWhite};
+  background-color: ${colors.iiBeige};
   box-shadow: ${g.CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
