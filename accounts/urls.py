@@ -1,7 +1,6 @@
 from django.urls import path
 from rest_auth.views import (
     LoginView, LogoutView, PasswordChangeView,
-    PasswordResetView, PasswordResetConfirmView
 )
 from rest_auth.registration.views import RegisterView
 from accounts.views import ConfirmEmailView
