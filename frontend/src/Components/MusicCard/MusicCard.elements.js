@@ -44,3 +44,8 @@ export const SourceLink = styled.a`
     object-fit: contain;
   }
 `;
+
+export const NoPreviewSrc = styled.p`
+  font-size: 0.8rem;
+  color: ${colors.darkGray};
+`;

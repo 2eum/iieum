@@ -15,7 +15,11 @@ const MusicCard = ({ title, artist, source, link, cover }) => {
             </S.SourceLink>
             <S.Artist>{artist}</S.Artist>
           </S.MiddleWrapper>
-          <MusicPlayer source={source} />
+          {source !== "null" ? (
+            <MusicPlayer source={source} />
+          ) : (
+            <S.NoPreviewSrc>미리듣기 음원이 없습니다</S.NoPreviewSrc>
+          )}
         </S.Info>
         <S.Cover src={cover} />
       </S.Wrapper>
