@@ -1,28 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import {
-  TodayPostContainer,
-  BannerDate,
-  TodayMessage,
-  QuestionWrapper,
-  PostContainer,
-  ContentWrapper,
-  ArrowContainer,
-  ContentTitle,
-  ContentAuthor,
-  ContentSummary,
-  CreateButtonArea,
-  CreateMessage,
-  CreateButton,
-  QuestionAnswerLink,
-} from "./Home.elements";
+import * as S from "./Home.elements";
+import { LoadMoreButtonL, LoadMoreButtonR } from "../../Components/LoadMoreButton/LoadMoreButton";
+import * as com from "../../Components";
+import { PostCardList } from "..";
 
-import { MusicCard, PostCardL, PostCardS } from "../../Components";
-import { New, PostCardList } from "..";
-import { BoldSpan } from "../../globalStyles";
-
-const Home = ({ currUser, token, userId }) => {
+const Home = ({ currUser, token, userId, postId }) => {
   const [content, setContent] = useState(null);
   const [questionList, setQList] = useState([]);
   const [question, setQuestion] = useState("");
@@ -117,57 +101,109 @@ const Home = ({ currUser, token, userId }) => {
 
   return (
     <>
-      <TodayPostContainer>
-        {loaded === false ? (
-          <p>{placeholder}</p>
-        ) : (
-          <>
-            <BannerDate>{todayString}</BannerDate>
-            <TodayMessage>누군가의 오늘 하루, 그리고 음악.</TodayMessage>
-            <QuestionWrapper>오늘의 질문: {question}</QuestionWrapper>
-            <QuestionAnswerLink to={`/new/${questionId}`}>
-              질문에 답하기
-            </QuestionAnswerLink>
+      <S.Background>
 
-            {/* <PostCardL />
-            <PostCardS /> */}
-            {/* {content[contentIdx] ? (
-              <PostContainer>
-                <ArrowContainer onClick={() => changeArticle("prev")}>
-                  <i className="fas fa-chevron-left"></i>
-                </ArrowContainer>
-                <MusicCard />
-                <ContentWrapper>
-                  <ContentTitle to={`detail/${content[contentIdx].id}`}>
-                    {content[contentIdx].title}
-                    <ContentAuthor>by {content[contentIdx].user}</ContentAuthor>
-                  </ContentTitle>
-                  <ContentSummary>{content[contentIdx].content}</ContentSummary>
-                </ContentWrapper>
-                <ArrowContainer onClick={() => changeArticle("next")}>
-                  <i className="fas fa-chevron-right"></i>
-                </ArrowContainer>
-              </PostContainer>
-            ) : (
-              ""
-            )} */}
-          </>
-        )}
-      </TodayPostContainer>
-      <PostCardList currUser={currUser} token={token} userId={userId} />
-      {/* <CreateButtonArea>
-        <CreateMessage>
-          오늘, <BoldSpan>당신의 하루는</BoldSpan> 어떤{" "}
-          <BoldSpan>선율</BoldSpan>
-          이었나요?
-        </CreateMessage>
-        <CreateButton to="/new">내 이야기 쓰러가기</CreateButton>
-      </CreateButtonArea> */}
-      <New token={token} />
+        {/* 1.Question Page */}
+        <S.TodayQuestionPageSection>
+            {/* <com.PostCardL/> */}
+            <S.RightContainer>
+              <S.QuestionArea>
+                <com.ShuffleButton/>
+                <S.TodayQuestion>
+                  <S.QDate>오늘의 질문</S.QDate>
+                  <S.Question>{question}</S.Question>
+                </S.TodayQuestion>
+              </S.QuestionArea>
+              <S.PostCardSArea>
+                {/* <S.PostCardSWrapper>
+                  <LoadMoreButtonL/>
+                  <com.PostCardS/><com.PostCardS/>
+                  <LoadMoreButtonR/>
+                </S.PostCardSWrapper> */}
+                <com.Indicator/>
+              </S.PostCardSArea>
+            </S.RightContainer>
+          </S.TodayQuestionPageSection>
+          <PostCardList currUser={currUser} token={token} userId={userId} />
 
-      {/* Question List */}
+          {/* 2.Create Page */}
+          <S.CreatePageSection>
+            <S.CreateCardLeft>
+              <S.HelperQuestionArea/>
+              <S.HelperSearchArea/>
+              <S.HelperContentArea>
+                <S.HelperLeft>
+                  당신의 이야기를 들려주세요.
+                  어떤 내용이든 좋아요.
+                  아주 사소한 것부터 깊은 속마음까지,
+                  떠오르는 대로 적어볼까요?
+                </S.HelperLeft>
+              </S.HelperContentArea>
+              <S.HelperDoneArea/>
+            </S.CreateCardLeft>
+            <com.CreateCard/>
+            <S.CreateCardRight>
+              <S.HelperQuestionArea>
+                <S.HelperRight>
+                  질문을 듣고,<br/>
+                  떠오르는 음악이나 이야기가 있나요?
+                </S.HelperRight>
+              </S.HelperQuestionArea>
+              <S.HelperSearchArea>
+                <S.HelperRight>
+                  당신의 이야기에 어울리는 음악을<br/>
+                  직접 골라주세요.
+                </S.HelperRight>
+              </S.HelperSearchArea>
+              <S.HelperDoneArea>
+                <S.HelperRight>
+                  이제 당신의 이야기를<br/>
+                  다른 사람들과 나눠보세요!
+                </S.HelperRight>
+              </S.HelperDoneArea>
+              <S.DoneButtonArea>
+                <com.DoneButton/>
+              </S.DoneButtonArea>
+            </S.CreateCardRight>
+          </S.CreatePageSection>
 
-      {/* Music List */}
+          {/* 3.Question List Page */}
+          <S.QuestionListPageSection>
+            <S.PageHeaderContainer>
+              <S.PageHeader>다른 질문 둘러보기</S.PageHeader>
+              <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
+            </S.PageHeaderContainer>
+            <S.QuestionListContainer>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+              <com.QuestionCard/>
+            </S.QuestionListContainer>
+          </S.QuestionListPageSection>
+
+          {/* 4. Music List Page*/}
+          <S.MusicListPageSection>
+            <S.PageHeaderContainer>
+              <S.PageHeader>
+                최근에 선택된 음악
+              </S.PageHeader>
+            </S.PageHeaderContainer>
+            <S.MusicListContainer>
+              {/* <com.MusicCard/><com.MusicCard/>
+              <com.MusicCard/><com.MusicCard/>
+              <com.MusicCard/><com.MusicCard/> */}
+            </S.MusicListContainer>
+          </S.MusicListPageSection>
+
+      </S.Background>
+
+      
+
     </>
   );
 };

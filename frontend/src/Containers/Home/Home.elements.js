@@ -1,103 +1,164 @@
 import styled from "styled-components";
-import { BannerContainer, DefaultButton } from "../../globalStyles";
-import { nearWhite, gray, pink } from "../../Colors";
+import * as colors from "../../Colors";
 import { Link } from "react-router-dom";
 
-export const TodayPostContainer = styled(BannerContainer)`
-  background: linear-gradient(
-    to bottom,
-    rgba(196, 185, 157),
-    rgba(196, 185, 157, 0.82)
-  );
+export const Background = styled.div`
+  background-color: ${colors.iiBG};
+  padding: 10% 15%;
 `;
 
-// Banner section
-export const BannerDate = styled.p`
-  margin: 1rem 0;
-
-  font-size: 1.3rem;
-  font-weight: 300;
-
-  color: ${gray};
-  opacity: 80%;
-`;
-
-export const TodayMessage = styled.p`
-  width: 60%;
-
-  margin: 2rem auto;
-
-  /* font-family: Pretendard-Thin; */
+export const PageHeader = styled.h3`
   font-size: 3rem;
-
-  background: rgba(255, 213, 196, 0.5);
-  color: #ffffff;
 `;
 
-export const QuestionWrapper = styled.p``;
+export const PageHeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
 
-export const QuestionAnswerLink = styled(Link)``;
+//1. Question Page
 
-export const PostContainer = styled.section`
-  width: 70%;
+export const TodayQuestionPageSection = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  // margin: 5%;
+`;
 
-  margin: 2rem auto;
+export const RightContainer = styled.section`
+  width: 40%;
+  margin-left: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
+export const QuestionArea = styled.section`
+  font-size: 3rem;
+`;
+
+export const TodayQuestion = styled.div`
+  margin-top: 5%;
+`;
+
+export const QDate = styled.h5`
+  font-size: 1.2rem;
+`;
+
+export const Question = styled.h2`
+  font-size: 3rem;
+`;
+
+export const PostCardSArea = styled.section`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+`;
+
+export const PostCardSWrapper = styled.section`
   display: flex;
   justify-content: center;
 `;
 
-export const ContentWrapper = styled.div`
-  width: 70%;
 
-  padding: 0 2rem;
+//2. Create Page
+export const CreatePageSection = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 15% auto;
+`;
 
+export const CreateCardLeft = styled.section`
+  width: 25%;
+  height: 100%;
+  margin: 4% auto;
+`;
+
+export const CreateCardRight = styled.section`
+  width: 25%;
+  height: 100%;
+  margin: 4% auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const HelperQuestionArea = styled.div`
+  height: 70px;
+  margin: 16px 0;
+  padding-top: 20px;
+`;
+
+export const HelperSearchArea = styled.div`
+  height: 136px;
+  margin: 16px 0;
+  padding-top: 10px;
+`;
+
+export const HelperContentArea = styled.div`
+  height: 300px;
+  margin: 16px 0;
+  padding-top: 60px;
+`;
+
+export const HelperDoneArea = styled.div`
+  height: 30px;
+  margin: 16px 0;
+`;
+
+export const HelperLeft = styled.p`
+  text-align: right;
+`;
+
+export const HelperRight = styled.p`
   text-align: left;
 `;
 
-export const ContentTitle = styled(Link)`
+export const DoneButtonArea = styled.div`
+  margin: 16px 0;
+`;
+
+
+//3.Question List Page
+
+export const QuestionListPageSection = styled.section`
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-
-  font-size: 1.5rem;
-  color: ${nearWhite};
+  flex-direction: column;
+  justify-content: center;
+  margin: 15% auto;
 `;
 
-export const ContentAuthor = styled.span`
-  text-align: right;
-  font-size: 1rem;
-  opacity: 80%;
+export const ToQuestionListButton = styled(Link)`
+  margin: 2%;
+  font-size: 1.2rem;
 `;
 
-export const ContentSummary = styled.p`
-  margin: 1rem 0;
-  color: ${nearWhite};
+export const QuestionListContainer = styled.div`
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8%;
+  margin: 3% 0;
 `;
 
-export const ArrowContainer = styled.p`
-  color: ${nearWhite};
-  font-size: 1.5rem;
-  align-self: center;
-  margin: 0 1rem;
-  cursor: pointer;
 
-  &:hover {
-    color: ${pink};
-  }
+//4. Music List Page
+
+export const MusicListPageSection = styled.section`
+  margin-top: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
-// Create section
-export const CreateButtonArea = styled.section`
-  width: 80%;
-
-  margin: 3rem auto;
-
-  text-align: center;
+export const MusicListContainer = styled.div`
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8%;
+  margin: 5% 10%;
 `;
-export const CreateMessage = styled.p`
-  font-size: 2rem;
-  font-family: Pretendard-ExtraLight;
-  margin: 8rem auto;
-`;
-export const CreateButton = styled(DefaultButton)``;
