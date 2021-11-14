@@ -42,9 +42,7 @@ const Home = ({ currUser, token, userId, postId }) => {
         return response.data;
       })
       .then((data) => {
-        const sortedArray = [...data];
-        sortedArray.sort((a, b) => sortByLatest(a, b));
-        setQList(sortedArray);
+        setQList(data);
       });
   }, []);
 
@@ -81,6 +79,7 @@ const Home = ({ currUser, token, userId, postId }) => {
     }
   }, [questionId]);
 
+  // when content for today question is updated
   useEffect(() => {
     let arr = [];
     for (let c of content) {
@@ -104,6 +103,7 @@ const Home = ({ currUser, token, userId, postId }) => {
     }
   }, [content]);
 
+  // when content is updated or idx of CardS has changed
   useEffect(() => {
     let indArr = [];
     for (let i = 0; i < Math.ceil(content.length / 2); i++) {
@@ -112,6 +112,7 @@ const Home = ({ currUser, token, userId, postId }) => {
     setIndicators([...indArr]);
   }, [contentIdx, content]);
 
+  // update CardS idx
   const handleTodayQCard = (d) => {
     let idx;
     if (d > 0) {
@@ -126,19 +127,7 @@ const Home = ({ currUser, token, userId, postId }) => {
     setIdx(idx);
   };
 
-  const sortByLatest = (a, b) => {
-    const a_date = new Date(a.released_date);
-    const b_date = new Date(b.released_date);
-
-    if (a_date > b_date) {
-      return -1;
-    } else if (b_date > a_date) {
-      return 1;
-    } else {
-      return 0;
-    }
-  };
-
+  // generate random idx for question
   const randomQuestion = () => {
     let qIdx;
     do {
@@ -149,6 +138,7 @@ const Home = ({ currUser, token, userId, postId }) => {
     setQuestionId(questionList[qIdx].id);
   };
 
+  // CardL switch when CardS clicked
   const switchCardL = (id) => {
     setCardLId(id);
   };
