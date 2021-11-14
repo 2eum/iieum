@@ -19,7 +19,7 @@ from .serializers import *
 from .models import *
 
 # 누구나 접근 가능
-@permission_classes([AllowAny]) 
+"""@permission_classes([AllowAny]) 
 class Registration(generics.GenericAPIView):
     serializer_class = CustomRegisterSerializer
 
@@ -63,7 +63,7 @@ class Login(generics.GenericAPIView):
                 ).data, 
                 "token": user['token']
             }
-        )
+        )"""
 
 
 class ConfirmEmailView(APIView):
