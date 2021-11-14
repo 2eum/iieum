@@ -13,7 +13,7 @@ import {
 import { MainContentContainer } from "../../globalStyles";
 import { Redirect } from "react-router";
 
-const MyPage = ({ token }) => {
+const MyPage = ({ currUser, token, userId }) => {
   const [view, setView] = useState("list");
 
   const changeView = (e) => {
@@ -31,17 +31,8 @@ const MyPage = ({ token }) => {
       </MyPageBanner>
 
       <MainContentContainer>
-        {/* detail cards */}
         <MyPageTitle>나의 이야기</MyPageTitle>
-        {/* <ViewSwitchWrapper>
-          <ViewSwitch value="list" onClick={(e) => changeView(e)}>
-            리스트 보기
-          </ViewSwitch>
-          <ViewSwitch value="cal" onClick={(e) => changeView(e)}>
-            캘린더 보기
-          </ViewSwitch>
-        </ViewSwitchWrapper> */}
-        <Calendar token={token} />
+        <Calendar token={token} currUser={currUser} userId={userId} />
         <List token={token} />
       </MainContentContainer>
     </>

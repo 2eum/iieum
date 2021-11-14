@@ -1,32 +1,65 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import * as colors from "../../Colors";
 
-export const CalendarArea = styled.div`
-  width: 70%;
+export const CalendarSection = styled.section`
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  height: 95vh;
+`;
+
+export const CardContainer = styled.div`
+  width: 50%;
+  position: relative;
+`;
+
+export const CardWrapper = styled.div`
+  position: relative;
+  margin: auto;
+
+  & > * {
+    position: absolute;
+    transition: all 500ms;
+  }
+
+  & > *:nth-child(2) {
+    transform: rotate(3deg);
+    transform-origin: bottom right;
+  }
+`;
+
+export const CardSwitchButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+`;
+export const CardSwitchButton = styled.div`
+  cursor: pointer;
+`;
+
+export const CalendarContainer = styled.div`
+  width: 50%;
   margin: auto;
   padding: 3%;
 
   box-sizing: border-box;
 
-  background: linear-gradient(
-    315deg,
-    #ffdbdb 0%,
-    rgba(255, 242, 242, 0.35) 100%
-  );
-
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
+  background-color: ${colors.iiBeige};
+  border: 1px solid ${colors.cardStroke};
+  border-radius: 5px;
 `;
-export const MonthArea = styled.div`
+export const Month = styled.p`
   margin: 0;
-  padding: 0 auto 1rem 0;
 
   text-align: center;
-  font-size: 2rem;
-  letter-spacing: 1rem;
+  font-size: 1.5rem;
+  font-family: "Noto Serif KR", serif;
+  font-weight: 500;
+  color: ${colors.iiPurple};
 `;
 
 export const MonthChangeArea = styled.div`
@@ -38,14 +71,12 @@ export const MonthChangeButton = styled.button`
   margin: 0 5%;
 
   border: none;
-  border-bottom: 1px solid #000000;
   background-color: #00000000;
 
   cursor: pointer;
 
   &:hover {
     color: #cccccc;
-    border-bottom: 1px solid #cccccc;
   }
 `;
 
@@ -54,6 +85,7 @@ export const WeekDaysArea = styled.div`
   grid-template-columns: repeat(7, 1fr);
 
   text-align: center;
+
   p {
     padding: 0.5rem 0;
   }
@@ -70,18 +102,30 @@ export const WeekDaysArea = styled.div`
 export const DatesArea = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(${(props) => props.rows}, 1fr);
+  grid-template-rows: repeat(${(props) => props.rows}, 14vh);
+  background-color: ${colors.iiSunset};
+  border: 1px solid ${colors.cardStroke};
 `;
 
 export const DateItem = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 0.3rem 0.5rem;
-
-  border: 1px solid #ff8c8c;
+  padding: 10%;
 
   opacity: ${(props) => (props.curr === "curr" ? 1 : 0.7)};
+
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
 `;
 
 export const DateNum = styled.p`
@@ -91,10 +135,11 @@ export const DateNum = styled.p`
   color: ${(props) =>
     props.day === "sun" ? "#FF8D8D" : props.day === "sat" ? "#56A4FF" : "#000"};
   text-align: center;
-  font-size: 0.7rem;
 `;
 
-export const DateImgWrapper = styled(Link)``;
+export const DateImgWrapper = styled.div`
+  cursor: pointer;
+`;
 
 export const DateImg = styled.img`
   width: 100%;

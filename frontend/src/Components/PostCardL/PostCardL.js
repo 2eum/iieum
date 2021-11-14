@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./PostCardL.elements";
 import { MusicCard } from "..";
-import { useParams } from "react-router";
 import axios from "axios";
 
-const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
+const PostCardL = ({
+  currUser,
+  token,
+  userId,
+  handleCardClose,
+  postId,
+  order,
+}) => {
   const [content, setContent] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
@@ -32,9 +38,6 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
         checkLiked(data.liked_user);
         setLikeCount(data.liked_user.length);
         return data;
-      })
-      .then(() => {
-        setLoad(true);
       });
   }, [postId]);
 
@@ -93,10 +96,14 @@ const PostCardL = ({ currUser, token, userId, handleCardClose, postId }) => {
   return (
     <>
       {content && postId ? (
-        <S.PostCardArea>
+        <S.PostCardArea order={order}>
           <S.HeaderArea>
             <S.CloseBtnArea>
-              <S.CloseBtn onClick={handleCardClose}>닫기</S.CloseBtn>
+              {handleCardClose ? (
+                <S.CloseBtn onClick={handleCardClose}>닫기</S.CloseBtn>
+              ) : (
+                ""
+              )}
             </S.CloseBtnArea>
             <S.PostTop>
               <S.LikeArea>

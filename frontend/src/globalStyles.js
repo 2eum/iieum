@@ -9,7 +9,8 @@ const GlobalStyle = createGlobalStyle`
   //noto serif kr
   // font-family: 'Noto Serif KR'
   // font-weight로 조절
-@import url(https://cdn.rawgit.com/kattergil/NotoSerifKR-Web/76eb9ebf/stylesheet/NotoSerif-Web.css);
+/* @import url('https://cdn.rawgit.com/kattergil/NotoSerifKR-Web/76eb9ebf/stylesheet/NotoSerif-Web.css'); */
+
 
 
 
@@ -76,7 +77,7 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
 
-  font-family: Noto Serif KR;
+  font-family: 'Noto Serif KR';
   font-weight: 400;
   color: ${colors.iiBrown};
 }
