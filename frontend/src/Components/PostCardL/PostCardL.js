@@ -10,6 +10,7 @@ const PostCardL = ({
   handleCardClose,
   postId,
   order,
+  cols,
 }) => {
   const [content, setContent] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
@@ -134,6 +135,8 @@ const PostCardL = ({
                 source={content.track_audio}
                 link={content.spotify_link}
                 cover={content.track_album_cover}
+                cols={cols}
+                postId={postId}
               />
             </S.MusicArea>
             <S.ContentArea>

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import * as S from "./MusicPlayer.elements";
 
-const MusicPlayer = ({ source }) => {
+const MusicPlayer = ({ source, postId, cols }) => {
   const audioSrc = useRef();
   const [playing, setPlay] = useState(false);
   const [timeStamp, setTimeStamp] = useState(0);
@@ -20,6 +20,11 @@ const MusicPlayer = ({ source }) => {
     setWidth(Math.floor((timeStamp / 30) * 100));
     if (timeStamp >= 30) setPlay(false);
   }, [timeStamp]);
+
+  useEffect(() => {
+    setPlay(false);
+    setTimeStamp(0);
+  }, [postId, cols]);
 
   const handleTimeSet = (e) => {
     let time = Math.floor(e.target.currentTime);

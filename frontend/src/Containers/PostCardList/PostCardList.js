@@ -63,6 +63,7 @@ const PostCardList = ({ currUser, token, userId }) => {
             userId={userId}
             postId={cardLIndex}
             handleCardClose={handleCardClose}
+            cols={cols}
           />
         </S.PostCardLContainer>
       ) : (
