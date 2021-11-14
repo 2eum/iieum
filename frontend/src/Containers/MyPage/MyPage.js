@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { List, Calendar } from "../../Components";
+import { Calendar } from "../../Components";
 import {
   CreateButton,
   MyPageBanner,
@@ -33,7 +33,7 @@ const MyPage = ({ currUser, token, userId }) => {
       <MainContentContainer>
         <MyPageTitle>나의 이야기</MyPageTitle>
         <Calendar token={token} currUser={currUser} userId={userId} />
-        <List token={token} />
+        {/* <List token={token} /> */}
       </MainContentContainer>
     </>
   );
