@@ -16,6 +16,7 @@ const PostCardL = ({
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
+  // get content info from api
   useEffect(() => {
     axios({
       method: "get",
@@ -42,11 +43,13 @@ const PostCardL = ({
       });
   }, [postId]);
 
+  // set date form
   const pubDateObj = new Date(content ? content.pub_date : "");
   let formattedDate = `${pubDateObj.getFullYear()}년
   ${pubDateObj.getMonth() + 1}월
   ${pubDateObj.getDate()}일`;
 
+  // check if liked post
   const checkLiked = (likeList) => {
     const intId = userId * 1;
     if (likeList.includes(intId)) {
@@ -56,6 +59,7 @@ const PostCardL = ({
     }
   };
 
+  // like post request
   const postLike = (e) => {
     axios({
       method: "post",
@@ -73,6 +77,7 @@ const PostCardL = ({
       });
   };
 
+  // delete request
   const handleDelete = () => {
     console.log(1);
     axios({
@@ -96,10 +101,12 @@ const PostCardL = ({
 
   return (
     <>
+      {/* load only if content is loaded */}
       {content && postId ? (
         <S.PostCardArea order={order}>
           <S.HeaderArea>
             <S.CloseBtnArea>
+              {/* render close button only on card list */}
               {handleCardClose ? (
                 <S.CloseBtn onClick={handleCardClose}>닫기</S.CloseBtn>
               ) : (
@@ -108,21 +115,14 @@ const PostCardL = ({
             </S.CloseBtnArea>
             <S.PostTop>
               <S.LikeArea>
-                {isLiked ? (
-                  <>
-                    <S.LikeBtn onClick={postLike}>
-                      <i className="fa fa-heart" />
-                    </S.LikeBtn>
-                    <S.LikeCount>{likeCount}</S.LikeCount>
-                  </>
-                ) : (
-                  <>
-                    <S.LikeBtn onClick={postLike}>
-                      <i className="fa fa-heart-o" />
-                    </S.LikeBtn>
-                    <S.LikeCount>{likeCount}</S.LikeCount>
-                  </>
-                )}
+                <S.LikeBtn onClick={postLike}>
+                  {/* toggle full, empty heart icon */}
+                  {isLiked ? (
+                    <i className="fa fa-heart" />
+                  ) : (
+                    <i className="fa fa-heart-o" />
+                  )}
+                </S.LikeBtn>
               </S.LikeArea>
               <S.Question>{content.question.question_content}</S.Question>
             </S.PostTop>
@@ -149,6 +149,7 @@ const PostCardL = ({
           </S.MiddleArea>
           <S.PostBottom>
             <S.Signature>{content.user}</S.Signature>
+            {/* show edit, delete button only when user is post card owner */}
             {currUser === content.user ? (
               <S.BtnArea>
                 <S.EditBtn>

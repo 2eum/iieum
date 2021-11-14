@@ -27,6 +27,7 @@ const PostCardList = ({ currUser, token, userId }) => {
       });
   }, [cols]);
 
+  // card open, close functions
   const handleCardOpen = (id) => {
     if (cols === 4) setCols(2);
     setCardLIndex(id);
@@ -36,6 +37,7 @@ const PostCardList = ({ currUser, token, userId }) => {
     setCols(4);
   };
 
+  // if content is loaded, create post card s list
   const PostCardSItems = content
     ? content.map((c) => {
         return (
@@ -55,6 +57,7 @@ const PostCardList = ({ currUser, token, userId }) => {
   return (
     <S.CardListContainer>
       <S.GridContainer cols={cols}>{PostCardSItems}</S.GridContainer>
+      {/* show post card l if card is selected */}
       {cardLIndex ? (
         <S.PostCardLContainer cols={cols}>
           <PostCardL

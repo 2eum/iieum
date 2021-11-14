@@ -15,8 +15,10 @@ const Calendar = ({ currUser, token, userId }) => {
   const [content, setContent] = useState({});
   const [showPostId, setPostId] = useState([]);
 
+  // date info set for retrieving content from last, next months
   const prevMonthSearch = new Date(viewMonth.year, viewMonth.month - 1, 23);
   const nextMonthSearch = new Date(viewMonth.year, viewMonth.month + 1, 6);
+
   useEffect(() => {
     // get all music diary data
     axios({
@@ -25,7 +27,7 @@ const Calendar = ({ currUser, token, userId }) => {
         prevMonthSearch.getMonth() + 1
       }/23/${nextMonthSearch.getFullYear()}/${
         nextMonthSearch.getMonth() + 1
-      }/6/0`,
+      }/6/0`, // range - 6 days from prev month ~ 6 days from next month
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,
@@ -89,6 +91,7 @@ const Calendar = ({ currUser, token, userId }) => {
     viewDates.push(nextDate);
   }
 
+  // set post ids for picked date
   const handleDatePick = (date) => {
     let ids = content[date].map((d) => d.id);
     setPostId(ids);
@@ -97,6 +100,7 @@ const Calendar = ({ currUser, token, userId }) => {
   // create date items
   let items = viewDates.map((d) => {
     let date = `${d.getMonth() + 1}-${d.getDate()}`;
+    // when content is present
     if (date in content) {
       let latestItem = content[date][0];
       return (
@@ -105,11 +109,7 @@ const Calendar = ({ currUser, token, userId }) => {
           curr={d.getMonth() === viewMonth.month ? "curr" : ""}
           onClick={() => handleDatePick(date)}
         >
-          <S.DateNum
-            day={d.getDay() === 0 ? "sun" : d.getDay() === 6 ? "sat" : ""}
-          >
-            {d.getDate()}
-          </S.DateNum>
+          <S.DateNum day={d.getDay()}>{d.getDate()}</S.DateNum>
           <S.DateImgWrapper>
             <S.DateImg
               src={latestItem.track_album_cover}
@@ -119,22 +119,20 @@ const Calendar = ({ currUser, token, userId }) => {
         </S.DateItem>
       );
     } else {
+      // no content
       return (
         <S.DateItem
           key={date}
           curr={d.getMonth() === viewMonth.month ? "curr" : ""}
         >
-          <S.DateNum
-            day={d.getDay() === 0 ? "sun" : d.getDay() === 6 ? "sat" : ""}
-          >
-            {d.getDate()}
-          </S.DateNum>
+          <S.DateNum day={d.getDay()}>{d.getDate()}</S.DateNum>
           <S.DateImgWrapper></S.DateImgWrapper>
         </S.DateItem>
       );
     }
   });
 
+  // month change functions
   const toPrevMonth = () => {
     const dayOne = new Date(viewMonth.year, viewMonth.month - 1, 1);
 
@@ -149,6 +147,7 @@ const Calendar = ({ currUser, token, userId }) => {
     setPostId([]);
   };
 
+  // card list Update
   const CardLs = showPostId.map((id, i) => {
     return (
       <PostCardL
@@ -162,6 +161,7 @@ const Calendar = ({ currUser, token, userId }) => {
     );
   });
 
+  // card switch function
   const handleCardSwitch = (d) => {
     let arr = showPostId;
     let move;

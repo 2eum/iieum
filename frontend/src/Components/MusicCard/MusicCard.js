@@ -9,11 +9,8 @@ const MusicCard = ({ title, artist, source, link, cover, postId, cols }) => {
       <S.Wrapper>
         <S.Info>
           <S.TitleWrapper>
-            {title.length > 10 ? (
-              <S.Title slide={true}>{title}</S.Title>
-            ) : (
-              <S.Title slide={false}>{title}</S.Title>
-            )}
+            {/* if title is longer than 10 letters, set slide animation to true */}
+            <S.Title slide={title.length > 10}>{title}</S.Title>
           </S.TitleWrapper>
 
           <S.MiddleWrapper>
@@ -21,13 +18,11 @@ const MusicCard = ({ title, artist, source, link, cover, postId, cols }) => {
               <img src={spotifyIcon} />
             </S.SourceLink>
             <S.ArtistWrapper>
-              {artist.length > 10 ? (
-                <S.Artist slide={true}>{artist}</S.Artist>
-              ) : (
-                <S.Artist slide={false}>{artist}</S.Artist>
-              )}
+              {/* if artist is longer than 10 letters, set slide animation to true */}
+              <S.Artist slide={artist.length > 10}>{artist}</S.Artist>
             </S.ArtistWrapper>
           </S.MiddleWrapper>
+          {/* if no preview music, show message */}
           {source !== "null" ? (
             <MusicPlayer source={source} postId={postId} cols={cols} />
           ) : (

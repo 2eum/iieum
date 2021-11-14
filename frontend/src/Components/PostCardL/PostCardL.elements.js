@@ -14,6 +14,7 @@ export const PostCardArea = styled.section`
   box-shadow: ${g.CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
+  // if card is stacked, set z-index according to order
   z-index: ${(p) => p.order * -1};
 `;
 

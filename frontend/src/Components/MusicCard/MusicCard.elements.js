@@ -36,7 +36,8 @@ export const Title = styled.p`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${(p) => (p.slide ? `100%` : `100%`)};
+  width: 100%;
+  //slide animation
   animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
 
@@ -60,7 +61,8 @@ export const Artist = styled.p`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${(p) => (p.slide ? `100%` : `100%`)};
+  width: 100%;
+  //slide animation
   animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
 

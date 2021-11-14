@@ -56,7 +56,7 @@ export const MusicInfoArea = styled.div`
 
 export const MusicTitleWrapper = styled.div`
   width: 100%;
-  height: 1.6rem;
+  height: 1.8rem;
   overflow: hidden;
   white-space: nowrap;
   position: relative;
@@ -68,7 +68,7 @@ export const MusicTitle = styled.h3`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${(p) => (p.slide ? `100%` : `100%`)};
+  width: 100%;
   animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
 
@@ -87,7 +87,7 @@ export const MusicArtist = styled.h4`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${(p) => (p.slide ? `300%` : `100%`)};
+  width: 100%;
   animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
 

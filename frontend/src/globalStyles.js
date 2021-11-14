@@ -135,12 +135,13 @@ export const MainContentContainer = styled.div`
 
 export const CardShadow = "8px 8px 8px 1px rgba(0, 0, 0, .15)";
 
+// text slide animation
 export const slide = keyframes`
     0% {
       left: 100%;
     }
     100% {
-      left: -300%;
+      left: -200%;
     }
 `;
 

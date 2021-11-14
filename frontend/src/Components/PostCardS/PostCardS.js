@@ -18,18 +18,16 @@ const PostCardS = ({
         <S.MusicCover src={track_album_cover}></S.MusicCover>
         <S.MusicInfoArea>
           <S.MusicTitleWrapper>
-            {track_title.length > 10 ? (
-              <S.MusicTitle slide={true}>{track_title}</S.MusicTitle>
-            ) : (
-              <S.MusicTitle slide={false}>{track_title}</S.MusicTitle>
-            )}
+            {/* if title is longer than 10 letters, set slide animation to true */}
+            <S.MusicTitle slide={track_title.length > 10}>
+              {track_title}
+            </S.MusicTitle>
           </S.MusicTitleWrapper>
           <S.MusicArtistWrapper>
-            {track_artist.length > 10 ? (
-              <S.MusicArtist slide={true}>{track_artist}</S.MusicArtist>
-            ) : (
-              <S.MusicArtist slide={false}>{track_artist}</S.MusicArtist>
-            )}
+            {/* if artist is longer than 10 letters, set slide animation to true */}
+            <S.MusicArtist slide={track_artist.length > 10}>
+              {track_artist}
+            </S.MusicArtist>
           </S.MusicArtistWrapper>
         </S.MusicInfoArea>
       </S.MusicArea>
