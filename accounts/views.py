@@ -55,7 +55,6 @@ class Login(generics.GenericAPIView):
         user = serializer.validated_data
         if user['username'] == "None":
             return Response({"message": "fail"}, status=status.HTTP_401_UNAUTHORIZED)
-
         return Response(
             {
                 "user": UserSerializer(
