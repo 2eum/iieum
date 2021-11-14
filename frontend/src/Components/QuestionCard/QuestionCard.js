@@ -1,6 +1,6 @@
 import React from "react";
-import OpenListButton from "../OpenListButton/OpenListButton";
 import * as S from "./QuestionCard.elements";
+import * as g from "../../globalStyles";
 
 const QuestionCard = () => {
   return (
@@ -12,7 +12,12 @@ const QuestionCard = () => {
         </S.TopContainer>
         <S.Line/>
         <S.BottomContainer>
-          <OpenListButton/>
+
+          {/* OpenListButton */}
+          <g.ButtonWrapper>
+            <g.ButtonIcon className="fa fa-angle-down fa-2x"/>
+          </g.ButtonWrapper>
+
           <S.QuestionName>나의 이상적인 여름휴가</S.QuestionName>
         </S.BottomContainer>
       </S.QuestionCardContainer>

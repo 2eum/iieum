@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import * as S from "./Home.elements";
-import { LoadMoreButtonL, LoadMoreButtonR } from "../../Components/LoadMoreButton/LoadMoreButton";
 import * as com from "../../Components";
+import * as g from "../../globalStyles";
 import { PostCardList } from "..";
 
 const Home = ({ currUser, token, userId, postId }) => {
@@ -108,7 +108,7 @@ const Home = ({ currUser, token, userId, postId }) => {
             {/* <com.PostCardL/> */}
             <S.RightContainer>
               <S.QuestionArea>
-                <com.ShuffleButton/>
+                <S.ShuffleButton className="fa fa-shuffle"/>
                 <S.TodayQuestion>
                   <S.QDate>오늘의 질문</S.QDate>
                   <S.Question>{question}</S.Question>
@@ -116,11 +116,17 @@ const Home = ({ currUser, token, userId, postId }) => {
               </S.QuestionArea>
               <S.PostCardSArea>
                 {/* <S.PostCardSWrapper>
-                  <LoadMoreButtonL/>
+                  <S.LoadMoreButtonContainer>
+                    <h3>&lt;</h3>
+                  </S.LoadMoreButtonContainer>
                   <com.PostCardS/><com.PostCardS/>
-                  <LoadMoreButtonR/>
+                  <S.LoadMoreButtonContainer>
+                    <h3>&gt;</h3>
+                  </S.LoadMoreButtonContainer>
                 </S.PostCardSWrapper> */}
-                <com.Indicator/>
+                <S.IndicatorWrapper>
+                  <p>Indicator</p>
+                </S.IndicatorWrapper>
               </S.PostCardSArea>
             </S.RightContainer>
           </S.TodayQuestionPageSection>
@@ -162,7 +168,14 @@ const Home = ({ currUser, token, userId, postId }) => {
                 </S.HelperRight>
               </S.HelperDoneArea>
               <S.DoneButtonArea>
-                <com.DoneButton/>
+                <g.ButtonWrapper>
+                  <g.DefaultButton>
+                    <g.ButtonIconArea>
+                      <g.ButtonIcon className="fa fa-check"/>
+                    </g.ButtonIconArea>
+                    다 썼어요
+                  </g.DefaultButton>
+                </g.ButtonWrapper>
               </S.DoneButtonArea>
             </S.CreateCardRight>
           </S.CreatePageSection>

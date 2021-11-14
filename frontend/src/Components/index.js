@@ -8,7 +8,3 @@ export { default as PostCardL } from "./PostCardL/PostCardL";
 export { default as PostCardS } from "./PostCardS/PostCardS";
 export { default as CreateCard } from "./CreateCard/CreateCard";
 export { default as QuestionCard } from "./QuestionCard/QuestionCard";
-export { default as Indicator } from "./Indicator/Indicator";
-export { default as ShuffleButton } from "./ShuffleButton/ShuffleButton";
-export { default as DoneButton } from "./DoneButton/DoneButton";
-export { default as CreateButton } from "./CreateButton/CreateButton";
