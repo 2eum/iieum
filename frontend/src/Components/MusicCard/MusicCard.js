@@ -8,12 +8,25 @@ const MusicCard = ({ title, artist, source, link, cover, postId, cols }) => {
     <>
       <S.Wrapper>
         <S.Info>
-          <S.Title>{title}</S.Title>
+          <S.TitleWrapper>
+            {title.length > 10 ? (
+              <S.Title slide={true}>{title}</S.Title>
+            ) : (
+              <S.Title slide={false}>{title}</S.Title>
+            )}
+          </S.TitleWrapper>
+
           <S.MiddleWrapper>
             <S.SourceLink href={link} target="_blank">
               <img src={spotifyIcon} />
             </S.SourceLink>
-            <S.Artist>{artist}</S.Artist>
+            <S.ArtistWrapper>
+              {artist.length > 10 ? (
+                <S.Artist slide={true}>{artist}</S.Artist>
+              ) : (
+                <S.Artist slide={false}>{artist}</S.Artist>
+              )}
+            </S.ArtistWrapper>
           </S.MiddleWrapper>
           {source !== "null" ? (
             <MusicPlayer source={source} postId={postId} cols={cols} />

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../Colors";
+import * as g from "../../globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
@@ -22,8 +23,21 @@ export const Info = styled.div`
   justify-content: space-around;
 `;
 
+export const TitleWrapper = styled.div`
+  height: 1.6rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+`;
+
 export const Title = styled.p`
   text-align: right;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: ${(p) => (p.slide ? `100%` : `100%`)};
+  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
 
 export const MiddleWrapper = styled.div`
@@ -32,9 +46,22 @@ export const MiddleWrapper = styled.div`
   gap: 10%;
 `;
 
+export const ArtistWrapper = styled.div`
+  height: 1.6rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+`;
+
 export const Artist = styled.p`
   text-align: right;
   color: ${colors.littleDarkGray};
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: ${(p) => (p.slide ? `100%` : `100%`)};
+  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
 
 export const SourceLink = styled.a`
