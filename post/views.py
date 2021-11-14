@@ -15,6 +15,9 @@ import random
 from datetime import datetime, timedelta
 from account.models import *
 from django.http import Http404
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 # 전체 글
 class PostViewSet(viewsets.ModelViewSet): 
@@ -22,6 +25,9 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     queryset = Post.objects.all().order_by('-pub_date')
     serializer_class = PostSerializer
+    filter_backends = [SearchFilter, DjangoFilterBackend] 
+    search_fields = ['title','content','question__question_content','track_title','track_artist']
+
     # serializer.save() 재정의
     def perform_create(self, serializer):
         serializer.save(user=self.request.user,
@@ -71,7 +77,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
     queryset = Question.objects.all() 
     serializer_class = QuestionSerializer
-
+    
 # 질문 랜덤돌리기(하루에 한번 호출해서 오늘의 질문 선택)
 class RandomQuestion(APIView):
     @csrf_exempt
