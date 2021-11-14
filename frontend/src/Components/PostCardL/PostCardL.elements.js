@@ -62,12 +62,16 @@ export const MiddleArea = styled.section`
   width: 90%;
   margin: auto;
   margin-bottom: 5%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const MusicArea = styled.section`
+  width: 15vw;
   text-align: right;
   display: flex;
   justify-content: flex-end;
+  align-self: flex-end;
 `;
 
 export const ContentArea = styled.section`

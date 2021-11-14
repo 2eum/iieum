@@ -4,14 +4,10 @@ import * as g from "../../globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
-  // width: 15vw;
   width: 100%;
   height: 6vw;
   padding: 5%;
-  background-color: ${colors.iiBeige};
-  box-shadow: ${g.CardShadow};
   border-radius: 8px;
-  border: 1px solid #abaaa6;
 `;
 
 export const Cover = styled.img`
@@ -56,7 +52,7 @@ export const MiddleWrapper = styled.div`
 
 export const ArtistWrapper = styled.div`
   height: 1.6rem;
-  width: 100%;
+  width: 65%;
   position: relative;
   overflow: hidden;
 `;

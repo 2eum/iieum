@@ -19,15 +19,19 @@ export const PageHeaderContainer = styled.div`
 
 //1. Question Page
 
-export const TodayQuestionPageSection = styled.section`
+export const TodayQuestionSection = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
-  // margin: 5%;
+  gap: 5%;
 `;
 
-export const RightContainer = styled.section`
-  width: 40%;
+export const TodayLeftContainer = styled.div`
+  width: 50%;
+`;
+
+export const TodayRightContainer = styled.section`
+  width: 50%;
   margin-left: 1%;
   display: flex;
   flex-direction: column;
@@ -38,9 +42,7 @@ export const QuestionArea = styled.section`
   font-size: 3rem;
 `;
 
-export const ShuffleButton = styled.i`
-
-`;
+export const ShuffleButton = styled.div``;
 
 export const TodayQuestion = styled.div`
   margin-top: 5%;
@@ -60,13 +62,23 @@ export const PostCardSArea = styled.section`
   text-align: center;
 `;
 
-export const PostCardSWrapper = styled.section`
+export const TodaySTop = styled.div`
   display: flex;
-  justify-content: center;
+  gap: 5%;
 `;
 
-export const IndicatorWrapper = styled.div``;
+export const PostCardSWrapper = styled.section`
+  margin: 5% 0;
+  display: flex;
+  justify-content: center;
+  gap: 1%;
+`;
 
+export const IndicatorWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 5%;
+`;
 
 //2. Create Page
 export const CreatePageSection = styled.section`
@@ -152,7 +164,6 @@ export const QuestionListContainer = styled.div`
   gap: 8%;
   margin: 3% 0;
 `;
-
 
 //4. Music List Page
 
