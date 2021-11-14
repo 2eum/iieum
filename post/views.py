@@ -13,7 +13,7 @@ from django.conf import settings
 from django.db.models import Max
 import random
 from datetime import datetime, timedelta
-from account.models import *
+from accounts.models import *
 from django.http import Http404
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
