@@ -6,4 +6,5 @@ export { default as DiaryForm } from "./DiaryForm/DiaryForm";
 export { default as SearchedItem } from "./SearchedItem/SearchedItem";
 export { default as PostCardL } from "./PostCardL/PostCardL";
 export { default as PostCardS } from "./PostCardS/PostCardS";
+export { default as CreateCard } from "./CreateCard/CreateCard";
 export { default as QuestionCard } from "./QuestionCard/QuestionCard";

@@ -4,7 +4,14 @@ import * as g from "../../globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
-  width: 70%;
+  // width: 15vw;
+  width: 100%;
+  height: 6vw;
+  padding: 5%;
+  background-color: ${colors.iiBeige};
+  box-shadow: ${g.CardShadow};
+  border-radius: 8px;
+  border: 1px solid #abaaa6;
 `;
 
 export const Cover = styled.img`
