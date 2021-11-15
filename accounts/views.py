@@ -1,21 +1,9 @@
-from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework import status, mixins
-from rest_framework import generics # generics class-based view 사용할 계획
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
-from rest_framework.decorators import permission_classes, authentication_classes
-from rest_framework.exceptions import NotFound
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from allauth.account.models import EmailConfirmation, EmailConfirmationHMAC
-from django.conf import settings
-
-# JWT 사용을 위해 필요
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
-
-from .serializers import *
 from .models import *
 
 
