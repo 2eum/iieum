@@ -3,13 +3,13 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const PostCardArea = styled.section`
-  width: 90%;
-  height: 45vw;
+  width: 34rem;
+  height: 50rem;
   margin: auto;
   padding: 5%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: ${colors.iiBeige};
   box-shadow: ${g.CardShadow};
   border-radius: 8px;
@@ -18,7 +18,9 @@ export const PostCardArea = styled.section`
   z-index: ${(p) => p.order * -1};
 `;
 
-export const HeaderArea = styled.section``;
+export const HeaderArea = styled.section`
+  height: 10%;
+`;
 
 export const CloseBtnArea = styled.section`
   text-align: right;
@@ -34,24 +36,25 @@ export const CloseBtn = styled.p`
 export const PostTop = styled.section`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 2%;
 `;
 
 export const LikeArea = styled.div`
-  width: 10%;
+  width: 30%;
   display: flex;
+  gap: 10%;
+  align-items: center;
 `;
 
 export const LikeBtn = styled.div`
-  margin-right: 20%;
   cursor: pointer;
+  font-size: 1.5rem;
 `;
 
-export const LikeCount = styled.div`
-  margin: 2%;
-`;
+export const LikeCount = styled.div``;
 
-export const Question = styled.h5`
+export const Question = styled.p`
   text-align: right;
   color: ${colors.iiBrown};
   opacity: 0.5;
@@ -60,14 +63,15 @@ export const Question = styled.h5`
 export const MiddleArea = styled.section`
   height: 70%;
   width: 90%;
-  margin: auto;
+  margin: 0 auto;
   margin-bottom: 5%;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 `;
 
 export const MusicArea = styled.section`
-  width: 15vw;
+  width: 20vw;
   text-align: right;
   display: flex;
   justify-content: flex-end;
@@ -80,21 +84,19 @@ export const ContentArea = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 80%;
+  height: 70%;
 `;
 
 export const ContentTitle = styled.h2`
-  margin: 2%;
   margin-bottom: 5%;
+  word-wrap: break-word;
 `;
 
-export const PubDate = styled.h5`
-  margin: 2%;
-  margin-bottom: 3%;
+export const PubDate = styled.p`
+  color: ${colors.darkGray};
 `;
 
 export const BodyWrapper = styled.div`
-  margin: 2%;
   overflow-y: scroll;
   height: 20vw;
 `;
@@ -108,7 +110,9 @@ export const PostBottom = styled.section`
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  align-items: center;
   margin: 2%;
+  height: 10%;
 `;
 
 export const BtnArea = styled.div`

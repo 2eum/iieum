@@ -124,6 +124,7 @@ const PostCardL = ({
                     <i className="fa fa-heart-o" />
                   )}
                 </S.LikeBtn>
+                <S.LikeCount>{likeCount}</S.LikeCount>
               </S.LikeArea>
               <S.Question>{content.question.question_content}</S.Question>
             </S.PostTop>

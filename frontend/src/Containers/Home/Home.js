@@ -149,7 +149,16 @@ const Home = ({ currUser, token, userId, postId }) => {
         {/* 1.Question Page */}
         <S.TodayQuestionSection>
           <S.TodayLeftContainer>
-            {content.length ? <PostCardL postId={cardLId} token={token} /> : ""}
+            {content.length ? (
+              <PostCardL
+                postId={cardLId}
+                currUser={currUser}
+                userId={userId}
+                token={token}
+              />
+            ) : (
+              ""
+            )}
           </S.TodayLeftContainer>
           <S.TodayRightContainer>
             <S.QuestionArea>

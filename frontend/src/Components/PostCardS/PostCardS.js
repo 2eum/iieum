@@ -33,7 +33,9 @@ const PostCardS = ({
         </S.MusicInfoArea>
       </S.MusicArea>
       <S.TitleArea>
-        <S.ContentTitle>{title}</S.ContentTitle>
+        <S.ContentTitle>
+          {title.length > 30 ? title.slice(0, 30) + "..." : title}
+        </S.ContentTitle>
       </S.TitleArea>
     </S.PostCardArea>
   );
