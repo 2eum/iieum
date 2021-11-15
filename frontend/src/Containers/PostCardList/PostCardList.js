@@ -4,7 +4,7 @@ import * as S from "./PostCardList.elements";
 import axios from "axios";
 
 const PostCardList = ({ currUser, token, userId, questionId }) => {
-  const [cols, setCols] = useState(4);
+  const [cols, setCols] = useState(5);
   const [content, setContent] = useState(null);
   const [cardLIndex, setCardLIndex] = useState();
 
@@ -29,12 +29,12 @@ const PostCardList = ({ currUser, token, userId, questionId }) => {
 
   // card open, close functions
   const handleCardOpen = (id) => {
-    if (cols === 4) setCols(2);
+    if (cols === 5) setCols(3);
     setCardLIndex(id);
   };
 
   const handleCardClose = () => {
-    setCols(4);
+    setCols(5);
   };
 
   // if content is loaded, create post card s list

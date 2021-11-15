@@ -12,6 +12,7 @@ import {
   QuestionCard,
   MusicCard,
   CreateCard,
+  QuestionCardGrid,
 } from "../../Components";
 
 const Home = ({ currUser, token, userId, postId }) => {
@@ -248,11 +249,7 @@ const Home = ({ currUser, token, userId, postId }) => {
             <S.PageHeader>다른 질문 둘러보기</S.PageHeader>
             <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
           </S.PageHeaderContainer>
-          <com.QuestionCardGrid
-            currUser={currUser}
-            token={token}
-            userId={userId}
-          />
+          <QuestionCardGrid currUser={currUser} token={token} userId={userId} />
         </S.QuestionListPageSection>
 
         {/* 4. Music List Page*/}
