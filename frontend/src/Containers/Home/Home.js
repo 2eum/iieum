@@ -256,9 +256,61 @@ const Home = ({ currUser, token, userId, postId }) => {
             <S.PageHeader>최근에 선택된 음악</S.PageHeader>
           </S.PageHeaderContainer>
           <S.MusicListContainer>
-            {/* <MusicCard/><MusicCard/>
-              <MusicCard/><MusicCard/>
-              <MusicCard/><MusicCard/> */}
+            <S.MusicCardWrapper>
+              <MusicCard
+                title="안녕"
+                artist="안녕"
+                source="안녕"
+                link="안녕"
+                cover="안녕"
+                cols="1"
+                postId={postId}
+              />
+            </S.MusicCardWrapper>
+            <S.MusicCardWrapper>
+              <MusicCard
+                title="안녕"
+                artist="안녕"
+                source="안녕"
+                link="안녕"
+                cover="안녕"
+                cols="1"
+                postId={postId}
+              />
+            </S.MusicCardWrapper>
+            <S.MusicCardWrapper>
+              <MusicCard
+                title="안녕"
+                artist="안녕"
+                source="안녕"
+                link="안녕"
+                cover="안녕"
+                cols="1"
+                postId={postId}
+              />
+            </S.MusicCardWrapper>
+            <S.MusicCardWrapper>
+              <MusicCard
+                title="안녕"
+                artist="안녕"
+                source="안녕"
+                link="안녕"
+                cover="안녕"
+                cols="1"
+                postId={postId}
+              />
+            </S.MusicCardWrapper>
+            <S.MusicCardWrapper>
+              <MusicCard
+                title="안녕"
+                artist="안녕"
+                source="안녕"
+                link="안녕"
+                cover="안녕"
+                cols="1"
+                postId={postId}
+              />
+            </S.MusicCardWrapper>
           </S.MusicListContainer>
         </S.MusicListPageSection>
       </S.Background>

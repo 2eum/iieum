@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../Colors";
+import * as g from "../../globalStyles";
 import { Link } from "react-router-dom";
 
 export const Background = styled.div`
@@ -182,9 +183,14 @@ export const MusicListPageSection = styled.section`
 `;
 
 export const MusicListContainer = styled.div`
-  width: 60%;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8%;
-  margin: 5% 10%;
+`;
+
+export const MusicCardWrapper = styled.div`
+  border: 1px solid ${colors.cardStroke};
+  border-radius: 15px;
+  box-shadow: ${g.CardShadow};
 `;
