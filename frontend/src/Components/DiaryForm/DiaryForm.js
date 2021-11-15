@@ -41,7 +41,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
       url: "api/question/",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+        Authorization: `jwt ${token}`,
       },
     })
       .then((response) => {
@@ -62,7 +62,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
         url: "api/spotify/",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Token ${token}`,
+          Authorization: `jwt ${token}`,
         },
         data: {
           search: searchQuery,
@@ -93,7 +93,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
       url: type === "post" ? "api/post/" : `api/post/${id}/`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+        Authorization: `jwt ${token}`,
       },
       data: {
         title: title,

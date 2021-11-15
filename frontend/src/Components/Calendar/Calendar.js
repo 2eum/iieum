@@ -30,7 +30,7 @@ const Calendar = ({ currUser, token, userId }) => {
       }/6/0`, // range - 6 days from prev month ~ 6 days from next month
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+        Authorization: `jwt ${token}`,
       },
     })
       .then((response) => {
