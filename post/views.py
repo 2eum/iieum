@@ -23,8 +23,7 @@ from rest_framework.permissions import IsAuthenticated
 # 전체 글
 class PostViewSet(viewsets.ModelViewSet): 
     authentication_classes = [JSONWebTokenAuthentication]
-    permission_classes = [IsAuthenticated]
-    #permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     queryset = Post.objects.all().order_by('-pub_date')
     serializer_class = PostSerializer
     filter_backends = [SearchFilter, DjangoFilterBackend] 
@@ -32,7 +31,6 @@ class PostViewSet(viewsets.ModelViewSet):
 
     # serializer.save() 재정의
     def perform_create(self, serializer):
-        print(self.request.user)
         serializer.save(user=self.request.user,
                         track_title=self.request.data['track_title'],
 						track_artist=self.request.data['track_artist'],
@@ -62,8 +60,7 @@ class SearchView(APIView):
 # 마이페이지 => 추후 삭제
 class MyPageView(APIView):
     authentication_classes = [JSONWebTokenAuthentication]
-    permission_classes = [IsAuthenticated]
-    #permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly)
     #내가 쓴 글 보여주기
     def get(self, request):
         if request.user.is_authenticated:
@@ -78,8 +75,7 @@ class MyPageView(APIView):
 
 class QuestionViewSet(viewsets.ModelViewSet): 
     authentication_classes = [JSONWebTokenAuthentication]
-    permission_classes = [IsAuthenticated]
-    #permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly)
     queryset = Question.objects.all() 
     serializer_class = QuestionSerializer
     
@@ -119,8 +115,7 @@ class PastQuestion(APIView):
 # 좋아요 기능 
 class LikeToggle(APIView):
     authentication_classes = [JSONWebTokenAuthentication]
-    permission_classes = [IsAuthenticated]
-    #permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly )
+    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly)
     def post(self, request, post_id):
         like_list = Post.objects.filter(id=post_id).first()  
         if self.request.user in like_list.liked_user.all():

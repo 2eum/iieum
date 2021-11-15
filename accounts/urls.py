@@ -9,20 +9,16 @@ from django.conf.urls import include, re_path
 from .views import *
 
 urlpatterns = [
-    #path('api/signup', Registration.as_view()),
-    #path('api/login', Login.as_view()),
-    
     # 로그인
-    #path('rest-auth/login', LoginView.as_view(), name='rest_login'),
     path('api/login', LoginView.as_view(), name='rest_login'),
     path('rest-auth/logout', LogoutView.as_view(), name='rest_logout'),
     path('rest-auth/password/change', PasswordChangeView.as_view(), name='rest_password_change'),
 
     # 회원가입
-    #path('rest-auth/registration', RegisterView.as_view(), name='rest_register'),
     path('api/signup', RegisterView.as_view(), name='rest_register'),
 
     path('accounts/', include('allauth.urls')),
+    
     # 이메일 관련 필요
     path('accounts/allauth/', include('allauth.urls')),
     # 유효한 이메일이 유저에게 전달
