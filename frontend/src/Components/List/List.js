@@ -26,7 +26,7 @@ const List = ({ token }) => {
       url: "/api/mypage/",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+        Authorization: `jwt ${token}`,
       },
     })
       .then((response) => {

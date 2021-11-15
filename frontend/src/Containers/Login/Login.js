@@ -16,11 +16,11 @@ import {
 } from "./Login.elements";
 
 const Login = ({ saveUserData, currUser }) => {
-  const [nickname, setNickname] = useState("");
+  const [username, setUsername] = useState("");
   const [pwd, setPwd] = useState("");
 
-  const nicknameInputChange = (e) => {
-    setNickname(e.target.value);
+  const usernameInputChange = (e) => {
+    setUsername(e.target.value);
   };
 
   const pwdInputChange = (e) => {
@@ -28,19 +28,19 @@ const Login = ({ saveUserData, currUser }) => {
   };
 
   const validateInput = () => {
-    return nickname !== "" && pwd !== "" ? true : false;
+    return username !== "" && pwd !== "" ? true : false;
   };
 
   const onLoginClick = () => {
     if (validateInput()) {
       axios({
         method: "post",
-        url: "/api/login/",
+        url: "/api/login",
         headers: {
           "Content-Type": "application/json",
         },
         data: {
-          nickname: nickname,
+          username: username,
           password: pwd,
         },
       })
@@ -51,7 +51,7 @@ const Login = ({ saveUserData, currUser }) => {
           return response.data;
         })
         .then((data) => {
-          saveUserData(data.Token, data.User, data.Id);
+          saveUserData(data.token, data.user.username, data.user.pk);
         });
     }
   };
@@ -67,10 +67,10 @@ const Login = ({ saveUserData, currUser }) => {
           <InputContainer>
             <LoginInput
               type="text"
-              name="nickname"
+              name="username"
               placeholder="닉네임"
               onChange={(e) => {
-                nicknameInputChange(e);
+                usernameInputChange(e);
               }}
             />
           </InputContainer>

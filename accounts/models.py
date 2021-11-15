@@ -1,14 +1,17 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-"""from django.conf import settings
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from rest_framework.authtoken.models import Token"""
+from django.contrib.auth.models import UserManager, AbstractUser
 
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
+class User(AbstractUser):
+    objects = UserManager()
+    nickname = models.CharField(blank=True, max_length=50)
+    def __str__(self):
+        return self.username
+
+
+
+
+"""from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class UserManager(BaseUserManager):
     # 일반 user 생성
@@ -78,4 +81,4 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['email', 'name']
 
     def __str__(self):
-        return self.nickname
+        return self.nickname"""

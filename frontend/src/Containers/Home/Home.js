@@ -151,7 +151,6 @@ const Home = ({ currUser, token, userId, postId }) => {
           <S.TodayLeftContainer>
             {content.length ? <PostCardL postId={cardLId} token={token} /> : ""}
           </S.TodayLeftContainer>
-
           <S.TodayRightContainer>
             <S.QuestionArea>
               <S.ShuffleButton onClick={randomQuestion}>
@@ -238,17 +237,11 @@ const Home = ({ currUser, token, userId, postId }) => {
             <S.PageHeader>다른 질문 둘러보기</S.PageHeader>
             <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
           </S.PageHeaderContainer>
-          <S.QuestionListContainer>
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-          </S.QuestionListContainer>
+          <com.QuestionCardGrid
+            currUser={currUser}
+            token={token}
+            userId={userId}
+          />
         </S.QuestionListPageSection>
 
         {/* 4. Music List Page*/}

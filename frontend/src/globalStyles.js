@@ -165,6 +165,13 @@ export const ButtonName = styled.p``;
 export const OpenListButtonWrapper = styled.div`
   margin: 2%;
   margin-top: 20%;
+  // width: 135px;
+  // height: 45px;
+`;
+
+export const OpenListButtonIcon = styled.i`
+  color: ${colors.iiPurple};
+  margin-right: 8px;
 `;
 
 export const IndicatorDot = styled.div`

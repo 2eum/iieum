@@ -19,8 +19,8 @@ const App = () => {
     localStorage.getItem("token") ? localStorage.getItem("token") : ""
   );
   const [currUser, setUser] = useState(
-    localStorage.getItem("nickname")
-      ? window.localStorage.getItem("nickname")
+    localStorage.getItem("username")
+      ? window.localStorage.getItem("username")
       : ""
   );
 
@@ -28,14 +28,14 @@ const App = () => {
     localStorage.getItem("userId") ? window.localStorage.getItem("userId") : ""
   );
 
-  const saveUserData = (token, nickname, userId) => {
+  const saveUserData = (token, username, userId) => {
     setToken(token);
-    setUser(nickname);
+    setUser(username);
     setUserId(userId);
 
     window.localStorage.setItem("token", token);
 
-    window.localStorage.setItem("nickname", nickname);
+    window.localStorage.setItem("username", username);
 
     window.localStorage.setItem("userId", userId);
   };
