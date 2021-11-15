@@ -57,6 +57,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 ]
 
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
