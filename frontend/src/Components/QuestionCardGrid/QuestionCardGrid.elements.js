@@ -3,15 +3,13 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const QuestionGridContainer = styled.div`
-  // width: 25vw;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8%;
-  margin: 3% 0;
+  grid-template-columns: repeat(3, 18vw);
+  grid-gap: 3vw;
+  margin: 3% auto;
+  width: 100%;
 `;
 
 export const QuestionCardWrapper = styled.div`
-  width: 10vw;
-  // height: 15vh;
   text-align: center;
 `;

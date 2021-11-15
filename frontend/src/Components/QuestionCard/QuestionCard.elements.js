@@ -3,7 +3,7 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const QuestionCardContainer = styled.div`
-  width: 20vw;
+  width: 18vw;
   height: 10vw;
   margin: auto;
   padding: 1vw;
@@ -17,6 +17,7 @@ export const QuestionCardContainer = styled.div`
   border-radius: 8px;
   border: 1px solid #abaaa6;
   position: relative;
+  cursor: pointer;
 `;
 
 export const TopContainer = styled.div`
@@ -46,7 +47,7 @@ export const BottomContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const QuestionName  = styled.h3`
+export const QuestionName = styled.h3`
   text-align: right;
   width: 60%;
   font-size: 2rem;

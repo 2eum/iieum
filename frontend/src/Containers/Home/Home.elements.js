@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import * as colors from "../../Colors";
+import * as g from "../../globalStyles";
 import { Link } from "react-router-dom";
 
 export const Background = styled.div`
   background-color: ${colors.iiBG};
-  padding: 10% 15%;
+  padding: 5% 20%;
 `;
 
 export const PageHeader = styled.h3`
@@ -19,15 +20,19 @@ export const PageHeaderContainer = styled.div`
 
 //1. Question Page
 
-export const TodayQuestionPageSection = styled.section`
+export const TodayQuestionSection = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
-  // margin: 5%;
+  gap: 5%;
 `;
 
-export const RightContainer = styled.section`
-  width: 40%;
+export const TodayLeftContainer = styled.div`
+  width: 50%;
+`;
+
+export const TodayRightContainer = styled.section`
+  width: 50%;
   margin-left: 1%;
   display: flex;
   flex-direction: column;
@@ -38,8 +43,8 @@ export const QuestionArea = styled.section`
   font-size: 3rem;
 `;
 
-export const ShuffleButton = styled.i`
-
+export const ShuffleButton = styled.div`
+  cursor: pointer;
 `;
 
 export const TodayQuestion = styled.div`
@@ -60,13 +65,30 @@ export const PostCardSArea = styled.section`
   text-align: center;
 `;
 
-export const PostCardSWrapper = styled.section`
+export const TodaySTop = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 5%;
 `;
 
-export const IndicatorWrapper = styled.div``;
+export const PostCardSWrapper = styled.section`
+  width: 80%;
+  margin: 5% 0;
+  display: flex;
+  justify-content: center;
+  gap: 1%;
+`;
 
+export const IndicatorWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 5%;
+`;
+
+export const LoadMoreButtonContainer = styled.div`
+  width: 5%;
+  cursor: pointer;
+`;
 
 //2. Create Page
 export const CreatePageSection = styled.section`
@@ -78,13 +100,14 @@ export const CreatePageSection = styled.section`
 
 export const CreateCardLeft = styled.section`
   width: 25%;
-  height: 100%;
-  margin: 4% auto;
+  height: 50rem;
+  display: flex;
+  align-items: center;
 `;
 
 export const CreateCardRight = styled.section`
   width: 25%;
-  height: 100%;
+  height: 50rem;
   margin: 4% auto;
   display: flex;
   flex-direction: column;
@@ -126,10 +149,6 @@ export const DoneButtonArea = styled.div`
   margin: 16px 0;
 `;
 
-export const LoadMoreButtonContainer = styled.div`
-  margin: 25% auto;
-`;
-
 //3.Question List Page
 
 export const QuestionListPageSection = styled.section`
@@ -145,6 +164,13 @@ export const ToQuestionListButton = styled(Link)`
   font-size: 1.2rem;
 `;
 
+export const QuestionListContainer = styled.div`
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8%;
+  margin: 3% 0;
+`;
 
 //4. Music List Page
 
@@ -157,9 +183,14 @@ export const MusicListPageSection = styled.section`
 `;
 
 export const MusicListContainer = styled.div`
-  width: 60%;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8%;
-  margin: 5% 10%;
+`;
+
+export const MusicCardWrapper = styled.div`
+  border: 1px solid ${colors.cardStroke};
+  border-radius: 15px;
+  box-shadow: ${g.CardShadow};
 `;

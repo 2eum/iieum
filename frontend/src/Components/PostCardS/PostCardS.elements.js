@@ -3,10 +3,10 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const PostCardArea = styled.section`
-  width: 17vw;
-  height: 23vw;
+  width: 13rem;
+  height: 20rem;
   margin: 0 auto;
-  padding: 2vw;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -18,11 +18,6 @@ export const PostCardArea = styled.section`
   border: 1px solid #abaaa6;
   position: relative;
 
-  @media screen and (min-width: 1920px) {
-    width: 15vw;
-    height: 20vw;
-  }
-
   &::after {
     content: "";
     position: absolute;
@@ -30,13 +25,11 @@ export const PostCardArea = styled.section`
     left: 0;
     width: 100%;
     height: 100%;
+    cursor: pointer;
   }
 `;
 
-export const TopArea = styled.section`
-  height: 5%;
-  margin: 1.2%;
-`;
+export const TopArea = styled.section``;
 
 export const Author = styled.h4``;
 
@@ -46,7 +39,7 @@ export const MusicArea = styled.section`
 `;
 
 export const MusicCover = styled.img`
-  width: 66%;
+  width: 80%;
   margin: 1%;
 `;
 
@@ -93,9 +86,8 @@ export const MusicArtist = styled.h4`
 
 export const TitleArea = styled.section`
   width: 100%;
-  overflow: hidden;
 `;
 
 export const ContentTitle = styled.h3`
-  word-break: keep-all;
+  word-break: break-word;
 `;

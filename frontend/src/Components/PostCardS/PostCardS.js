@@ -2,6 +2,7 @@ import React from "react";
 import * as S from "./PostCardS.elements";
 
 const PostCardS = ({
+  id,
   user,
   title,
   track_title,
@@ -10,7 +11,7 @@ const PostCardS = ({
   handleCardOpen,
 }) => {
   return (
-    <S.PostCardArea onClick={handleCardOpen}>
+    <S.PostCardArea onClick={() => handleCardOpen(id)}>
       <S.TopArea>
         <S.Author>{user}</S.Author>
       </S.TopArea>
@@ -32,7 +33,9 @@ const PostCardS = ({
         </S.MusicInfoArea>
       </S.MusicArea>
       <S.TitleArea>
-        <S.ContentTitle>{title}</S.ContentTitle>
+        <S.ContentTitle>
+          {title.length > 30 ? title.slice(0, 30) + "..." : title}
+        </S.ContentTitle>
       </S.TitleArea>
     </S.PostCardArea>
   );

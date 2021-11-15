@@ -137,7 +137,6 @@ export const MainContentContainer = styled.div`
   margin: auto;
 `;
 
-
 // text slide animation
 export const slide = keyframes`
     0% {
@@ -147,7 +146,6 @@ export const slide = keyframes`
       left: -200%;
     }
 `;
-
 
 //Buttons
 export const ButtonWrapper = styled.div`
@@ -162,9 +160,7 @@ export const ButtonIcon = styled.i`
   margin-right: 8px;
 `;
 
-export const ButtonName = styled.p`
-
-`;
+export const ButtonName = styled.p``;
 
 export const OpenListButtonWrapper = styled.div`
   margin: 2%;
@@ -178,5 +174,13 @@ export const OpenListButtonIcon = styled.i`
   margin-right: 8px;
 `;
 
+export const IndicatorDot = styled.div`
+  width: 10px;
+  height: 10px;
+  background-color: ${(p) =>
+    p.selected ? colors.iiPurple : colors.iiPurpleOpacity};
+  border-radius: 100%;
+  content: "";
+`;
 
 export default GlobalStyle;
