@@ -129,6 +129,8 @@ const Home = ({ currUser, token, userId, postId }) => {
 
   // generate random idx for question
   const randomQuestion = () => {
+    setContent([]);
+    setTodayQCards([]);
     let qIdx;
     do {
       qIdx = Math.floor(Math.random() * 100) % questionList.length;
