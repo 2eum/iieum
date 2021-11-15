@@ -17,37 +17,24 @@ import {
 } from "./SignUp.elements";
 
 const SignUp = ({ token, saveUserData, currUser }) => {
-  const [nickname, setNickname] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [pwdConfirm, setConfirm] = useState("");
-
-  const nicknameInputChange = (e) => {
-    setNickname(e.target.value);
-  };
-
-  const pwdInputChange = (e) => {
-    setPwd(e.target.value);
-  };
-
-  const pwdConfirmInputChange = (e) => {
-    setConfirm(e.target.value);
-  };
-
-  const validateInput = () => {
-    return nickname !== "" && pwd !== "" && pwd === pwdConfirm ? true : false;
-  };
 
   const onRegisterClick = () => {
     if (validateInput()) {
       axios({
         method: "post",
-        url: "/api/signup/",
+        url: "/api/signup",
         headers: {
           "Content-Type": "application/json",
         },
         data: {
-          nickname: nickname,
-          password: pwd,
+          username: username,
+          email: email,
+          password1: pwd,
+          password2: pwdConfirm,
         },
       })
         .then((response) => {
@@ -62,6 +49,12 @@ const SignUp = ({ token, saveUserData, currUser }) => {
     }
   };
 
+  const validateInput = () => {
+    return username !== "" && email !== "" && pwd !== "" && pwdConfirm !== ""
+      ? true
+      : false;
+  };
+
   return currUser ? (
     <Redirect to="/" />
   ) : (
@@ -71,13 +64,24 @@ const SignUp = ({ token, saveUserData, currUser }) => {
         <RegisterLegend>회원가입</RegisterLegend>
         <RegisterFieldset>
           <InputContainer>
-            <InputLabel htmlFor="nickname">닉네임</InputLabel>
+            <InputLabel htmlFor="username">아이디</InputLabel>
             <RegisterInput
               type="text"
-              name="nickname"
+              name="username"
               placeholder="공백없이 영문, 숫자 포함 6-12자"
               onChange={(e) => {
-                nicknameInputChange(e);
+                setUsername(e.target.value);
+              }}
+            />
+          </InputContainer>
+          <InputContainer>
+            <InputLabel htmlFor="username">이메일</InputLabel>
+            <RegisterInput
+              type="email"
+              name="email"
+              placeholder="ex. test@iieum.com"
+              onChange={(e) => {
+                setEmail(e.target.value);
               }}
             />
           </InputContainer>
@@ -88,7 +92,7 @@ const SignUp = ({ token, saveUserData, currUser }) => {
               name="password"
               placeholder="공백없이 영문, 숫자 포함 6-20자"
               onChange={(e) => {
-                pwdInputChange(e);
+                setPwd(e.target.value);
               }}
             />
           </InputContainer>
@@ -99,7 +103,7 @@ const SignUp = ({ token, saveUserData, currUser }) => {
               name="passwordConfirm"
               placeholder="비밀번호 재확인"
               onChange={(e) => {
-                pwdConfirmInputChange(e);
+                setConfirm(e.target.value);
               }}
             />
           </InputContainer>

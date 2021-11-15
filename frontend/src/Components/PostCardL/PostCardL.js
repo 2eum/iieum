@@ -24,7 +24,7 @@ const PostCardL = ({
       url: `/api/post/${postId}`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+        Authorization: `jwt ${token}`,
       },
     })
       .then((response) => {
@@ -66,7 +66,7 @@ const PostCardL = ({
       method: "post",
       url: `/api/like/${postId}/`,
       headers: {
-        Authorization: `Token ${token}`,
+        Authorization: `jwt ${token}`,
       },
     })
       .then((response) => {
@@ -86,7 +86,7 @@ const PostCardL = ({
       url: `/api/post/${postId}/`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+        Authorization: `jwt ${token}`,
       },
     })
       .then((response) => {
