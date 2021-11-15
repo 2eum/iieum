@@ -4,8 +4,8 @@ import * as g from "../../globalStyles";
 
 export const QuestionGridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 20vw);
-  grid-gap: 5vw;
+  grid-template-columns: repeat(3, 18vw);
+  grid-gap: 3vw;
   margin: 3% auto;
   width: 100%;
 `;

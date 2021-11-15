@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as colors from "../../Colors";
 
 export const OpenedContainer = styled.div`
-  width: 70vw;
+  width: 60vw;
   height: ${(p) => (p.open ? "75%" : 0)};
   opacity: ${(p) => (p.open ? 1 : 0)};
   display: ${(p) => (p.open ? `flex` : `none`)};
@@ -15,8 +15,8 @@ export const OpenedContainer = styled.div`
     p.gridNum === 0
       ? ""
       : p.gridNum === 1
-      ? `transform: translateX(-25vw);`
-      : `transform: translateX(-50vw);`}
+      ? `transform: translateX(-21vw);`
+      : `transform: translateX(-42vw);`}
 `;
 
 export const QuestionContainer = styled.div``;

@@ -3,7 +3,7 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const QuestionCardContainer = styled.div`
-  width: 20vw;
+  width: 18vw;
   height: 10vw;
   margin: auto;
   padding: 1vw;

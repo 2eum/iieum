@@ -6,16 +6,17 @@ export const CardListContainer = styled.section`
   margin-top: 3%;
   height: 50vw;
   width: 100%;
+  display: flex;
 `;
 
 export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(${(p) => p.cols}, 1fr);
   grid-template-rows: max-content;
-  width: ${(p) => p.cols * 14}vw;
+  width: ${(p) => p.cols * 12}vw;
+  grid-row-gap: 5%;
   position: relative;
   overflow-y: scroll;
-  grid-gap: 3%;
   height: 100%;
 `;
 
@@ -23,8 +24,8 @@ export const PostCardLContainer = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  opacity: ${(p) => (p.cols === 3 ? 1 : 0)};
-  z-index: ${(p) => (p.cols === 3 ? 1 : -1)};
+  opacity: ${(p) => (p.cols === 2 ? 1 : 0)};
+  z-index: ${(p) => (p.cols === 2 ? 1 : -1)};
   transition: opacity 500ms;
   height: 50vw;
   padding: auto;

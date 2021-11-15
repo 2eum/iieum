@@ -29,7 +29,7 @@ const PostCardList = ({ currUser, token, userId, questionId }) => {
 
   // card open, close functions
   const handleCardOpen = (id) => {
-    if (cols === 5) setCols(3);
+    if (cols === 5) setCols(2);
     setCardLIndex(id);
   };
 
