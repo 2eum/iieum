@@ -4,7 +4,6 @@ import axios from "axios";
 import * as S from "./Home.elements";
 import * as com from "../../Components";
 import * as g from "../../globalStyles";
-import { PostCardList } from "..";
 
 import {
   PostCardL,
@@ -192,20 +191,17 @@ const Home = ({ currUser, token, userId, postId }) => {
             </S.PostCardSArea>
           </S.TodayRightContainer>
         </S.TodayQuestionSection>
-        {/* <PostCardList currUser={currUser} token={token} userId={userId} /> */}
 
         {/* 2.Create Page */}
         <S.CreatePageSection>
           <S.CreateCardLeft>
-            <S.HelperQuestionArea />
-            <S.HelperSearchArea />
-            <S.HelperContentArea>
-              <S.HelperLeft>
-                당신의 이야기를 들려주세요. 어떤 내용이든 좋아요. 아주 사소한
-                것부터 깊은 속마음까지, 떠오르는 대로 적어볼까요?
-              </S.HelperLeft>
-            </S.HelperContentArea>
-            <S.HelperDoneArea />
+            <S.HelperLeft>
+              <br />
+              <br />
+              <br />
+              당신의 이야기를 들려주세요. 어떤 내용이든 좋아요. 아주 사소한
+              것부터 깊은 속마음까지, 떠오르는 대로 적어볼까요?
+            </S.HelperLeft>
           </S.CreateCardLeft>
           <com.CreateCard />
           <S.CreateCardRight>
@@ -214,23 +210,25 @@ const Home = ({ currUser, token, userId, postId }) => {
                 질문을 듣고,
                 <br />
                 떠오르는 음악이나 이야기가 있나요?
-              </S.HelperRight>
-            </S.HelperQuestionArea>
-            <S.HelperSearchArea>
-              <S.HelperRight>
+                <br />
+                <br />
                 당신의 이야기에 어울리는 음악을
                 <br />
                 직접 골라주세요.
               </S.HelperRight>
+            </S.HelperQuestionArea>
+            <S.HelperSearchArea>
+              <S.HelperRight></S.HelperRight>
             </S.HelperSearchArea>
-            <S.HelperDoneArea>
+            <S.HelperDoneArea></S.HelperDoneArea>
+            <S.DoneButtonArea>
               <S.HelperRight>
                 이제 당신의 이야기를
                 <br />
                 다른 사람들과 나눠보세요!
+                <br />
+                <br />
               </S.HelperRight>
-            </S.HelperDoneArea>
-            <S.DoneButtonArea>
               <g.ButtonWrapper>
                 <g.DefaultButton>
                   <g.ButtonIconArea>

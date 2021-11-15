@@ -99,13 +99,14 @@ export const CreatePageSection = styled.section`
 
 export const CreateCardLeft = styled.section`
   width: 25%;
-  height: 100%;
-  margin: 4% auto;
+  height: 50rem;
+  display: flex;
+  align-items: center;
 `;
 
 export const CreateCardRight = styled.section`
   width: 25%;
-  height: 100%;
+  height: 50rem;
   margin: 4% auto;
   display: flex;
   flex-direction: column;
