@@ -145,14 +145,6 @@ export const ToQuestionListButton = styled(Link)`
   font-size: 1.2rem;
 `;
 
-export const QuestionListContainer = styled.div`
-  width: 60%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8%;
-  margin: 3% 0;
-`;
-
 
 //4. Music List Page
 

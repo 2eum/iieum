@@ -3,7 +3,7 @@ import { PostCardL, PostCardS } from "../../Components";
 import * as S from "./PostCardList.elements";
 import axios from "axios";
 
-const PostCardList = ({ currUser, token, userId }) => {
+const PostCardList = ({ currUser, token, userId, questionId }) => {
   const [cols, setCols] = useState(4);
   const [content, setContent] = useState(null);
   const [cardLIndex, setCardLIndex] = useState();
@@ -11,7 +11,7 @@ const PostCardList = ({ currUser, token, userId }) => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/api/postlist-question/3/0`,
+      url: `/api/postlist-question/${questionId}/0`,
       headers: {
         "Content-Type": "application/json",
       },

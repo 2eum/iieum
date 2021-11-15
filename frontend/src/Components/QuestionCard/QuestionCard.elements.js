@@ -5,7 +5,6 @@ import * as g from "../../globalStyles";
 export const QuestionCardContainer = styled.div`
   width: 20vw;
   height: 10vw;
-
   margin: auto;
   padding: 1vw;
   display: flex;
@@ -51,6 +50,6 @@ export const QuestionName  = styled.h3`
   text-align: right;
   width: 60%;
   font-size: 2rem;
-  word-break: keep-all;
+  // word-break: keep-all;
   margin: 2%;
 `;
