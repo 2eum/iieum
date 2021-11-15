@@ -148,14 +148,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-"""REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ]
-}"""
 
 REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
@@ -166,7 +158,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':[
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        #'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
 
     ],
@@ -211,19 +202,15 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 
 SITE_ID = 1
 
-# ACCOUNT_EMAIL_VERIFICATION = "mandatory" <- 이메일 인증 번호 필요
-#ACCOUNT_EMAIL_VERIFICATION = "none"
-#ACCOUNT_EMAIL_REQUIRED = True
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com' # 메일 호스트 서버
 
 EMAIL_PORT = '587' # gmail과 통신하는 포트
 
-EMAIL_HOST_USER = '****' # 발신할 이메일
+EMAIL_HOST_USER = 'iieum.ms.official@gmail.com' # 발신할 이메일
 
-EMAIL_HOST_PASSWORD = '****' # 발신할 메일의 비밀번호
+EMAIL_HOST_PASSWORD = 'dldmadldma1!' # 발신할 메일의 비밀번호
 
 EMAIL_USE_TLS = True # TLS 보안 방법
 
