@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from account.models import User
+from accounts.models import User
 
 class Question(models.Model):
     id = models.AutoField(primary_key=True, null=False, blank=False)

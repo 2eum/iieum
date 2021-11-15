@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Post, Question
 
 class PostSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source = 'user.nickname')
+    user = serializers.ReadOnlyField(source = 'user.username')
     class Meta: 
         model = Post
         fields = ('url', 'id','title','user','content','pub_date','track_title','track_artist','track_album_cover','track_audio','spotify_link','question','liked_user')

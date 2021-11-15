@@ -37,7 +37,7 @@ const Detail = ({ currUser, token, userId }) => {
       url: `/api/post/${id}/`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+        Authorization: `jwt ${token}`,
       },
     })
       .then((response) => {
