@@ -3,10 +3,12 @@ import * as S from "./QuestionOpened.elements";
 import {PostCardList} from "../../Containers";
 import * as g from "../../globalStyles";
 
-const QuestionOpened = ({currUser, token, userId, question, detail, open, cardIndex}) => {
+const QuestionOpened = ({currUser, token, userId, questionId, question, detail, open, cardIndex}) => {
+  const gridNum = cardIndex % 3;
+
   return (
     <>
-      <S.OpenedContainer open={open} cardIndex={cardIndex}>
+      <S.OpenedContainer open={open} gridNum={gridNum}>
         <S.QuestionContainer>
           <S.Question>{question}</S.Question>
           <S.QuestionDetails>
@@ -23,7 +25,7 @@ const QuestionOpened = ({currUser, token, userId, question, detail, open, cardIn
             </g.DefaultButton>
           </S.CreateButtonWrapper>
         </S.CreateButtonContainer>
-        <PostCardList currUser={currUser} token={token} userId={userId}/>
+        <PostCardList currUser={currUser} token={token} userId={userId} questionId={questionId}/>
       </S.OpenedContainer>
     </>
 

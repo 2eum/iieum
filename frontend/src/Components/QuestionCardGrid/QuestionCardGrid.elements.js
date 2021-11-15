@@ -12,10 +12,6 @@ export const QuestionGridContainer = styled.div`
 
 export const QuestionCardWrapper = styled.div`
   width: 10vw;
+  // height: 15vh;
   text-align: center;
 `;
-
-  // & > * :last-child {
-  // ${(p) => (p.cardIndex % 3 === 0 ? "" : 
-  //   1 ? `transform: translateX(-30%);` : 
-  //   2 ? `transform: translateX(-60%);`)}

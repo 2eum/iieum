@@ -105,7 +105,9 @@ const Home = ({ currUser, token, userId, postId }) => {
 
         {/* 1.Question Page */}
         <S.TodayQuestionPageSection>
-            {/* <com.PostCardL/> */}
+
+              {/* <com.PostCardL/> */}
+
             <S.RightContainer>
               <S.QuestionArea>
                 <S.ShuffleButton className="fa fa-shuffle"/>
@@ -119,7 +121,7 @@ const Home = ({ currUser, token, userId, postId }) => {
                   <S.LoadMoreButtonContainer>
                     <h3>&lt;</h3>
                   </S.LoadMoreButtonContainer>
-                  <com.PostCardS/><com.PostCardS/>
+                  <com.PostCardS /><com.PostCardS/>
                   <S.LoadMoreButtonContainer>
                     <h3>&gt;</h3>
                   </S.LoadMoreButtonContainer>
@@ -129,8 +131,9 @@ const Home = ({ currUser, token, userId, postId }) => {
                 </S.IndicatorWrapper>
               </S.PostCardSArea>
             </S.RightContainer>
+
           </S.TodayQuestionPageSection>
-          <PostCardList currUser={currUser} token={token} userId={userId} />
+          {/* <PostCardList currUser={currUser} token={token} userId={userId} /> */}
 
           {/* 2.Create Page */}
           <S.CreatePageSection>
@@ -186,7 +189,11 @@ const Home = ({ currUser, token, userId, postId }) => {
               <S.PageHeader>다른 질문 둘러보기</S.PageHeader>
               <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
             </S.PageHeaderContainer>
-            <com.QuestionCardGrid/>
+            <com.QuestionCardGrid
+              currUser = {currUser}
+              token = {token}
+              userId = {userId}
+            />
           </S.QuestionListPageSection>
 
           {/* 4. Music List Page*/}

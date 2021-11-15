@@ -5,7 +5,7 @@ import axios from "axios";
 
 const QuestionCardGrid= ({currUser, token, userId}) => {
   const [content, setContent] = useState(null);
-  const [openCard, setOpenCard] = useState();
+  const [openCard, setOpenCard] = useState(-1);
   const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
@@ -29,14 +29,20 @@ const QuestionCardGrid= ({currUser, token, userId}) => {
   }, []);
 
 
-  const handleClick = (cardIndex) => {
-    console.log(cardIndex);
-    setOpenCard(cardIndex);
-    if (isOpened === false){
-      setIsOpened(true);
-    } else {
+  const handleClick = (clickedCard) => {
+    console.log(clickedCard, openCard);
+    if (clickedCard === openCard){
+      setOpenCard(-1);
       setIsOpened(false);
+    } else { //다른 카드 클릭
+      setOpenCard(clickedCard);
+      setIsOpened(true);
     }
+    // if (isOpened === false){
+    //   setIsOpened(true);
+    // } else {
+    //   setIsOpened(false);
+    // }
   }
 
   const QuestionCardList = content ? content.map((c, i) => {
@@ -47,11 +53,13 @@ const QuestionCardGrid= ({currUser, token, userId}) => {
           date = {c.released_date}
           cardIndex = {i}
           handleClick = {handleClick}
+          open = {isOpened && openCard === i}
         />
         <QuestionOpened
           currUser = {currUser}
           token = {token}
           userId = {userId}
+          questionId = {c.id}
           question = {c.question_content}
           detail = {c.explain}
           cardIndex = {i}

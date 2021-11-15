@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as colors from "../../Colors";
 
 export const OpenedContainer = styled.div`
-  border: 1px solid #abaaa6;
+  // border: 1px solid #abaaa6;
   width: ${(p) => (p.open ? "71vw" : 0)};
   height: ${(p) => (p.open ? "80%" : 0)};
   opacity: ${(p) => (p.open ? 1 : 0)};
@@ -12,9 +12,9 @@ export const OpenedContainer = styled.div`
   flex-direction: column;
   text-align: center;
 
-  ${(p) => (p.cardIndex % 3 === 0 ? "" : 
-    1 ? `transform: translateX(-35%);` : 
-    2 ? `transform: translateX(-30%);` : "")
+  ${(p) => (p.gridNum === 0 ? "" : 
+    p.gridNum === 1 ? `transform: translateX(-35.5%);` : 
+    `transform: translateX(-71%);`)
   }
 
 `;
@@ -42,5 +42,7 @@ export const CreateButtonWrapper = styled.div`
   margin: 2%;
 `;
 
-export const CardListContainer = styled.div``;
+export const CardListContainer = styled.div`
+  width: 100vw;
+`;
 

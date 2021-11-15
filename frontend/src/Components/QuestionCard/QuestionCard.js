@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import * as S from "./QuestionCard.elements";
 import * as g from "../../globalStyles";
 
-const QuestionCard = ({question, date, cardIndex, handleClick}) => {
+const QuestionCard = ({question, date, cardIndex, handleClick, open}) => {
 
   return (
     <>
@@ -15,9 +15,12 @@ const QuestionCard = ({question, date, cardIndex, handleClick}) => {
         <S.BottomContainer>
 
           {/* OpenListButton */}
-          <g.ButtonWrapper>
-            <g.ButtonIcon className="fa fa-angle-down fa-2x"/>
-          </g.ButtonWrapper>
+          <g.OpenListButtonWrapper>
+            {open ?
+            <g.OpenListButtonIcon className="fa fa-angle-up fa-2x"/> : 
+            <g.OpenListButtonIcon className="fa fa-angle-down fa-2x"/>
+            }
+          </g.OpenListButtonWrapper>
           <S.QuestionName>{question}</S.QuestionName>
         </S.BottomContainer>
       </S.QuestionCardContainer>
