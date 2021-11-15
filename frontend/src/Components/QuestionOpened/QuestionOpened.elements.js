@@ -2,12 +2,12 @@ import styled from "styled-components";
 import * as colors from "../../Colors";
 
 export const OpenedContainer = styled.div`
-  width: 71vw;
-  height: ${(p) => (p.open ? "80%" : 0)};
+  width: 70vw;
+  height: ${(p) => (p.open ? "75%" : 0)};
   opacity: ${(p) => (p.open ? 1 : 0)};
+  display: ${(p) => (p.open ? `flex` : `none`)};
   position: relative;
   margin-top: 5vw;
-  display: flex;
   flex-direction: column;
   text-align: center;
 
@@ -15,16 +15,14 @@ export const OpenedContainer = styled.div`
     p.gridNum === 0
       ? ""
       : p.gridNum === 1
-      ? `transform: translateX(-35.5%);`
-      : `transform: translateX(-71%);`}
-
-  transition: all 1s;
+      ? `transform: translateX(-25vw);`
+      : `transform: translateX(-50vw);`}
 `;
 
 export const QuestionContainer = styled.div``;
 
 export const Question = styled.h3`
-  margin: 3%;
+  margin: 2%;
 `;
 
 export const QuestionDetails = styled.p`
