@@ -2,12 +2,13 @@ import React from "react";
 import * as S from "./QuestionCard.elements";
 import * as g from "../../globalStyles";
 
-const QuestionCard = () => {
+const QuestionCard = ({question, date, cardIndex, handleClick}) => {
+
   return (
     <>
-      <S.QuestionCardContainer>
+      <S.QuestionCardContainer onClick = {()=> handleClick(cardIndex)}>
         <S.TopContainer>
-          <S.Qdate>2021년 11월 14일</S.Qdate>
+          <S.Qdate>{date}</S.Qdate>
           <S.CardCorner/>
         </S.TopContainer>
         <S.Line/>
@@ -17,8 +18,7 @@ const QuestionCard = () => {
           <g.ButtonWrapper>
             <g.ButtonIcon className="fa fa-angle-down fa-2x"/>
           </g.ButtonWrapper>
-
-          <S.QuestionName>나의 이상적인 여름휴가</S.QuestionName>
+          <S.QuestionName>{question}</S.QuestionName>
         </S.BottomContainer>
       </S.QuestionCardContainer>
     </>

@@ -186,17 +186,7 @@ const Home = ({ currUser, token, userId, postId }) => {
               <S.PageHeader>다른 질문 둘러보기</S.PageHeader>
               <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
             </S.PageHeaderContainer>
-            <S.QuestionListContainer>
-              <com.QuestionCard/>
-              <com.QuestionCard/>
-              <com.QuestionCard/>
-              <com.QuestionCard/>
-              <com.QuestionCard/>
-              <com.QuestionCard/>
-              <com.QuestionCard/>
-              <com.QuestionCard/>
-              <com.QuestionCard/>
-            </S.QuestionListContainer>
+            <com.QuestionCardGrid/>
           </S.QuestionListPageSection>
 
           {/* 4. Music List Page*/}
