@@ -1,7 +1,6 @@
 from rest_framework import viewsets
 from .serializers import PostSerializer, QuestionSerializer
 from .models import Post, Question
-from rest_framework.authentication import TokenAuthentication 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
@@ -18,7 +17,6 @@ from django.http import Http404
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-from rest_framework.permissions import IsAuthenticated
 
 # 전체 글
 class PostViewSet(viewsets.ModelViewSet): 

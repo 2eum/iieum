@@ -1,6 +1,7 @@
 from django.db import transaction
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
+from .models import *
 
 class CustomRegisterSerializer(RegisterSerializer):
     nickname = serializers.CharField(max_length=30)
@@ -11,3 +12,8 @@ class CustomRegisterSerializer(RegisterSerializer):
         user.nickname = self.data.get('nickname')
         user.save()
         return user
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = User
+        fields = ('username', 'email', 'nickname')
