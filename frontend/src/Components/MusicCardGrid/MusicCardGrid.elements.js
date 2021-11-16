@@ -1,0 +1,16 @@
+import styled from "styled-components";
+import * as colors from "../../Colors";
+import * as g from "../../globalStyles";
+
+export const MusicListContainer = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8%;
+`;
+
+export const MusicCardWrapper = styled.div`
+  border: 1px solid ${colors.cardStroke};
+  border-radius: 5px;
+  box-shadow: ${g.CardShadow};
+`;

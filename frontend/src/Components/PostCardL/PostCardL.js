@@ -24,7 +24,6 @@ const PostCardL = ({
       url: `/api/post/${postId}`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `jwt ${token}`,
       },
     })
       .then((response) => {

@@ -7,7 +7,6 @@ export const Wrapper = styled.section`
   width: 100%;
   height: 6vw;
   padding: 5%;
-  border-radius: 8px;
 `;
 
 export const Cover = styled.img`

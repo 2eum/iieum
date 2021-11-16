@@ -18,7 +18,7 @@ export const PageHeaderContainer = styled.div`
   justify-content: space-between;
 `;
 
-//1. Question Page
+//1. Today Question Page
 
 export const TodayQuestionSection = styled.section`
   width: 100%;
@@ -191,6 +191,6 @@ export const MusicListContainer = styled.div`
 
 export const MusicCardWrapper = styled.div`
   border: 1px solid ${colors.cardStroke};
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: ${g.CardShadow};
 `;
