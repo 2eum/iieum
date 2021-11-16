@@ -51,8 +51,6 @@ const MusicCardOpened = ({currUser, token, userId, open, cardIndex, title, artis
             source={source}
             link={link}
             cover={cover}
-            postId="1"
-            cols="1"
           />
         </S.MusicContainer>
         <S.PostCardGrid>

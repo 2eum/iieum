@@ -37,60 +37,22 @@ const MusicCardGrid = ({currUser, token, userId}) => {
       setIsOpened(true);
     }
   };
-
-    
-    
-    // const MusicCardList = content
-    // ? content["music list"].map((c, i) => {
-    //   console.log(content);
-    //   return (
-    //     <S.MusicCardWrapper>
-    //       <MusicCard
-    //         title={c.track_title}
-    //         artist={c.track_artist}
-    //         cover={c.track_album_cover}
-    //         source={c.track_audio}
-    //         link={c.spotify_link}
-    //         cardIndex={i}
-    //         handleClick={handleClick}
-    //         open={isOpened && openCard === i}
-    //         cols="1"
-    //         postId="1"
-    //       />
-    //       <MusicCardOpened
-    //         currUser={currUser}
-    //         token={token}
-    //         userId={userId}
-    //         open={open}
-    //         cardIndex={i}
-    //         title={c.track_title}
-    //         artist={c.track_artist}
-    //         cover={c.track_album_cover}
-    //         source={c.track_audio}
-    //         link={c.spotify_link}
-    //       />
-    //     </S.MusicCardWrapper>
-    //   );
-    // })
-    // : [];
-
+  
     const MusicCardList = content
     ? content["music list"].map((c, i) => {
       console.log(content);
       return (
         <S.MusicCardWrapper>
-          <MusicCard
-            title={c[0]}
-            artist={c[1]}
-            cover={c[2]}
-            source={c[3]}
-            link={c[4]}
-            cardIndex={i}
-            handleClick={handleClick}
-            open={isOpened && openCard === i}
-            cols="1"
-            postId="1"
-          />
+            <MusicCard
+              title={c[0]}
+              artist={c[1]}
+              cover={c[2]}
+              source={c[3]}
+              link={c[4]}
+              cardIndex={i}
+              handleClick={handleClick}
+              open={isOpened && openCard === i}
+            />
           <MusicCardOpened
             currUser={currUser}
             token={token}

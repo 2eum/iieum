@@ -3,10 +3,10 @@ import * as S from "./MusicCard.elements";
 import { MusicPlayer } from "..";
 import spotifyIcon from "../../Components/SearchedItem/Spotify_Icon.png";
 
-const MusicCard = ({ title, artist, source, link, cover, postId, cols }) => {
+const MusicCard = ({ title, artist, source, link, cover, cardIndex, handleClick, open, postId, cols }) => {
   return (
     <>
-      <S.Wrapper>
+      <S.Wrapper onClick={() => handleClick(cardIndex)}>
         <S.Info>
           <S.TitleWrapper>
             {/* if title is longer than 10 letters, set slide animation to true */}

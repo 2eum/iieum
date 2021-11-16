@@ -4,9 +4,10 @@ import * as g from "../../globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
-  width: 100%;
-  height: 6vw;
+  width: 11vw;
+  height: 5vw;
   padding: 5%;
+  border: 1px solid #abaaa6;
 `;
 
 export const Cover = styled.img`
