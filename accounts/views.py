@@ -6,7 +6,6 @@ from rest_framework.permissions import AllowAny
 from allauth.account.models import EmailConfirmation, EmailConfirmationHMAC
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
-from .serializers import *
 from django.http import Http404
 
 class ConfirmEmailView(APIView):
