@@ -87,7 +87,7 @@ const Login = ({ saveUserData, currUser }) => {
         </LoginFieldset>
         <LoginBtnContainer>
           <LoginBtn onClick={() => onLoginClick()}>로그인</LoginBtn>
-          <ToRegisterLink to="/signup">회원가입하기</ToRegisterLink>
+          <ToRegisterLink to="/register">회원가입하기</ToRegisterLink>
         </LoginBtnContainer>
       </LoginForm>
     </LoginSection>
