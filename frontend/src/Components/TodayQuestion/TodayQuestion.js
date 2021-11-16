@@ -5,7 +5,7 @@ import * as g from "../../globalStyles";
 
 import { PostCardL, PostCardS } from "../../Components";
 
-const TodayQuestion = ({ currUser, token, userId }) => {
+const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const [content, setContent] = useState([]);
   const [questionList, setQList] = useState([]);
   const [question, setQuestion] = useState();
@@ -39,6 +39,7 @@ const TodayQuestion = ({ currUser, token, userId }) => {
     if (questionList[0]) {
       setQuestion(questionList[0].question_content);
       setQuestionId(questionList[0].id);
+      setPageQuestion(questionList[0].id);
     }
   }, [questionList]);
 
@@ -123,6 +124,7 @@ const TodayQuestion = ({ currUser, token, userId }) => {
 
     setQuestion(questionList[qIdx].question_content);
     setQuestionId(questionList[qIdx].id);
+    setPageQuestion(questionList[qIdx].id);
   };
 
   // CardL switch when CardS clicked

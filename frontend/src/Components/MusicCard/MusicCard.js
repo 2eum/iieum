@@ -23,7 +23,7 @@ const MusicCard = ({ title, artist, source, link, cover, postId, cols }) => {
             </S.ArtistWrapper>
           </S.MiddleWrapper>
           {/* if no preview music, show message */}
-          {source !== "null" ? (
+          {source !== "null" || !source ? (
             <MusicPlayer source={source} postId={postId} cols={cols} />
           ) : (
             <S.NoPreviewSrc>미리듣기 음원이 없습니다</S.NoPreviewSrc>
