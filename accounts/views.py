@@ -54,4 +54,14 @@ class UsernameCheck(APIView):
         if user is None:
             return Response({"detail":"Available username"})
         else:
-            raise Http404("username already exist")
+            raise Http404("Username already exist")
+
+class EmailCheck(APIView):
+    @csrf_exempt
+    def post(self, request):
+        email = request.data['email']
+        user = User.objects.filter(email=email).first()
+        if user is None:
+            return Response({"detail":"Available email"})
+        else:
+            raise Http404("Email already exist")

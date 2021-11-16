@@ -28,4 +28,5 @@ urlpatterns = [
 
     path('api/nickname-check', NicknameCheck.as_view()),
     path('api/username-check', UsernameCheck.as_view()),
+    path('api/email-check', EmailCheck.as_view()),
 ]
