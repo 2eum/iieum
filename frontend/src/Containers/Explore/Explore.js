@@ -9,9 +9,9 @@ const Explore = ({ currUser, token, userId }) => {
     <>
     <g.Background>
       <g.PageSection>
-        <S.ExploreTitleWrapper>
-          <S.ExploreTitle>질문 둘러보기</S.ExploreTitle>
-        </S.ExploreTitleWrapper>
+        <g.PageTitleWrapper>
+          <g.PageTitle>질문 둘러보기</g.PageTitle>
+        </g.PageTitleWrapper>
         <S.QuestionListWrapper>
           <QuestionCardGrid 
             currUser={currUser}

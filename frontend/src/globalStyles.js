@@ -133,8 +133,9 @@ export const DefaultButton = styled(Link)`
 `;
 
 export const MainContentContainer = styled.div`
-  width: 80%;
-  margin: auto;
+  width: 100%;
+  margin: 5%;
+  text-align: center;
 `;
 
 // text slide animation
@@ -184,6 +185,10 @@ export const IndicatorDot = styled.div`
 `;
 
 //Page layout
+export const Background = styled.div`
+  background-color: ${colors.iiBG};
+  padding: 8% 20%;
+`;
 export const PageSection = styled.section`
   width: 100%;
   display: flex;
@@ -192,9 +197,12 @@ export const PageSection = styled.section`
   // margin: 10% auto;
 `;
 
-export const Background = styled.div`
-  background-color: ${colors.iiBG};
-  padding: 8% 20%;
+export const PageTitleWrapper = styled.div`
+  text-align: center;
+`;
+
+export const PageTitle = styled.h3`
+  font-size: 2rem;
 `;
 
 export default GlobalStyle;

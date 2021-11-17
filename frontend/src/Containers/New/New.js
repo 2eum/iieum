@@ -9,10 +9,17 @@ const New = ({ currUser, token, userId}) => {
   return (
     <>
     <g.Background> 
-      <g.MainContentContainer>
-        <CreateCard currUser={currUser} token={token}
-        userId={userId} questionId={id} type="post"/>
-      </g.MainContentContainer>
+      <g.PageSection>
+        <g.PageTitleWrapper>
+          <g.PageTitle>이야기 작성하기</g.PageTitle>
+        </g.PageTitleWrapper>
+        <g.MainContentContainer>
+          <S.CreateCardWrapper>
+            <CreateCard currUser={currUser} token={token}
+            userId={userId} questionId={id} type="post"/>
+          </S.CreateCardWrapper>
+        </g.MainContentContainer>
+      </g.PageSection>
     </g.Background>
     </>
   );
