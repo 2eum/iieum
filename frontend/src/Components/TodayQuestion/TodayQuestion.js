@@ -16,9 +16,15 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const [cardLId, setCardLId] = useState();
   // on Mount
   useEffect(() => {
+    const today = new Date();
+    const startingDate = today - 4;
     axios({
       method: "get",
-      url: "/api/question/past",
+      url: `/api/question/${startingDate.getFullYear()}-${
+        startingDate.getMonth() + 1
+      }-${startingDate.getDate()}/${today.getFullYear()}-${
+        today.getMonth() + 1
+      }-${today.getDate()}/0`,
       headers: {
         "Content-Type": "application/json",
       },

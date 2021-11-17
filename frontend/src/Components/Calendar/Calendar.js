@@ -23,11 +23,11 @@ const Calendar = ({ currUser, token, userId }) => {
     // get all music diary data
     axios({
       method: "get",
-      url: `api/postlist-user-date/${userId}/${prevMonthSearch.getFullYear()}/${
+      url: `api/postlist-user-date/${userId}/${prevMonthSearch.getFullYear()}-${
         prevMonthSearch.getMonth() + 1
-      }/23/${nextMonthSearch.getFullYear()}/${
+      }-23/${nextMonthSearch.getFullYear()}-${
         nextMonthSearch.getMonth() + 1
-      }/6/0`, // range - 6 days from prev month ~ 6 days from next month
+      }-6/0`, // range - 6 days from prev month ~ 6 days from next month
       headers: {
         "Content-Type": "application/json",
         Authorization: `jwt ${token}`,
