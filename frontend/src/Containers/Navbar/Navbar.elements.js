@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { nearWhite, lightGray, beige, lightBrown } from "../../Colors";
+import * as colors from "../../Colors";
 
 // Container
 export const NavContainer = styled.nav`
@@ -12,7 +12,7 @@ export const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
 
-  background-color: ${nearWhite};
+  background-color: ${colors.iiBG};
 `;
 
 // Logo
@@ -43,7 +43,7 @@ export const SearchBar = styled.input`
 
   font-size: 0.7rem;
 
-  border: solid 1px ${lightGray};
+  border: solid 1px ${colors.cardStroke};
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
 
@@ -63,10 +63,10 @@ export const SearchButton = styled.button`
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 
-  background-color: ${beige};
+  background-color: ${colors.iiBeige};
 
   & i {
-    color: ${nearWhite};
+    color: ${colors.iiBG};
   }
 `;
 
@@ -110,5 +110,6 @@ export const RightNavLinksWrapper = styled.div`
 
 export const GreetMessage = styled.p`
   font-size: 1.2rem;
-  color: ${lightBrown};
+  color: ${colors.iiBrown};
+  opacity: 0.7;
 `;
