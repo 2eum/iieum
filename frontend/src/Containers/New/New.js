@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import * as g from "../../globalStyles";
 import * as S from "./New.elements";
 import { CreateCard } from "../../Components";
@@ -6,12 +7,28 @@ import { useParams, Redirect } from "react-router";
 
 const New = ({ currUser, token, userId}) => {
   let { id } = useParams();
+  const [question, setQuestion] = useState("");
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `api/question/${id}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      setQuestion(response.data.question_content);
+    });
+  }, [question]);
+
+  
+
   return (
     <>
     <g.Background> 
       <g.PageSection>
         <g.PageTitleWrapper>
-          <g.PageTitle>이야기 작성하기</g.PageTitle>
+          <g.PageTitle>{question? question:""}</g.PageTitle>
           <S.ReselectButtonWrapper>
             <S.ReselectButton to="/explore">
               질문 다시 고르기

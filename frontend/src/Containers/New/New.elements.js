@@ -10,11 +10,11 @@ export const CreateCardWrapper = styled.div`
 
 export const ReselectButtonWrapper = styled.div`
   width: 30%;
-  margin: 2% auto;
+  margin: 3% auto;
 `;
 
 export const ReselectButton = styled(Link)`
   text-decoration: underline;
-  margin-top: 1rem;
   cursor: pointer;
+  opacity: 0.7;
 `;
