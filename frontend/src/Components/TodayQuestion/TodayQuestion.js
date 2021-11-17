@@ -14,13 +14,19 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const [indicators, setIndicators] = useState([]);
   const [contentIdx, setIdx] = useState();
   const [cardLId, setCardLId] = useState();
+  const [dayName, setDayName] = useState();
+
+  const dayNames = ["오늘", "어제", "3일 전", "4일 전", "5일 전"];
+
+  const today = new Date();
+  const startingDate = new Date(today);
+  startingDate.setDate(startingDate.getDate() - 4);
   // on Mount
   useEffect(() => {
-    const today = new Date();
-    const startingDate = today - 4;
+    console.log(startingDate);
     axios({
       method: "get",
-      url: `/api/question/${startingDate.getFullYear()}-${
+      url: `/api/questionlist/${startingDate.getFullYear()}-${
         startingDate.getMonth() + 1
       }-${startingDate.getDate()}/${today.getFullYear()}-${
         today.getMonth() + 1
@@ -46,6 +52,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
       setQuestion(questionList[0].question_content);
       setQuestionId(questionList[0].id);
       setPageQuestion(questionList[0].id);
+      setDayName(dayNames[0]);
     }
   }, [questionList]);
 
@@ -131,6 +138,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
     setQuestion(questionList[qIdx].question_content);
     setQuestionId(questionList[qIdx].id);
     setPageQuestion(questionList[qIdx].id);
+    setDayName(dayNames[qIdx]);
   };
 
   // CardL switch when CardS clicked
@@ -157,7 +165,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
             <i className="fas fa-random"></i>
           </S.ShuffleButton>
           <S.TodayQuestion>
-            <S.QDate>오늘의 질문</S.QDate>
+            <S.QDate>{dayName}의 질문</S.QDate>
             <S.Question>{question}</S.Question>
           </S.TodayQuestion>
         </S.QuestionArea>
