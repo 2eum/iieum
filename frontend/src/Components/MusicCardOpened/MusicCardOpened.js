@@ -29,7 +29,6 @@ const MusicCardOpened = ({currUser, token, userId, cardIndex, title, artist, sou
 
   const OpenedPostList = content 
     ? content.map((c) => {
-      console.log(c);
       return (
         <>
           <PostCardL

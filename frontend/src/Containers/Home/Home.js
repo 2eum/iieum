@@ -38,8 +38,10 @@ const Home = ({ currUser, token, userId }) => {
               <br />
               <br />
               <br />
-              당신의 이야기를 들려주세요. 어떤 내용이든 좋아요. 아주 사소한
-              것부터 깊은 속마음까지, 떠오르는 대로 적어볼까요?
+              당신의 이야기를 들려주세요.<br />
+              어떤 내용이든 좋아요. <br />
+              사소한 일상부터 깊은 속마음까지,<br />
+              떠오르는 대로 적어볼까요?
             </S.HelperLeft>
           </S.CreateCardLeft>
           <CreateCard
@@ -85,7 +87,7 @@ const Home = ({ currUser, token, userId }) => {
         {/* 3.Question List Page */}
         <S.QuestionListPageSection>
           <S.PageHeaderContainer>
-            <S.PageHeader>다른 질문 둘러보기</S.PageHeader>
+            <S.PageHeader>이런 질문은 어때요?</S.PageHeader>
             <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
           </S.PageHeaderContainer>
           <QuestionCardGrid currUser={currUser} token={token} userId={userId} />
@@ -94,7 +96,7 @@ const Home = ({ currUser, token, userId }) => {
         {/* 4. Music List Page*/}
         <S.MusicListPageSection>
           <S.PageHeaderContainer>
-            <S.PageHeader>최근에 선택된 음악</S.PageHeader>
+            <S.PageHeader>최근에 선택된 음악이에요.</S.PageHeader>
           </S.PageHeaderContainer>
             <MusicCardGrid
               currUser={currUser} 

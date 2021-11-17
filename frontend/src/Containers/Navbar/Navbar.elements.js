@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { nearWhite, lightGray, beige, lightBrown } from "../../Colors";
+import * as colors from "../../Colors";
 
 // Container
 export const NavContainer = styled.nav`
@@ -12,7 +12,7 @@ export const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
 
-  background-color: ${nearWhite};
+  background-color: ${colors.iiBG};
 `;
 
 // Logo
@@ -21,7 +21,7 @@ export const LogoContainer = styled(Link)`
 `;
 
 export const Logo = styled.img`
-  width: 80%;
+  width: 65%;
   cursor: pointer;
 `;
 
@@ -43,17 +43,15 @@ export const SearchBar = styled.input`
 
   font-size: 0.7rem;
 
-  border: solid 1px ${lightGray};
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border: none;
 
-  &:focus {
-    outline: none;
-  }
+  border-bottom: solid 1px ${colors.cardStroke};
+
+  background-color: ${colors.iiBG};
 `;
 
 export const SearchButton = styled.button`
-  width: 2.5rem;
+  width: 1rem;
   height: 2rem;
 
   padding: 0.5rem;
@@ -63,10 +61,11 @@ export const SearchButton = styled.button`
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 
-  background-color: ${beige};
+  background-color: ${colors.iiBG};
 
   & i {
-    color: ${nearWhite};
+    color: ${colors.iiPurple};
+    opacity: 0.7;
   }
 `;
 
@@ -109,6 +108,7 @@ export const RightNavLinksWrapper = styled.div`
 `;
 
 export const GreetMessage = styled.p`
-  font-size: 1.2rem;
-  color: ${lightBrown};
+  font-size: 1rem;
+  color: ${colors.iiBrown};
+  opacity: 0.7;
 `;
