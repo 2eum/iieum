@@ -6,6 +6,7 @@ import * as g from "../../globalStyles";
 
 import {
   TodayQuestion,
+  MusicCard,
   CreateCard,
   QuestionCardGrid,
   MusicCardGrid,
@@ -15,13 +16,19 @@ import {
 const Home = ({ currUser, token, userId }) => {
   const [loaded, setLoad] = useState(false);
   const [placeholder, setPlaceholder] = useState("Loading Content");
+  const [pageQuestion, setPageQuestion] = useState();
 
   return (
     <>
       <S.Background>
         {/* 1.Question Page */}
         <S.TodayQuestionSection>
-          <TodayQuestion currUser={currUser} token={token} userId={userId} />
+          <TodayQuestion
+            currUser={currUser}
+            token={token}
+            userId={userId}
+            setPageQuestion={setPageQuestion}
+          />
         </S.TodayQuestionSection>
 
         {/* 2.Create Page */}
@@ -35,7 +42,13 @@ const Home = ({ currUser, token, userId }) => {
               것부터 깊은 속마음까지, 떠오르는 대로 적어볼까요?
             </S.HelperLeft>
           </S.CreateCardLeft>
-          <CreateCard />
+          <CreateCard
+            currUser={currUser}
+            token={token}
+            userId={userId}
+            questionId={pageQuestion}
+            type="post"
+          />
           <S.CreateCardRight>
             <S.HelperQuestionArea>
               <S.HelperRight>
@@ -57,14 +70,14 @@ const Home = ({ currUser, token, userId }) => {
                 <br />
                 <br />
               </S.HelperRight>
-              <g.ButtonWrapper>
+              {/* <g.ButtonWrapper>
                 <g.DefaultButton>
                   <g.ButtonIconArea>
                     <g.ButtonIcon className="fa fa-check" />
                   </g.ButtonIconArea>
                   다 썼어요
                 </g.DefaultButton>
-              </g.ButtonWrapper>
+              </g.ButtonWrapper> */}
             </S.DoneButtonArea>
           </S.CreateCardRight>
         </S.CreatePageSection>

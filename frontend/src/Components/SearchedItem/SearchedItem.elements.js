@@ -34,16 +34,21 @@ export const Artist = styled.p`
   }
 `;
 export const Cover = styled.img`
-  width: 40%;
+  width: 25%;
 `;
 export const Link = styled.img`
   width: 1rem;
   margin-right: 1vh;
 `;
-export const Preview = styled.audio``;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+`;
 
 export const SelectButton = styled.p`
   border: 1px solid #000;
-  background-color: #ccc;
+  background-color: transparent;
   cursor: pointer;
+  width: 3rem;
+  text-align: center;
 `;
