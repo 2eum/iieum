@@ -37,13 +37,7 @@ const SignUp = ({ saveUserData, currUser }) => {
   const [requestReview, setRequestReview] = useState(false);
 
   const onRegisterClick = () => {
-    if (!validateInput()) {
-      setRequestReview("모든 영역은 필수 입력입니다.");
-    } else if (!usernameChecked || !nicknameChecked) {
-      setRequestReview("아이디와 필명의 중복 확인이 필요합니다.");
-    } else if (!pwdMatch) {
-      setRequestReview("비밀번호가 일치하지 않습니다.");
-    } else {
+    if (validateInput()) {
       axios({
         method: "post",
         url: "/api/signup",
@@ -58,22 +52,39 @@ const SignUp = ({ saveUserData, currUser }) => {
           password2: pwdConfirm,
         },
       })
+        .catch((err) =>
+          err.response.status === 400
+            ? setRequestReview(
+                "비밀번호가 보안에 취약합니다. 다른 비밀번호를 입력해주세요."
+              )
+            : err.response
+        )
         .then((response) => {
-          if (response.status > 400) {
-            setPlaceholder("Something went wrong!");
+          if (response.status < 400) {
+            setSent(true);
           }
-          return response.data;
-        })
-        .then(() => {
-          setSent(true);
         });
     }
   };
 
   const validateInput = () => {
-    return username !== "" && email !== "" && pwd !== "" && pwdConfirm !== ""
-      ? true
-      : false;
+    if (username === "" || email === "" || pwd === "" || pwdConfirm === "") {
+      setRequestReview("모든 영역은 필수 입력입니다.");
+      return false;
+    } else if (!usernameChecked || !nicknameChecked) {
+      setRequestReview("아이디와 필명의 중복 확인이 필요합니다.");
+      return false;
+    } else if (!pwdMatch) {
+      setRequestReview("비밀번호가 일치하지 않습니다.");
+      return false;
+    } else if (pwd.length < 9) {
+      setRequestReview("비밀번호가 너무 짧습니다.");
+      return false;
+    } else if (pwd.match(/^\d+$/)) {
+      setRequestReview("비밀번호가 숫자로만 이루어져 있습니다.");
+      return false;
+    }
+    return true;
   };
 
   const checkDuplicate = (type, target, setFunc) => {
@@ -141,6 +152,7 @@ const SignUp = ({ saveUserData, currUser }) => {
                 onChange={(e) => {
                   setUsername(e.target.value);
                   setUsernameCheck();
+                  setRequestReview("");
                 }}
               />
               {!usernameChecked ? (
@@ -174,6 +186,7 @@ const SignUp = ({ saveUserData, currUser }) => {
                 onChange={(e) => {
                   setNickname(e.target.value);
                   setNicknameCheck();
+                  setRequestReview("");
                 }}
               />
               {!nicknameChecked ? (
@@ -194,9 +207,10 @@ const SignUp = ({ saveUserData, currUser }) => {
             <RegisterInput
               type="email"
               name="email"
-              placeholder="ex. test@iieum.com"
+              placeholder="ex. example@iieum.com"
               onChange={(e) => {
                 setEmail(e.target.value);
+                setRequestReview("");
               }}
             />
           </InputContainer>
@@ -205,10 +219,11 @@ const SignUp = ({ saveUserData, currUser }) => {
             <RegisterInput
               type="password"
               name="password"
-              placeholder="공백없이 영문, 숫자 포함 6-20자"
+              placeholder="공백없이 영문, 숫자 포함 8-20자"
               duplicateChecked={pwdMatch}
               onChange={(e) => {
                 setPwd(e.target.value);
+                setRequestReview("");
               }}
             />
           </InputContainer>
@@ -230,6 +245,7 @@ const SignUp = ({ saveUserData, currUser }) => {
               duplicateChecked={pwdMatch}
               onChange={(e) => {
                 setConfirm(e.target.value);
+                setRequestReview("");
               }}
             />
           </InputContainer>
