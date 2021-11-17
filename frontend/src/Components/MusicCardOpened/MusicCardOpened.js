@@ -4,7 +4,7 @@ import {PostCardL, MusicCard} from "..";
 import * as g from "../../globalStyles";
 import axios from "axios";
 
-const MusicCardOpened = ({currUser, token, userId, open, cardIndex, title, artist, source, link, cover}) => {
+const MusicCardOpened = ({currUser, token, userId, cardIndex, title, artist, source, link, cover}) => {
   const gridNum = cardIndex % 3;
   const [content, setContent] = useState(null);
 
@@ -25,10 +25,11 @@ const MusicCardOpened = ({currUser, token, userId, open, cardIndex, title, artis
       .then((data) => {
         setContent(data);
       });
-  }, []);
+  }, [title]);
 
   const OpenedPostList = content 
     ? content.map((c) => {
+      console.log(c);
       return (
         <>
           <PostCardL
@@ -43,7 +44,7 @@ const MusicCardOpened = ({currUser, token, userId, open, cardIndex, title, artis
 
   return (
     <>
-      <S.OpenedContainer open={open} gridNum={gridNum}>
+      <S.OpenedContainer>
         <S.MusicContainer>
           <MusicCard
             title={title}

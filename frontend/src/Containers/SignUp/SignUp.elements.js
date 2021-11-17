@@ -2,6 +2,15 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { beige, lightBrown, lightGray, nearWhite } from "../../Colors";
 
+export const AfterSent = styled.section`
+  width: 80%;
+  margin: 5% auto;
+  text-align: center;
+`;
+export const SentMessage = styled.p`
+  margin: 5%;
+`;
+
 export const RegisterSection = styled.main`
   width: 80%;
 

@@ -9,6 +9,7 @@ import {
   CreateCard,
   QuestionCardGrid,
   MusicCardGrid,
+  MusicCardOpened,
 } from "../../Components";
 
 const Home = ({ currUser, token, userId }) => {

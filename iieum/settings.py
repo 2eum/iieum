@@ -57,9 +57,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 ]
 
-ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
 }
 
 MIDDLEWARE = [
@@ -195,11 +195,6 @@ JWT_AUTH = {
 
 REST_USE_JWT = True
 
-ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
-REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
-}
-
 SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -210,7 +205,7 @@ EMAIL_PORT = '587' # gmail과 통신하는 포트
 
 EMAIL_HOST_USER = 'iieum.ms.official@gmail.com' # 발신할 이메일
 
-EMAIL_HOST_PASSWORD = '****' # 발신할 메일의 비밀번호
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_PWD"] # 발신할 메일의 비밀번호
 
 EMAIL_USE_TLS = True # TLS 보안 방법
 

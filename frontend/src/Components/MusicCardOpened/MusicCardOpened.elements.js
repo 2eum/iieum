@@ -4,27 +4,21 @@ import * as g from "../../globalStyles";
 
 export const OpenedContainer = styled.div`
   width: 60vw;
-  height: ${(p) => (p.open ? "75%" : 0)};
-  opacity: ${(p) => (p.open ? 1 : 0)};
-  display: ${(p) => (p.open ? `flex` : `none`)};
   position: relative;
   margin-top: 5vw;
   flex-direction: column;
   text-align: center;
-
-  ${(p) =>
-    p.gridNum === 0
-      ? ""
-      : p.gridNum === 1
-      ? `transform: translateX(-21vw);`
-      : `transform: translateX(-42vw);`}
 `;
 
-export const MusicContainer = styled.div``;
+export const MusicContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: auto;
+`;
 
 
 export const PostCardGrid = styled.div`
-  width: 100vw;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 3vw;

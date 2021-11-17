@@ -5,8 +5,8 @@ import axios from "axios";
 
 const MusicCardGrid = ({currUser, token, userId}) => {
   const [content, setContent] = useState(null);
-  const [openCard, setOpenCard] = useState(-1);
-  const [isOpened, setIsOpened] = useState(false);
+  const [openCard, setOpenCard] = useState(0);
+  // const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
     axios({
@@ -23,26 +23,20 @@ const MusicCardGrid = ({currUser, token, userId}) => {
         return response.data;
       })
       .then((data) => {
-        setContent(data);
+        setContent(data["music list"]);
       });
   }, []);
 
   const handleClick = (clickedCard) => {
-    if (clickedCard === openCard) {
-      setOpenCard(-1);
-      setIsOpened(false);
-    } else {
-      //다른 카드 클릭
-      setOpenCard(clickedCard);
-      setIsOpened(true);
-    }
+    setOpenCard(clickedCard);
+    // console.log(content["music list"][openCard][0]);
+    console.log(openCard);
   };
-  
+
     const MusicCardList = content
-    ? content["music list"].map((c, i) => {
-      console.log(content);
+    ? content.map((c, i) => {
       return (
-        <S.MusicCardWrapper>
+        <S.MusicCardWrapper onclick={()=>handleClick(i)} open={openCard === i}>
             <MusicCard
               title={c[0]}
               artist={c[1]}
@@ -51,20 +45,8 @@ const MusicCardGrid = ({currUser, token, userId}) => {
               link={c[4]}
               cardIndex={i}
               handleClick={handleClick}
-              open={isOpened && openCard === i}
+              open={openCard === i}
             />
-          <MusicCardOpened
-            currUser={currUser}
-            token={token}
-            userId={userId}
-            open={open}
-            cardIndex={i}
-            title={c[0]}
-            artist={c[1]}
-            cover={c[2]}
-            source={c[3]}
-            link={c[4]}
-          />
         </S.MusicCardWrapper>
       );
     })
@@ -72,9 +54,23 @@ const MusicCardGrid = ({currUser, token, userId}) => {
   
 
   return (
+    <>
     <S.MusicListContainer>
       {MusicCardList}
     </S.MusicListContainer>
+    <MusicCardOpened
+      currUser={currUser}
+      token={token}
+      userId={userId}
+      // open={open}
+      cardIndex={openCard}
+      title={content? content[openCard][0] : ""}
+      artist={content? content[openCard][1] : ""}
+      cover={content? content[openCard][2] : ""}
+      source={content? content[openCard][3] : ""}
+      link={content? content[openCard][4] : ""}
+    />
+  </>
 
   )
 }

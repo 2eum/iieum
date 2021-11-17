@@ -4,14 +4,14 @@ import * as g from "../../globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
-  width: 11vw;
-  height: 5vw;
-  padding: 5%;
-  border: 1px solid #abaaa6;
+  width: 13vw;
+  height: 6vw;
+  padding: 1vw;
+  // border: 1px solid ${colors.cardStroke};
 `;
 
 export const Cover = styled.img`
-  width: 30%;
+  width: 35%;
 
   margin: auto;
 
@@ -20,7 +20,7 @@ export const Cover = styled.img`
 
 export const Info = styled.div`
   margin-right: 3%;
-  width: 65%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -65,6 +65,7 @@ export const Artist = styled.p`
   top: 0;
   left: 0;
   width: 100%;
+  font-size: 0.8rem;
   //slide animation
   animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
 `;
