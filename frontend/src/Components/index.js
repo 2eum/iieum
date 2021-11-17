@@ -11,3 +11,5 @@ export { default as QuestionCard } from "./QuestionCard/QuestionCard";
 export { default as QuestionCardGrid } from "./QuestionCardGrid/QuestionCardGrid";
 export { default as QuestionOpened } from "./QuestionOpened/QuestionOpened";
 export { default as TodayQuestion } from "./TodayQuestion/TodayQuestion";
+export { default as MusicCardGrid } from "./MusicCardGrid/MusicCardGrid";
+export { default as MusicCardOpened } from "./MusicCardOpened/MusicCardOpened";

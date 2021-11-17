@@ -5,10 +5,12 @@ import * as S from "./Home.elements";
 import * as g from "../../globalStyles";
 
 import {
+  TodayQuestion,
   MusicCard,
   CreateCard,
   QuestionCardGrid,
-  TodayQuestion,
+  MusicCardGrid,
+  MusicCardOpened,
 } from "../../Components";
 
 const Home = ({ currUser, token, userId }) => {
@@ -94,63 +96,11 @@ const Home = ({ currUser, token, userId }) => {
           <S.PageHeaderContainer>
             <S.PageHeader>최근에 선택된 음악</S.PageHeader>
           </S.PageHeaderContainer>
-          <S.MusicListContainer>
-            <S.MusicCardWrapper>
-              <MusicCard
-                title="안녕"
-                artist="안녕"
-                source="안녕"
-                link="안녕"
-                cover="안녕"
-                cols="1"
-                postId="1"
-              />
-            </S.MusicCardWrapper>
-            <S.MusicCardWrapper>
-              <MusicCard
-                title="안녕"
-                artist="안녕"
-                source="안녕"
-                link="안녕"
-                cover="안녕"
-                cols="1"
-                postId="1"
-              />
-            </S.MusicCardWrapper>
-            <S.MusicCardWrapper>
-              <MusicCard
-                title="안녕"
-                artist="안녕"
-                source="안녕"
-                link="안녕"
-                cover="안녕"
-                cols="1"
-                postId="1"
-              />
-            </S.MusicCardWrapper>
-            <S.MusicCardWrapper>
-              <MusicCard
-                title="안녕"
-                artist="안녕"
-                source="안녕"
-                link="안녕"
-                cover="안녕"
-                cols="1"
-                postId="1"
-              />
-            </S.MusicCardWrapper>
-            <S.MusicCardWrapper>
-              <MusicCard
-                title="안녕"
-                artist="안녕"
-                source="안녕"
-                link="안녕"
-                cover="안녕"
-                cols="1"
-                postId="1"
-              />
-            </S.MusicCardWrapper>
-          </S.MusicListContainer>
+            <MusicCardGrid
+              currUser={currUser} 
+              token={token} 
+              userId={userId}
+            />
         </S.MusicListPageSection>
       </S.Background>
     </>
