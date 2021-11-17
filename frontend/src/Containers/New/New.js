@@ -1,22 +1,19 @@
 import React from "react";
-import { MainContentContainer, PageHeader, Line } from "./New.elements";
-import { DiaryForm } from "../../Components";
+import * as g from "../../globalStyles";
+import * as S from "./New.elements";
+import { CreateCard } from "../../Components";
 import { useParams, Redirect } from "react-router";
 
-const New = ({ token }) => {
+const New = ({ currUser, token, userId}) => {
   let { id } = useParams();
   return (
     <>
-      <MainContentContainer>
-        <PageHeader>나의 이야기 작성하기</PageHeader>
-        <Line />
-
-        <DiaryForm
-          token={token}
-          type={"post"}
-          c_questionId={id ? id * 1 : ""}
-        />
-      </MainContentContainer>
+    <g.Background> 
+      <g.MainContentContainer>
+        <CreateCard currUser={currUser} token={token}
+        userId={userId} questionId={id} type="post"/>
+      </g.MainContentContainer>
+    </g.Background>
     </>
   );
 };

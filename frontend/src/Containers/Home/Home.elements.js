@@ -3,11 +3,6 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 import { Link } from "react-router-dom";
 
-export const Background = styled.div`
-  background-color: ${colors.iiBG};
-  padding: 8% 20%;
-`;
-
 export const PageHeader = styled.h3`
   font-size: 3rem;
 `;
@@ -157,7 +152,6 @@ export const QuestionListPageSection = styled.section`
   flex-direction: column;
   justify-content: center;
   margin: 15% auto;
-  text-align: center;
 `;
 
 export const ToQuestionListButton = styled(Link)`

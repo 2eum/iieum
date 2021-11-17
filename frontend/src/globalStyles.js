@@ -183,4 +183,18 @@ export const IndicatorDot = styled.div`
   content: "";
 `;
 
+//Page layout
+export const PageSection = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // margin: 10% auto;
+`;
+
+export const Background = styled.div`
+  background-color: ${colors.iiBG};
+  padding: 8% 20%;
+`;
+
 export default GlobalStyle;

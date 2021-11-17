@@ -20,7 +20,7 @@ const Home = ({ currUser, token, userId }) => {
 
   return (
     <>
-      <S.Background>
+      <g.Background>
         {/* 1.Question Page */}
         <S.TodayQuestionSection>
           <TodayQuestion
@@ -104,7 +104,7 @@ const Home = ({ currUser, token, userId }) => {
               userId={userId}
             />
         </S.MusicListPageSection>
-      </S.Background>
+      </g.Background>
     </>
   );
 };
