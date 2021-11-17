@@ -88,7 +88,7 @@ const Home = ({ currUser, token, userId }) => {
         <S.QuestionListPageSection>
           <S.PageHeaderContainer>
             <S.PageHeader>이런 질문은 어때요?</S.PageHeader>
-            <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
+            <S.ToQuestionListButton to={`/explore`}>모든 질문 보기 &gt;</S.ToQuestionListButton>
           </S.PageHeaderContainer>
           <QuestionCardGrid currUser={currUser} token={token} userId={userId} />
         </S.QuestionListPageSection>
