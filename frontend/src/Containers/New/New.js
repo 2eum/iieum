@@ -12,6 +12,11 @@ const New = ({ currUser, token, userId}) => {
       <g.PageSection>
         <g.PageTitleWrapper>
           <g.PageTitle>이야기 작성하기</g.PageTitle>
+          <S.ReselectButtonWrapper>
+            <S.ReselectButton to="/explore">
+              질문 다시 고르기
+            </S.ReselectButton>
+          </S.ReselectButtonWrapper>
         </g.PageTitleWrapper>
         <g.MainContentContainer>
           <S.CreateCardWrapper>

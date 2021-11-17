@@ -134,7 +134,7 @@ export const DefaultButton = styled(Link)`
 
 export const MainContentContainer = styled.div`
   width: 100%;
-  margin: 5%;
+  margin: 4%;
   text-align: center;
 `;
 
@@ -198,7 +198,11 @@ export const PageSection = styled.section`
 `;
 
 export const PageTitleWrapper = styled.div`
+  width: 100%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 export const PageTitle = styled.h3`
