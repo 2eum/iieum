@@ -98,7 +98,7 @@ class RandomQuestion(APIView):
                 serializer_class = QuestionSerializer(random_question, many=False, context=serializer_context)
                 return Response(serializer_class.data)
 
-# 최근 5일 간의 질문 불러오기(최신순) => 추후 삭제
+# 최근 5일 간의 질문 불러오기(최신순)
 class PastQuestion(APIView):
     @csrf_exempt
     def get(self, request):
