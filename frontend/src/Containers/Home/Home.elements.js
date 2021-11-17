@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const Background = styled.div`
   background-color: ${colors.iiBG};
-  padding: 5% 20%;
+  padding: 8% 20%;
 `;
 
 export const PageHeader = styled.h3`

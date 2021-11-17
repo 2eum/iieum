@@ -6,6 +6,7 @@ import * as g from "../../globalStyles";
 
 import {
   TodayQuestion,
+  MusicCard,
   CreateCard,
   QuestionCardGrid,
   MusicCardGrid,
@@ -15,13 +16,19 @@ import {
 const Home = ({ currUser, token, userId }) => {
   const [loaded, setLoad] = useState(false);
   const [placeholder, setPlaceholder] = useState("Loading Content");
+  const [pageQuestion, setPageQuestion] = useState();
 
   return (
     <>
       <S.Background>
         {/* 1.Question Page */}
         <S.TodayQuestionSection>
-          <TodayQuestion currUser={currUser} token={token} userId={userId} />
+          <TodayQuestion
+            currUser={currUser}
+            token={token}
+            userId={userId}
+            setPageQuestion={setPageQuestion}
+          />
         </S.TodayQuestionSection>
 
         {/* 2.Create Page */}
@@ -31,11 +38,19 @@ const Home = ({ currUser, token, userId }) => {
               <br />
               <br />
               <br />
-              당신의 이야기를 들려주세요. 어떤 내용이든 좋아요. 아주 사소한
-              것부터 깊은 속마음까지, 떠오르는 대로 적어볼까요?
+              당신의 이야기를 들려주세요.<br />
+              어떤 내용이든 좋아요. <br />
+              사소한 일상부터 깊은 속마음까지,<br />
+              떠오르는 대로 적어볼까요?
             </S.HelperLeft>
           </S.CreateCardLeft>
-          <CreateCard />
+          <CreateCard
+            currUser={currUser}
+            token={token}
+            userId={userId}
+            questionId={pageQuestion}
+            type="post"
+          />
           <S.CreateCardRight>
             <S.HelperQuestionArea>
               <S.HelperRight>
@@ -57,14 +72,14 @@ const Home = ({ currUser, token, userId }) => {
                 <br />
                 <br />
               </S.HelperRight>
-              <g.ButtonWrapper>
+              {/* <g.ButtonWrapper>
                 <g.DefaultButton>
                   <g.ButtonIconArea>
                     <g.ButtonIcon className="fa fa-check" />
                   </g.ButtonIconArea>
                   다 썼어요
                 </g.DefaultButton>
-              </g.ButtonWrapper>
+              </g.ButtonWrapper> */}
             </S.DoneButtonArea>
           </S.CreateCardRight>
         </S.CreatePageSection>
@@ -72,7 +87,7 @@ const Home = ({ currUser, token, userId }) => {
         {/* 3.Question List Page */}
         <S.QuestionListPageSection>
           <S.PageHeaderContainer>
-            <S.PageHeader>다른 질문 둘러보기</S.PageHeader>
+            <S.PageHeader>이런 질문은 어때요?</S.PageHeader>
             <S.ToQuestionListButton>모든 질문 보기 &gt;</S.ToQuestionListButton>
           </S.PageHeaderContainer>
           <QuestionCardGrid currUser={currUser} token={token} userId={userId} />
@@ -81,7 +96,7 @@ const Home = ({ currUser, token, userId }) => {
         {/* 4. Music List Page*/}
         <S.MusicListPageSection>
           <S.PageHeaderContainer>
-            <S.PageHeader>최근에 선택된 음악</S.PageHeader>
+            <S.PageHeader>최근에 선택된 음악이에요.</S.PageHeader>
           </S.PageHeaderContainer>
             <MusicCardGrid
               currUser={currUser} 

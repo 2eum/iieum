@@ -24,7 +24,7 @@ const Navbar = ({ currUser, handleLogout }) => {
         </LogoContainer>
 
         <SearchBarContainer>
-          <SearchBar placeholder="검색하기" />
+          <SearchBar placeholder="찾고 싶은 이야기나 음악이 있나요?" />
           <SearchButton>
             <i className="fas fa-search"></i>
           </SearchButton>
@@ -34,7 +34,7 @@ const Navbar = ({ currUser, handleLogout }) => {
             어서오세요 {currUser ? `${currUser}님` : ""} :)
           </GreetMessage>
           <RightNavLinksWrapper>
-            <NavLink to="/">둘러보기</NavLink>
+            <NavLink to="/">질문 둘러보기</NavLink>
             {currUser ? (
               <>
                 <NavLink to="/mypage">내 페이지</NavLink>

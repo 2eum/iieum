@@ -25,19 +25,8 @@ urlpatterns = [
     re_path(r'^account-confirm-email/$', VerifyEmailView.as_view(), name='account_email_verification_sent'),
     # 유저가 클릭한 이메일(=링크) 확인
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', ConfirmEmailView.as_view(), name='account_confirm_email'),
+
+    path('api/nickname-check', NicknameCheck.as_view()),
+    path('api/username-check', UsernameCheck.as_view()),
+    path('api/email-check', EmailCheck.as_view()),
 ]
-
-
-
-
-
-
-
-"""from django.urls import path
-from .views import SignupView, LoginView
-
-urlpatterns = [
-    path('api/signup/', SignupView.as_view()),
-    path('api/login/', LoginView.as_view()),
-]
-"""
