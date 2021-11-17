@@ -62,15 +62,45 @@ export const InputLabel = styled.label`
   text-align: left;
 `;
 
+export const InputWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const RegisterInput = styled.input`
   padding: 0.5rem;
 
   border-radius: 5px;
-  border: 1px solid ${lightGray};
+  border: 1px solid
+    ${(p) =>
+      p.duplicateChecked === false
+        ? "red"
+        : p.duplicateChecked === true
+        ? "green"
+        : lightGray};
 
   &:focus {
     outline: none;
   }
+`;
+
+export const DuplicateMessage = styled.span`
+  color: red;
+  font-size: 0.8rem;
+`;
+
+export const DuplicateConfirm = styled.p`
+  color: green;
+`;
+
+export const DuplicateCheckButton = styled.button`
+  padding: 0.5rem;
+  width: 20%;
+  background-color: transparent;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
 `;
 
 export const RegisterBtnContainer = styled.div`
