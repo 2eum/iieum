@@ -87,7 +87,6 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
   }, [searchQuery]);
 
   const handleSubmit = (e) => {
-    console.log(questionId);
     axios({
       method: type,
       url: type === "post" ? "api/post/" : `api/post/${id}/`,
@@ -105,9 +104,7 @@ const DiaryForm = ({ token, c_title, c_body, c_questionId, type, c_id }) => {
         track_audio: mObject.preview,
         question: questionId,
       },
-    })
-      .then((res) => setId(res.data.id))
-      .then(() => setSubmitStat(true));
+    }).then(() => setSubmitStat(true));
   };
 
   const updateSearchInput = (e) => {

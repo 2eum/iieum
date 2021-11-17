@@ -18,6 +18,7 @@ export const CreateCardArea = styled.section`
 
 export const TopArea = styled.section`
   text-align: right;
+  height: 10%;
 `;
 
 export const Question = styled.p`
@@ -25,12 +26,49 @@ export const Question = styled.p`
 `;
 
 export const MusicSearchArea = styled.section`
-  height: 20%;
-  text-align: right;
+  height: ${(p) => (p.isSearching ? "70%" : "20%")};
+  display: flex;
+  justify-content: ${(p) => (p.isSearching ? "center" : "flex-end")};
+  align-items: flex-start;
+  transition: all 1s;
+  position: relative;
+`;
+
+export const MusicCardWrapper = styled.div`
+  width: 60%;
+`;
+
+export const SearchBar = styled.div`
+  border-bottom: 1px solid ${colors.iiBrown};
+  width: 40%;
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  padding: 0.5rem 0;
+`;
+
+export const SearchInput = styled.input`
+  width: 80%;
+  background-color: #ffffff00;
+  border: none;
+  position: relative;
+  z-index: 1;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SearchResultContainer = styled.div`
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  height: 23rem;
+  overflow-y: scroll;
+  box-shadow: ${g.CardShadow};
 `;
 
 export const FormArea = styled.section`
-  height: 60%;
+  height: ${(p) => (p.isSearching ? "30%" : "60%")};
   display: flex;
   flex-direction: column;
 `;
@@ -67,3 +105,17 @@ export const BottomArea = styled.section`
 `;
 
 export const Signature = styled.h3``;
+
+export const SubmitButton = styled.p`
+  text-decoration: underline;
+  margin-top: 1rem;
+  cursor: pointer;
+`;
+
+export const ResetChoiceButton = styled.p`
+  text-decoration: underline;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-align: right;
+`;
