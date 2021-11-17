@@ -55,7 +55,7 @@ class SearchView(APIView):
         results = sp.search(search_word)
         return Response({"Search word": search_word, "Results": results})
 
-# 마이페이지 => 추후 삭제
+# 마이페이지
 class MyPageView(APIView):
     authentication_classes = [JSONWebTokenAuthentication]
     permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly)
@@ -128,21 +128,16 @@ class LikeToggle(APIView):
         return Response(serializer_class.data)
 
 
-"""========================================= Endpoint 추가 및 수정 ========================================="""
-
-
 # 특정 날짜/개수 범위 내의 질문리스트 (req: 날짜, 개수제한 / res: 질문 리스트)
 class QuestionList(APIView):
     @csrf_exempt
-    def get(self, request, s_year, s_month, s_day, e_year, e_month, e_day, limit):
-        startdate_string = str(s_year)+"-"+str(s_month)+"-"+str(s_day)
-        startdate = datetime.strptime(startdate_string, "%Y-%m-%d")
-        enddate_string = str(e_year)+"-"+str(e_month)+"-"+str(e_day)
-        enddate = datetime.strptime(enddate_string, "%Y-%m-%d")
-        if limit == 0: # 한계없음
+    def get(self, request, start_date, end_date, limit):
+        startdate = datetime.strptime(start_date, "%Y-%m-%d")
+        enddate = datetime.strptime(end_date, "%Y-%m-%d")
+        if int(limit) == 0: # 한계없음
             questionlist = Question.objects.filter(released_date__range=[startdate, enddate]).order_by('-released_date')
         else:
-            questionlist = Question.objects.filter(released_date__range=[startdate, enddate]).order_by('-released_date')[:limit]
+            questionlist = Question.objects.filter(released_date__range=[startdate, enddate]).order_by('-released_date')[:int(limit)]
         if questionlist:
             serializer_context = {'request': request,}
             serializer_class = QuestionSerializer(questionlist, many=True, context=serializer_context)
@@ -183,15 +178,13 @@ class PostList_user(APIView):
 # 특정 날짜 범위 내의 글목록, 유저 구분X (req: 날짜, 개수 제한 / res: 해당 기간 동안의 글 목록)
 class PostList_date(APIView):
     @csrf_exempt
-    def get(self, request, s_year, s_month, s_day, e_year, e_month, e_day, limit):
-        startdate_string = str(s_year)+"-"+str(s_month)+"-"+str(s_day)
-        startdate = datetime.strptime(startdate_string, "%Y-%m-%d")
-        enddate_string = str(e_year)+"-"+str(e_month)+"-"+str(e_day)
-        enddate = datetime.strptime(enddate_string, "%Y-%m-%d")
-        if limit == 0: # 한계없음
+    def get(self, request, start_date, end_date, limit):
+        startdate = datetime.strptime(start_date, "%Y-%m-%d")
+        enddate = datetime.strptime(end_date, "%Y-%m-%d")
+        if int(limit) == 0: # 한계없음
             postlist = Post.objects.filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')
         else:
-            postlist = Post.objects.filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')[:limit]
+            postlist = Post.objects.filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')[:int(limit)]
         if postlist:
             serializer_context = {'request': request,}
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
@@ -203,15 +196,13 @@ class PostList_date(APIView):
 # 타겟 유저의 특정 날짜 범위 내의 글 목록 (req: 유저 아이디, 날짜 범위, 개수 제한 / res: 해당 기간 동안 유저의 글 목록)
 class PostList_user_date(APIView):
     @csrf_exempt
-    def get(self, request, pk, s_year, s_month, s_day, e_year, e_month, e_day, limit):
-        startdate_string = str(s_year)+"-"+str(s_month)+"-"+str(s_day)
-        startdate = datetime.strptime(startdate_string, "%Y-%m-%d")
-        enddate_string = str(e_year)+"-"+str(e_month)+"-"+str(e_day)
-        enddate = datetime.strptime(enddate_string, "%Y-%m-%d")
-        if limit == 0: # 한계없음
-            postlist = Post.objects.filter(user=pk).filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')
+    def get(self, request, pk, start_date, end_date, limit):
+        startdate = datetime.strptime(start_date, "%Y-%m-%d")
+        enddate = datetime.strptime(end_date, "%Y-%m-%d")
+        if int(limit) == 0: # 한계없음
+            postlist = Post.objects.filter(user=int(pk)).filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')
         else:
-            postlist = Post.objects.filter(user=pk).filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')[:limit]
+            postlist = Post.objects.filter(user=int(pk)).filter(pub_date__range=[startdate, enddate]).order_by('-pub_date')[:int(limit)]
         if postlist:
             serializer_context = {'request': request,}
             serializer_class = PostSerializer(postlist, many=True, context=serializer_context)
