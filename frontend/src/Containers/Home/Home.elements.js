@@ -157,6 +157,7 @@ export const QuestionListPageSection = styled.section`
   flex-direction: column;
   justify-content: center;
   margin: 15% auto;
+  text-align: center;
 `;
 
 export const ToQuestionListButton = styled(Link)`
@@ -180,17 +181,4 @@ export const MusicListPageSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-export const MusicListContainer = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8%;
-`;
-
-export const MusicCardWrapper = styled.div`
-  border: 1px solid ${colors.cardStroke};
-  border-radius: 5px;
-  box-shadow: ${g.CardShadow};
 `;

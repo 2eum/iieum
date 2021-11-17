@@ -53,9 +53,11 @@ const MusicCardOpened = ({currUser, token, userId, cardIndex, title, artist, sou
             cover={cover}
           />
         </S.MusicContainer>
-        <S.PostCardGrid>
-          {OpenedPostList}
-        </S.PostCardGrid>
+        <S.PostCardContainer>
+          <S.PostCardGrid>
+            {OpenedPostList}
+          </S.PostCardGrid>
+        </S.PostCardContainer>
       </S.OpenedContainer>
     </>
   )

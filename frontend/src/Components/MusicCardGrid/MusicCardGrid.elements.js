@@ -3,7 +3,6 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 
-
 export const MusicListContainer = styled.div`
   width: 80%;
   display: grid;
@@ -13,6 +12,7 @@ export const MusicListContainer = styled.div`
 `;
 
 export const MusicCardWrapper = styled.div`
+  cursor: pointer;
   width: 13vw;
   height: 6vw;
   border: 1px solid ${colors.cardStroke};
