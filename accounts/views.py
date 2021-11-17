@@ -7,6 +7,19 @@ from allauth.account.models import EmailConfirmation, EmailConfirmationHMAC
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404
+from rest_framework.exceptions import APIException
+from django.utils.encoding import force_text
+from rest_framework import status
+
+class CustomValidation(APIException):
+    status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+    default_detail = 'A server error occurred.'
+
+    def __init__(self, detail, field, status_code):
+        if status_code is not None:self.status_code = status_code
+        if detail is not None:
+            self.detail = {field: force_text(detail)}
+        else: self.detail = {'detail': force_text(self.default_detail)}
 
 class ConfirmEmailView(APIView):
     permission_classes = [AllowAny]
@@ -43,7 +56,7 @@ class NicknameCheck(APIView):
         if user is None:
             return Response({"detail":"Available nickname"})
         else:
-            raise Http404("Nickname already exist")
+            raise CustomValidation('Duplicate Nickname','nickname', status_code=status.HTTP_409_CONFLICT)
 
 class UsernameCheck(APIView):
     @csrf_exempt
@@ -53,7 +66,7 @@ class UsernameCheck(APIView):
         if user is None:
             return Response({"detail":"Available username"})
         else:
-            raise Http404("Username already exist")
+            raise CustomValidation('Duplicate Username','username', status_code=status.HTTP_409_CONFLICT)
 
 class EmailCheck(APIView):
     @csrf_exempt
@@ -63,4 +76,4 @@ class EmailCheck(APIView):
         if user is None:
             return Response({"detail":"Available email"})
         else:
-            raise Http404("Email already exist")
+            raise CustomValidation('Duplicate Email','email', status_code=status.HTTP_409_CONFLICT)
