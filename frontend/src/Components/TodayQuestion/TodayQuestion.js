@@ -15,6 +15,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const [contentIdx, setIdx] = useState();
   const [cardLId, setCardLId] = useState();
   const [dayName, setDayName] = useState();
+  const [shuffleHover, setShuffleHover] = useState(false);
 
   const dayNames = ["오늘", "어제", "3일 전", "4일 전", "5일 전"];
 
@@ -144,6 +145,11 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const switchCardL = (id) => {
     setCardLId(id);
   };
+
+  // question shuffle button hover function
+  const onShuffleHover = () => {
+    setShuffleHover(shuffleHover ? false : true);
+  };
   return (
     <>
       <S.TodayLeftContainer>
@@ -160,12 +166,21 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
       </S.TodayLeftContainer>
       <S.TodayRightContainer>
         <S.QuestionArea>
-          <S.ShuffleButton onClick={randomQuestion}>
-            <i className="fas fa-random"></i>
+          <S.ShuffleButton
+            onClick={randomQuestion}
+            onMouseEnter={onShuffleHover}
+            onMouseLeave={onShuffleHover}
+          >
+            <i className="fas fa-random" />
+            {shuffleHover ? "다른 질문 보기" : ""}
           </S.ShuffleButton>
           <S.TodayQuestion>
             <S.QDate>{dayName}의 질문</S.QDate>
             <S.Question>{question}</S.Question>
+            <S.AnswerButton smooth to="/#create">
+              <i className="fa fa-pen" />
+              질문에 답하기
+            </S.AnswerButton>
           </S.TodayQuestion>
         </S.QuestionArea>
         <S.PostCardSArea>
