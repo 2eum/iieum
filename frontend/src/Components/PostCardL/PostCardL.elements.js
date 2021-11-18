@@ -108,9 +108,10 @@ export const ContentBody = styled.p`
 
 export const PostBottom = styled.section`
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
+  ${(p) =>
+    p.editMode
+      ? "flex-direction: column; align-items: flex-end;"
+      : "flex-direction: row-reverse; justify-content: space-between; align-items: center;"}
   margin: 2%;
   height: 10%;
 `;
@@ -122,6 +123,7 @@ export const BtnArea = styled.div`
 
 export const EditBtn = styled.div`
   margin: auto 5%;
+  cursor: pointer;
 `;
 
 export const DeleteBtn = styled.div`
@@ -132,4 +134,93 @@ export const DeleteBtn = styled.div`
 export const Signature = styled.h3`
   margin: 2%;
   justify-self: flex-end;
+`;
+
+export const MusicSearchArea = styled.section`
+  height: ${(p) => (p.isSearching ? "70%" : "20%")};
+  display: flex;
+  justify-content: ${(p) => (p.isSearching ? "center" : "flex-end")};
+  align-items: flex-start;
+  transition: all 1s;
+  position: relative;
+`;
+
+export const MusicCardWrapper = styled.div`
+  width: 60%;
+`;
+
+export const SearchBar = styled.div`
+  border-bottom: 1px solid ${colors.iiBrown};
+  width: 40%;
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  padding: 0.5rem 0;
+`;
+
+export const SearchInput = styled.input`
+  width: 80%;
+  background-color: #ffffff00;
+  border: none;
+  position: relative;
+  z-index: 1;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SearchResultContainer = styled.div`
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  height: 23rem;
+  overflow-y: scroll;
+  box-shadow: ${g.CardShadow};
+`;
+
+export const FormArea = styled.section`
+  height: ${(p) => (p.isSearching ? "30%" : "60%")};
+  display: flex;
+  flex-direction: column;
+`;
+
+export const FormTitle = styled.input`
+  background-color: ${colors.iiBeige};
+  border: 0;
+  font-size: 1.5rem;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const FormBody = styled.textarea`
+  margin: 4% 0;
+  width: 100%;
+  height: 80%;
+  border: 0;
+  background-color: ${colors.iiBeige};
+  font-size: 1rem;
+  resize: none;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SubmitButton = styled.p`
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+export const ResetChoiceButton = styled.p`
+  text-decoration: underline;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-align: right;
+`;
+
+export const EditMessage = styled.p`
+  color: green;
+  font-size: 1.5rem;
+  justify-self: flex-start;
 `;
