@@ -10,9 +10,16 @@ import {
   New,
   Detail,
   Edit,
-  Explore
+  Explore,
+  Search,
 } from "./Containers";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 
 const App = () => {
@@ -46,69 +53,90 @@ const App = () => {
     location.reload();
   };
 
+  // search query function
+  const useQuery = () => {
+    const { search } = useLocation();
+
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  };
+
+  let query = useQuery();
+
   return (
     <div>
-      <Router>
-        <GlobalStyle />
-        <Navbar currUser={currUser} handleLogout={handleLogout} />
-        <Switch>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <Home currUser={currUser} token={token} userId={userId} />
-            )}
-          />
-          <Route
-            path="/mypage"
-            exact
-            render={() => (
-              <MyPage currUser={currUser} token={token} userId={userId} />
-            )}
-          />
-          <Route
-            path="/detail/:id"
-            exact
-            render={() => (
-              <Detail currUser={currUser} token={token} userId={userId} />
-            )}
-          />
-          <Route path="/detail/" exact render={() => <h2>잘못된 접근</h2>} />
-          <Route path="/new/:id" exact render={() => <New currUser={currUser} token={token} userId={userId}/>} />
-          <Route path="/new" exact render={() => <New token={token} />} />
-          <Route
-            path="/edit/:id"
-            exact
-            render={() => <Edit token={token} currUser={currUser} />}
-          />
-          <Route path="/explore" 
-            exact render={() => (<Explore currUser={currUser} token={token} userId={userId} />)} 
-          />
-          <Route
-            path="/register"
-            exact
-            render={() => (
-              <SignUp
-                token={token}
-                saveUserData={saveUserData}
-                currUser={currUser}
-              />
-            )}
-          />
-          <Route
-            path="/login"
-            exact
-            render={() => (
-              <Login
-                token={token}
-                saveUserData={saveUserData}
-                currUser={currUser}
-              />
-            )}
-          />
-        </Switch>
-        <Footer />
-      </Router>
+      <GlobalStyle />
+      <Navbar currUser={currUser} handleLogout={handleLogout} />
+      <Switch>
+        <Route
+          path="/"
+          exact
+          render={() => (
+            <Home currUser={currUser} token={token} userId={userId} />
+          )}
+        />
+        <Route
+          path="/mypage"
+          exact
+          render={() => (
+            <MyPage currUser={currUser} token={token} userId={userId} />
+          )}
+        />
+        <Route
+          path="/detail/:id"
+          exact
+          render={() => (
+            <Detail currUser={currUser} token={token} userId={userId} />
+          )}
+        />
+        <Route
+          path="/search"
+          exact
+          render={() => <Search keyword={query.get("q")} />}
+        />
+        <Route
+          path="/new/:id"
+          exact
+          render={() => (
+            <New currUser={currUser} token={token} userId={userId} />
+          )}
+        />
+        <Route path="/new" exact render={() => <New token={token} />} />
+        <Route
+          path="/edit/:id"
+          exact
+          render={() => <Edit token={token} currUser={currUser} />}
+        />
+        <Route
+          path="/explore"
+          exact
+          render={() => (
+            <Explore currUser={currUser} token={token} userId={userId} />
+          )}
+        />
+        <Route
+          path="/register"
+          exact
+          render={() => (
+            <SignUp
+              token={token}
+              saveUserData={saveUserData}
+              currUser={currUser}
+            />
+          )}
+        />
+        <Route
+          path="/login"
+          exact
+          render={() => (
+            <Login
+              token={token}
+              saveUserData={saveUserData}
+              currUser={currUser}
+            />
+          )}
+        />
+      </Switch>
+      <Footer />
     </div>
   );
 };
@@ -116,4 +144,9 @@ const App = () => {
 export default App;
 
 const container = document.getElementById("app");
-render(<App />, container);
+render(
+  <Router>
+    <App />
+  </Router>,
+  container
+);
