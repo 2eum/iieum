@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./MusicCardGrid.elements";
 import { MusicCard, MusicCardOpened } from "..";
 import axios from "axios";
 
-const MusicCardGrid = ({currUser, token, userId}) => {
+const MusicCardGrid = ({ currUser, token, userId }) => {
   const [content, setContent] = useState(null);
   const [openCard, setOpenCard] = useState(0);
   // const [isOpened, setIsOpened] = useState(false);
@@ -33,10 +33,14 @@ const MusicCardGrid = ({currUser, token, userId}) => {
     console.log(openCard);
   };
 
-    const MusicCardList = content
+  const MusicCardList = content
     ? content.map((c, i) => {
-      return (
-        <S.MusicCardWrapper onclick={()=>handleClick(i)} open={openCard === i}>
+        return (
+          <S.MusicCardWrapper
+            key={i}
+            onclick={() => handleClick(i)}
+            open={openCard === i}
+          >
             <MusicCard
               title={c[0]}
               artist={c[1]}
@@ -47,32 +51,28 @@ const MusicCardGrid = ({currUser, token, userId}) => {
               handleClick={handleClick}
               open={openCard === i}
             />
-        </S.MusicCardWrapper>
-      );
-    })
+          </S.MusicCardWrapper>
+        );
+      })
     : [];
-  
 
   return (
     <>
-    <S.MusicListContainer>
-      {MusicCardList}
-    </S.MusicListContainer>
-    <MusicCardOpened
-      currUser={currUser}
-      token={token}
-      userId={userId}
-      // open={open}
-      cardIndex={openCard}
-      title={content? content[openCard][0] : ""}
-      artist={content? content[openCard][1] : ""}
-      cover={content? content[openCard][2] : ""}
-      source={content? content[openCard][3] : ""}
-      link={content? content[openCard][4] : ""}
-    />
-  </>
-
-  )
-}
+      <S.MusicListContainer>{MusicCardList}</S.MusicListContainer>
+      <MusicCardOpened
+        currUser={currUser}
+        token={token}
+        userId={userId}
+        // open={open}
+        cardIndex={openCard}
+        title={content ? content[openCard][0] : ""}
+        artist={content ? content[openCard][1] : ""}
+        cover={content ? content[openCard][2] : ""}
+        source={content ? content[openCard][3] : ""}
+        link={content ? content[openCard][4] : ""}
+      />
+    </>
+  );
+};
 
 export default MusicCardGrid;
