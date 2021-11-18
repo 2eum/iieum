@@ -17,7 +17,7 @@ const QuestionOpened = ({currUser, token, userId, questionId, question, detail, 
         </S.QuestionContainer>
         <S.CreateButtonContainer>
           <S.CreateButtonWrapper>
-            <g.DefaultButton>
+            <g.DefaultButton to={`/new/${questionId}`}>
               <g.ButtonIconArea>
                 <g.ButtonIcon className="fa fa-pen"/>
               </g.ButtonIconArea>

@@ -34,7 +34,7 @@ const Navbar = ({ currUser, handleLogout }) => {
             어서오세요 {currUser ? `${currUser}님` : ""} :)
           </GreetMessage>
           <RightNavLinksWrapper>
-            <NavLink to="/">질문 둘러보기</NavLink>
+            <NavLink to="/explore">질문 둘러보기</NavLink>
             {currUser ? (
               <>
                 <NavLink to="/mypage">내 페이지</NavLink>

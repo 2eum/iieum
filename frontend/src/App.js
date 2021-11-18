@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { render } from "react-dom";
 import {
   Navbar,
@@ -10,6 +10,7 @@ import {
   New,
   Detail,
   Edit,
+  Explore
 } from "./Containers";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
@@ -73,12 +74,15 @@ const App = () => {
             )}
           />
           <Route path="/detail/" exact render={() => <h2>잘못된 접근</h2>} />
-          <Route path="/new/:id" exact render={() => <New token={token} />} />
+          <Route path="/new/:id" exact render={() => <New currUser={currUser} token={token} userId={userId}/>} />
           <Route path="/new" exact render={() => <New token={token} />} />
           <Route
             path="/edit/:id"
             exact
             render={() => <Edit token={token} currUser={currUser} />}
+          />
+          <Route path="/explore" 
+            exact render={() => (<Explore currUser={currUser} token={token} userId={userId} />)} 
           />
           <Route
             path="/register"

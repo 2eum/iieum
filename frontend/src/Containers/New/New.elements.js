@@ -1,22 +1,20 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import * as c from "../../Colors";
 
-import { black } from "../../Colors";
 
-export const MainContentContainer = styled.div`
-  width: 65%;
-  margin: 10vh auto;
+export const CreateCardWrapper = styled.div`
+  margin: 0 20%;
+
 `;
 
-export const PageHeader = styled.h2`
-  color: ${black};
+export const ReselectButtonWrapper = styled.div`
+  width: 30%;
+  margin: 3% auto;
 `;
 
-export const Line = styled.hr`
-  text-align: center;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  border-radius: 0.25rem;
-  border: 1px solid #dedbd8;
-  background-color: #dedbd8;
-  width: 20%;
+export const ReselectButton = styled(Link)`
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.7;
 `;

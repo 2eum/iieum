@@ -3,11 +3,6 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 import { Link } from "react-router-dom";
 
-export const Background = styled.div`
-  background-color: ${colors.iiBG};
-  padding: 8% 20%;
-`;
-
 export const PageHeader = styled.h3`
   font-size: 3rem;
 `;
@@ -180,17 +175,4 @@ export const MusicListPageSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-export const MusicListContainer = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8%;
-`;
-
-export const MusicCardWrapper = styled.div`
-  border: 1px solid ${colors.cardStroke};
-  border-radius: 5px;
-  box-shadow: ${g.CardShadow};
 `;
