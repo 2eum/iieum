@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { DefaultButton, ButtonShadow } from "../../globalStyles";
+
+import * as colors from "../../Colors";
+import { HashLink as Link } from "react-router-hash-link";
 
 export const TodayLeftContainer = styled.div`
   width: 50%;
@@ -18,6 +22,11 @@ export const QuestionArea = styled.section`
 
 export const ShuffleButton = styled.div`
   cursor: pointer;
+  display: flex;
+  gap: 3%;
+  align-items: center;
+  font-size: 1.5rem;
+  height: 2rem;
 `;
 
 export const TodayQuestion = styled.div`
@@ -61,4 +70,30 @@ export const IndicatorWrapper = styled.div`
 export const LoadMoreButtonContainer = styled.div`
   width: 5%;
   cursor: pointer;
+`;
+
+export const AnswerButton = styled(Link)`
+  width: 30%;
+  margin: 3% 0;
+  padding: 0.5rem 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  border: none;
+  border-radius: 5px;
+  background-color: ${colors.iiPurple};
+  box-shadow: ${ButtonShadow};
+  font-size: 1rem;
+  font-weight: 300;
+  color: ${colors.iiBeige};
+  cursor: pointer;
+
+  i {
+    color: ${colors.iiBeige};
+    margin-right: 5%;
+  }
+  &:hover {
+    color: ${colors.iiBeige};
+  }
 `;

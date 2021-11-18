@@ -121,6 +121,7 @@ export const DefaultButton = styled(Link)`
   padding: 0.5rem 1.2rem;
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 44px;
   border: none;
   border-radius: 5px;
