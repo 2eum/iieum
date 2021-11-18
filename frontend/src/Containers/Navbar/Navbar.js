@@ -25,7 +25,7 @@ const Navbar = ({ currUser, handleLogout }) => {
 
         <SearchBarContainer>
           <SearchBar placeholder="찾고 싶은 이야기나 음악이 있나요?" />
-          <SearchButton>
+          <SearchButton to="/search?q=짜잔">
             <i className="fas fa-search"></i>
           </SearchButton>
         </SearchBarContainer>

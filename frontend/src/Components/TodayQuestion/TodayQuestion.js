@@ -24,7 +24,6 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   startingDate.setDate(startingDate.getDate() - 4);
   // on Mount
   useEffect(() => {
-    console.log(startingDate);
     axios({
       method: "get",
       url: `/api/questionlist/${startingDate.getFullYear()}-${

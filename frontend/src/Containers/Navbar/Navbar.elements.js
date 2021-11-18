@@ -50,7 +50,7 @@ export const SearchBar = styled.input`
   background-color: ${colors.iiBG};
 `;
 
-export const SearchButton = styled.button`
+export const SearchButton = styled(Link)`
   width: 1rem;
   height: 2rem;
 
