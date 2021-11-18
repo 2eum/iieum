@@ -133,8 +133,9 @@ export const DefaultButton = styled(Link)`
 `;
 
 export const MainContentContainer = styled.div`
-  width: 80%;
-  margin: auto;
+  width: 100%;
+  margin: 4%;
+  text-align: center;
 `;
 
 // text slide animation
@@ -181,6 +182,31 @@ export const IndicatorDot = styled.div`
     p.selected ? colors.iiPurple : colors.iiPurpleOpacity};
   border-radius: 100%;
   content: "";
+`;
+
+//Page layout
+export const Background = styled.div`
+  background-color: ${colors.iiBG};
+  padding: 8% 20%;
+`;
+export const PageSection = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // margin: 10% auto;
+`;
+
+export const PageTitleWrapper = styled.div`
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+export const PageTitle = styled.h3`
+  font-size: 2rem;
 `;
 
 export default GlobalStyle;

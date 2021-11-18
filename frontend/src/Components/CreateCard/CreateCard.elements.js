@@ -76,6 +76,7 @@ export const FormArea = styled.section`
 export const PubDate = styled.p`
   color: ${colors.darkGray};
   margin: 2% 0;
+  text-align: left;
 `;
 
 export const FormTitle = styled.input`

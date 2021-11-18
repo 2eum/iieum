@@ -4,8 +4,8 @@ import * as g from "../../globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
-  width: 13vw;
-  height: 6vw;
+  // width: 13vw;
+  // height: 6vw;
   padding: 1vw;
   // border: 1px solid ${colors.cardStroke};
 `;
