@@ -1,10 +1,20 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./MusicCardOpened.elements";
-import {PostCardL, MusicCard} from "..";
+import { PostCardL, MusicCard } from "..";
 import * as g from "../../globalStyles";
 import axios from "axios";
 
-const MusicCardOpened = ({currUser, token, userId, cardIndex, title, artist, source, link, cover}) => {
+const MusicCardOpened = ({
+  currUser,
+  token,
+  userId,
+  cardIndex,
+  title,
+  artist,
+  source,
+  link,
+  cover,
+}) => {
   const gridNum = cardIndex % 3;
   const [content, setContent] = useState(null);
 
@@ -27,42 +37,36 @@ const MusicCardOpened = ({currUser, token, userId, cardIndex, title, artist, sou
       });
   }, [title]);
 
-  const OpenedPostList = content 
-    ? content.map((c) => {
-      return (
-        <>
+  const OpenedPostList = content
+    ? content.map((c, i) => {
+        return (
           <PostCardL
-          currUser={currUser}
-          token={token}
-          userId={userId}
-          postId={c.id}
+            key={i}
+            currUser={currUser}
+            token={token}
+            userId={userId}
+            postId={c.id}
           />
-        </>
-      )
-    }) : [];
+        );
+      })
+    : [];
 
   return (
-    <>
-      <S.OpenedContainer>
-        <S.MusicContainer>
-          <MusicCard
-            title={title}
-            artist={artist}
-            source={source}
-            link={link}
-            cover={cover}
-          />
-        </S.MusicContainer>
-        <S.PostCardContainer>
-          <S.PostCardGrid>
-            {OpenedPostList}
-          </S.PostCardGrid>
-        </S.PostCardContainer>
-      </S.OpenedContainer>
-    </>
-  )
-
-
-}
+    <S.OpenedContainer>
+      <S.MusicContainer>
+        <MusicCard
+          title={title}
+          artist={artist}
+          source={source}
+          link={link}
+          cover={cover}
+        />
+      </S.MusicContainer>
+      <S.PostCardContainer>
+        <S.PostCardGrid>{OpenedPostList}</S.PostCardGrid>
+      </S.PostCardContainer>
+    </S.OpenedContainer>
+  );
+};
 
 export default MusicCardOpened;
