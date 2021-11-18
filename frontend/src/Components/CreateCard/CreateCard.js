@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "./CreateCard.elements";
 import { MusicCard, SearchedItem } from "..";
 
-const CreateCard = ({ currUser, token, userId, questionId, type }) => {
+const CreateCard = ({ currUser, token, userId, questionId }) => {
   const [questionContent, setQuestionContent] = useState();
   const [isSearching, setSearching] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
@@ -110,8 +110,8 @@ const CreateCard = ({ currUser, token, userId, questionId, type }) => {
 
   const handleSubmit = (e) => {
     axios({
-      method: type,
-      url: type === "post" ? "api/post/" : `api/post/${id}/`,
+      method: "post",
+      url: "api/post/",
       headers: {
         "Content-Type": "application/json",
         Authorization: `jwt ${token}`,
