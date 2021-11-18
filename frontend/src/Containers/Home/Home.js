@@ -32,15 +32,17 @@ const Home = ({ currUser, token, userId }) => {
         </S.TodayQuestionSection>
 
         {/* 2.Create Page */}
-        <S.CreatePageSection>
+        <S.CreatePageSection id="create">
           <S.CreateCardLeft>
             <S.HelperLeft>
               <br />
               <br />
               <br />
-              당신의 이야기를 들려주세요.<br />
+              당신의 이야기를 들려주세요.
+              <br />
               어떤 내용이든 좋아요. <br />
-              사소한 일상부터 깊은 속마음까지,<br />
+              사소한 일상부터 깊은 속마음까지,
+              <br />
               떠오르는 대로 적어볼까요?
             </S.HelperLeft>
           </S.CreateCardLeft>
@@ -88,7 +90,9 @@ const Home = ({ currUser, token, userId }) => {
         <S.QuestionListPageSection>
           <S.PageHeaderContainer>
             <S.PageHeader>이런 질문은 어때요?</S.PageHeader>
-            <S.ToQuestionListButton to={`/explore`}>모든 질문 보기 &gt;</S.ToQuestionListButton>
+            <S.ToQuestionListButton to={`/explore`}>
+              모든 질문 보기 &gt;
+            </S.ToQuestionListButton>
           </S.PageHeaderContainer>
           <QuestionCardGrid currUser={currUser} token={token} userId={userId} />
         </S.QuestionListPageSection>
@@ -98,11 +102,7 @@ const Home = ({ currUser, token, userId }) => {
           <S.PageHeaderContainer>
             <S.PageHeader>최근에 선택된 음악이에요.</S.PageHeader>
           </S.PageHeaderContainer>
-            <MusicCardGrid
-              currUser={currUser} 
-              token={token} 
-              userId={userId}
-            />
+          <MusicCardGrid currUser={currUser} token={token} userId={userId} />
         </S.MusicListPageSection>
       </g.Background>
     </>
