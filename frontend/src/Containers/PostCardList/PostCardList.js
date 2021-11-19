@@ -3,28 +3,38 @@ import { PostCardL, PostCardS } from "../../Components";
 import * as S from "./PostCardList.elements";
 import axios from "axios";
 
-const PostCardList = ({ currUser, token, userId, questionId }) => {
+const PostCardList = ({ currUser, token, userId, questionId, list }) => {
   const [cols, setCols] = useState(5);
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState();
   const [cardLIndex, setCardLIndex] = useState();
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `/api/postlist-question/${questionId}/0`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.status > 400) {
-          setPlaceholder("Something went wrong!");
-        }
-        return response.data;
+    setContent();
+    if (list && list.length) {
+      setContent(list);
+    }
+  }, [list]);
+
+  // only send axios request when no content is passed in
+  useEffect(() => {
+    if (!list) {
+      axios({
+        method: "get",
+        url: `/api/postlist-question/${questionId}/0`,
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .then((data) => {
-        if (Array.isArray(data)) setContent(data);
-      });
+        .then((response) => {
+          if (response.status > 400) {
+            setPlaceholder("Something went wrong!");
+          }
+          return response.data;
+        })
+        .then((data) => {
+          if (Array.isArray(data)) setContent(data);
+        });
+    }
   }, [cols]);
 
   // card open, close functions
@@ -55,24 +65,30 @@ const PostCardList = ({ currUser, token, userId, questionId }) => {
     : "";
 
   return (
-    <S.CardListContainer>
-      <S.GridContainer cols={cols}>{PostCardSItems}</S.GridContainer>
-      {/* show post card l if card is selected */}
-      {cardLIndex ? (
-        <S.PostCardLContainer cols={cols}>
-          <PostCardL
-            currUser={currUser}
-            token={token}
-            userId={userId}
-            postId={cardLIndex}
-            handleCardClose={handleCardClose}
-            cols={cols}
-          />
-        </S.PostCardLContainer>
+    <>
+      {content ? (
+        <S.CardListContainer>
+          <S.GridContainer cols={cols}>{PostCardSItems}</S.GridContainer>
+          {/* show post card l if card is selected */}
+          {cardLIndex ? (
+            <S.PostCardLContainer cols={cols}>
+              <PostCardL
+                currUser={currUser}
+                token={token}
+                userId={userId}
+                postId={cardLIndex}
+                handleCardClose={handleCardClose}
+                cols={cols}
+              />
+            </S.PostCardLContainer>
+          ) : (
+            ""
+          )}
+        </S.CardListContainer>
       ) : (
         ""
       )}
-    </S.CardListContainer>
+    </>
   );
 };
 
