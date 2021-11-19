@@ -17,6 +17,7 @@ from django.http import Http404
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from django.db.models import Q
 
 # 전체 글
 class PostViewSet(viewsets.ModelViewSet): 
@@ -324,3 +325,31 @@ class Postlist_music(APIView):
             return Response(serializer_class.data)
         else:
             raise Http404("Music does not exist")
+
+class Search(APIView):
+    @csrf_exempt
+    def get(self, request, query):
+        postlist = Post.objects.all().order_by('-pub_date')
+        questionlist = Question.objects.all()
+        targetlist = []
+        musiclist = []
+        for post in postlist:
+            target = [post.track_title, post.track_artist]
+            if target not in targetlist:
+                targetlist.append(target)
+                music = [post.track_title, post.track_artist, post.track_album_cover, post.track_audio, post.spotify_link]
+                musiclist.append(music)
+
+        if query:
+            posts = postlist.filter(Q(title__icontains=query)|Q(content__icontains=query))
+            questions = questionlist.filter(Q(question_content__icontains=query)|Q(explain__icontains=query))
+            musics = [x for x in musiclist if x[0].lower().find(query.lower())!=-1 or x[1].lower().find(query.lower())!=-1]
+
+        if posts or questions or musics:
+            serializer_context = {'request': request,}
+            return Response({"post": PostSerializer(posts, many=True, context=serializer_context).data,
+                            "question": QuestionSerializer(questions, many=True, context=serializer_context).data,
+                            "music": musics
+                            })
+        else:
+            raise Http404("No search result")
