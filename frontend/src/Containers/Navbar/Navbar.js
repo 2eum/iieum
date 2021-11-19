@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LogoImg from "./iieum_logo.png";
 
 import {
@@ -16,16 +16,24 @@ import {
 } from "./Navbar.elements";
 
 const Navbar = ({ currUser, handleLogout }) => {
+  const [keyword, setKeyword] = useState("");
+
+  const searchUrl = `/search?q=${keyword}`;
   return (
     <>
       <NavContainer>
         <LogoContainer to="/">
-          <Logo src={LogoImg} onClick={() => {}} />
+          <Logo src={LogoImg} />
         </LogoContainer>
 
         <SearchBarContainer>
-          <SearchBar placeholder="찾고 싶은 이야기나 음악이 있나요?" />
-          <SearchButton to="/search?q=짜잔">
+          <SearchBar
+            placeholder="찾고 싶은 이야기나 음악이 있나요?"
+            onChange={(e) => {
+              setKeyword(e.target.value);
+            }}
+          />
+          <SearchButton to={searchUrl}>
             <i className="fas fa-search"></i>
           </SearchButton>
         </SearchBarContainer>

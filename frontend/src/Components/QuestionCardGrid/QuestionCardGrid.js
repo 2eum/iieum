@@ -3,28 +3,37 @@ import * as S from "./QuestionCardGrid.elements";
 import { QuestionOpened, QuestionCard } from "..";
 import axios from "axios";
 
-const QuestionCardGrid = ({ currUser, token, userId }) => {
-  const [content, setContent] = useState(null);
+const QuestionCardGrid = ({ currUser, token, userId, list }) => {
+  const [content, setContent] = useState();
   const [openCard, setOpenCard] = useState(-1);
   const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `/api/question`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.status > 400) {
-          setPlaceholder("Something went wrong!");
-        }
-        return response.data;
+    setContent();
+    if (list && list.length) {
+      setContent(list);
+    }
+  }, [list]);
+
+  useEffect(() => {
+    if (!list) {
+      axios({
+        method: "get",
+        url: `/api/question`,
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .then((data) => {
-        setContent(data);
-      });
+        .then((response) => {
+          if (response.status > 400) {
+            setPlaceholder("Something went wrong!");
+          }
+          return response.data;
+        })
+        .then((data) => {
+          setContent(data);
+        });
+    }
   }, []);
 
   const handleClick = (clickedCard) => {
