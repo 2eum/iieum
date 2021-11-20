@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as colors from "../../Colors";
 
 export const CalendarSection = styled.section`
-  width: 90%;
+  width: 100%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -45,7 +45,7 @@ export const CardSwitchButton = styled.div`
 export const CalendarContainer = styled.div`
   width: 50%;
   margin: auto;
-  padding: 3%;
+  padding: 2%;
 
   box-sizing: border-box;
 

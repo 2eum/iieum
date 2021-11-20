@@ -7,6 +7,7 @@ const MusicCard = ({ title, artist, source, link, cover, cardIndex, handleClick,
   return (
     <>
       <S.Wrapper onClick={() => handleClick(cardIndex)}>
+      {/* <S.Wrapper> */}
         <S.Info>
           <S.TitleWrapper>
             {/* if title is longer than 10 letters, set slide animation to true */}

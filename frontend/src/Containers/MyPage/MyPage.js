@@ -1,40 +1,147 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar } from "../../Components";
-import {
-  CreateButton,
-  MyPageBanner,
-  Date,
-  Message,
-  MyPageTitle,
-  ViewSwitchWrapper,
-  ViewSwitch,
-} from "./MyPage.elements";
+import * as S from "./MyPage.elements";
+import * as g from "../../globalStyles";
 
 import { MainContentContainer } from "../../globalStyles";
 import { Redirect } from "react-router";
+import axios from "axios";
+import { PostCardList } from "..";
 
 const MyPage = ({ currUser, token, userId }) => {
   const [view, setView] = useState("list");
+  const [postCount, setPostCount] = useState();
+  const [likeCount, setLikeCount] = useState();
+  const [selectedList, setSelectedList] = useState("post");
+  const [postList, setPostList] = useState();
+  const [likeList, setLikeList] = useState();
+  
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `api/userinfo/${userId}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      setPostCount(response.data["post-count"]);
+      setLikeCount(response.data["like-count"]);
+    });
+  }, [selectedList]);
 
-  const changeView = (e) => {
-    setView(e.target.value);
-  };
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `api/likelist/${userId}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      setLikeList(response.data);
+    });
+  }, [likeList]);
+
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `api/postlist-user/${userId}/0`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      setPostList(response.data);
+    });
+  }, [postList]);
+  
+
+  // const changeView = (e) => {
+  //   setView(e.target.value);
+  // };
+
+  const changeList = (e) => {
+    console.log("target: ", e.target.value);
+    setSelectedList(e.target.value);  
+    // selectedList = e.target.value;
+    console.log("selectedList: ", selectedList);
+  }
+
+  const today = new Date();
+  const todayString = `${today.getFullYear()}년 ${
+    today.getMonth() + 1
+  }월 ${today.getDate()}일`;
 
   return token === "" ? (
     <Redirect to="/" />
   ) : (
     <>
-      <MyPageBanner>
-        <Date>2021년 9월 12일</Date>
-        <Message>오늘 하루는 어땠나요?</Message>
-        <CreateButton to="/new">오늘의 일기 쓰기</CreateButton>
-      </MyPageBanner>
+    <g.Background>
+      <g.PageSection>
+        <S.MyPageBanner>
+          {/* <Date>2021년 9월 12일</Date>
+          <Message>오늘 하루는 어땠나요?</Message>
+          <CreateButton to="/new">오늘의 일기 쓰기</CreateButton> */}
+          <S.Message>
+            <S.User>{currUser}</S.User>님, <br/> 
+            당신의 이야기를 들려주세요.
+          </S.Message>
+          <S.StatsWrapper>
+            <S.Date>{todayString}</S.Date>
+            <S.Stat>작성한 이음 {postCount}개</S.Stat>
+            <S.Stat>좋아요한 이음 {likeCount}개</S.Stat>
+          </S.StatsWrapper>
+        </S.MyPageBanner>
 
-      <MainContentContainer>
-        <MyPageTitle>나의 이야기</MyPageTitle>
-        <Calendar token={token} currUser={currUser} userId={userId} />
-        {/* <List token={token} /> */}
-      </MainContentContainer>
+          <g.MainContentContainer>
+              {/* <S.MyPageTitle>나의 이야기</S.MyPageTitle> */}
+              <S.ListSwitchContainer>
+                <S.ListSwitchWrapper>
+                  <S.ListSwitch onClick={changeList}
+                  isSelected={selectedList==="post"} value={"post"}>
+                    나의 이음
+                  </S.ListSwitch>
+                </S.ListSwitchWrapper>
+                <S.ListSwitchWrapper>
+                  <S.ListSwitch onClick={changeList}
+                  isSelected={selectedList==="like"} value={"like"}>
+                    좋아요한 이음
+                  </S.ListSwitch>
+                </S.ListSwitchWrapper>
+              </S.ListSwitchContainer>
+              {selectedList === "post" ? 
+              <>
+                <S.PostListSection>
+                  <Calendar token={token} currUser={currUser} userId={userId} />
+                </S.PostListSection>
+                <S.OverviewSection>
+                  <PostCardList
+                      currUser={currUser}
+                      token={token}
+                      userId={userId}
+                      list={postList}
+                    />
+                </S.OverviewSection>
+              </>
+              : 
+              <>
+                <S.LikeListSection>
+                  <PostCardList
+                    currUser={currUser}
+                    token={token}
+                    userId={userId}
+                    // mode={"like"}
+                    list={likeList}
+                  />
+                </S.LikeListSection>
+              </>
+              }
+
+              
+            {/* <List token={token} /> */}
+          </g.MainContentContainer>
+      </g.PageSection>
+    </g.Background>
+      
     </>
   );
 };

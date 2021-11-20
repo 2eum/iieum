@@ -25,7 +25,7 @@ const QuestionOpened = ({currUser, token, userId, questionId, question, detail, 
             </g.DefaultButton>
           </S.CreateButtonWrapper>
         </S.CreateButtonContainer>
-        <PostCardList currUser={currUser} token={token} userId={userId} questionId={questionId}/>
+        <PostCardList currUser={currUser} token={token} userId={userId} questionId={questionId} mode={"question"}/>
       </S.OpenedContainer>
     </>
 
