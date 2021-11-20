@@ -15,7 +15,7 @@ const MyPage = ({ currUser, token, userId }) => {
   const [selectedList, setSelectedList] = useState("post");
   const [postList, setPostList] = useState();
   const [likeList, setLikeList] = useState();
-  
+
   useEffect(() => {
     axios({
       method: "get",
@@ -39,8 +39,7 @@ const MyPage = ({ currUser, token, userId }) => {
     }).then((response) => {
       setLikeList(response.data);
     });
-  }, [likeList]);
-
+  }, []);
 
   useEffect(() => {
     axios({
@@ -52,8 +51,7 @@ const MyPage = ({ currUser, token, userId }) => {
     }).then((response) => {
       setPostList(response.data);
     });
-  }, [postList]);
-  
+  }, []);
 
   // const changeView = (e) => {
   //   setView(e.target.value);
@@ -61,10 +59,10 @@ const MyPage = ({ currUser, token, userId }) => {
 
   const changeList = (e) => {
     console.log("target: ", e.target.value);
-    setSelectedList(e.target.value);  
+    setSelectedList(e.target.value);
     // selectedList = e.target.value;
     console.log("selectedList: ", selectedList);
-  }
+  };
 
   const today = new Date();
   const todayString = `${today.getFullYear()}년 ${
@@ -75,54 +73,60 @@ const MyPage = ({ currUser, token, userId }) => {
     <Redirect to="/" />
   ) : (
     <>
-    <g.Background>
-      <g.PageSection>
-        <S.MyPageBanner>
-          {/* <Date>2021년 9월 12일</Date>
+      <g.Background>
+        <g.PageSection>
+          <S.MyPageBanner>
+            {/* <Date>2021년 9월 12일</Date>
           <Message>오늘 하루는 어땠나요?</Message>
           <CreateButton to="/new">오늘의 일기 쓰기</CreateButton> */}
-          <S.Message>
-            <S.User>{currUser}</S.User>님, <br/> 
-            당신의 이야기를 들려주세요.
-          </S.Message>
-          <S.StatsWrapper>
-            <S.Date>{todayString}</S.Date>
-            <S.Stat>작성한 이음 {postCount}개</S.Stat>
-            <S.Stat>좋아요한 이음 {likeCount}개</S.Stat>
-          </S.StatsWrapper>
-        </S.MyPageBanner>
+            <S.Message>
+              <S.User>{currUser}</S.User>님, <br />
+              당신의 이야기를 들려주세요.
+            </S.Message>
+            <S.StatsWrapper>
+              <S.Date>{todayString}</S.Date>
+              <S.Stat>작성한 이음 {postCount}개</S.Stat>
+              <S.Stat>좋아요한 이음 {likeCount}개</S.Stat>
+            </S.StatsWrapper>
+          </S.MyPageBanner>
 
           <g.MainContentContainer>
-              {/* <S.MyPageTitle>나의 이야기</S.MyPageTitle> */}
-              <S.ListSwitchContainer>
-                <S.ListSwitchWrapper>
-                  <S.ListSwitch onClick={changeList}
-                  isSelected={selectedList==="post"} value={"post"}>
-                    나의 이음
-                  </S.ListSwitch>
-                </S.ListSwitchWrapper>
-                <S.ListSwitchWrapper>
-                  <S.ListSwitch onClick={changeList}
-                  isSelected={selectedList==="like"} value={"like"}>
-                    좋아요한 이음
-                  </S.ListSwitch>
-                </S.ListSwitchWrapper>
-              </S.ListSwitchContainer>
-              {selectedList === "post" ? 
+            {/* <S.MyPageTitle>나의 이야기</S.MyPageTitle> */}
+            <S.ListSwitchContainer>
+              <S.ListSwitchWrapper>
+                <S.ListSwitch
+                  onClick={changeList}
+                  isSelected={selectedList === "post"}
+                  value={"post"}
+                >
+                  나의 이음
+                </S.ListSwitch>
+              </S.ListSwitchWrapper>
+              <S.ListSwitchWrapper>
+                <S.ListSwitch
+                  onClick={changeList}
+                  isSelected={selectedList === "like"}
+                  value={"like"}
+                >
+                  좋아요한 이음
+                </S.ListSwitch>
+              </S.ListSwitchWrapper>
+            </S.ListSwitchContainer>
+            {selectedList === "post" ? (
               <>
                 <S.PostListSection>
                   <Calendar token={token} currUser={currUser} userId={userId} />
                 </S.PostListSection>
                 <S.OverviewSection>
                   <PostCardList
-                      currUser={currUser}
-                      token={token}
-                      userId={userId}
-                      list={postList}
-                    />
+                    currUser={currUser}
+                    token={token}
+                    userId={userId}
+                    list={postList}
+                  />
                 </S.OverviewSection>
               </>
-              : 
+            ) : (
               <>
                 <S.LikeListSection>
                   <PostCardList
@@ -134,14 +138,12 @@ const MyPage = ({ currUser, token, userId }) => {
                   />
                 </S.LikeListSection>
               </>
-              }
+            )}
 
-              
             {/* <List token={token} /> */}
           </g.MainContentContainer>
-      </g.PageSection>
-    </g.Background>
-      
+        </g.PageSection>
+      </g.Background>
     </>
   );
 };
