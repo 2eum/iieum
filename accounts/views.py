@@ -10,6 +10,7 @@ from django.http import Http404
 from rest_framework.exceptions import APIException
 from django.utils.encoding import force_text
 from rest_framework import status
+from django.http import HttpResponseRedirect
 
 class CustomValidation(APIException):
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -28,7 +29,8 @@ class ConfirmEmailView(APIView):
         self.object = confirmation = self.get_object()
         confirmation.confirm(self.request)
         # A React Router Route will handle the failure scenario
-        return Response({"detail":"login success"})
+        #return Response({"detail":"login success"})
+        return HttpResponseRedirect(redirect_to="/#/login")
 
     def get_object(self, queryset=None):
         key = self.kwargs['key']
@@ -40,7 +42,8 @@ class ConfirmEmailView(APIView):
                 email_confirmation = queryset.get(key=key.lower())
             except EmailConfirmation.DoesNotExist:
                 # A React Router Route will handle the failure scenario
-                return Response({"detail":"login fail"})
+                #return Response({"detail":"login fail"})
+                return HttpResponseRedirect(redirect_to="/")
         return email_confirmation
 
     def get_queryset(self):
