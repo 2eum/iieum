@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { PostCardList } from "..";
+import * as S from "./Search.elements";
+import * as g from "../../globalStyles";
 import { MusicCardGrid, QuestionCardGrid } from "../../Components";
 
 const Search = ({ keyword }) => {
@@ -33,15 +35,29 @@ const Search = ({ keyword }) => {
       });
   }, [keyword]);
   return (
-    <div>
-      <p>검색어: {keyword}</p>
-      <h1>글 검색 결과</h1>
-      <PostCardList list={postResult} />
-      <h1>질문 검색 결과</h1>
-      <QuestionCardGrid list={questionResult} />
-      <h1>음악 검색 결과</h1>
-      <MusicCardGrid list={musicResult} />
-    </div>
+    <>
+      <g.Background>
+        <g.PageSection>
+            <S.KeywordResult><S.Keyword>{keyword}</S.Keyword> 검색 결과</S.KeywordResult>
+            <S.PostResultContainer>
+              <S.ResultTitle>글 검색 결과</S.ResultTitle>
+              <PostCardList list={postResult} />
+            </S.PostResultContainer>
+
+            <S.QuestionResultContainer>
+            <S.ResultTitle>질문 검색 결과</S.ResultTitle>
+            <QuestionCardGrid list={questionResult} />
+            </S.QuestionResultContainer>
+
+            <S.MusicResultContainer>
+              <S.ResultTitle>음악 검색 결과</S.ResultTitle>
+              <MusicCardGrid list={musicResult} />
+            </S.MusicResultContainer>
+        </g.PageSection>
+      </g.Background>
+      
+    </>
+   
   );
 };
 
