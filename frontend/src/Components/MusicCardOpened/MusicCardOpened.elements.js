@@ -6,7 +6,6 @@ export const OpenedContainer = styled.div`
   width: 60vw;
   margin-top: 3vw;
   flex-direction: column;
-  // padding: 2%;
 `;
 
 export const MusicContainer = styled.div`
@@ -19,7 +18,7 @@ export const MusicContainer = styled.div`
 
 export const PostCardContainer = styled.div`
   width: 100%;
-  height: 57vh;
+  height: 90vh;
   overflow: scroll;
 `;
 
@@ -32,5 +31,5 @@ export const PostCardGrid = styled.div`
 `;
 
 export const PostCardWrapper = styled.div`
-    margin: 2%;
+  margin: 2%;
 `;
