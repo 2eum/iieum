@@ -2,7 +2,6 @@ import styled from "styled-components";
 import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
-
 export const MusicListContainer = styled.div`
   width: 80%;
   display: grid;
