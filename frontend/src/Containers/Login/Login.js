@@ -68,7 +68,7 @@ const Login = ({ saveUserData, currUser }) => {
             <LoginInput
               type="text"
               name="username"
-              placeholder="닉네임"
+              placeholder="아이디"
               onChange={(e) => {
                 usernameInputChange(e);
               }}
