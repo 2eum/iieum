@@ -71,6 +71,14 @@ const Login = ({ saveUserData, currUser }) => {
             }
           }
         });
+    } else {
+      setErrorMsg("아이디와 비밀번호를 입력해주세요");
+    }
+  };
+  const handleKeyPress = (e) => {
+    console.log(e.target);
+    if (e.key === "Enter") {
+      onLoginClick();
     }
   };
 
@@ -90,6 +98,7 @@ const Login = ({ saveUserData, currUser }) => {
               onChange={(e) => {
                 usernameInputChange(e);
               }}
+              onKeyPress={handleKeyPress}
             />
           </InputContainer>
           <InputContainer>
@@ -100,6 +109,7 @@ const Login = ({ saveUserData, currUser }) => {
               onChange={(e) => {
                 pwdInputChange(e);
               }}
+              onKeyPress={handleKeyPress}
             />
           </InputContainer>
         </LoginFieldset>
