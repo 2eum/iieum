@@ -20,14 +20,16 @@ import {
   InputWrapper,
   DuplicateMessage,
   DuplicateConfirm,
+  SubmitMessage,
 } from "./SignUp.elements";
 
-const SignUp = ({ saveUserData, currUser }) => {
+const SignUp = () => {
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [pwdConfirm, setConfirm] = useState("");
+  const [submit, setSubmit] = useState(false);
   const [sent, setSent] = useState(false);
 
   const [pwdMatch, setPwdMatch] = useState();
@@ -37,6 +39,7 @@ const SignUp = ({ saveUserData, currUser }) => {
   const [requestReview, setRequestReview] = useState(false);
 
   const onRegisterClick = () => {
+    setSubmit(true);
     if (validateInput()) {
       axios({
         method: "post",
@@ -259,8 +262,16 @@ const SignUp = ({ saveUserData, currUser }) => {
           ) : (
             ""
           )}
-          <RegisterBtn onClick={() => onRegisterClick()}>가입하기</RegisterBtn>
-          <ToLoginLink to="/login">로그인하기</ToLoginLink>
+          {submit ? (
+            <SubmitMessage>처리 중입니다...</SubmitMessage>
+          ) : (
+            <>
+              <RegisterBtn onClick={() => onRegisterClick()}>
+                가입하기
+              </RegisterBtn>
+              <ToLoginLink to="/login">로그인하기</ToLoginLink>
+            </>
+          )}
         </RegisterBtnContainer>
       </RegisterForm>
     </RegisterSection>
