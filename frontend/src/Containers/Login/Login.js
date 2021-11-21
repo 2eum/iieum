@@ -76,7 +76,6 @@ const Login = ({ saveUserData, currUser }) => {
     }
   };
   const handleKeyPress = (e) => {
-    console.log(e.target);
     if (e.key === "Enter") {
       onLoginClick();
     }
