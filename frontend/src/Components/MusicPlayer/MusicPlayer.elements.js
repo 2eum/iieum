@@ -20,15 +20,10 @@ export const PlayerButton = styled.div`
   display: flex;
   justify-content: center;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   i {
-    font-size: 0.8rem;
     color: ${colors.iiBeige};
-    align-self: center;
-  }
-
-  // center play button
-  & .fa-play {
-    padding-left: 2px;
   }
 `;
 
