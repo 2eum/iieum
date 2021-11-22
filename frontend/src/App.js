@@ -21,6 +21,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
+import ScrollToTop from "./Components/ScrollToTop";
 
 const App = () => {
   const [token, setToken] = useState(
@@ -64,6 +65,7 @@ const App = () => {
 
   return (
     <div>
+      <ScrollToTop />
       <GlobalStyle />
       <Navbar currUser={currUser} handleLogout={handleLogout} />
       <Switch>
