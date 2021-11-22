@@ -90,3 +90,9 @@ export const ToRegisterLink = styled(Link)`
 
   font-size: 0.8rem;
 `;
+
+export const ErrorMessage = styled.p`
+  text-align: center;
+  color: red;
+  margin-bottom: 5%;
+`;

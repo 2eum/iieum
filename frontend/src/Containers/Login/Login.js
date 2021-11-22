@@ -13,11 +13,13 @@ import {
   LoginBtnContainer,
   LoginBtn,
   ToRegisterLink,
+  ErrorMessage,
 } from "./Login.elements";
 
 const Login = ({ saveUserData, currUser }) => {
   const [username, setUsername] = useState("");
   const [pwd, setPwd] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const usernameInputChange = (e) => {
     setUsername(e.target.value);
@@ -45,14 +47,37 @@ const Login = ({ saveUserData, currUser }) => {
         },
       })
         .then((response) => {
-          if (response.status > 400) {
-            setPlaceholder("Something went wrong!");
-          }
-          return response.data;
+          setErrorMsg("");
+          saveUserData(
+            response.data.token,
+            response.data.user.username,
+            response.data.user.pk
+          );
         })
-        .then((data) => {
-          saveUserData(data.token, data.user.username, data.user.pk);
+        .catch((error) => {
+          if (error.response) {
+            if (
+              error.response.data["non_field_errors"][0] ===
+              "Unable to log in with provided credentials."
+            )
+              setErrorMsg("아이디 혹은 비밀번호가 바르지 않습니다.");
+            else if (
+              error.response.data["non_field_errors"][0] ===
+              "E-mail is not verified."
+            )
+              setErrorMsg("이메일 인증 후 로그인 해주세요.");
+            else {
+              setErrorMsg("로그인에 실패했습니다. 다시 시도해주세요");
+            }
+          }
         });
+    } else {
+      setErrorMsg("아이디와 비밀번호를 입력해주세요");
+    }
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onLoginClick();
     }
   };
 
@@ -68,10 +93,11 @@ const Login = ({ saveUserData, currUser }) => {
             <LoginInput
               type="text"
               name="username"
-              placeholder="닉네임"
+              placeholder="아이디"
               onChange={(e) => {
                 usernameInputChange(e);
               }}
+              onKeyPress={handleKeyPress}
             />
           </InputContainer>
           <InputContainer>
@@ -82,10 +108,12 @@ const Login = ({ saveUserData, currUser }) => {
               onChange={(e) => {
                 pwdInputChange(e);
               }}
+              onKeyPress={handleKeyPress}
             />
           </InputContainer>
         </LoginFieldset>
         <LoginBtnContainer>
+          {errorMsg !== "" ? <ErrorMessage>{errorMsg}</ErrorMessage> : ""}
           <LoginBtn onClick={() => onLoginClick()}>로그인</LoginBtn>
           <ToRegisterLink to="/register">회원가입하기</ToRegisterLink>
         </LoginBtnContainer>

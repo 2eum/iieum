@@ -11,6 +11,9 @@ export const NavContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 15;
 
   background-color: ${colors.iiBG};
 `;

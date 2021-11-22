@@ -134,3 +134,5 @@ export const RegisterBtn = styled.button`
 export const ToLoginLink = styled(Link)`
   font-size: 0.9rem;
 `;
+
+export const SubmitMessage = styled.p``;
