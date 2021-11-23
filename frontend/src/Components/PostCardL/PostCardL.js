@@ -92,7 +92,6 @@ const PostCardL = ({
 
   // delete request
   const handleDelete = () => {
-    console.log(1);
     axios({
       method: "delete",
       url: `/api/post/${postId}/`,
@@ -106,6 +105,10 @@ const PostCardL = ({
           setPlaceholder("Something went wrong!");
         }
         return response.data;
+      })
+      .then(() => {
+        alert("글 삭제가 완료되었습니다.");
+        window.location.reload();
       })
       .then(() => {
         handleCardClose();
