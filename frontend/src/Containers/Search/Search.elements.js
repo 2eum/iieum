@@ -42,11 +42,9 @@ export const SearchBar = styled.input`
   :focus {
     outline: none;
   }
-
-
 `;
 
-export const SearchButton = styled(Link)`
+export const SearchButton = styled.div`
   width: 1rem;
   height: 2rem;
 
@@ -84,14 +82,8 @@ export const NoResult = styled.p`
   margin: 3% 0 7% 1%;
 `;
 
-export const PostResultContainer = styled.div`
+export const PostResultContainer = styled.div``;
 
-`;
+export const QuestionResultContainer = styled.div``;
 
-export const QuestionResultContainer = styled.div`
-
-`;
-
-export const MusicResultContainer = styled.div`
-
-`;
+export const MusicResultContainer = styled.div``;
