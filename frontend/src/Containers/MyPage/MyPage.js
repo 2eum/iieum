@@ -53,10 +53,6 @@ const MyPage = ({ currUser, token, userId }) => {
     });
   }, []);
 
-  // const changeView = (e) => {
-  //   setView(e.target.value);
-  // };
-
   const changeList = (e) => {
     console.log("target: ", e.target.value);
     setSelectedList(e.target.value);
@@ -76,9 +72,6 @@ const MyPage = ({ currUser, token, userId }) => {
       <g.Background>
         <g.PageSection>
           <S.MyPageBanner>
-            {/* <Date>2021년 9월 12일</Date>
-          <Message>오늘 하루는 어땠나요?</Message>
-          <CreateButton to="/new">오늘의 일기 쓰기</CreateButton> */}
             <S.Message>
               <S.User>{currUser}</S.User>님, <br />
               당신의 이야기를 들려주세요.
@@ -91,7 +84,6 @@ const MyPage = ({ currUser, token, userId }) => {
           </S.MyPageBanner>
 
           <g.MainContentContainer>
-            {/* <S.MyPageTitle>나의 이야기</S.MyPageTitle> */}
             <S.ListSwitchContainer>
               <S.ListSwitchWrapper>
                 <S.ListSwitch
