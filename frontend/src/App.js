@@ -12,6 +12,7 @@ import {
   Edit,
   Explore,
   Search,
+  EmailConfirmed,
 } from "./Containers";
 
 import {
@@ -25,16 +26,18 @@ import ScrollToTop from "./Components/ScrollToTop";
 
 const App = () => {
   const [token, setToken] = useState(
-    localStorage.getItem("token") ? localStorage.getItem("token") : ""
+    localStorage.getItem("token") ? localStorage.getItem("token") : null
   );
   const [currUser, setUser] = useState(
     localStorage.getItem("username")
       ? window.localStorage.getItem("username")
-      : ""
+      : null
   );
 
   const [userId, setUserId] = useState(
-    localStorage.getItem("userId") ? window.localStorage.getItem("userId") : ""
+    localStorage.getItem("userId")
+      ? window.localStorage.getItem("userId")
+      : null
   );
 
   const saveUserData = (token, username, userId) => {
@@ -138,6 +141,17 @@ const App = () => {
           exact
           render={() => (
             <Login
+              token={token}
+              saveUserData={saveUserData}
+              currUser={currUser}
+            />
+          )}
+        />
+        <Route
+          path="/email-confirmed"
+          exact
+          render={() => (
+            <EmailConfirmed
               token={token}
               saveUserData={saveUserData}
               currUser={currUser}
