@@ -181,7 +181,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
             </S.LoadMoreButtonContainer>
             <S.PostCardSWrapper>
               {todayQCards[contentIdx]}
-              {contentIdx + 1 < todayQCards.length - 1
+              {contentIdx + 1 < todayQCards.length
                 ? todayQCards[contentIdx + 1]
                 : ""}
             </S.PostCardSWrapper>
