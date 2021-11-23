@@ -200,7 +200,9 @@ const CreateCard = ({ currUser, token, userId, questionId }) => {
             </S.FormArea>
             <S.BottomArea>
               <S.Signature>{currUser}</S.Signature>
-              <S.SubmitButton onClick={handleSubmit}>다 썼어요!</S.SubmitButton>
+              <S.SubmitButton onClick={handleSubmit}>
+                <i className="fas fa-check" />다 썼어요!
+              </S.SubmitButton>
             </S.BottomArea>
           </>
         )}

@@ -103,14 +103,28 @@ export const FormBody = styled.textarea`
 
 export const BottomArea = styled.section`
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 `;
 
 export const Signature = styled.h3``;
 
 export const SubmitButton = styled.p`
-  text-decoration: underline;
   margin-top: 1rem;
   cursor: pointer;
+  background-color: ${colors.iiPurple};
+  border-radius: 5px;
+  width: 8rem;
+  padding: 0.5rem 1rem;
+  color: ${colors.iiBeige};
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  & > i {
+    color: ${colors.iiBeige};
+  }
 `;
 
 export const ResetChoiceButton = styled.p`
