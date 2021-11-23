@@ -201,6 +201,7 @@ export const IndicatorDot = styled.div`
     p.selected ? colors.iiPurple : colors.iiPurpleOpacity};
   border-radius: 100%;
   content: "";
+  cursor: pointer;
 `;
 
 //Page layout
