@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import * as S from "./CreateCard.elements";
 import { MusicCard, SearchedItem } from "..";
+import { useHistory } from "react-router";
 
-const CreateCard = ({ currUser, token, userId, questionId }) => {
+const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
   const [questionContent, setQuestionContent] = useState();
   const [isSearching, setSearching] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
@@ -136,6 +137,8 @@ const CreateCard = ({ currUser, token, userId, questionId }) => {
     setSearchReady(false);
   };
 
+  let history = useHistory();
+
   return (
     <>
       <S.CreateCardArea>
@@ -144,8 +147,12 @@ const CreateCard = ({ currUser, token, userId, questionId }) => {
             <p>글 작성이 완료되었습니다</p>
             <S.RedirectButton
               onClick={() => {
-                window.location.reload();
-                window.scrollTo(0, 0);
+                if (locationAt === "home") {
+                  window.location.reload();
+                  window.scrollTo(0, 0);
+                } else {
+                  history.goBack();
+                }
               }}
             >
               확인
