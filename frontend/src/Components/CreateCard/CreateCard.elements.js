@@ -134,3 +134,22 @@ export const ResetChoiceButton = styled.p`
   font-size: 0.8rem;
   text-align: right;
 `;
+
+export const CompleteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
+export const RedirectButton = styled.p`
+  margin-top: 1rem;
+  cursor: pointer;
+  background-color: ${colors.iiPurple};
+  border-radius: 5px;
+  width: 5rem;
+  padding: 0.5rem 1rem;
+  color: ${colors.iiBeige};
+  text-align: center;
+`;

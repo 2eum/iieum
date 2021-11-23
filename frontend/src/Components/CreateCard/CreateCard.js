@@ -140,7 +140,17 @@ const CreateCard = ({ currUser, token, userId, questionId }) => {
     <>
       <S.CreateCardArea>
         {submitted ? (
-          <p>글 작성이 완료되었습니다</p>
+          <S.CompleteContainer>
+            <p>글 작성이 완료되었습니다</p>
+            <S.RedirectButton
+              onClick={() => {
+                window.location.reload();
+                window.scrollTo(0, 0);
+              }}
+            >
+              확인
+            </S.RedirectButton>
+          </S.CompleteContainer>
         ) : (
           <>
             <S.TopArea>
