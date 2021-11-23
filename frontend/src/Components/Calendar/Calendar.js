@@ -14,6 +14,7 @@ const Calendar = ({ currUser, token, userId }) => {
   // api content state
   const [content, setContent] = useState({});
   const [showPostId, setPostId] = useState([]);
+  const [cardIndex, setCardIndex] = useState(0);
 
   // date info set for retrieving content from last, next months
   const prevMonthSearch = new Date(viewMonth.year, viewMonth.month - 1, 23);
@@ -138,6 +139,7 @@ const Calendar = ({ currUser, token, userId }) => {
 
     setMonth({ year: dayOne.getFullYear(), month: dayOne.getMonth() });
     setPostId([]);
+    setCardIndex(0);
   };
 
   const toNextMonth = () => {
@@ -145,45 +147,54 @@ const Calendar = ({ currUser, token, userId }) => {
 
     setMonth({ year: dayOne.getFullYear(), month: dayOne.getMonth() });
     setPostId([]);
+    setCardIndex(0);
   };
 
   // card list Update
   const CardLs = showPostId.map((id, i) => {
     return (
-      <PostCardL
+      <S.CardWrapper key={i}>
+        <PostCardL
+          token={token}
+          currUser={currUser}
+          userId={userId}
+          postId={id}
+        />
+      </S.CardWrapper>
+    );
+  });
+
+  const Indicators = showPostId.map((x, i) => {
+    return (
+      <S.CardIndicator
         key={i}
-        token={token}
-        currUser={currUser}
-        userId={userId}
-        postId={id}
-        order={i}
+        selected={i === cardIndex}
+        onClick={() => setCardIndex(i)}
       />
     );
   });
 
   // card switch function
   const handleCardSwitch = (d) => {
-    let arr = showPostId;
-    let move;
     if (d > 0) {
-      move = arr.shift();
-      arr.push(move);
+      if (cardIndex === showPostId.length - 1) setCardIndex(0);
+      else setCardIndex(cardIndex + 1);
     } else {
-      move = arr.pop();
-      arr.unshift(move);
+      if (cardIndex === 0) setCardIndex(showPostId.length - 1);
+      else setCardIndex(cardIndex - 1);
     }
-    setPostId([...arr]);
   };
 
   return (
     <S.CalendarSection>
       <S.CardContainer>
-        <S.CardWrapper>{CardLs}</S.CardWrapper>
+        <S.CardFlexSlider index={cardIndex}>{CardLs}</S.CardFlexSlider>
         {CardLs.length > 1 ? (
           <S.CardSwitchButtonWrapper>
             <S.CardSwitchButton onClick={() => handleCardSwitch(-1)}>
               <i className="fas fa-chevron-left" />
             </S.CardSwitchButton>
+            <S.CardIndicatorWrapper>{Indicators}</S.CardIndicatorWrapper>
             <S.CardSwitchButton onClick={() => handleCardSwitch(1)}>
               <i className="fas fa-chevron-right" />
             </S.CardSwitchButton>

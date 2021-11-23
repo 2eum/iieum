@@ -1,39 +1,35 @@
 import styled from "styled-components";
 import * as colors from "../../Colors";
+import * as g from "../../globalStyles";
 
 export const CalendarSection = styled.section`
   width: 100%;
   margin: auto;
   display: flex;
   justify-content: space-between;
-  height: 95vh;
+  height: 90vh;
 `;
 
 export const CardContainer = styled.div`
   width: 50%;
   position: relative;
+  overflow: hidden;
+`;
+
+export const CardFlexSlider = styled.div`
+  display: flex;
+  gap: 5rem;
+  transform: translateX(-${(p) => p.index * 39}rem);
+
+  transition: transform 1s ease-in-out;
 `;
 
 export const CardWrapper = styled.div`
-  position: relative;
   margin: auto;
-
-  // cards stack
-  & > * {
-    position: absolute;
-    transition: all 500ms;
-  }
-
-  // tilted card rotate
-  & > *:nth-child(2) {
-    transform: rotate(3deg);
-    transform-origin: bottom right;
-  }
 `;
 
 export const CardSwitchButtonWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
+  margin-top: 2rem;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -42,10 +38,19 @@ export const CardSwitchButton = styled.div`
   cursor: pointer;
 `;
 
+export const CardIndicatorWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
+export const CardIndicator = styled(g.IndicatorDot)``;
+
 export const CalendarContainer = styled.div`
   width: 50%;
-  margin: auto;
+  margin: 0 auto;
   padding: 2%;
+  height: 52rem;
 
   box-sizing: border-box;
 

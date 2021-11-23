@@ -30,7 +30,7 @@ class ConfirmEmailView(APIView):
         confirmation.confirm(self.request)
         # A React Router Route will handle the failure scenario
         #return Response({"detail":"login success"})
-        return HttpResponseRedirect(redirect_to="/#/login")
+        return HttpResponseRedirect(redirect_to="/#/email-confirmed")
 
     def get_object(self, queryset=None):
         key = self.kwargs['key']
