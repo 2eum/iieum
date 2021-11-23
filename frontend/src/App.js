@@ -93,7 +93,14 @@ const App = () => {
         <Route
           path="/search"
           exact
-          render={() => <Search keyword={query.get("q")} />}
+          render={() => (
+            <Search
+              word={query.get("q")}
+              currUser={currUser}
+              token={token}
+              userId={userId}
+            />
+          )}
         />
         <Route
           path="/new/:id"

@@ -51,6 +51,10 @@ export const SearchBar = styled.input`
   border-bottom: solid 1px ${colors.cardStroke};
 
   background-color: ${colors.iiBG};
+  :focus {
+    outline: none;
+  }
+
 `;
 
 export const SearchButton = styled(Link)`

@@ -6,7 +6,6 @@ import axios from "axios";
 const MusicCardGrid = ({ currUser, token, userId, list }) => {
   const [content, setContent] = useState(null);
   const [openCard, setOpenCard] = useState(0);
-  // const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
     setContent();
@@ -38,8 +37,6 @@ const MusicCardGrid = ({ currUser, token, userId, list }) => {
 
   const handleClick = (clickedCard) => {
     setOpenCard(clickedCard);
-    // console.log(content["music list"][openCard][0]);
-    console.log(openCard);
   };
 
   const MusicCardList = content
@@ -74,7 +71,6 @@ const MusicCardGrid = ({ currUser, token, userId, list }) => {
             currUser={currUser}
             token={token}
             userId={userId}
-            // open={open}
             cardIndex={openCard}
             title={content[openCard] ? content[openCard][0] : ""}
             artist={content[openCard] ? content[openCard][1] : ""}
