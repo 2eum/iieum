@@ -1,0 +1,69 @@
+@media screen {
+  @font-face {
+      font-family: 'NotoSerifKR';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NotoSerifKR.woff') format('woff');
+      font-weight: 300;
+      font-style: normal;
+  }
+}
+
+/* CLIENT-SPECIFIC STYLES */
+body,
+table,
+td,
+a {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+* {
+  color: #381D00;
+}
+
+img {
+  -ms-interpolation-mode: bicubic;
+}
+
+/* RESET STYLES */
+img {
+  border: 0;
+  height: auto;
+  line-height: 100%;
+  outline: none;
+  text-decoration: none;
+}
+
+table {
+  border-collapse: collapse !important;
+}
+
+body {
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+/* iOS BLUE LINKS */
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+
+/* MOBILE STYLES */
+@media screen and (max-width:600px) {
+  h1 {
+      font-size: 32px !important;
+      line-height: 32px !important;
+  }
+}
+
+/* ANDROID CENTER FIX */
+div[style*="margin: 16px 0;"] {
+  margin: 0 !important;
+}
+
