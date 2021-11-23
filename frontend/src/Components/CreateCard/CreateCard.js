@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import * as S from "./CreateCard.elements";
 import { MusicCard, SearchedItem } from "..";
+import { useHistory } from "react-router";
 
-const CreateCard = ({ currUser, token, userId, questionId }) => {
+const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
   const [questionContent, setQuestionContent] = useState();
   const [isSearching, setSearching] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
@@ -136,11 +137,27 @@ const CreateCard = ({ currUser, token, userId, questionId }) => {
     setSearchReady(false);
   };
 
+  let history = useHistory();
+
   return (
     <>
       <S.CreateCardArea>
         {submitted ? (
-          <p>글 작성이 완료되었습니다</p>
+          <S.CompleteContainer>
+            <p>글 작성이 완료되었습니다</p>
+            <S.RedirectButton
+              onClick={() => {
+                if (locationAt === "home") {
+                  window.location.reload();
+                  window.scrollTo(0, 0);
+                } else {
+                  history.goBack();
+                }
+              }}
+            >
+              확인
+            </S.RedirectButton>
+          </S.CompleteContainer>
         ) : (
           <>
             <S.TopArea>
@@ -200,7 +217,9 @@ const CreateCard = ({ currUser, token, userId, questionId }) => {
             </S.FormArea>
             <S.BottomArea>
               <S.Signature>{currUser}</S.Signature>
-              <S.SubmitButton onClick={handleSubmit}>다 썼어요!</S.SubmitButton>
+              <S.SubmitButton onClick={handleSubmit}>
+                <i className="fas fa-check" />다 썼어요!
+              </S.SubmitButton>
             </S.BottomArea>
           </>
         )}

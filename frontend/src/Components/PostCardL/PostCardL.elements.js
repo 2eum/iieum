@@ -35,7 +35,7 @@ export const CloseBtn = styled.p`
 
 export const PostTop = styled.section`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${(p) => (p.editMode ? "flex-end" : "space-between")};
   align-items: center;
   margin: 2%;
 `;
@@ -61,7 +61,7 @@ export const Question = styled.p`
 `;
 
 export const MiddleArea = styled.section`
-  height: 70%;
+  height: ${(p) => (p.editMode ? "65%" : "70%")};
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5%;
@@ -110,10 +110,9 @@ export const PostBottom = styled.section`
   display: flex;
   ${(p) =>
     p.editMode
-      ? "flex-direction: column; align-items: flex-end;"
-      : "flex-direction: row-reverse; justify-content: space-between; align-items: center;"}
+      ? "flex-direction: column; align-items: flex-end; height: 15%;"
+      : "flex-direction: row-reverse; justify-content: space-between; align-items: center; height: 10%;"}
   margin: 2%;
-  height: 10%;
 `;
 
 export const BtnArea = styled.div`
@@ -124,15 +123,17 @@ export const BtnArea = styled.div`
 export const EditBtn = styled.div`
   margin: auto 5%;
   cursor: pointer;
+  color: ${colors.iiPurple};
 `;
 
 export const DeleteBtn = styled.div`
   margin: auto 5%;
   cursor: pointer;
+  color: ${colors.iiPurple};
 `;
 
 export const Signature = styled.h3`
-  margin: 2%;
+  margin: 1%;
   justify-self: flex-end;
 `;
 
@@ -207,8 +208,21 @@ export const FormBody = styled.textarea`
 `;
 
 export const SubmitButton = styled.p`
-  text-decoration: underline;
+  margin-top: 1rem;
   cursor: pointer;
+  color: ${colors.iiPurple};
+  border-radius: 5px;
+  width: 8rem;
+  padding: 0 1rem;
+  background-color: ${colors.iiBeige};
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 2.5rem;
+  border: 1px solid ${colors.iiPurple};
+  & > i {
+    color: ${colors.iiPurple};
+  }
 `;
 
 export const ResetChoiceButton = styled.p`
@@ -221,6 +235,14 @@ export const ResetChoiceButton = styled.p`
 
 export const EditMessage = styled.p`
   color: green;
-  font-size: 1.5rem;
   justify-self: flex-start;
 `;
+
+export const EditBtnsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+export const EditLeftWrapper = styled.div``;

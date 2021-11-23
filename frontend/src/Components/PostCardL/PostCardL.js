@@ -92,7 +92,6 @@ const PostCardL = ({
 
   // delete request
   const handleDelete = () => {
-    console.log(1);
     axios({
       method: "delete",
       url: `/api/post/${postId}/`,
@@ -106,6 +105,10 @@ const PostCardL = ({
           setPlaceholder("Something went wrong!");
         }
         return response.data;
+      })
+      .then(() => {
+        alert("글 삭제가 완료되었습니다.");
+        window.location.reload();
       })
       .then(() => {
         handleCardClose();
@@ -291,10 +294,10 @@ const PostCardL = ({
                         setSubmit(false);
                       }}
                     >
-                      <i className="fa fa-pen fa-lg" />
+                      <i className="fa fa-pen fa-lg" /> 수정하기
                     </S.EditBtn>
                     <S.DeleteBtn onClick={handleDelete}>
-                      <i className="fa fa-trash fa-lg" />
+                      <i className="fa fa-trash fa-lg" /> 삭제하기
                     </S.DeleteBtn>
                   </S.BtnArea>
                 ) : (
@@ -306,11 +309,12 @@ const PostCardL = ({
             <>
               <S.HeaderArea>
                 <S.PostTop editMode={editMode}>
-                  <S.EditMessage>글을 수정하고 있어요</S.EditMessage>
-                  <S.Question>{content.question.question_content}</S.Question>
+                  <S.Question editMode={editMode}>
+                    {content.question.question_content}
+                  </S.Question>
                 </S.PostTop>
               </S.HeaderArea>
-              <S.MiddleArea>
+              <S.MiddleArea editMode={editMode}>
                 <S.MusicSearchArea
                   isSearching={isSearching}
                   onClick={!selected ? () => setSearching(true) : () => {}}
@@ -368,12 +372,19 @@ const PostCardL = ({
               </S.MiddleArea>
               <S.PostBottom editMode={editMode}>
                 <S.Signature>{currUser}</S.Signature>
-                <S.SubmitButton onClick={handleSubmit}>
-                  수정 완료!
-                </S.SubmitButton>
-                <S.SubmitButton onClick={(e) => setEditMode(false)}>
-                  수정 취소
-                </S.SubmitButton>
+                <S.EditBtnsWrapper>
+                  <S.EditLeftWrapper>
+                    <S.EditMessage>글을 수정하고 있어요</S.EditMessage>
+                    <S.SubmitButton onClick={(e) => setEditMode(false)}>
+                      <i className="fas fa-times" />
+                      수정 취소
+                    </S.SubmitButton>
+                  </S.EditLeftWrapper>
+
+                  <S.SubmitButton onClick={handleSubmit}>
+                    <i className="fas fa-check" /> 수정 완료
+                  </S.SubmitButton>
+                </S.EditBtnsWrapper>
               </S.PostBottom>
             </>
           )}
