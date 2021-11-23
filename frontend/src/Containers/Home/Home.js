@@ -51,7 +51,7 @@ const Home = ({ currUser, token, userId }) => {
             token={token}
             userId={userId}
             questionId={pageQuestion}
-            type="post"
+            locationAt="home"
           />
           <S.CreateCardRight>
             <S.HelperQuestionArea>
