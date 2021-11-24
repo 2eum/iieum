@@ -3,8 +3,8 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const QuestionCardContainer = styled.div`
-  width: 18vw;
-  height: 10vw;
+  width: 22rem;
+  height: 12rem;
   margin: auto;
   padding: 1vw;
   display: flex;
