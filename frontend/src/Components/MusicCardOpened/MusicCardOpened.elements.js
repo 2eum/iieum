@@ -3,22 +3,25 @@ import * as colors from "../../Colors";
 import * as g from "../../globalStyles";
 
 export const OpenedContainer = styled.div`
-  width: 60vw;
+  width: 100%;
   margin-top: 3vw;
   flex-direction: column;
+  @media screen and (min-width: 1920px) {
+    width: 60vw;
+  }
 `;
 
 export const MusicContainer = styled.div`
   display: flex;
   justify-content: center;
   margin: auto;
-  width: 15vw;
-  height: 6vw;
+  width: 18rem;
+  height: 7.5rem;
 `;
 
 export const PostCardContainer = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 55rem;
   overflow: scroll;
 `;
 
