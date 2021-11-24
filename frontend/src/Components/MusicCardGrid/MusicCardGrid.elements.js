@@ -13,8 +13,8 @@ export const MusicListContainer = styled.div`
 
 export const MusicCardWrapper = styled.div`
   cursor: pointer;
-  width: 15vw;
-  height: 7vw;
+  width: 18rem;
+  height: 7.5rem;
   display: flex;
   align-items: center;
   border: 1px solid ${colors.cardStroke};

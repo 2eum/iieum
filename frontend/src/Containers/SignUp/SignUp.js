@@ -91,28 +91,31 @@ const SignUp = () => {
   };
 
   const checkDuplicate = (type, target, setFunc) => {
-    axios({
-      method: "post",
-      url: `/api/${type}-check`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: {
-        username: `${target}`,
-        nickname: `${target}`,
-      },
-    })
-      .catch((error) => {
-        if (error.response.status === 409) {
-          setFunc(false);
-          return error.response;
-        }
+    if (target === "") setFunc(false);
+    else {
+      axios({
+        method: "post",
+        url: `/api/${type}-check`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          username: `${target}`,
+          nickname: `${target}`,
+        },
       })
-      .then((response) => {
-        if (response.status < 400) {
-          setFunc(true);
-        }
-      });
+        .catch((error) => {
+          if (error.response.status === 409) {
+            setFunc(false);
+            return error.response;
+          }
+        })
+        .then((response) => {
+          if (response.status < 400) {
+            setFunc(true);
+          }
+        });
+    }
   };
 
   useEffect(() => {
@@ -140,7 +143,7 @@ const SignUp = () => {
               아이디{" "}
               {usernameChecked === false ? (
                 <DuplicateMessage>
-                  해당 아이디는 사용 중입니다.
+                  해당 아이디는 사용할 수 없습니다.
                 </DuplicateMessage>
               ) : (
                 ""
@@ -175,7 +178,9 @@ const SignUp = () => {
             <InputLabel htmlFor="nickname">
               필명{" "}
               {nicknameChecked === false ? (
-                <DuplicateMessage>해당 필명은 사용 중입니다.</DuplicateMessage>
+                <DuplicateMessage>
+                  해당 필명은 사용할 수 없습니다.
+                </DuplicateMessage>
               ) : (
                 ""
               )}

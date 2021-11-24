@@ -6,6 +6,7 @@ export const LoginSection = styled.main`
   width: 80%;
 
   margin: auto;
+  margin-top: 30vh;
 
   text-align: center;
 `;

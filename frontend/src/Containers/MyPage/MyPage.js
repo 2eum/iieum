@@ -54,10 +54,7 @@ const MyPage = ({ currUser, token, userId }) => {
   }, []);
 
   const changeList = (e) => {
-    console.log("target: ", e.target.value);
     setSelectedList(e.target.value);
-    // selectedList = e.target.value;
-    console.log("selectedList: ", selectedList);
   };
 
   const today = new Date();
@@ -83,7 +80,7 @@ const MyPage = ({ currUser, token, userId }) => {
             </S.StatsWrapper>
           </S.MyPageBanner>
 
-          <g.MainContentContainer>
+          <S.MainContentContainer>
             <S.ListSwitchContainer>
               <S.ListSwitchWrapper>
                 <S.ListSwitch
@@ -133,7 +130,7 @@ const MyPage = ({ currUser, token, userId }) => {
             )}
 
             {/* <List token={token} /> */}
-          </g.MainContentContainer>
+          </S.MainContentContainer>
         </g.PageSection>
       </g.Background>
     </>

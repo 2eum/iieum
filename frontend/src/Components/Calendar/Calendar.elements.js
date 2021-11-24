@@ -7,7 +7,7 @@ export const CalendarSection = styled.section`
   margin: auto;
   display: flex;
   justify-content: space-between;
-  height: 90vh;
+  height: 55rem;
 `;
 
 export const CardContainer = styled.div`
@@ -34,6 +34,7 @@ export const CardSwitchButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
 export const CardSwitchButton = styled.div`
   cursor: pointer;
 `;
@@ -50,7 +51,7 @@ export const CalendarContainer = styled.div`
   width: 50%;
   margin: 0 auto;
   padding: 2%;
-  height: 52rem;
+  height: fit-content;
 
   box-sizing: border-box;
 
@@ -109,7 +110,7 @@ export const WeekDaysArea = styled.div`
 export const DatesArea = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(${(props) => props.rows}, 14vh);
+  grid-template-rows: repeat(${(props) => props.rows}, 7rem);
   background-color: ${colors.iiSunset};
   border: 1px solid ${colors.cardStroke};
 `;

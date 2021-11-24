@@ -4,8 +4,12 @@ import { beige, lightBrown, lightGray, nearWhite } from "../../Colors";
 
 export const AfterSent = styled.section`
   width: 80%;
-  margin: 5% auto;
+  margin: 30% auto;
   text-align: center;
+
+  @media screen and (min-width: 1920px) {
+    margin-top: 10%;
+  }
 `;
 export const SentMessage = styled.p`
   margin: 5%;
@@ -15,12 +19,16 @@ export const RegisterSection = styled.main`
   width: 80%;
 
   margin: auto;
+  margin-top: 30vh;
 
   text-align: center;
+  @media screen and (min-width: 1920px) {
+    margin-top: 10vh;
+  }
 `;
 
 export const RegisterForm = styled.div`
-  width: 25%;
+  width: 40%;
   margin: 5% auto;
 
   text-align: center;

@@ -127,8 +127,6 @@ export const ButtonName = styled.p``;
 export const OpenListButtonWrapper = styled.div`
   margin: 2%;
   margin-top: 20%;
-  // width: 135px;
-  // height: 45px;
 `;
 
 export const OpenListButtonIcon = styled.i`
@@ -149,7 +147,11 @@ export const IndicatorDot = styled.div`
 //Page layout
 export const Background = styled.div`
   background-color: ${colors.iiBG};
-  padding: 8% 20%;
+  padding: 8% 5%;
+
+  @media screen and (min-width: 1920px) {
+    padding: 8% 20%;
+  }
 `;
 export const PageSection = styled.section`
   width: 100%;
