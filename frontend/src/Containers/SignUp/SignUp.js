@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import CSRFToken from "../../Components/csrftoken";
 import { Redirect } from "react-router";
+import * as g from "../../globalStyles";
 
 import {
   DuplicateCheckButton,
@@ -125,161 +126,167 @@ const SignUp = () => {
   }, [pwdConfirm]);
 
   return sent ? (
-    <AfterSent>
-      <SentMessage>
-        입력해주신 이메일로 인증 링크를 보내드렸습니다. 인증 후 로그인
-        가능합니다.
-      </SentMessage>
-      <ToLoginLink to="/login">로그인 하기</ToLoginLink>
-    </AfterSent>
+    <g.Background>
+      <AfterSent>
+        <SentMessage>
+          입력해주신 이메일로 인증 링크를 보내드렸습니다. 인증 후 로그인
+          가능합니다.
+        </SentMessage>
+        <ToLoginLink to="/login">로그인 하기</ToLoginLink>
+      </AfterSent>
+    </g.Background>
+    
   ) : (
-    <RegisterSection>
-      <RegisterForm>
-        <CSRFToken />
-        <RegisterLegend>회원가입</RegisterLegend>
-        <RegisterFieldset>
-          <InputContainer>
-            <InputLabel htmlFor="username">
-              아이디{" "}
-              {usernameChecked === false ? (
-                <DuplicateMessage>
-                  해당 아이디는 사용할 수 없습니다.
-                </DuplicateMessage>
-              ) : (
-                ""
-              )}
-            </InputLabel>
-            <InputWrapper>
+    <g.Background>
+      <RegisterSection>
+        <RegisterForm>
+          <CSRFToken />
+          <RegisterLegend>회원가입</RegisterLegend>
+          <RegisterFieldset>
+            <InputContainer>
+              <InputLabel htmlFor="username">
+                아이디{" "}
+                {usernameChecked === false ? (
+                  <DuplicateMessage>
+                    해당 아이디는 사용할 수 없습니다.
+                  </DuplicateMessage>
+                ) : (
+                  ""
+                )}
+              </InputLabel>
+              <InputWrapper>
+                <RegisterInput
+                  type="text"
+                  name="username"
+                  placeholder="공백없이 영문, 숫자 포함 6-12자"
+                  duplicateChecked={usernameChecked}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                    setUsernameCheck();
+                    setRequestReview("");
+                  }}
+                />
+                {!usernameChecked ? (
+                  <DuplicateCheckButton
+                    onClick={() => {
+                      checkDuplicate("username", username, setUsernameCheck);
+                    }}
+                  >
+                    중복 확인
+                  </DuplicateCheckButton>
+                ) : (
+                  <DuplicateConfirm>사용 가능합니다</DuplicateConfirm>
+                )}
+              </InputWrapper>
+            </InputContainer>
+            <InputContainer>
+              <InputLabel htmlFor="nickname">
+                필명{" "}
+                {nicknameChecked === false ? (
+                  <DuplicateMessage>
+                    해당 필명은 사용할 수 없습니다.
+                  </DuplicateMessage>
+                ) : (
+                  ""
+                )}
+              </InputLabel>
+              <InputWrapper>
+                <RegisterInput
+                  type="text"
+                  name="nickname"
+                  placeholder="글을 작성 시 표시되는 이름"
+                  duplicateChecked={nicknameChecked}
+                  onChange={(e) => {
+                    setNickname(e.target.value);
+                    setNicknameCheck();
+                    setRequestReview("");
+                  }}
+                />
+                {!nicknameChecked ? (
+                  <DuplicateCheckButton
+                    onClick={() => {
+                      checkDuplicate("nickname", nickname, setNicknameCheck);
+                    }}
+                  >
+                    중복 확인
+                  </DuplicateCheckButton>
+                ) : (
+                  <DuplicateConfirm>사용 가능합니다</DuplicateConfirm>
+                )}
+              </InputWrapper>
+            </InputContainer>
+            <InputContainer>
+              <InputLabel htmlFor="username">이메일</InputLabel>
               <RegisterInput
-                type="text"
-                name="username"
-                placeholder="공백없이 영문, 숫자 포함 6-12자"
-                duplicateChecked={usernameChecked}
+                type="email"
+                name="email"
+                placeholder="ex. example@iieum.com"
                 onChange={(e) => {
-                  setUsername(e.target.value);
-                  setUsernameCheck();
+                  setEmail(e.target.value);
                   setRequestReview("");
                 }}
               />
-              {!usernameChecked ? (
-                <DuplicateCheckButton
-                  onClick={() => {
-                    checkDuplicate("username", username, setUsernameCheck);
-                  }}
-                >
-                  중복 확인
-                </DuplicateCheckButton>
-              ) : (
-                <DuplicateConfirm>사용 가능합니다</DuplicateConfirm>
-              )}
-            </InputWrapper>
-          </InputContainer>
-          <InputContainer>
-            <InputLabel htmlFor="nickname">
-              필명{" "}
-              {nicknameChecked === false ? (
-                <DuplicateMessage>
-                  해당 필명은 사용할 수 없습니다.
-                </DuplicateMessage>
-              ) : (
-                ""
-              )}
-            </InputLabel>
-            <InputWrapper>
+            </InputContainer>
+            <InputContainer>
+              <InputLabel htmlFor="password">비밀번호</InputLabel>
               <RegisterInput
-                type="text"
-                name="nickname"
-                placeholder="글을 작성 시 표시되는 이름"
-                duplicateChecked={nicknameChecked}
+                type="password"
+                name="password"
+                placeholder="공백없이 영문, 숫자 포함 8-20자"
+                duplicateChecked={pwdMatch}
                 onChange={(e) => {
-                  setNickname(e.target.value);
-                  setNicknameCheck();
+                  setPwd(e.target.value);
                   setRequestReview("");
                 }}
               />
-              {!nicknameChecked ? (
-                <DuplicateCheckButton
-                  onClick={() => {
-                    checkDuplicate("nickname", nickname, setNicknameCheck);
-                  }}
-                >
-                  중복 확인
-                </DuplicateCheckButton>
-              ) : (
-                <DuplicateConfirm>사용 가능합니다</DuplicateConfirm>
-              )}
-            </InputWrapper>
-          </InputContainer>
-          <InputContainer>
-            <InputLabel htmlFor="username">이메일</InputLabel>
-            <RegisterInput
-              type="email"
-              name="email"
-              placeholder="ex. example@iieum.com"
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setRequestReview("");
-              }}
-            />
-          </InputContainer>
-          <InputContainer>
-            <InputLabel htmlFor="password">비밀번호</InputLabel>
-            <RegisterInput
-              type="password"
-              name="password"
-              placeholder="공백없이 영문, 숫자 포함 8-20자"
-              duplicateChecked={pwdMatch}
-              onChange={(e) => {
-                setPwd(e.target.value);
-                setRequestReview("");
-              }}
-            />
-          </InputContainer>
-          <InputContainer>
-            <InputLabel htmlFor="passwordConfirm">
-              비밀번호 확인
-              {pwdMatch === false ? (
-                <DuplicateMessage>
-                  비밀번호가 일치하지 않습니다.
-                </DuplicateMessage>
-              ) : (
-                ""
-              )}
-            </InputLabel>
-            <RegisterInput
-              type="password"
-              name="passwordConfirm"
-              placeholder="비밀번호 재확인"
-              duplicateChecked={pwdMatch}
-              onChange={(e) => {
-                setConfirm(e.target.value);
-                setRequestReview("");
-              }}
-            />
-          </InputContainer>
-        </RegisterFieldset>
-        <RegisterBtnContainer>
-          {requestReview ? (
-            <>
-              <DuplicateMessage>{requestReview}</DuplicateMessage>
-              <br />
-            </>
-          ) : (
-            ""
-          )}
-          {submit ? (
-            <SubmitMessage>처리 중입니다...</SubmitMessage>
-          ) : (
-            <>
-              <RegisterBtn onClick={() => onRegisterClick()}>
-                가입하기
-              </RegisterBtn>
-              <ToLoginLink to="/login">로그인하기</ToLoginLink>
-            </>
-          )}
-        </RegisterBtnContainer>
-      </RegisterForm>
-    </RegisterSection>
+            </InputContainer>
+            <InputContainer>
+              <InputLabel htmlFor="passwordConfirm">
+                비밀번호 확인
+                {pwdMatch === false ? (
+                  <DuplicateMessage>
+                    비밀번호가 일치하지 않습니다.
+                  </DuplicateMessage>
+                ) : (
+                  ""
+                )}
+              </InputLabel>
+              <RegisterInput
+                type="password"
+                name="passwordConfirm"
+                placeholder="비밀번호 재확인"
+                duplicateChecked={pwdMatch}
+                onChange={(e) => {
+                  setConfirm(e.target.value);
+                  setRequestReview("");
+                }}
+              />
+            </InputContainer>
+          </RegisterFieldset>
+          <RegisterBtnContainer>
+            {requestReview ? (
+              <>
+                <DuplicateMessage>{requestReview}</DuplicateMessage>
+                <br />
+              </>
+            ) : (
+              ""
+            )}
+            {submit ? (
+              <SubmitMessage>처리 중입니다...</SubmitMessage>
+            ) : (
+              <>
+                <RegisterBtn onClick={() => onRegisterClick()}>
+                  가입하기
+                </RegisterBtn>
+                <ToLoginLink to="/login">로그인하기</ToLoginLink>
+              </>
+            )}
+          </RegisterBtnContainer>
+        </RegisterForm>
+      </RegisterSection>
+    </g.Background>
+    
   );
 };
 

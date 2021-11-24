@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { beige, lightBrown, lightGray, nearWhite } from "../../Colors";
+import * as colors from "../../Colors";
 
 export const AfterSent = styled.section`
   width: 80%;
@@ -19,11 +19,11 @@ export const RegisterSection = styled.main`
   width: 80%;
 
   margin: auto;
-  margin-top: 30vh;
+  margin-top: 4rem;
 
   text-align: center;
   @media screen and (min-width: 1920px) {
-    margin-top: 10vh;
+    margin-top: 4rem;
   }
 `;
 
@@ -48,9 +48,9 @@ export const RegisterLegend = styled.legend`
   margin: 3% auto;
   padding: 5%;
 
-  border-bottom: 2px solid ${lightBrown};
+  border-bottom: 2px solid ${colors.iiPurpleOpacity};
 
-  color: ${lightBrown};
+  color: ${colors.iiBrown};
   font-size: 1.5rem;
   text-align: center;
 `;
@@ -78,15 +78,16 @@ export const InputWrapper = styled.div`
 
 export const RegisterInput = styled.input`
   padding: 0.5rem;
-
-  border-radius: 5px;
-  border: 1px solid
+  background-color: ${colors.iiBG};
+  border: none;
+  // border-radius: 5px;
+  border-bottom: 1px solid
     ${(p) =>
       p.duplicateChecked === false
         ? "red"
         : p.duplicateChecked === true
         ? "green"
-        : lightGray};
+        : colors.iiBrown};
 
   &:focus {
     outline: none;
@@ -106,9 +107,14 @@ export const DuplicateCheckButton = styled.button`
   padding: 0.5rem;
   width: 20%;
   background-color: transparent;
-  border: 1px solid #000;
+  border: 1px solid ${colors.iiPurple};
   border-radius: 5px;
   cursor: pointer;
+  color: ${colors.iiPurple};
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const RegisterBtnContainer = styled.div`
@@ -125,9 +131,9 @@ export const RegisterBtn = styled.button`
   border-radius: 4px;
   border: none;
 
-  background-color: ${beige};
+  background-color: ${colors.iiPurple};
 
-  color: ${nearWhite};
+  color: ${colors.iiBeige};
   font-size: 1.1rem;
   font-weight: 500;
 
@@ -135,7 +141,7 @@ export const RegisterBtn = styled.button`
 
   &:hover {
     transform: scale(1.05);
-    background-color: ${lightBrown};
+    background-color: ${colors.iiBrown};
   }
 `;
 

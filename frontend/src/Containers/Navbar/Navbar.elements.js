@@ -93,7 +93,7 @@ export const NavLink = styled(Link)`
 
   &:hover {
     translate: scale(1.05);
-    color: #dba691;
+    color: ${colors.iiPurple};
   }
 `;
 

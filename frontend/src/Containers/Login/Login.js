@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import CSRFToken from "../../Components/csrftoken";
 import { Redirect } from "react-router";
+import * as g from "../../globalStyles";
 
 import {
   LoginSection,
@@ -15,6 +16,7 @@ import {
   ToRegisterLink,
   ErrorMessage,
 } from "./Login.elements";
+import { InputLabel } from "../SignUp/SignUp.elements";
 
 const Login = ({ saveUserData, currUser }) => {
   const [username, setUsername] = useState("");
@@ -84,41 +86,44 @@ const Login = ({ saveUserData, currUser }) => {
   return currUser ? (
     <Redirect to="/" />
   ) : (
-    <LoginSection>
-      <LoginForm>
-        <CSRFToken />
-        <LoginLegend>이음에서 당신의 오늘을 기록하세요</LoginLegend>
-        <LoginFieldset>
-          <InputContainer>
-            <LoginInput
-              type="text"
-              name="username"
-              placeholder="아이디"
-              onChange={(e) => {
-                usernameInputChange(e);
-              }}
-              onKeyPress={handleKeyPress}
-            />
-          </InputContainer>
-          <InputContainer>
-            <LoginInput
-              type="password"
-              name="password"
-              placeholder="비밀번호"
-              onChange={(e) => {
-                pwdInputChange(e);
-              }}
-              onKeyPress={handleKeyPress}
-            />
-          </InputContainer>
-        </LoginFieldset>
-        <LoginBtnContainer>
-          {errorMsg !== "" ? <ErrorMessage>{errorMsg}</ErrorMessage> : ""}
-          <LoginBtn onClick={() => onLoginClick()}>로그인</LoginBtn>
-          <ToRegisterLink to="/register">회원가입하기</ToRegisterLink>
-        </LoginBtnContainer>
-      </LoginForm>
-    </LoginSection>
+    <g.Background>
+      <LoginSection>
+        <LoginForm>
+          <CSRFToken />
+          <LoginLegend>로그인</LoginLegend>
+          <LoginFieldset>
+            <InputContainer>
+              <LoginInput
+                type="text"
+                name="username"
+                placeholder="아이디"
+                onChange={(e) => {
+                  usernameInputChange(e);
+                }}
+                onKeyPress={handleKeyPress}
+              />
+            </InputContainer>
+            <InputContainer>
+              <LoginInput
+                type="password"
+                name="password"
+                placeholder="비밀번호"
+                onChange={(e) => {
+                  pwdInputChange(e);
+                }}
+                onKeyPress={handleKeyPress}
+              />
+            </InputContainer>
+          </LoginFieldset>
+          <LoginBtnContainer>
+            {errorMsg !== "" ? <ErrorMessage>{errorMsg}</ErrorMessage> : ""}
+            <LoginBtn onClick={() => onLoginClick()}>로그인</LoginBtn>
+            <ToRegisterLink to="/register">회원가입하기</ToRegisterLink>
+          </LoginBtnContainer>
+        </LoginForm>
+      </LoginSection>
+    </g.Background>
+    
   );
 };
 
