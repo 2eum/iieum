@@ -49,8 +49,16 @@ export const BottomContainer = styled.div`
 
 export const QuestionName = styled.h3`
   text-align: right;
-  width: 60%;
-  font-size: 2rem;
-  // word-break: keep-all;
+  width: 70%;
+  font-size: 1.5rem;
+  word-break: keep-all;
   margin: 2%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 2rem;
+  height: 6rem;
 `;
