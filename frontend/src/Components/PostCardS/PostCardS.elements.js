@@ -86,8 +86,15 @@ export const MusicArtist = styled.h4`
 
 export const TitleArea = styled.section`
   width: 100%;
+  height: 3rem;
+  overflow: hidden;
 `;
 
-export const ContentTitle = styled.h3`
-  word-break: break-word;
+export const ContentTitle = styled.p`
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 1.5rem;
 `;

@@ -68,14 +68,19 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
   }, [questionId]);
 
   const updateSearchInput = (e) => {
-    setSearchCount(searchCount + 1);
-    let count = searchCount;
-    setTimeout(() => {
-      if (count === searchCount) {
-        setSelected(false);
-        setSearchQuery(e.target.value);
-      }
-    }, 1000);
+    if (!currUser) {
+      alert("로그인 후 글 작성이 가능합니다!");
+      e.target.value = "";
+    } else {
+      setSearchCount(searchCount + 1);
+      let count = searchCount;
+      setTimeout(() => {
+        if (count === searchCount) {
+          setSelected(false);
+          setSearchQuery(e.target.value);
+        }
+      }, 1000);
+    }
   };
 
   const selectMusic = (i) => {
@@ -165,7 +170,13 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
             </S.TopArea>
             <S.MusicSearchArea
               isSearching={isSearching}
-              onClick={!selected ? () => setSearching(true) : () => {}}
+              onClick={
+                !selected
+                  ? currUser
+                    ? () => setSearching(true)
+                    : () => alert("로그인 후 글 작성이 가능합니다!")
+                  : () => {}
+              }
             >
               {selected ? (
                 <S.MusicCardWrapper>
@@ -206,18 +217,32 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
                 placeholder="제목을 입력하세요"
                 maxLength={120}
                 autoComplete="off"
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) =>
+                  currUser
+                    ? setTitle(e.target.value)
+                    : alert("로그인 후 글 작성이 가능합니다!")
+                }
               />
               <S.FormBody
                 placeholder="당신의 이야기를 들려주세요 :)"
                 name="body"
                 autoComplete="off"
-                onChange={(e) => setBody(e.target.value)}
+                onChange={(e) =>
+                  currUser
+                    ? setBody(e.target.value)
+                    : alert("로그인 후 글 작성이 가능합니다!")
+                }
               />
             </S.FormArea>
             <S.BottomArea>
               <S.Signature>{currUser}</S.Signature>
-              <S.SubmitButton onClick={handleSubmit}>
+              <S.SubmitButton
+                onClick={
+                  currUser
+                    ? () => handleSubmit
+                    : () => alert("로그인 후 글 작성이 가능합니다!")
+                }
+              >
                 <i className="fas fa-check" />다 썼어요!
               </S.SubmitButton>
             </S.BottomArea>
