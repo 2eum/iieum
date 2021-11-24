@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as g from "../../globalStyles";
 import * as colors from "../../Colors";
 
-export const MyPageBanner = styled(g.BannerContainer)`
+export const MyPageBanner = styled.section`
   width: 100%;
 
   display: flex;
