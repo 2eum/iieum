@@ -11,6 +11,12 @@ const GlobalStyle = createGlobalStyle`
 // font-weight로 조절
 /* @import url('https://cdn.rawgit.com/kattergil/NotoSerifKR-Web/76eb9ebf/stylesheet/NotoSerif-Web.css'); */
 
+@font-face {
+    font-family: 'Daughter_handwriting';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Daughter_handwriting.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 // defaults
 * {

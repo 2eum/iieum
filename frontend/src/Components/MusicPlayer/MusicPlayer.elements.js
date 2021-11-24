@@ -15,7 +15,6 @@ export const PlayerContainer = styled.div`
 export const PlayerButton = styled.div`
   width: 1.5rem;
   height: 1.5rem;
-  background-color: ${colors.iiPurple};
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -23,7 +22,8 @@ export const PlayerButton = styled.div`
   display: flex;
   align-items: center;
   i {
-    color: ${colors.iiBeige};
+    color: ${colors.iiPurple};
+    font-size: 1.5rem;
   }
 `;
 

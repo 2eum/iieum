@@ -135,6 +135,8 @@ export const DeleteBtn = styled.div`
 export const Signature = styled.h3`
   margin: 1%;
   justify-self: flex-end;
+  font-family: "Daughter_handwriting";
+  font-size: 2.5rem;
 `;
 
 export const MusicSearchArea = styled.section`

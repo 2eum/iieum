@@ -108,7 +108,10 @@ export const BottomArea = styled.section`
   align-items: flex-end;
 `;
 
-export const Signature = styled.h3``;
+export const Signature = styled.h3`
+  font-family: "Daughter_handwriting";
+  font-size: 2.5rem;
+`;
 
 export const SubmitButton = styled.p`
   margin-top: 1rem;
