@@ -88,3 +88,8 @@ export const ListSwitch = styled.button`
 `;
 
 export const LikeListSection = styled.section``;
+
+export const MainContentContainer = styled.section`
+  width: 100%;
+  text-align: center;
+`;

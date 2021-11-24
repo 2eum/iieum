@@ -80,7 +80,7 @@ const MyPage = ({ currUser, token, userId }) => {
             </S.StatsWrapper>
           </S.MyPageBanner>
 
-          <g.MainContentContainer>
+          <S.MainContentContainer>
             <S.ListSwitchContainer>
               <S.ListSwitchWrapper>
                 <S.ListSwitch
@@ -130,7 +130,7 @@ const MyPage = ({ currUser, token, userId }) => {
             )}
 
             {/* <List token={token} /> */}
-          </g.MainContentContainer>
+          </S.MainContentContainer>
         </g.PageSection>
       </g.Background>
     </>
