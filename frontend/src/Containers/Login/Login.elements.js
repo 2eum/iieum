@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { beige, lightBrown, lightGray, nearWhite } from "../../Colors";
+import * as colors from "../../Colors";
 
 export const LoginSection = styled.main`
   width: 80%;
 
   margin: auto;
-  margin-top: 30vh;
+  margin-top: 4rem;
 
   text-align: center;
 `;
@@ -18,15 +18,15 @@ export const LoginForm = styled.div`
 
   text-align: center;
 
-  background-color: ${nearWhite};
-  box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
+  background-color: ${colors.iiBG};
+  // box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
 `;
 
 export const LoginFieldset = styled.fieldset`
   display: flex;
   flex-direction: column;
 
-  margin: 7% auto;
+  margin: 8% auto;
 
   background-color: rgba(0, 0, 0, 0);
   border: none;
@@ -34,10 +34,13 @@ export const LoginFieldset = styled.fieldset`
 
 export const LoginLegend = styled.legend`
   margin: 5% auto 10% auto;
+  padding: 5%;
 
-  color: ${lightBrown};
-  font-size: 1.3rem;
+  color: ${colors.iiBrown};
+  font-size: 1.5rem;
   text-align: center;
+
+  // border-bottom: 2px solid ${colors.iiPurpleOpacity};
 `;
 
 export const InputContainer = styled.div`
@@ -49,9 +52,11 @@ export const InputContainer = styled.div`
 
 export const LoginInput = styled.input`
   padding: 0.5rem;
-
-  border-radius: 5px;
-  border: 1px solid ${lightGray};
+  margin: 0.5rem 0;
+  border: none;
+  // border-radius: 5px;
+  border-bottom: 1px solid ${colors.iiBrown};
+  background-color: ${colors.iiBG};
 
   &:focus {
     outline: none;
@@ -72,9 +77,9 @@ export const LoginBtn = styled.button`
   border-radius: 4px;
   border: none;
 
-  background-color: ${beige};
+  background-color: ${colors.iiPurple};
 
-  color: ${nearWhite};
+  color: ${colors.iiBeige};
   font-size: 1.1rem;
   font-weight: 500;
 
@@ -82,7 +87,7 @@ export const LoginBtn = styled.button`
 
   &:hover {
     transform: scale(1.05);
-    background-color: ${lightBrown};
+    background-color: ${colors.iiBrown};
   }
 `;
 
