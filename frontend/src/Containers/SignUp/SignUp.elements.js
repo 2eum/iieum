@@ -105,7 +105,7 @@ export const DuplicateConfirm = styled.p`
 
 export const DuplicateCheckButton = styled.button`
   padding: 0.5rem;
-  width: 20%;
+  width: 5rem;
   background-color: transparent;
   border: 1px solid ${colors.iiPurple};
   border-radius: 5px;
