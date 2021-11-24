@@ -1,6 +1,7 @@
 import React from "react";
 
 import { FooterContainer, CopyRight, GitHubLink } from "./Footer.elements";
+import spotifyIcon from "../../Components/SearchedItem/Spotify_Icon.png";
 
 const Footer = () => {
   return (
@@ -12,7 +13,13 @@ const Footer = () => {
         {/* <GitHubLink href="https://github.com/2eum/musicdiary" target="_blank">
           Click and visit our Github!
         </GitHubLink> */}
-        Music Search & Data Powered by Spotify(Logo)
+        <p>
+          {" "}
+          Search & Data Powered by Spotify{" "}
+          <span>
+            <img width="16px" src={spotifyIcon} />
+          </span>{" "}
+        </p>
       </FooterContainer>
     </>
   );

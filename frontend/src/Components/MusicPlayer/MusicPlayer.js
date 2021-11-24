@@ -49,9 +49,9 @@ const MusicPlayer = ({ source, postId, cols }) => {
         <S.PlayerButton onClick={handlePlay}>
           {/* play, pause icon toggle */}
           {playing ? (
-            <i className="fas fa-pause"></i>
+            <i className="fa fa-pause-circle"></i>
           ) : (
-            <i className="fas fa-play"></i>
+            <i className="fa fa-play-circle"></i>
           )}
         </S.PlayerButton>
         <S.PlayerBase>

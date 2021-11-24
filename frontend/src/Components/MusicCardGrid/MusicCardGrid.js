@@ -18,7 +18,7 @@ const MusicCardGrid = ({ currUser, token, userId, list }) => {
     if (!list) {
       axios({
         method: "get",
-        url: `/api/recentmusic/0`,
+        url: `/api/recentmusic/6`,
         headers: {
           "Content-Type": "application/json",
         },

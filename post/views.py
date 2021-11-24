@@ -155,7 +155,9 @@ class GetOnePost(APIView):
         if post:
             serializer_context = {'request': request,}
             serializer_class = PostSerializer(post, many=False, context=serializer_context)
-            return Response(serializer_class.data)
+            #print(post.user.nickname)
+            #return Response(serializer_class.data)
+            return Response({"post":serializer_class.data, "nickname":post.user.nickname})
         else:
             raise Http404("Post does not exist")
 

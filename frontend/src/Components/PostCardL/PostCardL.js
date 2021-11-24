@@ -14,6 +14,7 @@ const PostCardL = ({
   cols,
 }) => {
   const [content, setContent] = useState(null);
+  const [nickname, setNickname] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [editMode, setEditMode] = useState(false);
@@ -46,7 +47,8 @@ const PostCardL = ({
         return response.data;
       })
       .then((data) => {
-        setContent(data);
+        setContent(data["post"]);
+        setNickname(data["nickname"]);
         return data;
       })
       .then((data) => {
@@ -284,7 +286,7 @@ const PostCardL = ({
                 </S.ContentArea>
               </S.MiddleArea>
               <S.PostBottom>
-                <S.Signature>{content.user}</S.Signature>
+                <S.Signature>{nickname}</S.Signature>
                 {/* show edit, delete button only when user is post card owner */}
                 {currUser === content.user ? (
                   <S.BtnArea>
