@@ -97,6 +97,7 @@ export const CreateCardLeft = styled.section`
   width: 25%;
   height: 50rem;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
 `;
 

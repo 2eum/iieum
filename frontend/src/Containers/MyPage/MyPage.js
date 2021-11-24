@@ -54,10 +54,7 @@ const MyPage = ({ currUser, token, userId }) => {
   }, []);
 
   const changeList = (e) => {
-    console.log("target: ", e.target.value);
     setSelectedList(e.target.value);
-    // selectedList = e.target.value;
-    console.log("selectedList: ", selectedList);
   };
 
   const today = new Date();
