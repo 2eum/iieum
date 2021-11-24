@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CardListContainer = styled.section`
   // fixed position 사용 위해 필요
   transform: scale(1);
-  height: 55vw;
+  height: 55rem;
   width: 100%;
   display: flex;
 `;
@@ -29,6 +29,6 @@ export const PostCardLContainer = styled.div`
   opacity: ${(p) => (p.cols === 2 ? 1 : 0)};
   z-index: ${(p) => (p.cols === 2 ? 1 : -1)};
   transition: opacity 500ms;
-  height: 55vw;
+  height: 55rem;
   padding: auto;
 `;
