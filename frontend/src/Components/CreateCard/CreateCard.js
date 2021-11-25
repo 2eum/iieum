@@ -239,7 +239,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
               <S.SubmitButton
                 onClick={
                   currUser
-                    ? () => handleSubmit
+                    ? () => handleSubmit()
                     : () => alert("로그인 후 글 작성이 가능합니다!")
                 }
               >

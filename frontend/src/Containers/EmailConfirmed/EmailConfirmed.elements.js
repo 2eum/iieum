@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const ConfirmationSection = styled.section`
-  margin-top: 15vh;
-`;
+export const ConfirmationSection = styled.section``;
 
 export const ConfirmationMessage = styled.p`
   text-align: center;
