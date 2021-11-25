@@ -46,9 +46,12 @@ const GlobalStyle = createGlobalStyle`
     background: rgba(0,0,0,.9);
   }
 
-  wordbreak: keep-all;
+  word-break: keep-all;
 }
 
+body {
+  background-color: ${colors.iiBG};
+}
 .fa {
   color: ${colors.iiPurple};
 }
@@ -68,11 +71,6 @@ a {
 h1, h2, h3 {
   font-weight: 500;
 }
-
-* {
-  wordbreak: keep-all;
-}
-
 `;
 
 export const CardShadow = "8px 8px 8px 1px rgba(0, 0, 0, .15)";
