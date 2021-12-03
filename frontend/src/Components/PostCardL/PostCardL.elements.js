@@ -125,12 +125,20 @@ export const EditBtn = styled.div`
   margin: auto 5%;
   cursor: pointer;
   color: ${colors.iiPurple};
+
+  &:hover {
+    border-bottom: 1px solid ${colors.iiPurple};
+  }
 `;
 
 export const DeleteBtn = styled.div`
   margin: auto 5%;
   cursor: pointer;
   color: ${colors.iiPurple};
+
+  &:hover {
+    border-bottom: 1px solid ${colors.iiPurple};
+  }
 `;
 
 export const Signature = styled.h3`

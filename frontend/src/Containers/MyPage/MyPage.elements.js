@@ -83,8 +83,10 @@ export const ListSwitch = styled.button`
       : `border-bottom: none;`};
 
   &:hover {
-    text-decoration: underline;
+    color: ${colors.iiPurple};
   }
+
+  transition: all 100ms;
 `;
 
 export const LikeListSection = styled.section``;
