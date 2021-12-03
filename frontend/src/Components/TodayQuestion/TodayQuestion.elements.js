@@ -93,7 +93,14 @@ export const AnswerButton = styled(Link)`
     color: ${colors.iiBeige};
     margin-right: 5%;
   }
+
   &:hover {
-    color: ${colors.iiBeige};
+    background-color: ${colors.iiBeige};
+    border: solid 1px ${colors.iiPurple};
+    i {
+      color: ${colors.iiPurple};
+    }
   }
+
+  transition: all 100ms;
 `;

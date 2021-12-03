@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./PostCardL.elements";
-import * as g from "../../globalStyles";
 import { MusicCard, SearchedItem } from "..";
 import axios from "axios";
 
