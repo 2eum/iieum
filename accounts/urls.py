@@ -11,14 +11,14 @@ from .views import *
 urlpatterns = [
     # 로그인
     path('api/login', LoginView.as_view(), name='rest_login'),
-    path('rest-auth/logout', LogoutView.as_view(), name='rest_logout'),
-    path('rest-auth/password/change', PasswordChangeView.as_view(), name='rest_password_change'),
-
     # 회원가입
     path('api/signup', RegisterView.as_view(), name='rest_register'),
+    # 회원정보 받아오기 & 수정
+    path('api/accounts/user', Userinfo.as_view(), name='userinfo_after_login'),
+    path('api/accounts/change-password', PasswordChangeView.as_view(), name='rest_password_change'),
+    path('api/accounts/change-nickname', UserinfoChangeView.as_view(), name='userinfo_change'),
 
     path('accounts/', include('allauth.urls')),
-    
     # 이메일 관련 필요
     path('accounts/allauth/', include('allauth.urls')),
     # 유효한 이메일이 유저에게 전달
