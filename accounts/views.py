@@ -84,7 +84,7 @@ class EmailCheck(APIView):
 
 class UserinfoChangeView(APIView):
     @csrf_exempt
-    def post(self, request):
+    def put(self, request):
         new_username = request.data['new_username']
         new_nickname = request.data['new_nickname']
         user = User.objects.filter(id=self.request.user.id).first()
@@ -100,8 +100,7 @@ class UserinfoChangeView(APIView):
 
 class Userinfo(APIView):
     @csrf_exempt
-    def post(self, request):
-        pk = request.data['pk']
+    def get(self, request, pk):
         user = User.objects.filter(id=pk).first()
         if user is not None:
             serializer_context = {'request': request,}

@@ -11,12 +11,12 @@ from .views import *
 urlpatterns = [
     # 로그인
     path('api/login', LoginView.as_view(), name='rest_login'),
-    path('api/user', Userinfo.as_view(), name='userinfo_after_login'),
     # 회원가입
     path('api/signup', RegisterView.as_view(), name='rest_register'),
-    # 회원정보 수정
-    path('api/update/password', PasswordChangeView.as_view(), name='rest_password_change'),
-    path('api/update/userinfo', UserinfoChangeView.as_view(), name='userinfo_change'),
+    # 회원정보 받아오기 & 수정
+    path('api/accounts/user/<int:pk>', Userinfo.as_view(), name='userinfo_after_login'),
+    path('api/accounts/change-password', PasswordChangeView.as_view(), name='rest_password_change'),
+    path('api/accounts/change-nickname', UserinfoChangeView.as_view(), name='userinfo_change'),
 
     path('accounts/', include('allauth.urls')),
     # 이메일 관련 필요
