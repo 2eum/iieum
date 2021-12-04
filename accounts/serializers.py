@@ -12,3 +12,8 @@ class CustomRegisterSerializer(RegisterSerializer):
         user.nickname = self.data.get('nickname')
         user.save()
         return user
+
+class UserRepresentationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("id", "username", "nickname", "email")

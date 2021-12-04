@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Post, Question
+from accounts.serializers import UserRepresentationSerializer
 
 class PostSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source = 'user.username')
@@ -9,6 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         self.fields['question'] = QuestionRepresentationSerializer(read_only=True)
+        self.fields['user'] = UserRepresentationSerializer(read_only=True)
         return super(PostSerializer, self).to_representation(instance)
 
 class QuestionSerializer(serializers.ModelSerializer):
