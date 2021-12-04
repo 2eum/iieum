@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { render } from "react-dom";
 import {
   Navbar,
@@ -23,14 +23,15 @@ import {
 } from "react-router-dom";
 import GlobalStyle from "./globalStyles";
 import ScrollToTop from "./Components/ScrollToTop";
+import axios from "axios";
 
 const App = () => {
   const [token, setToken] = useState(
     localStorage.getItem("token") ? localStorage.getItem("token") : null
   );
   const [currUser, setUser] = useState(
-    localStorage.getItem("username")
-      ? window.localStorage.getItem("username")
+    localStorage.getItem("nickname")
+      ? window.localStorage.getItem("nickname")
       : null
   );
 
@@ -42,7 +43,6 @@ const App = () => {
 
   const saveUserData = (token, username, userId) => {
     setToken(token);
-    setUser(username);
     setUserId(userId);
 
     window.localStorage.setItem("token", token);
@@ -50,6 +50,24 @@ const App = () => {
     window.localStorage.setItem("username", username);
 
     window.localStorage.setItem("userId", userId);
+  };
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `/api/accounts/user`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `jwt ${token}`,
+      },
+    }).then((response) => {
+      setUser(response.data.nickname);
+      setNickname(response.data.nickname);
+    });
+  }, [token]);
+
+  const setNickname = (nickname) => {
+    window.localStorage.setItem("nickname", nickname);
   };
 
   const handleLogout = () => {
@@ -144,6 +162,7 @@ const App = () => {
               token={token}
               saveUserData={saveUserData}
               currUser={currUser}
+              setNickname={setNickname}
             />
           )}
         />

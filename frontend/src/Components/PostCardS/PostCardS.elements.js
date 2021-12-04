@@ -32,7 +32,7 @@ export const PostCardArea = styled.section`
 export const TopArea = styled.section``;
 
 export const Author = styled.p`
-  font-size: 2rem;
+  font-size: 1.3rem;
   font-family: "Daughter_handwriting";
 `;
 
