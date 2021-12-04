@@ -11,6 +11,7 @@ from .views import *
 urlpatterns = [
     # 로그인
     path('api/login', LoginView.as_view(), name='rest_login'),
+    path('api/user', Userinfo.as_view(), name='userinfo_after_login'),
     # 회원가입
     path('api/signup', RegisterView.as_view(), name='rest_register'),
     # 회원정보 수정

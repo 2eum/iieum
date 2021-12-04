@@ -97,3 +97,15 @@ class UserinfoChangeView(APIView):
             return Response(serializer_class.data)
         else:
             raise Http404("User does not exist")
+
+class Userinfo(APIView):
+    @csrf_exempt
+    def post(self, request):
+        pk = request.data['pk']
+        user = User.objects.filter(id=pk).first()
+        if user is not None:
+            serializer_context = {'request': request,}
+            serializer_class = UserRepresentationSerializer(user, many=False, context=serializer_context)
+            return Response(serializer_class.data)
+        else:
+            raise Http404("User does not exist")
