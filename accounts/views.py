@@ -12,6 +12,8 @@ from django.utils.encoding import force_text
 from rest_framework import status
 from django.http import HttpResponseRedirect
 from .serializers import *
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 class CustomValidation(APIException):
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -84,12 +86,10 @@ class EmailCheck(APIView):
 
 class UserinfoChangeView(APIView):
     @csrf_exempt
-    def put(self, request):
-        new_username = request.data['new_username']
+    def patch(self, request):
         new_nickname = request.data['new_nickname']
         user = User.objects.filter(id=self.request.user.id).first()
         if user is not None:
-            user.username = new_username
             user.nickname = new_nickname
             user.save()
             serializer_context = {'request': request,}
@@ -99,9 +99,12 @@ class UserinfoChangeView(APIView):
             raise Http404("User does not exist")
 
 class Userinfo(APIView):
+    authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated]
     @csrf_exempt
-    def get(self, request, pk):
-        user = User.objects.filter(id=pk).first()
+    def get(self, request):
+        user = User.objects.filter(id=self.request.user.id).first()
+        
         if user is not None:
             serializer_context = {'request': request,}
             serializer_class = UserRepresentationSerializer(user, many=False, context=serializer_context)
