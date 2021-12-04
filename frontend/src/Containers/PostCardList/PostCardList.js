@@ -53,7 +53,7 @@ const PostCardList = ({ currUser, token, userId, questionId, list }) => {
         return (
           <PostCardS
             key={c.id}
-            user={c.user}
+            user={c.user.nickname}
             title={c.title}
             track_title={c.track_title}
             track_artist={c.track_artist}
