@@ -61,7 +61,7 @@ export const Question = styled.p`
 `;
 
 export const MiddleArea = styled.section`
-  height: ${(p) => (p.editMode ? "65%" : "70%")};
+  height: ${(p) => (p.editMode ? "60%" : "70%")};
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5%;
@@ -94,6 +94,7 @@ export const ContentTitle = styled.h2`
 
 export const PubDate = styled.p`
   color: ${colors.darkGray};
+  text-align: left;
 `;
 
 export const BodyWrapper = styled.div`
@@ -110,7 +111,7 @@ export const PostBottom = styled.section`
   display: flex;
   ${(p) =>
     p.editMode
-      ? "flex-direction: column; align-items: flex-end; height: 15%;"
+      ? "flex-direction: column; align-items: flex-end; height: 20%;"
       : "flex-direction: row-reverse; justify-content: space-between; align-items: center; height: 10%;"}
   margin: 2%;
 `;
@@ -124,12 +125,20 @@ export const EditBtn = styled.div`
   margin: auto 5%;
   cursor: pointer;
   color: ${colors.iiPurple};
+
+  &:hover {
+    border-bottom: 1px solid ${colors.iiPurple};
+  }
 `;
 
 export const DeleteBtn = styled.div`
   margin: auto 5%;
   cursor: pointer;
   color: ${colors.iiPurple};
+
+  &:hover {
+    border-bottom: 1px solid ${colors.iiPurple};
+  }
 `;
 
 export const Signature = styled.h3`
@@ -222,9 +231,22 @@ export const SubmitButton = styled.p`
   align-items: center;
   height: 2.5rem;
   border: 1px solid ${colors.iiPurple};
-  & > i {
+  box-shadow: ${g.ButtonShadow};
+
+  i {
     color: ${colors.iiPurple};
   }
+
+  &:hover {
+    color: ${colors.iiBeige};
+    background-color: ${colors.iiPurple};
+
+    i {
+      color: ${colors.iiBeige};
+    }
+  }
+
+  transition: all 100ms;
 `;
 
 export const ResetChoiceButton = styled.p`

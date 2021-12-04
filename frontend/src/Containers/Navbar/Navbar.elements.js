@@ -54,7 +54,6 @@ export const SearchBar = styled.input`
   :focus {
     outline: none;
   }
-
 `;
 
 export const SearchButton = styled(Link)`
@@ -95,6 +94,8 @@ export const NavLink = styled(Link)`
     translate: scale(1.05);
     color: ${colors.iiPurple};
   }
+
+  transition: all 100ms;
 `;
 
 export const LogoutLink = styled.p`
@@ -102,8 +103,10 @@ export const LogoutLink = styled.p`
 
   &:hover {
     translate: scale(1.05);
-    color: #dba691;
+    color: ${colors.iiPurple};
   }
+
+  transition: all 100ms;
 `;
 
 export const RightNavLinksWrapper = styled.div`

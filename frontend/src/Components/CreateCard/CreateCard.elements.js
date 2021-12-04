@@ -118,16 +118,29 @@ export const SubmitButton = styled.p`
   cursor: pointer;
   background-color: ${colors.iiPurple};
   border-radius: 5px;
+  border: solid 1px ${colors.iiPurple};
   width: 8rem;
   padding: 0.5rem 1rem;
   color: ${colors.iiBeige};
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: ${g.ButtonShadow};
 
-  & > i {
+  i {
     color: ${colors.iiBeige};
   }
+
+  &:hover {
+    color: ${colors.iiPurple};
+    background-color: ${colors.iiBeige};
+
+    i {
+      color: ${colors.iiPurple};
+    }
+  }
+
+  transition: all 100ms;
 `;
 
 export const ResetChoiceButton = styled.p`
@@ -155,4 +168,17 @@ export const RedirectButton = styled.p`
   padding: 0.5rem 1rem;
   color: ${colors.iiBeige};
   text-align: center;
+  border: solid 1px ${colors.iiPurple};
+  box-shadow: ${g.ButtonShadow};
+
+  &:hover {
+    color: ${colors.iiPurple};
+    background-color: ${colors.iiBeige};
+
+    i {
+      color: ${colors.iiPurple};
+    }
+  }
+
+  transition: all 100ms;
 `;

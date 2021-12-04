@@ -87,7 +87,7 @@ export const DefaultButton = styled(Link)`
   justify-content: center;
   align-items: center;
   height: 44px;
-  border: none;
+  border: solid 1px ${colors.iiPurple};
   border-radius: 5px;
   background-color: ${colors.iiPurple};
   box-shadow: ${ButtonShadow};
@@ -95,6 +95,17 @@ export const DefaultButton = styled(Link)`
   font-weight: 300;
   color: ${colors.iiBeige};
   cursor: pointer;
+
+  &:hover {
+    color: ${colors.iiPurple};
+    background-color: ${colors.iiBeige};
+
+    i {
+      color: ${colors.iiPurple};
+    }
+  }
+
+  transition: all 100ms;
 `;
 
 export const MainContentContainer = styled.div`
