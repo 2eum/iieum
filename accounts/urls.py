@@ -15,6 +15,7 @@ urlpatterns = [
     path('api/signup', RegisterView.as_view(), name='rest_register'),
     # 회원정보 수정
     path('api/update/password', PasswordChangeView.as_view(), name='rest_password_change'),
+    path('api/update/userinfo', UserinfoChangeView.as_view(), name='userinfo_change'),
 
     path('accounts/', include('allauth.urls')),
     # 이메일 관련 필요

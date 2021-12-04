@@ -11,6 +11,7 @@ from rest_framework.exceptions import APIException
 from django.utils.encoding import force_text
 from rest_framework import status
 from django.http import HttpResponseRedirect
+from .serializers import *
 
 class CustomValidation(APIException):
     status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -80,3 +81,19 @@ class EmailCheck(APIView):
             return Response({"detail":"Available email"})
         else:
             raise CustomValidation('Duplicate Email','email', status_code=status.HTTP_409_CONFLICT)
+
+class UserinfoChangeView(APIView):
+    @csrf_exempt
+    def post(self, request):
+        new_username = request.data['new_username']
+        new_nickname = request.data['new_nickname']
+        user = User.objects.filter(id=self.request.user.id).first()
+        if user is not None:
+            user.username = new_username
+            user.nickname = new_nickname
+            user.save()
+            serializer_context = {'request': request,}
+            serializer_class = UserRepresentationSerializer(user, many=False, context=serializer_context)
+            return Response(serializer_class.data)
+        else:
+            raise Http404("User does not exist")
