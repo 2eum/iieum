@@ -31,7 +31,10 @@ export const PostCardArea = styled.section`
 
 export const TopArea = styled.section``;
 
-export const Author = styled.h4``;
+export const Author = styled.p`
+  font-size: 1.3rem;
+  font-family: "Daughter_handwriting";
+`;
 
 export const MusicArea = styled.section`
   width: 100%;

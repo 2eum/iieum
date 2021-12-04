@@ -18,7 +18,7 @@ import {
 } from "./Login.elements";
 import { InputLabel } from "../SignUp/SignUp.elements";
 
-const Login = ({ saveUserData, currUser }) => {
+const Login = ({ saveUserData, currUser, setNickname }) => {
   const [username, setUsername] = useState("");
   const [pwd, setPwd] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -55,6 +55,7 @@ const Login = ({ saveUserData, currUser }) => {
             response.data.user.username,
             response.data.user.pk
           );
+          return response.data.token;
         })
         .catch((error) => {
           if (error.response) {
@@ -123,7 +124,6 @@ const Login = ({ saveUserData, currUser }) => {
         </LoginForm>
       </LoginSection>
     </g.Background>
-    
   );
 };
 

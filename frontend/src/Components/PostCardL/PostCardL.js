@@ -46,8 +46,8 @@ const PostCardL = ({
         return response.data;
       })
       .then((data) => {
-        setContent(data["post"]);
-        setNickname(data["nickname"]);
+        setContent(data.post);
+        setNickname(data.post.user.nickname);
         return data;
       })
       .then((data) => {
@@ -287,7 +287,7 @@ const PostCardL = ({
               <S.PostBottom>
                 <S.Signature>{nickname}</S.Signature>
                 {/* show edit, delete button only when user is post card owner */}
-                {currUser === content.user ? (
+                {currUser ? (
                   <S.BtnArea>
                     <S.EditBtn
                       onClick={(e) => {
