@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import * as g from "../../globalStyles";
 import * as colors from "../../Colors";
+import { NavLink } from "react-router-dom";
 
 export const MyPageBanner = styled.section`
   width: 100%;
@@ -8,8 +8,10 @@ export const MyPageBanner = styled.section`
   display: flex;
   justify-content: space-between;
 
-  margin: 5% 0;
+  margin-bottom: 5%;
 `;
+
+export const InfoChangeLink = styled(NavLink)``;
 
 export const User = styled.span`
   color: ${colors.iiPurple};

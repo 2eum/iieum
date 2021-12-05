@@ -11,3 +11,4 @@ export { default as Footer } from "./Footer/Footer";
 export { default as PostCardList } from "./PostCardList/PostCardList";
 export { default as Explore } from "./Explore/Explore";
 export { default as Search } from "./Search/Search";
+export { default as Change } from "./Change/Change";
