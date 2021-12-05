@@ -81,7 +81,7 @@ const SignUp = () => {
     } else if (!pwdMatch) {
       setRequestReview("비밀번호가 일치하지 않습니다.");
       return false;
-    } else if (pwd.length < 9) {
+    } else if (pwd.length < 8) {
       setRequestReview("비밀번호가 너무 짧습니다.");
       return false;
     } else if (pwd.match(/^\d+$/)) {
@@ -135,7 +135,6 @@ const SignUp = () => {
         <ToLoginLink to="/login">로그인 하기</ToLoginLink>
       </AfterSent>
     </g.Background>
-    
   ) : (
     <g.Background>
       <RegisterSection>
@@ -286,7 +285,6 @@ const SignUp = () => {
         </RegisterForm>
       </RegisterSection>
     </g.Background>
-    
   );
 };
 

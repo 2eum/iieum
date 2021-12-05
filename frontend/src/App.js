@@ -13,6 +13,7 @@ import {
   Explore,
   Search,
   EmailConfirmed,
+  Change,
 } from "./Containers";
 
 import {
@@ -41,7 +42,14 @@ const App = () => {
       : null
   );
 
+  const [username, setUsername] = useState(
+    localStorage.getItem("username")
+      ? window.localStorage.getItem("username")
+      : null
+  );
+
   const saveUserData = (token, username, userId) => {
+    setUsername(username);
     setToken(token);
     setUserId(userId);
 
@@ -62,11 +70,11 @@ const App = () => {
       },
     }).then((response) => {
       setUser(response.data.nickname);
-      setNickname(response.data.nickname);
+      saveNickname(response.data.nickname);
     });
   }, [token]);
 
-  const setNickname = (nickname) => {
+  const saveNickname = (nickname) => {
     window.localStorage.setItem("nickname", nickname);
   };
 
@@ -162,7 +170,19 @@ const App = () => {
               token={token}
               saveUserData={saveUserData}
               currUser={currUser}
-              setNickname={setNickname}
+              saveNickname={saveNickname}
+            />
+          )}
+        />
+        <Route
+          path="/change"
+          exact
+          render={() => (
+            <Change
+              token={token}
+              saveUserData={saveUserData}
+              currUser={currUser}
+              username={username}
             />
           )}
         />
