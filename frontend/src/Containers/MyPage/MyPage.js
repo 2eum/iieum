@@ -68,7 +68,9 @@ const MyPage = ({ currUser, token, userId }) => {
     <>
       <g.Background>
         <g.PageSection>
-          <S.InfoChangeLink to="/change">내 정보 수정</S.InfoChangeLink>
+          <S.InfoChangeLink to="/change">
+            <i className="fas fa-user-edit" /> 내 정보 수정
+          </S.InfoChangeLink>
           <S.MyPageBanner>
             <S.Message>
               <S.User>{currUser}</S.User>님, <br />
