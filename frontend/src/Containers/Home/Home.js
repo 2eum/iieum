@@ -4,14 +4,9 @@ import axios from "axios";
 import * as S from "./Home.elements";
 import * as g from "../../styles/globalStyles";
 
-import {
-  TodayQuestion,
-  MusicCard,
-  CreateCard,
-  QuestionCardGrid,
-  MusicCardGrid,
-  MusicCardOpened,
-} from "../../Components";
+import { TodayQuestion, CreateCard } from "../../Components";
+
+import { QuestionCardGrid, MusicCardGrid } from "../";
 
 const Home = ({ currUser, token, userId }) => {
   const [loaded, setLoad] = useState(false);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { PostCardList } from "..";
 import * as S from "./Search.elements";
 import * as g from "../../styles/globalStyles";
-import { MusicCardGrid, QuestionCardGrid } from "../../Components";
+import { MusicCardGrid, QuestionCardGrid } from "../";
 
 const Search = ({ currUser, token, userId, word }) => {
   const [postResult, setPostResult] = useState([]);

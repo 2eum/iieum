@@ -10,3 +10,5 @@ export { default as PostCardList } from "./PostCardList/PostCardList";
 export { default as Explore } from "./Explore/Explore";
 export { default as Search } from "./Search/Search";
 export { default as Change } from "./Change/Change";
+export { default as MusicCardGrid } from "./MusicCardGrid/MusicCardGrid";
+export { default as QuestionCardGrid } from "./QuestionCardGrid/QuestionCardGrid";

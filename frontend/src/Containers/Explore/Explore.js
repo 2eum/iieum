@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import * as g from "../../styles/globalStyles";
-import { Redirect } from "react-router";
-import { QuestionCardGrid } from "../../Components";
+import { QuestionCardGrid } from "../";
 import * as S from "./Explore.elements";
 
 const Explore = ({ currUser, token, userId }) => {

@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import CSRFToken from "../../Components/csrftoken";
-import { Redirect } from "react-router";
 import * as g from "../../styles/globalStyles";
 
 import {
