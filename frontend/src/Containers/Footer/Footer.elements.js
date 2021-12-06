@@ -17,7 +17,3 @@ export const FooterContainer = styled.section`
 export const CopyRight = styled.p`
   margin: 1rem 0;
 `;
-
-export const GitHubLink = styled.a`
-  margin: 1rem 0;
-`;

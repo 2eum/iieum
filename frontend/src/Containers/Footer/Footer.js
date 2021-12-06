@@ -1,18 +1,15 @@
 import React from "react";
 
-import { FooterContainer, CopyRight, GitHubLink } from "./Footer.elements";
+import * as S from "./Footer.elements";
 import spotifyIcon from "../../Components/SearchedItem/Spotify_Icon.png";
 
 const Footer = () => {
   return (
     <>
-      <FooterContainer>
-        <CopyRight>
+      <S.FooterContainer>
+        <S.CopyRight>
           © 2021 <strong>IIEUM</strong>, All Rights Reserved
-        </CopyRight>
-        {/* <GitHubLink href="https://github.com/2eum/musicdiary" target="_blank">
-          Click and visit our Github!
-        </GitHubLink> */}
+        </S.CopyRight>
         <p>
           {" "}
           Search & Data Powered by Spotify{" "}
@@ -20,7 +17,7 @@ const Footer = () => {
             <img width="16px" src={spotifyIcon} />
           </span>{" "}
         </p>
-      </FooterContainer>
+      </S.FooterContainer>
     </>
   );
 };

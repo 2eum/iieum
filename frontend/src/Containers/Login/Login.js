@@ -16,9 +16,8 @@ import {
   ToSignUpLink,
   ErrorMessage,
 } from "./Login.elements";
-import { InputLabel } from "../SignUp/SignUp.elements";
 
-const Login = ({ saveUserData, currUser, setNickname }) => {
+const Login = ({ saveUserData, currUser }) => {
   const [username, setUsername] = useState("");
   const [pwd, setPwd] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
