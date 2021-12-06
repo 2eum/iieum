@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Background } from "../../globalStyles";
+import { Background } from "../../styles/globalStyles";
 import * as S from "./Change.elements";
 
 const Change = ({ token, username, currUser, saveUserData }) => {

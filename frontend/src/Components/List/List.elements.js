@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { nearWhite } from "../../Colors";
+import { nearWhite } from "../../styles/Colors";
 
 export const ContentArea = styled.section`
   display: flex;

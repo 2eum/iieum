@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as c from "../../Colors";
+import * as c from "../../styles/Colors";
 
 export const FooterContainer = styled.section`
   padding-top: 6rem;

@@ -8,8 +8,6 @@ import {
   Login,
   MyPage,
   New,
-  Detail,
-  Edit,
   Explore,
   Search,
   EmailConfirmed,
@@ -22,7 +20,8 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import GlobalStyle from "./globalStyles";
+
+import GlobalStyle from "./styles/globalStyles";
 import ScrollToTop from "./Components/ScrollToTop";
 import axios from "axios";
 
@@ -113,13 +112,6 @@ const App = () => {
           )}
         />
         <Route
-          path="/detail/:id"
-          exact
-          render={() => (
-            <Detail currUser={currUser} token={token} userId={userId} />
-          )}
-        />
-        <Route
           path="/search"
           exact
           render={() => (
@@ -139,11 +131,6 @@ const App = () => {
           )}
         />
         <Route path="/new" exact render={() => <New token={token} />} />
-        <Route
-          path="/edit/:id"
-          exact
-          render={() => <Edit token={token} currUser={currUser} />}
-        />
         <Route
           path="/explore"
           exact

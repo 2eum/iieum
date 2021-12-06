@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { PostCardList } from "..";
 import * as S from "./Search.elements";
-import * as g from "../../globalStyles";
+import * as g from "../../styles/globalStyles";
 import { MusicCardGrid, QuestionCardGrid } from "../../Components";
 
 const Search = ({ currUser, token, userId, word }) => {

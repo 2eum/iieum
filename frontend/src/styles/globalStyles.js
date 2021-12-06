@@ -3,14 +3,6 @@ import styled, { createGlobalStyle, keyframes } from "styled-components";
 import * as colors from "./Colors";
 
 const GlobalStyle = createGlobalStyle`
-
-// import web font
-
-//noto serif kr
-// font-family: 'Noto Serif KR'
-// font-weight로 조절
-/* @import url('https://cdn.rawgit.com/kattergil/NotoSerifKR-Web/76eb9ebf/stylesheet/NotoSerif-Web.css'); */
-
 @font-face {
     font-family: 'Daughter_handwriting';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/Daughter_handwriting.woff') format('woff');
@@ -26,7 +18,9 @@ const GlobalStyle = createGlobalStyle`
 
   font-family: 'Noto Serif KR';
   font-weight: 400;
+
   color: ${colors.iiBrown};
+  
   &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -52,6 +46,7 @@ const GlobalStyle = createGlobalStyle`
 body {
   background-color: ${colors.iiBG};
 }
+
 .fa {
   color: ${colors.iiPurple};
 }
@@ -66,10 +61,6 @@ a {
   &:hover {
     color: ${colors.iiPurple};
   }
-}
-
-h1, h2, h3 {
-  font-weight: 500;
 }
 `;
 

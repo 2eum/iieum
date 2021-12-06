@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./QuestionCard.elements";
-import * as g from "../../globalStyles";
+import * as g from "../../styles/globalStyles";
 
 const QuestionCard = ({ question, date, cardIndex, handleClick, open }) => {
   return (

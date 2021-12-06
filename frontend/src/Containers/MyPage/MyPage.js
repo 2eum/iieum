@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Calendar } from "../../Components";
 import * as S from "./MyPage.elements";
-import * as g from "../../globalStyles";
-
-import { MainContentContainer } from "../../globalStyles";
+import * as g from "../../styles/globalStyles";
 import { Redirect } from "react-router";
 import axios from "axios";
 import { PostCardList } from "..";

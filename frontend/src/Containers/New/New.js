@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import * as g from "../../globalStyles";
+import * as g from "../../styles/globalStyles";
 import * as S from "./New.elements";
 import { CreateCard } from "../../Components";
 import { useParams, Redirect } from "react-router";

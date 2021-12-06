@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
-import { Link } from "react-router-dom";
+import * as colors from "../../styles/Colors";
 
 export const KeyWordContainer = styled.div`
   margin: 5%;

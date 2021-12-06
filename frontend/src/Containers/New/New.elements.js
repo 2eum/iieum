@@ -1,11 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import * as c from "../../Colors";
-
 
 export const CreateCardWrapper = styled.div`
   margin: 0 20%;
-
 `;
 
 export const ReselectButtonWrapper = styled.div`

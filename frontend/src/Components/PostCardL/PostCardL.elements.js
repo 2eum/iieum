@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
-import * as g from "../../globalStyles";
+import * as colors from "../../styles/Colors";
+import * as g from "../../styles/globalStyles";
 
 export const PostCardArea = styled.section`
   width: 34rem;
@@ -93,7 +93,7 @@ export const ContentTitle = styled.h2`
 `;
 
 export const PubDate = styled.p`
-  color: ${colors.darkGray};
+  color: ${colors.iiBrown};
   text-align: left;
 `;
 

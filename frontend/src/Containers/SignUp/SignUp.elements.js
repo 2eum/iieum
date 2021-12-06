@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import * as colors from "../../Colors";
+import * as colors from "../../styles/Colors";
 
 export const AfterSent = styled.section`
   width: 80%;

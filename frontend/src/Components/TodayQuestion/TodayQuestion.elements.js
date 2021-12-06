@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { DefaultButton, ButtonShadow } from "../../globalStyles";
+import { DefaultButton, ButtonShadow } from "../../styles/globalStyles";
 
-import * as colors from "../../Colors";
+import * as colors from "../../styles/Colors";
 import { HashLink as Link } from "react-router-hash-link";
 
 export const TodayLeftContainer = styled.div`

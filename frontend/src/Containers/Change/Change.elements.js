@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
+import * as colors from "../../styles/Colors";
 import { NavLink } from "react-router-dom";
 
 export const ValidateSection = styled.section`

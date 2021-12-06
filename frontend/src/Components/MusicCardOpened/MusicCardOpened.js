@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./MusicCardOpened.elements";
 import { PostCardL, MusicCard } from "..";
-import * as g from "../../globalStyles";
+import * as g from "../../styles/globalStyles";
 import axios from "axios";
 
 const MusicCardOpened = ({
