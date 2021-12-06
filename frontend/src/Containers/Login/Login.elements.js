@@ -91,7 +91,7 @@ export const LoginBtn = styled.button`
   }
 `;
 
-export const ToRegisterLink = styled(Link)`
+export const ToSignUpLink = styled(Link)`
   align-self: flex-end;
 
   font-size: 0.8rem;

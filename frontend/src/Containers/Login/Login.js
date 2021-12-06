@@ -13,7 +13,7 @@ import {
   LoginInput,
   LoginBtnContainer,
   LoginBtn,
-  ToRegisterLink,
+  ToSignUpLink,
   ErrorMessage,
 } from "./Login.elements";
 import { InputLabel } from "../SignUp/SignUp.elements";
@@ -119,7 +119,7 @@ const Login = ({ saveUserData, currUser, setNickname }) => {
           <LoginBtnContainer>
             {errorMsg !== "" ? <ErrorMessage>{errorMsg}</ErrorMessage> : ""}
             <LoginBtn onClick={() => onLoginClick()}>로그인</LoginBtn>
-            <ToRegisterLink to="/register">회원가입하기</ToRegisterLink>
+            <ToSignUpLink to="/sign-up">회원가입하기</ToSignUpLink>
           </LoginBtnContainer>
         </LoginForm>
       </LoginSection>

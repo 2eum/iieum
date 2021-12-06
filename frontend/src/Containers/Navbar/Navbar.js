@@ -51,7 +51,7 @@ const Navbar = ({ currUser, handleLogout }) => {
             ) : (
               <>
                 <NavLink to="/login">로그인</NavLink>
-                <NavLink to="/register">회원가입</NavLink>
+                <NavLink to="/sign-up">회원가입</NavLink>
               </>
             )}
           </RightNavLinksWrapper>

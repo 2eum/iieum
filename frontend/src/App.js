@@ -139,7 +139,7 @@ const App = () => {
           )}
         />
         <Route
-          path="/register"
+          path="/sign-up"
           exact
           render={() => (
             <SignUp
