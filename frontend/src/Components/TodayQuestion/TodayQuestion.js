@@ -85,7 +85,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
         <PostCardS
           key={c.id}
           id={c.id}
-          user={c.user}
+          user={c.user.nickname}
           title={c.title}
           track_title={c.track_title}
           track_artist={c.track_artist}
