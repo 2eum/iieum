@@ -55,6 +55,10 @@ export const LikeArea = styled.div`
 export const LikeBtn = styled.div`
   cursor: pointer;
   font-size: 1.5rem;
+
+  i {
+    color: ${colors.iiPurple};
+  }
 `;
 
 export const LikeCount = styled.div``;
