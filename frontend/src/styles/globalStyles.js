@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
 import * as colors from "./Colors";
+import daughterHandwriting from "./Daughter_handwriting.woff";
 
 const GlobalStyle = createGlobalStyle`
 
 // import signature font
 @font-face {
     font-family: 'Daughter_handwriting';
-    src: url('./Daughter_handwriting.woff') format('woff');
+    src: url(${daughterHandwriting}) format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -88,14 +90,90 @@ export const IndicatorDot = styled.div`
   cursor: pointer;
 `;
 
-//Page layout
-export const BodyContainer = styled.div`
+// page layout
+export const BodyContainer = styled.main`
   background-color: ${colors.iiBG};
   padding: 8% 5%;
 
   @media screen and (min-width: 1920px) {
     padding: 8% 20%;
   }
+`;
+
+export const CustomButton = styled.div`
+  cursor: pointer;
+  background-color: ${colors.iiPurple};
+  border-radius: 5px;
+  border: solid 1px ${colors.iiPurple};
+  width: 8rem;
+  padding: 0.5rem 1rem;
+  color: ${colors.iiBeige};
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: ${ButtonShadow};
+
+  i {
+    color: ${colors.iiBeige};
+  }
+
+  &:hover {
+    color: ${colors.iiPurple};
+    background-color: ${colors.iiBeige};
+
+    i {
+      color: ${colors.iiPurple};
+    }
+  }
+
+  transition: all 100ms;
+`;
+
+export const CustomButtonInvert = styled(CustomButton)`
+  background-color: ${colors.iiBeige};
+  color: ${colors.iiPurple};
+  i {
+    color: ${colors.iiPurple};
+  }
+
+  &:hover {
+    color: ${colors.iiBeige};
+    background-color: ${colors.iiPurple};
+
+    i {
+      color: ${colors.iiBeige};
+    }
+  }
+`;
+
+export const CustomLink = styled(Link)`
+  margin-top: 1rem;
+  cursor: pointer;
+  background-color: ${colors.iiPurple};
+  border-radius: 5px;
+  border: solid 1px ${colors.iiPurple};
+  width: 8rem;
+  padding: 0.5rem 1rem;
+  color: ${colors.iiBeige};
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: ${ButtonShadow};
+
+  i {
+    color: ${colors.iiBeige};
+  }
+
+  &:hover {
+    color: ${colors.iiPurple};
+    background-color: ${colors.iiBeige};
+
+    i {
+      color: ${colors.iiPurple};
+    }
+  }
+
+  transition: all 100ms;
 `;
 
 export default GlobalStyle;
