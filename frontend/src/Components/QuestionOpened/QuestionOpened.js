@@ -1,7 +1,6 @@
 import React from "react";
 import * as S from "./QuestionOpened.elements";
 import { PostCardList } from "../../Containers";
-import * as g from "../../styles/globalStyles";
 
 const QuestionOpened = ({
   currUser,
@@ -24,12 +23,10 @@ const QuestionOpened = ({
         </S.QuestionContainer>
         <S.CreateButtonContainer>
           <S.CreateButtonWrapper>
-            <g.DefaultButton to={`/new/${questionId}`}>
-              <g.ButtonIconArea>
-                <g.ButtonIcon className="fa fa-pen" />
-              </g.ButtonIconArea>
+            <S.AnswerButton to={`/new/${questionId}`}>
+              <i className="fa fa-pen" />
               질문에 답하기
-            </g.DefaultButton>
+            </S.AnswerButton>
           </S.CreateButtonWrapper>
         </S.CreateButtonContainer>
         <PostCardList

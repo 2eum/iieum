@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as S from "./TodayQuestion.elements";
-import * as g from "../../styles/globalStyles";
 
 import { PostCardL, PostCardS } from "../../Components";
 

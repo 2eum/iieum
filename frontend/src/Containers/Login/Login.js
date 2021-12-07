@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import CSRFToken from "../../Components/csrftoken";
 import { Redirect } from "react-router";
-import * as g from "../../styles/globalStyles";
 
 import {
   LoginSection,
@@ -86,7 +85,7 @@ const Login = ({ saveUserData, currUser }) => {
   return currUser ? (
     <Redirect to="/" />
   ) : (
-    <g.Background>
+    <>
       <LoginSection>
         <LoginForm>
           <CSRFToken />
@@ -122,7 +121,7 @@ const Login = ({ saveUserData, currUser }) => {
           </LoginBtnContainer>
         </LoginForm>
       </LoginSection>
-    </g.Background>
+    </>
   );
 };
 

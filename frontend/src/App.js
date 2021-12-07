@@ -21,7 +21,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import GlobalStyle from "./styles/globalStyles";
+import GlobalStyle, { BodyContainer } from "./styles/globalStyles";
 import ScrollToTop from "./Components/ScrollToTop";
 import axios from "axios";
 
@@ -92,7 +92,7 @@ const App = () => {
   let query = useQuery();
 
   return (
-    <div>
+    <BodyContainer>
       <ScrollToTop />
       <GlobalStyle />
       <Navbar currUser={currUser} handleLogout={handleLogout} />
@@ -186,7 +186,7 @@ const App = () => {
         />
       </Switch>
       <Footer />
-    </div>
+    </BodyContainer>
   );
 };
 

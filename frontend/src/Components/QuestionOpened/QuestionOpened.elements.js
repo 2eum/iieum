@@ -53,3 +53,36 @@ export const CreateButtonWrapper = styled.div`
 export const CardListContainer = styled.div`
   width: 100%;
 `;
+
+export const AnswerButton = styled(Link)`
+  width: 30%;
+  margin: 3% 0;
+  padding: 0.5rem 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  border: none;
+  border-radius: 5px;
+  background-color: ${colors.iiPurple};
+  box-shadow: ${ButtonShadow};
+  font-size: 1rem;
+  font-weight: 300;
+  color: ${colors.iiBeige};
+  cursor: pointer;
+
+  i {
+    color: ${colors.iiBeige};
+    margin-right: 5%;
+  }
+
+  &:hover {
+    background-color: ${colors.iiBeige};
+    border: solid 1px ${colors.iiPurple};
+    i {
+      color: ${colors.iiPurple};
+    }
+  }
+
+  transition: all 100ms;
+`;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { PostCardList } from "..";
 import * as S from "./Search.elements";
-import * as g from "../../styles/globalStyles";
 import { MusicCardGrid, QuestionCardGrid } from "../";
 
 const Search = ({ currUser, token, userId, word }) => {
@@ -64,70 +63,66 @@ const Search = ({ currUser, token, userId, word }) => {
 
   return (
     <>
-      <g.Background>
-        <g.PageSection>
-          <S.SearchBarContainer>
-            <S.SearchBar
-              value={keyword}
-              placeholder={keyword}
-              onChange={(e) => {
-                setKeyword(e.target.value);
-              }}
-            />
-            <S.SearchButton>
-              <i className="fas fa-search"></i>
-            </S.SearchButton>
-          </S.SearchBarContainer>
+      <S.SearchBarContainer>
+        <S.SearchBar
+          value={keyword}
+          placeholder={keyword}
+          onChange={(e) => {
+            setKeyword(e.target.value);
+          }}
+        />
+        <S.SearchButton>
+          <i className="fas fa-search"></i>
+        </S.SearchButton>
+      </S.SearchBarContainer>
 
-          <S.PostResultContainer>
-            <S.ResultTitle>글 검색 결과</S.ResultTitle>
-            {postResult.length === 0 ? (
-              <S.NoResultWrapper>
-                <S.NoResult>검색결과가 없습니다</S.NoResult>
-              </S.NoResultWrapper>
-            ) : (
-              <PostCardList
-                currUser={currUser}
-                token={token}
-                userId={userId}
-                list={postResult}
-              />
-            )}
-          </S.PostResultContainer>
+      <S.PostResultContainer>
+        <S.ResultTitle>글 검색 결과</S.ResultTitle>
+        {postResult.length === 0 ? (
+          <S.NoResultWrapper>
+            <S.NoResult>검색결과가 없습니다</S.NoResult>
+          </S.NoResultWrapper>
+        ) : (
+          <PostCardList
+            currUser={currUser}
+            token={token}
+            userId={userId}
+            list={postResult}
+          />
+        )}
+      </S.PostResultContainer>
 
-          <S.QuestionResultContainer>
-            <S.ResultTitle>질문 검색 결과</S.ResultTitle>
-            {questionResult.length === 0 ? (
-              <S.NoResultWrapper>
-                <S.NoResult>검색결과가 없습니다</S.NoResult>
-              </S.NoResultWrapper>
-            ) : (
-              <QuestionCardGrid
-                currUser={currUser}
-                token={token}
-                userId={userId}
-                list={questionResult}
-              />
-            )}
-          </S.QuestionResultContainer>
+      <S.QuestionResultContainer>
+        <S.ResultTitle>질문 검색 결과</S.ResultTitle>
+        {questionResult.length === 0 ? (
+          <S.NoResultWrapper>
+            <S.NoResult>검색결과가 없습니다</S.NoResult>
+          </S.NoResultWrapper>
+        ) : (
+          <QuestionCardGrid
+            currUser={currUser}
+            token={token}
+            userId={userId}
+            list={questionResult}
+          />
+        )}
+      </S.QuestionResultContainer>
 
-          <S.MusicResultContainer>
-            <S.ResultTitle>음악 검색 결과</S.ResultTitle>
-            {musicResult.length === 0 ? (
-              <S.NoResultWrapper>
-                <S.NoResult>검색결과가 없습니다</S.NoResult>
-              </S.NoResultWrapper>
-            ) : (
-              <MusicCardGrid
-                currUser={currUser}
-                token={token}
-                userId={userId}
-                list={musicResult}
-              />
-            )}
-          </S.MusicResultContainer>
-        </g.PageSection>
-      </g.Background>
+      <S.MusicResultContainer>
+        <S.ResultTitle>음악 검색 결과</S.ResultTitle>
+        {musicResult.length === 0 ? (
+          <S.NoResultWrapper>
+            <S.NoResult>검색결과가 없습니다</S.NoResult>
+          </S.NoResultWrapper>
+        ) : (
+          <MusicCardGrid
+            currUser={currUser}
+            token={token}
+            userId={userId}
+            list={musicResult}
+          />
+        )}
+      </S.MusicResultContainer>
     </>
   );
 };

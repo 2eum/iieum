@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Background } from "../../styles/globalStyles";
 import * as S from "./Change.elements";
 
 const Change = ({ token, username, currUser, saveUserData }) => {
@@ -134,106 +133,96 @@ const Change = ({ token, username, currUser, saveUserData }) => {
     return true;
   };
 
-  return (
-    <Background>
-      {!isValidated ? (
-        <S.ValidateSection>
-          <S.ValidateTitle>
-            개인정보 변경을 위해 비밀번호를 다시 입력해주세요
-          </S.ValidateTitle>
-          <S.PasswordInput
-            type="password"
-            placeholder="비밀번호"
-            onChange={(e) => setPasswordInput(e.target.value)}
-          />
-          <S.ErrorMessage>{errorMsg}</S.ErrorMessage>
-          <S.PasswordSubmit onClick={handleValidation}>확인</S.PasswordSubmit>
-        </S.ValidateSection>
-      ) : (
-        <S.ChangeSection>
-          <S.NicknameChangeContainer>
-            {!nicknameChanged ? (
-              <>
-                <S.ContainerTitle>닉네임 변경</S.ContainerTitle>
-                {nicknameCheck === false ? (
-                  <S.ErrorMessage>
-                    해당 닉네임은 사용할 수 없습니다
-                  </S.ErrorMessage>
-                ) : (
-                  <S.ErrorMessage> </S.ErrorMessage>
-                )}
-                <S.NicknameInputWrapper>
-                  <S.NewItemInput
-                    type="text"
-                    placeholder="닉네임"
-                    onChange={(e) => {
-                      setNicknameInput(e.target.value);
-                      setNicknameCheck(null);
-                    }}
-                  />
-                  {!nicknameCheck ? (
-                    <S.NicknameDuplicateCheck
-                      onClick={() => {
-                        checkDuplicate(
-                          "nickname",
-                          nicknameInput,
-                          setNicknameCheck
-                        );
-                      }}
-                    >
-                      중복확인
-                    </S.NicknameDuplicateCheck>
-                  ) : (
-                    <S.NicknameConfirmed>사용 가능합니다</S.NicknameConfirmed>
-                  )}
-                </S.NicknameInputWrapper>
+  return !isValidated ? (
+    <S.ValidateSection>
+      <S.ValidateTitle>
+        개인정보 변경을 위해 비밀번호를 다시 입력해주세요
+      </S.ValidateTitle>
+      <S.PasswordInput
+        type="password"
+        placeholder="비밀번호"
+        onChange={(e) => setPasswordInput(e.target.value)}
+      />
+      <S.ErrorMessage>{errorMsg}</S.ErrorMessage>
+      <S.PasswordSubmit onClick={handleValidation}>확인</S.PasswordSubmit>
+    </S.ValidateSection>
+  ) : (
+    <S.ChangeSection>
+      <S.NicknameChangeContainer>
+        {!nicknameChanged ? (
+          <>
+            <S.ContainerTitle>닉네임 변경</S.ContainerTitle>
+            {nicknameCheck === false ? (
+              <S.ErrorMessage>해당 닉네임은 사용할 수 없습니다</S.ErrorMessage>
+            ) : (
+              <S.ErrorMessage> </S.ErrorMessage>
+            )}
+            <S.NicknameInputWrapper>
+              <S.NewItemInput
+                type="text"
+                placeholder="닉네임"
+                onChange={(e) => {
+                  setNicknameInput(e.target.value);
+                  setNicknameCheck(null);
+                }}
+              />
+              {!nicknameCheck ? (
+                <S.NicknameDuplicateCheck
+                  onClick={() => {
+                    checkDuplicate("nickname", nicknameInput, setNicknameCheck);
+                  }}
+                >
+                  중복확인
+                </S.NicknameDuplicateCheck>
+              ) : (
+                <S.NicknameConfirmed>사용 가능합니다</S.NicknameConfirmed>
+              )}
+            </S.NicknameInputWrapper>
 
-                <S.NewItemSubmit onClick={handleNicknameChange}>
-                  변경하기
-                </S.NewItemSubmit>
-              </>
+            <S.NewItemSubmit onClick={handleNicknameChange}>
+              변경하기
+            </S.NewItemSubmit>
+          </>
+        ) : (
+          <>
+            <p>변경이 완료되었습니다</p>
+            <S.HomeLink to="/">홈으로 돌아가기</S.HomeLink>
+          </>
+        )}
+      </S.NicknameChangeContainer>
+      <S.PasswordChangeContainer>
+        {!passwordChanged ? (
+          <>
+            <S.ContainerTitle>비밀번호 변경</S.ContainerTitle>
+            <S.PasswordInputWrapper>
+              <S.NewItemInput
+                type="password"
+                placeholder="비밀번호"
+                onChange={(e) => setPasswordInput(e.target.value)}
+              />
+              <S.NewItemInput
+                type="password"
+                placeholder="비밀번호 확인"
+                onChange={(e) => setPasswordCheckInput(e.target.value)}
+              />
+            </S.PasswordInputWrapper>
+            {passwordValid === false ? (
+              <S.ErrorMessage>{passwordErrorMsg}</S.ErrorMessage>
             ) : (
-              <>
-                <p>변경이 완료되었습니다</p>
-                <S.HomeLink to="/">홈으로 돌아가기</S.HomeLink>
-              </>
+              ""
             )}
-          </S.NicknameChangeContainer>
-          <S.PasswordChangeContainer>
-            {!passwordChanged ? (
-              <>
-                <S.ContainerTitle>비밀번호 변경</S.ContainerTitle>
-                <S.PasswordInputWrapper>
-                  <S.NewItemInput
-                    type="password"
-                    placeholder="비밀번호"
-                    onChange={(e) => setPasswordInput(e.target.value)}
-                  />
-                  <S.NewItemInput
-                    type="password"
-                    placeholder="비밀번호 확인"
-                    onChange={(e) => setPasswordCheckInput(e.target.value)}
-                  />
-                </S.PasswordInputWrapper>
-                {passwordValid === false ? (
-                  <S.ErrorMessage>{passwordErrorMsg}</S.ErrorMessage>
-                ) : (
-                  ""
-                )}
-                <S.NewItemSubmit onClick={handlePasswordChange}>
-                  변경하기
-                </S.NewItemSubmit>
-              </>
-            ) : (
-              <>
-                <p>변경이 완료되었습니다</p>
-                <S.HomeLink to="/">홈으로 돌아가기</S.HomeLink>
-              </>
-            )}
-          </S.PasswordChangeContainer>
-        </S.ChangeSection>
-      )}
-    </Background>
+            <S.NewItemSubmit onClick={handlePasswordChange}>
+              변경하기
+            </S.NewItemSubmit>
+          </>
+        ) : (
+          <>
+            <p>변경이 완료되었습니다</p>
+            <S.HomeLink to="/">홈으로 돌아가기</S.HomeLink>
+          </>
+        )}
+      </S.PasswordChangeContainer>
+    </S.ChangeSection>
   );
 };
 

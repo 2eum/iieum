@@ -1,5 +1,4 @@
 import React from "react";
-
 import * as S from "./Footer.elements";
 import spotifyIcon from "../../Components/SearchedItem/Spotify_Icon.png";
 

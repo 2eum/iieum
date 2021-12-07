@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import CSRFToken from "../../Components/csrftoken";
-import * as g from "../../styles/globalStyles";
 import * as S from "./SignUp.elements";
 
 const SignUp = () => {
@@ -106,7 +105,7 @@ const SignUp = () => {
   }, [pwdConfirm]);
 
   return sent ? (
-    <g.Background>
+    <>
       <S.AfterSent>
         <S.SentMessage>
           입력해주신 이메일로 인증 링크를 보내드렸습니다. 인증 후 로그인
@@ -114,9 +113,9 @@ const SignUp = () => {
         </S.SentMessage>
         <S.ToLoginLink to="/login">로그인 하기</S.ToLoginLink>
       </S.AfterSent>
-    </g.Background>
+    </>
   ) : (
-    <g.Background>
+    <>
       <S.RegisterSection>
         <S.RegisterForm>
           <CSRFToken />
@@ -264,7 +263,7 @@ const SignUp = () => {
           </S.RegisterBtnContainer>
         </S.RegisterForm>
       </S.RegisterSection>
-    </g.Background>
+    </>
   );
 };
 

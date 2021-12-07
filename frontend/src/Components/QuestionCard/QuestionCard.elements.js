@@ -62,3 +62,13 @@ export const QuestionName = styled.h3`
   line-height: 2rem;
   height: 6rem;
 `;
+
+export const OpenListButtonWrapper = styled.div`
+  margin: 2%;
+  margin-top: 20%;
+`;
+
+export const OpenListButtonIcon = styled.i`
+  color: ${colors.iiPurple};
+  margin-right: 8px;
+`;
