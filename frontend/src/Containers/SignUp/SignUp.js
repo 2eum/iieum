@@ -18,7 +18,7 @@ const SignUp = () => {
   const [nicknameChecked, setNicknameCheck] = useState();
   const [requestReview, setRequestReview] = useState(false);
 
-  const onRegisterClick = () => {
+  const onSignUpClick = () => {
     setSubmit(true);
     if (validateInput()) {
       axios({
@@ -116,11 +116,11 @@ const SignUp = () => {
     </>
   ) : (
     <>
-      <S.RegisterSection>
-        <S.RegisterForm>
+      <S.SignUpSection>
+        <S.SignUpForm>
           <CSRFToken />
-          <S.RegisterLegend>회원가입</S.RegisterLegend>
-          <S.RegisterFieldset>
+          <S.SignUpLegend>회원가입</S.SignUpLegend>
+          <S.SignUpFieldset>
             <S.InputContainer>
               <S.InputLabel htmlFor="username">
                 아이디{" "}
@@ -133,7 +133,7 @@ const SignUp = () => {
                 )}
               </S.InputLabel>
               <S.InputWrapper>
-                <S.RegisterInput
+                <S.SignUpInput
                   type="text"
                   name="username"
                   placeholder="공백없이 영문, 숫자 포함 6-12자"
@@ -169,7 +169,7 @@ const SignUp = () => {
                 )}
               </S.InputLabel>
               <S.InputWrapper>
-                <S.RegisterInput
+                <S.SignUpInput
                   type="text"
                   name="nickname"
                   placeholder="글을 작성 시 표시되는 이름"
@@ -195,7 +195,7 @@ const SignUp = () => {
             </S.InputContainer>
             <S.InputContainer>
               <S.InputLabel htmlFor="username">이메일</S.InputLabel>
-              <S.RegisterInput
+              <S.SignUpInput
                 type="email"
                 name="email"
                 placeholder="ex. example@iieum.com"
@@ -207,7 +207,7 @@ const SignUp = () => {
             </S.InputContainer>
             <S.InputContainer>
               <S.InputLabel htmlFor="password">비밀번호</S.InputLabel>
-              <S.RegisterInput
+              <S.SignUpInput
                 type="password"
                 name="password"
                 placeholder="공백없이 영문, 숫자 포함 8-20자"
@@ -229,7 +229,7 @@ const SignUp = () => {
                   ""
                 )}
               </S.InputLabel>
-              <S.RegisterInput
+              <S.SignUpInput
                 type="password"
                 name="passwordConfirm"
                 placeholder="비밀번호 재확인"
@@ -240,8 +240,8 @@ const SignUp = () => {
                 }}
               />
             </S.InputContainer>
-          </S.RegisterFieldset>
-          <S.RegisterBtnContainer>
+          </S.SignUpFieldset>
+          <S.SignUpBtnContainer>
             {requestReview ? (
               <>
                 <S.DuplicateMessage>{requestReview}</S.DuplicateMessage>
@@ -254,15 +254,15 @@ const SignUp = () => {
               <S.SubmitMessage>처리 중입니다...</S.SubmitMessage>
             ) : (
               <>
-                <S.RegisterBtn onClick={() => onRegisterClick()}>
+                <S.SignUpBtn onClick={() => onSignUpClick()}>
                   가입하기
-                </S.RegisterBtn>
+                </S.SignUpBtn>
                 <S.ToLoginLink to="/login">로그인하기</S.ToLoginLink>
               </>
             )}
-          </S.RegisterBtnContainer>
-        </S.RegisterForm>
-      </S.RegisterSection>
+          </S.SignUpBtnContainer>
+        </S.SignUpForm>
+      </S.SignUpSection>
     </>
   );
 };
