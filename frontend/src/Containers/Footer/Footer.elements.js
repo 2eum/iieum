@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import * as c from "../../styles/Colors";
+import * as colors from "../../styles/Colors";
 
 export const FooterContainer = styled.section`
   padding-top: 6rem;
   padding-bottom: 5rem;
 
-  border-top: 0.5px solid ${c.iiBrown};
+  border-top: 0.5px solid ${colors.iiBrown};
   opacity: 0.7;
 
-  background-color: ${c.iiBG};
+  background-color: ${colors.iiBG};
 
   text-align: center;
   font-size: 0.9rem;

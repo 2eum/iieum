@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { DefaultButton, ButtonShadow } from "../../styles/globalStyles";
-
+import { ButtonShadow } from "../../styles/globalStyles";
 import * as colors from "../../styles/Colors";
 import { HashLink as Link } from "react-router-hash-link";
 

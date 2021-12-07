@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
-import * as g from "../../styles/globalStyles";
+import { IndicatorDot } from "../../styles/globalStyles";
 
 export const CalendarSection = styled.section`
   width: 100%;
@@ -45,7 +45,7 @@ export const CardIndicatorWrapper = styled.div`
   gap: 5px;
 `;
 
-export const CardIndicator = styled(g.IndicatorDot)``;
+export const CardIndicator = styled(IndicatorDot)``;
 
 export const CalendarContainer = styled.div`
   width: 50%;

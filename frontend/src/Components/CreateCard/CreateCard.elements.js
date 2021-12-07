@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
-import * as g from "../../styles/globalStyles";
+import { CardShadow } from "../../styles/globalStyles";
 
 export const CreateCardArea = styled.section`
   width: 34rem;
@@ -11,7 +11,7 @@ export const CreateCardArea = styled.section`
   flex-direction: column;
   justify-content: space-between;
   background-color: ${colors.nearWhite};
-  box-shadow: ${g.CardShadow};
+  box-shadow: ${CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
 `;

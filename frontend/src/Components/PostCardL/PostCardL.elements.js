@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
-import * as g from "../../styles/globalStyles";
+import { CardShadow } from "../../styles/globalStyles";
 
 export const PostCardArea = styled.section`
   width: 34rem;
@@ -11,9 +11,10 @@ export const PostCardArea = styled.section`
   flex-direction: column;
   justify-content: space-around;
   background-color: ${colors.iiBeige};
-  box-shadow: ${g.CardShadow};
+  box-shadow: ${CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
+
   // if card is stacked, set z-index according to order
   z-index: ${(p) => p.order * -1};
 `;

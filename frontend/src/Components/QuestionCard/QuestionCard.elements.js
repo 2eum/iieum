@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
-import * as g from "../../styles/globalStyles";
+import { CardShadow } from "../../styles/globalStyles";
 
 export const QuestionCardContainer = styled.div`
   width: 22rem;
@@ -13,7 +13,7 @@ export const QuestionCardContainer = styled.div`
   gap: 1%;
   text-align: center;
   background-color: ${colors.iiBeige};
-  box-shadow: ${g.CardShadow};
+  box-shadow: ${CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
   position: relative;

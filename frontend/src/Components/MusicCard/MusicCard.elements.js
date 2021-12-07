@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
-import * as g from "../../styles/globalStyles";
+import { slide } from "../../styles/globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
@@ -37,8 +37,9 @@ export const Title = styled.p`
   top: 0;
   left: 0;
   width: 100%;
+
   //slide animation
-  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
 `;
 
 export const MiddleWrapper = styled.div`
@@ -65,7 +66,7 @@ export const Artist = styled.p`
   font-size: 0.8rem;
   opacity: 0.8;
   //slide animation
-  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
 `;
 
 export const SourceLink = styled.a`

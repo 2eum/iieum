@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
-import * as g from "../../styles/globalStyles";
+import { CardShadow } from "../../styles/globalStyles";
 
 export const PostCardArea = styled.section`
   width: 13rem;
@@ -13,7 +13,7 @@ export const PostCardArea = styled.section`
   gap: 1%;
   text-align: center;
   background-color: ${colors.iiBeige};
-  box-shadow: ${g.CardShadow};
+  box-shadow: ${CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
   position: relative;

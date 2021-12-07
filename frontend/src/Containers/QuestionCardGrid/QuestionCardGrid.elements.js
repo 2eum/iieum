@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
-import * as g from "../../styles/globalStyles";
 
 export const QuestionGridContainer = styled.div`
   display: grid;
