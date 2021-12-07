@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
-import { CardShadow } from "../../styles/globalStyles";
+import { CardShadow, slide } from "../../styles/globalStyles";
 
 export const PostCardArea = styled.section`
   width: 13rem;
@@ -27,6 +27,12 @@ export const PostCardArea = styled.section`
     height: 100%;
     cursor: pointer;
   }
+
+  &:hover {
+    border: 1px solid ${colors.iiPurple};
+  }
+
+  transition: border 100ms;
 `;
 
 export const TopArea = styled.section``;
@@ -65,7 +71,7 @@ export const MusicTitle = styled.h3`
   top: 0;
   left: 0;
   width: 100%;
-  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
 `;
 
 export const MusicArtistWrapper = styled.div`
@@ -84,7 +90,7 @@ export const MusicArtist = styled.h4`
   top: 0;
   left: 0;
   width: 100%;
-  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
 `;
 
 export const TitleArea = styled.section`

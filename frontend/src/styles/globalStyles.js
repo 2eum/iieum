@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
 import * as colors from "./Colors";
 import daughterHandwriting from "./Daughter_handwriting.woff";
+import { HashLink as Link } from "react-router-hash-link";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -105,12 +105,13 @@ export const CustomButton = styled.div`
   background-color: ${colors.iiPurple};
   border-radius: 5px;
   border: solid 1px ${colors.iiPurple};
-  width: 8rem;
+  width: max-content;
   padding: 0.5rem 1rem;
   color: ${colors.iiBeige};
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 0.5rem;
   box-shadow: ${ButtonShadow};
 
   i {
@@ -152,12 +153,13 @@ export const CustomLink = styled(Link)`
   background-color: ${colors.iiPurple};
   border-radius: 5px;
   border: solid 1px ${colors.iiPurple};
-  width: 8rem;
+  width: max-content;
   padding: 0.5rem 1rem;
   color: ${colors.iiBeige};
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 0.5rem;
   box-shadow: ${ButtonShadow};
 
   i {

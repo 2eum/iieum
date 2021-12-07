@@ -57,7 +57,7 @@ export const SearchButton = styled.div`
   background-color: ${colors.iiBG};
 
   & i {
-    color: ${colors.iiBrown};
+    color: ${colors.iiPurple};
     opacity: 0.7;
   }
 `;

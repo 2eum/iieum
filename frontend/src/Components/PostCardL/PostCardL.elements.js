@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
-import { CardShadow } from "../../styles/globalStyles";
+import {
+  ButtonShadow,
+  CardShadow,
+  CustomButton,
+} from "../../styles/globalStyles";
 
 export const PostCardArea = styled.section`
   width: 34rem;
@@ -127,6 +131,10 @@ export const EditBtn = styled.div`
   cursor: pointer;
   color: ${colors.iiPurple};
 
+  i {
+    color: ${colors.iiPurple};
+  }
+
   &:hover {
     border-bottom: 1px solid ${colors.iiPurple};
   }
@@ -136,6 +144,10 @@ export const DeleteBtn = styled.div`
   margin: auto 5%;
   cursor: pointer;
   color: ${colors.iiPurple};
+
+  i {
+    color: ${colors.iiPurple};
+  }
 
   &:hover {
     border-bottom: 1px solid ${colors.iiPurple};
@@ -188,7 +200,7 @@ export const SearchResultContainer = styled.div`
   left: 0;
   height: 23rem;
   overflow-y: scroll;
-  box-shadow: ${g.CardShadow};
+  box-shadow: ${CardShadow};
 `;
 
 export const FormArea = styled.section`
@@ -219,35 +231,8 @@ export const FormBody = styled.textarea`
   }
 `;
 
-export const SubmitButton = styled.p`
+export const SubmitButton = styled(CustomButton)`
   margin-top: 1rem;
-  cursor: pointer;
-  color: ${colors.iiPurple};
-  border-radius: 5px;
-  width: 8rem;
-  padding: 0 1rem;
-  background-color: ${colors.iiBeige};
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 2.5rem;
-  border: 1px solid ${colors.iiPurple};
-  box-shadow: ${g.ButtonShadow};
-
-  i {
-    color: ${colors.iiPurple};
-  }
-
-  &:hover {
-    color: ${colors.iiBeige};
-    background-color: ${colors.iiPurple};
-
-    i {
-      color: ${colors.iiBeige};
-    }
-  }
-
-  transition: all 100ms;
 `;
 
 export const ResetChoiceButton = styled.p`

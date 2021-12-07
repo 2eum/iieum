@@ -3,6 +3,7 @@ import axios from "axios";
 import * as S from "./TodayQuestion.elements";
 
 import { PostCardL, PostCardS } from "../../Components";
+import { IndicatorDot } from "../../styles/globalStyles";
 
 const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const [content, setContent] = useState([]);
@@ -84,7 +85,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
         <PostCardS
           key={c.id}
           id={c.id}
-          user={c.user}
+          user={c.user.nickname}
           title={c.title}
           track_title={c.track_title}
           track_artist={c.track_artist}
@@ -104,7 +105,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   useEffect(() => {
     let indArr = [];
     for (let i = 0; i < Math.ceil(content.length / 2); i++) {
-      indArr.push(<g.IndicatorDot key={i} selected={i * 2 === contentIdx} />);
+      indArr.push(<IndicatorDot key={i} selected={i * 2 === contentIdx} />);
     }
     setIndicators([...indArr]);
   }, [contentIdx, content]);
@@ -162,7 +163,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
         <S.QuestionArea>
           <S.ShuffleButton onClick={randomQuestion}>
             <i className="fas fa-random" />
-            <p>다른 질문 보기</p>
+            다른 질문 보기
           </S.ShuffleButton>
           <S.TodayQuestion>
             <S.QDate>{dayName}의 질문</S.QDate>

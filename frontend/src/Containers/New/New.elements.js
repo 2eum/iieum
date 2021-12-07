@@ -11,8 +11,8 @@ export const Title = styled.h3`
 `;
 
 export const ReselectButtonWrapper = styled.div`
-  width: 30%;
   margin: 3% auto;
+  text-align: center;
 `;
 
 export const ReselectButton = styled(Link)`

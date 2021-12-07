@@ -15,9 +15,15 @@ export const QuestionCardContainer = styled.div`
   background-color: ${colors.iiBeige};
   box-shadow: ${CardShadow};
   border-radius: 8px;
-  border: 1px solid #abaaa6;
+  border: 1px solid ${colors.cardStroke};
   position: relative;
   cursor: pointer;
+
+  &:hover {
+    border: 1px solid ${colors.iiPurple};
+  }
+
+  transition: border 100ms;
 `;
 
 export const TopContainer = styled.div`

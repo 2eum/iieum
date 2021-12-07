@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
+import { CustomButton } from "../../styles/globalStyles";
 
 export const LoginSection = styled.main`
   width: 80%;
@@ -39,8 +40,6 @@ export const LoginLegend = styled.legend`
   color: ${colors.iiBrown};
   font-size: 1.5rem;
   text-align: center;
-
-  // border-bottom: 2px solid ${colors.iiPurpleOpacity};
 `;
 
 export const InputContainer = styled.div`
@@ -54,7 +53,6 @@ export const LoginInput = styled.input`
   padding: 0.5rem;
   margin: 0.5rem 0;
   border: none;
-  // border-radius: 5px;
   border-bottom: 1px solid ${colors.iiBrown};
   background-color: ${colors.iiBG};
 
@@ -68,27 +66,10 @@ export const LoginBtnContainer = styled.div`
   flex-direction: column;
 `;
 
-export const LoginBtn = styled.button`
+export const LoginBtn = styled(CustomButton)`
   width: 100%;
 
   margin: 0 auto 1rem auto;
-  padding: 0.4rem 0;
-
-  border-radius: 4px;
-  border: none;
-
-  background-color: ${colors.iiPurple};
-
-  color: ${colors.iiBeige};
-  font-size: 1.1rem;
-  font-weight: 500;
-
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.05);
-    background-color: ${colors.iiBrown};
-  }
 `;
 
 export const ToSignUpLink = styled(Link)`

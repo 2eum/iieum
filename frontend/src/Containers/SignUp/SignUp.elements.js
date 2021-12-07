@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import * as colors from "../../styles/Colors";
+import { CustomButton, CustomButtonInvert } from "../../styles/globalStyles";
 
 export const AfterSent = styled.section`
   width: 80%;
@@ -103,46 +104,16 @@ export const DuplicateConfirm = styled.p`
   color: green;
 `;
 
-export const DuplicateCheckButton = styled.button`
-  padding: 0.5rem;
-  width: 5rem;
-  background-color: transparent;
-  border: 1px solid ${colors.iiPurple};
-  border-radius: 5px;
-  cursor: pointer;
-  color: ${colors.iiPurple};
-
-  &:focus {
-    outline: none;
-  }
-`;
+export const DuplicateCheckButton = styled(CustomButtonInvert)``;
 
 export const RegisterBtnContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const RegisterBtn = styled.button`
+export const RegisterBtn = styled(CustomButton)`
   width: 100%;
-
-  margin: 1rem auto;
-  padding: 0.4rem 0;
-
-  border-radius: 4px;
-  border: none;
-
-  background-color: ${colors.iiPurple};
-
-  color: ${colors.iiBeige};
-  font-size: 1.1rem;
-  font-weight: 500;
-
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.05);
-    background-color: ${colors.iiBrown};
-  }
+  margin-bottom: 1rem;
 `;
 
 export const ToLoginLink = styled(Link)`

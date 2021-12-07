@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonShadow } from "../../styles/globalStyles";
+import { ButtonShadow, CustomLink } from "../../styles/globalStyles";
 import * as colors from "../../styles/Colors";
 import { HashLink as Link } from "react-router-hash-link";
 
@@ -15,17 +15,22 @@ export const TodayRightContainer = styled.section`
   justify-content: space-between;
 `;
 
-export const QuestionArea = styled.section`
-  font-size: 3rem;
-`;
+export const QuestionArea = styled.section``;
 
-export const ShuffleButton = styled.div`
+export const ShuffleButton = styled.p`
   cursor: pointer;
   display: flex;
-  gap: 3%;
+  gap: 1rem;
   align-items: center;
-  font-size: 1.5rem;
-  height: 2rem;
+  width: max-content;
+
+  &:hover {
+    color: ${colors.iiPurple};
+
+    i {
+      color: ${colors.iiPurple};
+    }
+  }
 `;
 
 export const TodayQuestion = styled.div`
@@ -71,35 +76,6 @@ export const LoadMoreButtonContainer = styled.div`
   cursor: pointer;
 `;
 
-export const AnswerButton = styled(Link)`
-  width: 30%;
+export const AnswerButton = styled(CustomLink)`
   margin: 3% 0;
-  padding: 0.5rem 1.2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 44px;
-  border: none;
-  border-radius: 5px;
-  background-color: ${colors.iiPurple};
-  box-shadow: ${ButtonShadow};
-  font-size: 1rem;
-  font-weight: 300;
-  color: ${colors.iiBeige};
-  cursor: pointer;
-
-  i {
-    color: ${colors.iiBeige};
-    margin-right: 5%;
-  }
-
-  &:hover {
-    background-color: ${colors.iiBeige};
-    border: solid 1px ${colors.iiPurple};
-    i {
-      color: ${colors.iiPurple};
-    }
-  }
-
-  transition: all 100ms;
 `;
