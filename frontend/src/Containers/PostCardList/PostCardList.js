@@ -7,6 +7,7 @@ const PostCardList = ({ currUser, token, userId, questionId, list }) => {
   const [cols, setCols] = useState(5);
   const [content, setContent] = useState();
   const [cardLIndex, setCardLIndex] = useState();
+  const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
     setContent();
@@ -41,10 +42,12 @@ const PostCardList = ({ currUser, token, userId, questionId, list }) => {
   const handleCardOpen = (id) => {
     if (cols === 5) setCols(2);
     setCardLIndex(id);
+    setIsOpened(true);
   };
 
   const handleCardClose = () => {
     setCols(5);
+    setIsOpened(false);
   };
 
   // if content is loaded, create post card s list
@@ -59,6 +62,7 @@ const PostCardList = ({ currUser, token, userId, questionId, list }) => {
             track_artist={c.track_artist}
             track_album_cover={c.track_album_cover}
             handleCardOpen={(e) => handleCardOpen(c.id)}
+            open={isOpened && cardLIndex === c.id}
           />
         );
       })

@@ -9,9 +9,10 @@ const PostCardS = ({
   track_artist,
   track_album_cover,
   handleCardOpen,
+  open
 }) => {
   return (
-    <S.PostCardArea onClick={() => handleCardOpen(id)}>
+    <S.PostCardArea onClick={() => handleCardOpen(id)} open={open}>
       <S.TopArea>
         <S.Author>{user}</S.Author>
       </S.TopArea>

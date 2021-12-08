@@ -26,7 +26,8 @@ const Navbar = ({ currUser, handleLogout }) => {
         </S.SearchBarContainer>
         <S.NavLinkContainer>
           <S.GreetMessage>
-            어서오세요 {currUser ? `${currUser}님` : ""} :)
+            어서오세요 {currUser ? `${currUser}님` : ""} :)   
+            {currUser ? "" : " 글을 작성하려면 로그인해주세요."}
           </S.GreetMessage>
           <S.RightNavLinksWrapper>
             <S.NavLink to="/explore">질문 둘러보기</S.NavLink>

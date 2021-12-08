@@ -63,9 +63,6 @@ const MyPage = ({ currUser, token, userId }) => {
     <Redirect to="/" />
   ) : (
     <>
-      <S.InfoChangeLink to="/change">
-        <i className="fas fa-user-edit" /> 내 정보 수정
-      </S.InfoChangeLink>
       <S.MyPageBanner>
         <S.Message>
           <S.User>{currUser}</S.User>님, <br />
@@ -75,6 +72,9 @@ const MyPage = ({ currUser, token, userId }) => {
           <S.Date>{todayString}</S.Date>
           <S.Stat>작성한 이음 {postCount}개</S.Stat>
           <S.Stat>좋아요한 이음 {likeCount}개</S.Stat>
+          <S.InfoChangeLink to="/change">
+            <i className="fas fa-user-edit" /> 내 정보 수정
+          </S.InfoChangeLink>
         </S.StatsWrapper>
       </S.MyPageBanner>
 

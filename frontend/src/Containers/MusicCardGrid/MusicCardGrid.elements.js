@@ -20,8 +20,9 @@ export const MusicCardWrapper = styled.div`
   border: 1px solid ${colors.cardStroke};
   border-radius: 5px;
   box-shadow: ${CardShadow};
-  ${(p) =>
-    p.open === true
-      ? `border: 1px solid ${colors.iiPurple};`
-      : `border: 1px solid ${colors.cardStroke};`}
+  border: 1px solid ${(p) => (p.open ? colors.iiPurple : colors.cardStroke)};
+
+  &:hover {
+    border: 1px solid ${colors.iiPurple};
+  }
 `;

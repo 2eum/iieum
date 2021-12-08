@@ -73,7 +73,9 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
         })
         .then((data) => {
           setContent(data);
-        });
+          return data;
+        })
+        .then((data) => (data[0] ? setCardLId(data[0].id) : ""));
     }
   }, [questionId]);
 
@@ -91,15 +93,13 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
           track_artist={c.track_artist}
           track_album_cover={c.track_album_cover}
           handleCardOpen={switchCardL}
+          open={cardLId === c.id}
         />
       );
     }
     setTodayQCards([...arr]);
     setIdx(0);
-    if (content[0]) {
-      setCardLId(content[0].id);
-    }
-  }, [content]);
+  }, [content, cardLId]);
 
   // when content is updated or idx of CardS has changed
   useEffect(() => {
