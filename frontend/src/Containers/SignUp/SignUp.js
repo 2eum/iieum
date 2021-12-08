@@ -35,13 +35,14 @@ const SignUp = () => {
           password2: pwdConfirm,
         },
       })
-        .catch((err) =>
+        .catch((err) => {
           err.response.status === 400
             ? setRequestReview(
                 "비밀번호가 보안에 취약합니다. 다른 비밀번호를 입력해주세요."
               )
-            : err.response
-        )
+            : err.response;
+          setSubmit(false);
+        })
         .then((response) => {
           if (response.status < 400) {
             setSent(true);
