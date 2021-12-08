@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
-import * as g from "../../globalStyles";
+import * as colors from "../../styles/Colors";
+import { slide } from "../../styles/globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
@@ -37,8 +37,9 @@ export const Title = styled.p`
   top: 0;
   left: 0;
   width: 100%;
+
   //slide animation
-  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
 `;
 
 export const MiddleWrapper = styled.div`
@@ -56,15 +57,16 @@ export const ArtistWrapper = styled.div`
 
 export const Artist = styled.p`
   text-align: right;
-  color: ${colors.littleDarkGray};
+  color: ${colors.iiBrown};
   white-space: nowrap;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   font-size: 0.8rem;
+  opacity: 0.8;
   //slide animation
-  animation: ${(p) => (p.slide ? g.slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
 `;
 
 export const SourceLink = styled.a`
@@ -77,5 +79,5 @@ export const SourceLink = styled.a`
 
 export const NoPreviewSrc = styled.p`
   font-size: 0.8rem;
-  color: ${colors.darkGray};
+  color: ${colors.iiBrown};
 `;

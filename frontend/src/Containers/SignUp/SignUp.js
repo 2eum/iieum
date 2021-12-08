@@ -1,28 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import CSRFToken from "../../Components/csrftoken";
-import { Redirect } from "react-router";
-import * as g from "../../globalStyles";
-
-import {
-  DuplicateCheckButton,
-  RegisterSection,
-  RegisterForm,
-  RegisterLegend,
-  RegisterFieldset,
-  InputContainer,
-  InputLabel,
-  RegisterInput,
-  RegisterBtnContainer,
-  RegisterBtn,
-  ToLoginLink,
-  AfterSent,
-  SentMessage,
-  InputWrapper,
-  DuplicateMessage,
-  DuplicateConfirm,
-  SubmitMessage,
-} from "./SignUp.elements";
+import * as S from "./SignUp.elements";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -39,7 +18,7 @@ const SignUp = () => {
   const [nicknameChecked, setNicknameCheck] = useState();
   const [requestReview, setRequestReview] = useState(false);
 
-  const onRegisterClick = () => {
+  const onSignUpClick = () => {
     setSubmit(true);
     if (validateInput()) {
       axios({
@@ -126,35 +105,35 @@ const SignUp = () => {
   }, [pwdConfirm]);
 
   return sent ? (
-    <g.Background>
-      <AfterSent>
-        <SentMessage>
+    <>
+      <S.AfterSent>
+        <S.SentMessage>
           입력해주신 이메일로 인증 링크를 보내드렸습니다. 인증 후 로그인
           가능합니다.
-        </SentMessage>
-        <ToLoginLink to="/login">로그인 하기</ToLoginLink>
-      </AfterSent>
-    </g.Background>
+        </S.SentMessage>
+        <S.ToLoginLink to="/login">로그인 하기</S.ToLoginLink>
+      </S.AfterSent>
+    </>
   ) : (
-    <g.Background>
-      <RegisterSection>
-        <RegisterForm>
+    <>
+      <S.SignUpSection>
+        <S.SignUpForm>
           <CSRFToken />
-          <RegisterLegend>회원가입</RegisterLegend>
-          <RegisterFieldset>
-            <InputContainer>
-              <InputLabel htmlFor="username">
+          <S.SignUpLegend>회원가입</S.SignUpLegend>
+          <S.SignUpFieldset>
+            <S.InputContainer>
+              <S.InputLabel htmlFor="username">
                 아이디{" "}
                 {usernameChecked === false ? (
-                  <DuplicateMessage>
+                  <S.DuplicateMessage>
                     해당 아이디는 사용할 수 없습니다.
-                  </DuplicateMessage>
+                  </S.DuplicateMessage>
                 ) : (
                   ""
                 )}
-              </InputLabel>
-              <InputWrapper>
-                <RegisterInput
+              </S.InputLabel>
+              <S.InputWrapper>
+                <S.SignUpInput
                   type="text"
                   name="username"
                   placeholder="공백없이 영문, 숫자 포함 6-12자"
@@ -166,31 +145,31 @@ const SignUp = () => {
                   }}
                 />
                 {!usernameChecked ? (
-                  <DuplicateCheckButton
+                  <S.DuplicateCheckButton
                     onClick={() => {
                       checkDuplicate("username", username, setUsernameCheck);
                     }}
                   >
                     중복 확인
-                  </DuplicateCheckButton>
+                  </S.DuplicateCheckButton>
                 ) : (
-                  <DuplicateConfirm>사용 가능합니다</DuplicateConfirm>
+                  <S.DuplicateConfirm>사용 가능합니다</S.DuplicateConfirm>
                 )}
-              </InputWrapper>
-            </InputContainer>
-            <InputContainer>
-              <InputLabel htmlFor="nickname">
+              </S.InputWrapper>
+            </S.InputContainer>
+            <S.InputContainer>
+              <S.InputLabel htmlFor="nickname">
                 필명{" "}
                 {nicknameChecked === false ? (
-                  <DuplicateMessage>
+                  <S.DuplicateMessage>
                     해당 필명은 사용할 수 없습니다.
-                  </DuplicateMessage>
+                  </S.DuplicateMessage>
                 ) : (
                   ""
                 )}
-              </InputLabel>
-              <InputWrapper>
-                <RegisterInput
+              </S.InputLabel>
+              <S.InputWrapper>
+                <S.SignUpInput
                   type="text"
                   name="nickname"
                   placeholder="글을 작성 시 표시되는 이름"
@@ -202,21 +181,21 @@ const SignUp = () => {
                   }}
                 />
                 {!nicknameChecked ? (
-                  <DuplicateCheckButton
+                  <S.DuplicateCheckButton
                     onClick={() => {
                       checkDuplicate("nickname", nickname, setNicknameCheck);
                     }}
                   >
                     중복 확인
-                  </DuplicateCheckButton>
+                  </S.DuplicateCheckButton>
                 ) : (
-                  <DuplicateConfirm>사용 가능합니다</DuplicateConfirm>
+                  <S.DuplicateConfirm>사용 가능합니다</S.DuplicateConfirm>
                 )}
-              </InputWrapper>
-            </InputContainer>
-            <InputContainer>
-              <InputLabel htmlFor="username">이메일</InputLabel>
-              <RegisterInput
+              </S.InputWrapper>
+            </S.InputContainer>
+            <S.InputContainer>
+              <S.InputLabel htmlFor="username">이메일</S.InputLabel>
+              <S.SignUpInput
                 type="email"
                 name="email"
                 placeholder="ex. example@iieum.com"
@@ -225,10 +204,10 @@ const SignUp = () => {
                   setRequestReview("");
                 }}
               />
-            </InputContainer>
-            <InputContainer>
-              <InputLabel htmlFor="password">비밀번호</InputLabel>
-              <RegisterInput
+            </S.InputContainer>
+            <S.InputContainer>
+              <S.InputLabel htmlFor="password">비밀번호</S.InputLabel>
+              <S.SignUpInput
                 type="password"
                 name="password"
                 placeholder="공백없이 영문, 숫자 포함 8-20자"
@@ -238,19 +217,19 @@ const SignUp = () => {
                   setRequestReview("");
                 }}
               />
-            </InputContainer>
-            <InputContainer>
-              <InputLabel htmlFor="passwordConfirm">
+            </S.InputContainer>
+            <S.InputContainer>
+              <S.InputLabel htmlFor="passwordConfirm">
                 비밀번호 확인
                 {pwdMatch === false ? (
-                  <DuplicateMessage>
+                  <S.DuplicateMessage>
                     비밀번호가 일치하지 않습니다.
-                  </DuplicateMessage>
+                  </S.DuplicateMessage>
                 ) : (
                   ""
                 )}
-              </InputLabel>
-              <RegisterInput
+              </S.InputLabel>
+              <S.SignUpInput
                 type="password"
                 name="passwordConfirm"
                 placeholder="비밀번호 재확인"
@@ -260,31 +239,31 @@ const SignUp = () => {
                   setRequestReview("");
                 }}
               />
-            </InputContainer>
-          </RegisterFieldset>
-          <RegisterBtnContainer>
+            </S.InputContainer>
+          </S.SignUpFieldset>
+          <S.SignUpBtnContainer>
             {requestReview ? (
               <>
-                <DuplicateMessage>{requestReview}</DuplicateMessage>
+                <S.DuplicateMessage>{requestReview}</S.DuplicateMessage>
                 <br />
               </>
             ) : (
               ""
             )}
             {submit ? (
-              <SubmitMessage>처리 중입니다...</SubmitMessage>
+              <S.SubmitMessage>처리 중입니다...</S.SubmitMessage>
             ) : (
               <>
-                <RegisterBtn onClick={() => onRegisterClick()}>
+                <S.SignUpBtn onClick={() => onSignUpClick()}>
                   가입하기
-                </RegisterBtn>
-                <ToLoginLink to="/login">로그인하기</ToLoginLink>
+                </S.SignUpBtn>
+                <S.ToLoginLink to="/login">로그인하기</S.ToLoginLink>
               </>
             )}
-          </RegisterBtnContainer>
-        </RegisterForm>
-      </RegisterSection>
-    </g.Background>
+          </S.SignUpBtnContainer>
+        </S.SignUpForm>
+      </S.SignUpSection>
+    </>
   );
 };
 

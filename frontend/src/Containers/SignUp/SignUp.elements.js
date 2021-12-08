@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import * as colors from "../../Colors";
+import * as colors from "../../styles/Colors";
+import { CustomButton, CustomButtonInvert } from "../../styles/globalStyles";
 
 export const AfterSent = styled.section`
   width: 80%;
@@ -15,7 +16,7 @@ export const SentMessage = styled.p`
   margin: 5%;
 `;
 
-export const RegisterSection = styled.main`
+export const SignUpSection = styled.main`
   width: 80%;
 
   margin: auto;
@@ -27,14 +28,14 @@ export const RegisterSection = styled.main`
   }
 `;
 
-export const RegisterForm = styled.div`
+export const SignUpForm = styled.div`
   width: 40%;
   margin: 5% auto;
 
   text-align: center;
 `;
 
-export const RegisterFieldset = styled.fieldset`
+export const SignUpFieldset = styled.fieldset`
   display: flex;
   flex-direction: column;
 
@@ -44,7 +45,7 @@ export const RegisterFieldset = styled.fieldset`
   border: none;
 `;
 
-export const RegisterLegend = styled.legend`
+export const SignUpLegend = styled.legend`
   margin: 3% auto;
   padding: 5%;
 
@@ -76,7 +77,7 @@ export const InputWrapper = styled.div`
   align-items: center;
 `;
 
-export const RegisterInput = styled.input`
+export const SignUpInput = styled.input`
   padding: 0.5rem;
   background-color: ${colors.iiBG};
   border: none;
@@ -103,46 +104,16 @@ export const DuplicateConfirm = styled.p`
   color: green;
 `;
 
-export const DuplicateCheckButton = styled.button`
-  padding: 0.5rem;
-  width: 5rem;
-  background-color: transparent;
-  border: 1px solid ${colors.iiPurple};
-  border-radius: 5px;
-  cursor: pointer;
-  color: ${colors.iiPurple};
+export const DuplicateCheckButton = styled(CustomButtonInvert)``;
 
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const RegisterBtnContainer = styled.div`
+export const SignUpBtnContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const RegisterBtn = styled.button`
+export const SignUpBtn = styled(CustomButton)`
   width: 100%;
-
-  margin: 1rem auto;
-  padding: 0.4rem 0;
-
-  border-radius: 4px;
-  border: none;
-
-  background-color: ${colors.iiPurple};
-
-  color: ${colors.iiBeige};
-  font-size: 1.1rem;
-  font-weight: 500;
-
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.05);
-    background-color: ${colors.iiBrown};
-  }
+  margin-bottom: 1rem;
 `;
 
 export const ToLoginLink = styled(Link)`

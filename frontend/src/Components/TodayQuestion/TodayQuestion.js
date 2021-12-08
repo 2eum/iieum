@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as S from "./TodayQuestion.elements";
-import * as g from "../../globalStyles";
 
 import { PostCardL, PostCardS } from "../../Components";
+import { IndicatorDot } from "../../styles/globalStyles";
 
 const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const [content, setContent] = useState([]);
@@ -105,7 +105,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   useEffect(() => {
     let indArr = [];
     for (let i = 0; i < Math.ceil(content.length / 2); i++) {
-      indArr.push(<g.IndicatorDot key={i} selected={i * 2 === contentIdx} />);
+      indArr.push(<IndicatorDot key={i} selected={i * 2 === contentIdx} />);
     }
     setIndicators([...indArr]);
   }, [contentIdx, content]);
@@ -163,7 +163,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
         <S.QuestionArea>
           <S.ShuffleButton onClick={randomQuestion}>
             <i className="fas fa-random" />
-            <p>다른 질문 보기</p>
+            다른 질문 보기
           </S.ShuffleButton>
           <S.TodayQuestion>
             <S.QDate>{dayName}의 질문</S.QDate>

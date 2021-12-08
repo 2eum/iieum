@@ -8,8 +8,6 @@ import {
   Login,
   MyPage,
   New,
-  Detail,
-  Edit,
   Explore,
   Search,
   EmailConfirmed,
@@ -22,7 +20,8 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import GlobalStyle from "./globalStyles";
+
+import GlobalStyle, { BodyContainer } from "./styles/globalStyles";
 import ScrollToTop from "./Components/ScrollToTop";
 import axios from "axios";
 
@@ -93,113 +92,103 @@ const App = () => {
   let query = useQuery();
 
   return (
-    <div>
+    <>
       <ScrollToTop />
       <GlobalStyle />
       <Navbar currUser={currUser} handleLogout={handleLogout} />
-      <Switch>
-        <Route
-          path="/"
-          exact
-          render={() => (
-            <Home currUser={currUser} token={token} userId={userId} />
-          )}
-        />
-        <Route
-          path="/mypage"
-          exact
-          render={() => (
-            <MyPage currUser={currUser} token={token} userId={userId} />
-          )}
-        />
-        <Route
-          path="/detail/:id"
-          exact
-          render={() => (
-            <Detail currUser={currUser} token={token} userId={userId} />
-          )}
-        />
-        <Route
-          path="/search"
-          exact
-          render={() => (
-            <Search
-              word={query.get("q")}
-              currUser={currUser}
-              token={token}
-              userId={userId}
-            />
-          )}
-        />
-        <Route
-          path="/new/:id"
-          exact
-          render={() => (
-            <New currUser={currUser} token={token} userId={userId} />
-          )}
-        />
-        <Route path="/new" exact render={() => <New token={token} />} />
-        <Route
-          path="/edit/:id"
-          exact
-          render={() => <Edit token={token} currUser={currUser} />}
-        />
-        <Route
-          path="/explore"
-          exact
-          render={() => (
-            <Explore currUser={currUser} token={token} userId={userId} />
-          )}
-        />
-        <Route
-          path="/register"
-          exact
-          render={() => (
-            <SignUp
-              token={token}
-              saveUserData={saveUserData}
-              currUser={currUser}
-            />
-          )}
-        />
-        <Route
-          path="/login"
-          exact
-          render={() => (
-            <Login
-              token={token}
-              saveUserData={saveUserData}
-              currUser={currUser}
-              saveNickname={saveNickname}
-            />
-          )}
-        />
-        <Route
-          path="/change"
-          exact
-          render={() => (
-            <Change
-              token={token}
-              saveUserData={saveUserData}
-              currUser={currUser}
-              username={username}
-            />
-          )}
-        />
-        <Route
-          path="/email-confirmed"
-          exact
-          render={() => (
-            <EmailConfirmed
-              token={token}
-              saveUserData={saveUserData}
-              currUser={currUser}
-            />
-          )}
-        />
-      </Switch>
+      <BodyContainer>
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <Home currUser={currUser} token={token} userId={userId} />
+            )}
+          />
+          <Route
+            path="/mypage"
+            exact
+            render={() => (
+              <MyPage currUser={currUser} token={token} userId={userId} />
+            )}
+          />
+          <Route
+            path="/search"
+            exact
+            render={() => (
+              <Search
+                word={query.get("q")}
+                currUser={currUser}
+                token={token}
+                userId={userId}
+              />
+            )}
+          />
+          <Route
+            path="/new/:id"
+            exact
+            render={() => (
+              <New currUser={currUser} token={token} userId={userId} />
+            )}
+          />
+          <Route path="/new" exact render={() => <New token={token} />} />
+          <Route
+            path="/explore"
+            exact
+            render={() => (
+              <Explore currUser={currUser} token={token} userId={userId} />
+            )}
+          />
+          <Route
+            path="/sign-up"
+            exact
+            render={() => (
+              <SignUp
+                token={token}
+                saveUserData={saveUserData}
+                currUser={currUser}
+              />
+            )}
+          />
+          <Route
+            path="/login"
+            exact
+            render={() => (
+              <Login
+                token={token}
+                saveUserData={saveUserData}
+                currUser={currUser}
+                saveNickname={saveNickname}
+              />
+            )}
+          />
+          <Route
+            path="/change"
+            exact
+            render={() => (
+              <Change
+                token={token}
+                saveUserData={saveUserData}
+                currUser={currUser}
+                username={username}
+              />
+            )}
+          />
+          <Route
+            path="/email-confirmed"
+            exact
+            render={() => (
+              <EmailConfirmed
+                token={token}
+                saveUserData={saveUserData}
+                currUser={currUser}
+              />
+            )}
+          />
+        </Switch>
+      </BodyContainer>
       <Footer />
-    </div>
+    </>
   );
 };
 

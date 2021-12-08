@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./MusicCardGrid.elements";
-import { MusicCard, MusicCardOpened } from "..";
+import { MusicCard, MusicCardOpened } from "../../Components";
 import axios from "axios";
 
 const MusicCardGrid = ({ currUser, token, userId, list }) => {

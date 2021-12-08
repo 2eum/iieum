@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./QuestionCardGrid.elements";
-import { QuestionOpened, QuestionCard } from "..";
+import { QuestionOpened, QuestionCard } from "../../Components";
 import axios from "axios";
 
 const QuestionCardGrid = ({ currUser, token, userId, list }) => {

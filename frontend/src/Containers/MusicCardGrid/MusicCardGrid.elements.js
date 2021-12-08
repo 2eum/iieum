@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
-import * as g from "../../globalStyles";
+import * as colors from "../../styles/Colors";
+import { CardShadow } from "../../styles/globalStyles";
 
 export const MusicListContainer = styled.div`
   width: 100%;
@@ -19,7 +19,7 @@ export const MusicCardWrapper = styled.div`
   align-items: center;
   border: 1px solid ${colors.cardStroke};
   border-radius: 5px;
-  box-shadow: ${g.CardShadow};
+  box-shadow: ${CardShadow};
   ${(p) =>
     p.open === true
       ? `border: 1px solid ${colors.iiPurple};`

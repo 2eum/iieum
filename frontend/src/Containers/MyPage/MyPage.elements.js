@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
+import * as colors from "../../styles/Colors";
 import { NavLink } from "react-router-dom";
 
 export const MyPageBanner = styled.section`
@@ -11,7 +11,13 @@ export const MyPageBanner = styled.section`
   margin-bottom: 5%;
 `;
 
-export const InfoChangeLink = styled(NavLink)``;
+export const InfoChangeLink = styled(NavLink)`
+  &:hover {
+    i {
+      color: ${colors.iiPurple};
+    }
+  }
+`;
 
 export const User = styled.span`
   color: ${colors.iiPurple};

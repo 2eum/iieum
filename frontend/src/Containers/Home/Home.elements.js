@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
-import * as g from "../../globalStyles";
 import { Link } from "react-router-dom";
 
 export const PageHeader = styled.h3`

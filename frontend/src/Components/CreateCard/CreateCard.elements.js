@@ -1,6 +1,10 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
-import * as g from "../../globalStyles";
+import * as colors from "../../styles/Colors";
+import {
+  ButtonShadow,
+  CardShadow,
+  CustomButton,
+} from "../../styles/globalStyles";
 
 export const CreateCardArea = styled.section`
   width: 34rem;
@@ -11,7 +15,7 @@ export const CreateCardArea = styled.section`
   flex-direction: column;
   justify-content: space-between;
   background-color: ${colors.nearWhite};
-  box-shadow: ${g.CardShadow};
+  box-shadow: ${CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
 `;
@@ -64,7 +68,7 @@ export const SearchResultContainer = styled.div`
   left: 0;
   height: 23rem;
   overflow-y: scroll;
-  box-shadow: ${g.CardShadow};
+  box-shadow: ${CardShadow};
 `;
 
 export const FormArea = styled.section`
@@ -74,7 +78,7 @@ export const FormArea = styled.section`
 `;
 
 export const PubDate = styled.p`
-  color: ${colors.darkGray};
+  color: ${colors.iiBrown};
   margin: 2% 0;
   text-align: left;
 `;
@@ -113,34 +117,8 @@ export const Signature = styled.h3`
   font-size: 2.5rem;
 `;
 
-export const SubmitButton = styled.p`
+export const SubmitButton = styled(CustomButton)`
   margin-top: 1rem;
-  cursor: pointer;
-  background-color: ${colors.iiPurple};
-  border-radius: 5px;
-  border: solid 1px ${colors.iiPurple};
-  width: 8rem;
-  padding: 0.5rem 1rem;
-  color: ${colors.iiBeige};
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: ${g.ButtonShadow};
-
-  i {
-    color: ${colors.iiBeige};
-  }
-
-  &:hover {
-    color: ${colors.iiPurple};
-    background-color: ${colors.iiBeige};
-
-    i {
-      color: ${colors.iiPurple};
-    }
-  }
-
-  transition: all 100ms;
 `;
 
 export const ResetChoiceButton = styled.p`
@@ -159,26 +137,6 @@ export const CompleteContainer = styled.div`
   height: 100%;
 `;
 
-export const RedirectButton = styled.p`
+export const RedirectButton = styled(CustomButton)`
   margin-top: 1rem;
-  cursor: pointer;
-  background-color: ${colors.iiPurple};
-  border-radius: 5px;
-  width: 5rem;
-  padding: 0.5rem 1rem;
-  color: ${colors.iiBeige};
-  text-align: center;
-  border: solid 1px ${colors.iiPurple};
-  box-shadow: ${g.ButtonShadow};
-
-  &:hover {
-    color: ${colors.iiPurple};
-    background-color: ${colors.iiBeige};
-
-    i {
-      color: ${colors.iiPurple};
-    }
-  }
-
-  transition: all 100ms;
 `;

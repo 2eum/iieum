@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
+import * as colors from "../../styles/Colors";
 import { NavLink } from "react-router-dom";
+import { CustomButton, CustomButtonInvert } from "../../styles/globalStyles";
 
 export const ValidateSection = styled.section`
   margin-top: 10vh;
@@ -27,25 +28,8 @@ export const PasswordInput = styled.input`
   }
 `;
 
-export const PasswordSubmit = styled.p`
+export const PasswordSubmit = styled(CustomButton)`
   margin: 0 auto 1rem auto;
-  padding: 0.4rem 2rem;
-
-  border-radius: 4px;
-  border: none;
-
-  background-color: ${colors.iiPurple};
-
-  color: ${colors.iiBeige};
-  font-size: 1.1rem;
-  font-weight: 500;
-
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.05);
-    background-color: ${colors.iiBrown};
-  }
 `;
 
 export const ErrorMessage = styled.p`
@@ -77,26 +61,8 @@ export const NewItemInput = styled.input`
   }
 `;
 
-export const NewItemSubmit = styled.div`
+export const NewItemSubmit = styled(CustomButton)`
   margin: 0 auto 1rem auto;
-  padding: 0.4rem 2rem;
-  width: max-content;
-
-  border-radius: 4px;
-  border: none;
-
-  background-color: ${colors.iiPurple};
-
-  color: ${colors.iiBeige};
-  font-size: 1.1rem;
-  font-weight: 500;
-
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.05);
-    background-color: ${colors.iiBrown};
-  }
 `;
 
 export const NicknameChangeContainer = styled.div`
@@ -114,20 +80,7 @@ export const NicknameInputWrapper = styled.div`
   margin: 1.5rem 0;
 `;
 
-export const NicknameDuplicateCheck = styled.div`
-  padding: 0.5rem;
-  width: max-content;
-  height: max-content;
-  background-color: transparent;
-  border: 1px solid ${colors.iiPurple};
-  border-radius: 5px;
-  cursor: pointer;
-  color: ${colors.iiPurple};
-
-  &:focus {
-    outline: none;
-  }
-`;
+export const NicknameDuplicateCheck = styled(CustomButtonInvert)``;
 
 export const NicknameConfirmed = styled.p`
   color: green;

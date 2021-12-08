@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
+import { CustomLink } from "../../styles/globalStyles";
 
 export const OpenedContainer = styled.div`
   width: 90vw;
@@ -52,4 +52,8 @@ export const CreateButtonWrapper = styled.div`
 
 export const CardListContainer = styled.div`
   width: 100%;
+`;
+
+export const AnswerButton = styled(CustomLink)`
+  margin: 3% 0;
 `;

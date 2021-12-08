@@ -1,15 +1,11 @@
 export { default as MusicPlayer } from "./MusicPlayer/MusicPlayer";
 export { default as MusicCard } from "./MusicCard/MusicCard";
 export { default as Calendar } from "./Calendar/Calendar";
-export { default as List } from "./List/List";
-export { default as DiaryForm } from "./DiaryForm/DiaryForm";
 export { default as SearchedItem } from "./SearchedItem/SearchedItem";
 export { default as PostCardL } from "./PostCardL/PostCardL";
 export { default as PostCardS } from "./PostCardS/PostCardS";
 export { default as CreateCard } from "./CreateCard/CreateCard";
 export { default as QuestionCard } from "./QuestionCard/QuestionCard";
-export { default as QuestionCardGrid } from "./QuestionCardGrid/QuestionCardGrid";
 export { default as QuestionOpened } from "./QuestionOpened/QuestionOpened";
 export { default as TodayQuestion } from "./TodayQuestion/TodayQuestion";
-export { default as MusicCardGrid } from "./MusicCardGrid/MusicCardGrid";
 export { default as MusicCardOpened } from "./MusicCardOpened/MusicCardOpened";

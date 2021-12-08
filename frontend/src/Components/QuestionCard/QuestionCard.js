@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import * as S from "./QuestionCard.elements";
-import * as g from "../../globalStyles";
 
 const QuestionCard = ({ question, date, cardIndex, handleClick, open }) => {
   return (
@@ -11,14 +10,13 @@ const QuestionCard = ({ question, date, cardIndex, handleClick, open }) => {
       </S.TopContainer>
       <S.Line />
       <S.BottomContainer>
-        {/* OpenListButton */}
-        <g.OpenListButtonWrapper>
+        <S.OpenListButtonWrapper>
           {open ? (
-            <g.OpenListButtonIcon className="fa fa-angle-up fa-2x" />
+            <S.OpenListButtonIcon className="fa fa-angle-up fa-2x" />
           ) : (
-            <g.OpenListButtonIcon className="fa fa-angle-down fa-2x" />
+            <S.OpenListButtonIcon className="fa fa-angle-down fa-2x" />
           )}
-        </g.OpenListButtonWrapper>
+        </S.OpenListButtonWrapper>
         <S.QuestionName>{question}</S.QuestionName>
       </S.BottomContainer>
     </S.QuestionCardContainer>

@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
-import { Link } from "react-router-dom";
+import * as colors from "../../styles/Colors";
 
 export const KeyWordContainer = styled.div`
   margin: 5%;
@@ -58,7 +57,7 @@ export const SearchButton = styled.div`
   background-color: ${colors.iiBG};
 
   & i {
-    color: ${colors.iiBrown};
+    color: ${colors.iiPurple};
     opacity: 0.7;
   }
 `;

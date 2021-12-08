@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import * as colors from "../../Colors";
-import * as g from "../../globalStyles";
+import * as colors from "../../styles/Colors";
+import { CardShadow } from "../../styles/globalStyles";
 
 export const QuestionCardContainer = styled.div`
   width: 22rem;
@@ -13,11 +13,17 @@ export const QuestionCardContainer = styled.div`
   gap: 1%;
   text-align: center;
   background-color: ${colors.iiBeige};
-  box-shadow: ${g.CardShadow};
+  box-shadow: ${CardShadow};
   border-radius: 8px;
-  border: 1px solid #abaaa6;
+  border: 1px solid ${colors.cardStroke};
   position: relative;
   cursor: pointer;
+
+  &:hover {
+    border: 1px solid ${colors.iiPurple};
+  }
+
+  transition: border 100ms;
 `;
 
 export const TopContainer = styled.div`
@@ -61,4 +67,14 @@ export const QuestionName = styled.h3`
   word-wrap: break-word;
   line-height: 2rem;
   height: 6rem;
+`;
+
+export const OpenListButtonWrapper = styled.div`
+  margin: 2%;
+  margin-top: 20%;
+`;
+
+export const OpenListButtonIcon = styled.i`
+  color: ${colors.iiPurple};
+  margin-right: 8px;
 `;

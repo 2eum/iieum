@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import CSRFToken from "../../Components/csrftoken";
 import { Redirect } from "react-router";
-import * as g from "../../globalStyles";
 
 import {
   LoginSection,
@@ -13,12 +12,11 @@ import {
   LoginInput,
   LoginBtnContainer,
   LoginBtn,
-  ToRegisterLink,
+  ToSignUpLink,
   ErrorMessage,
 } from "./Login.elements";
-import { InputLabel } from "../SignUp/SignUp.elements";
 
-const Login = ({ saveUserData, currUser, setNickname }) => {
+const Login = ({ saveUserData, currUser }) => {
   const [username, setUsername] = useState("");
   const [pwd, setPwd] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -87,7 +85,7 @@ const Login = ({ saveUserData, currUser, setNickname }) => {
   return currUser ? (
     <Redirect to="/" />
   ) : (
-    <g.Background>
+    <>
       <LoginSection>
         <LoginForm>
           <CSRFToken />
@@ -119,11 +117,11 @@ const Login = ({ saveUserData, currUser, setNickname }) => {
           <LoginBtnContainer>
             {errorMsg !== "" ? <ErrorMessage>{errorMsg}</ErrorMessage> : ""}
             <LoginBtn onClick={() => onLoginClick()}>로그인</LoginBtn>
-            <ToRegisterLink to="/register">회원가입하기</ToRegisterLink>
+            <ToSignUpLink to="/sign-up">회원가입하기</ToSignUpLink>
           </LoginBtnContainer>
         </LoginForm>
       </LoginSection>
-    </g.Background>
+    </>
   );
 };
 
