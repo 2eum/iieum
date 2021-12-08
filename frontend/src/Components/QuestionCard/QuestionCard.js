@@ -3,7 +3,7 @@ import * as S from "./QuestionCard.elements";
 
 const QuestionCard = ({ question, date, cardIndex, handleClick, open }) => {
   return (
-    <S.QuestionCardContainer onClick={() => handleClick(cardIndex)}>
+    <S.QuestionCardContainer onClick={() => handleClick(cardIndex)} open={open}>
       <S.TopContainer>
         <S.Qdate>{date}</S.Qdate>
         <S.CardCorner />

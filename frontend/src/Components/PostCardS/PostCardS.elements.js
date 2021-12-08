@@ -15,7 +15,13 @@ export const PostCardArea = styled.section`
   background-color: ${colors.iiBeige};
   box-shadow: ${CardShadow};
   border-radius: 8px;
-  border: 1px solid #abaaa6;
+  // border: 1px solid #abaaa6;
+
+  ${(p) =>
+    p.open === true
+      ? `border: 1px solid ${colors.iiPurple};`
+      : `border: 1px solid ${colors.cardStroke};`}
+
   position: relative;
 
   &::after {

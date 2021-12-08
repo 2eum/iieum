@@ -15,7 +15,12 @@ export const QuestionCardContainer = styled.div`
   background-color: ${colors.iiBeige};
   box-shadow: ${CardShadow};
   border-radius: 8px;
-  border: 1px solid ${colors.cardStroke};
+
+  ${(p) =>
+    p.open === true
+      ? `border: 1px solid ${colors.iiPurple};`
+      : `border: 1px solid ${colors.cardStroke};`}
+
   position: relative;
   cursor: pointer;
 
@@ -72,9 +77,10 @@ export const QuestionName = styled.h3`
 export const OpenListButtonWrapper = styled.div`
   margin: 2%;
   margin-top: 20%;
+  margin-bottom: 0;
 `;
 
 export const OpenListButtonIcon = styled.i`
   color: ${colors.iiPurple};
-  margin-right: 8px;
+  margin-top: 10px;
 `;

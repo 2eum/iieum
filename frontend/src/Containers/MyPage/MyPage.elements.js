@@ -77,7 +77,6 @@ export const ListSwitchWrapper = styled.div`
 `;
 
 export const ListSwitch = styled.button`
-  // margin: 0 2%;
   border: none;
   background-color: #00000000;
 

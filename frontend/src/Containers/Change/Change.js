@@ -136,7 +136,7 @@ const Change = ({ token, username, currUser, saveUserData }) => {
   return !isValidated ? (
     <S.ValidateSection>
       <S.ValidateTitle>
-        개인정보 변경을 위해 비밀번호를 다시 입력해주세요
+        개인정보 변경을 위해 비밀번호를 다시 입력해주세요.
       </S.ValidateTitle>
       <S.PasswordInput
         type="password"
@@ -151,16 +151,16 @@ const Change = ({ token, username, currUser, saveUserData }) => {
       <S.NicknameChangeContainer>
         {!nicknameChanged ? (
           <>
-            <S.ContainerTitle>닉네임 변경</S.ContainerTitle>
+            <S.ContainerTitle>필명 변경</S.ContainerTitle>
             {nicknameCheck === false ? (
-              <S.ErrorMessage>해당 닉네임은 사용할 수 없습니다</S.ErrorMessage>
+              <S.ErrorMessage>해당 필명은 사용할 수 없습니다</S.ErrorMessage>
             ) : (
               <S.ErrorMessage> </S.ErrorMessage>
             )}
             <S.NicknameInputWrapper>
               <S.NewItemInput
                 type="text"
-                placeholder="닉네임"
+                placeholder="필명"
                 onChange={(e) => {
                   setNicknameInput(e.target.value);
                   setNicknameCheck(null);

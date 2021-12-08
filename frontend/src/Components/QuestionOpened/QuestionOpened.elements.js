@@ -30,14 +30,17 @@ export const OpenedContainer = styled.div`
   }
 `;
 
-export const QuestionContainer = styled.div``;
+export const QuestionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-export const Question = styled.h3`
-  margin: 2%;
+export const Question = styled.h2`
+  margin: 0 auto;
 `;
 
 export const QuestionDetails = styled.p`
-  margin: 2%;
+  margin: 2% auto;
 `;
 
 export const CreateButtonContainer = styled.div`
@@ -55,5 +58,5 @@ export const CardListContainer = styled.div`
 `;
 
 export const AnswerButton = styled(CustomLink)`
-  margin: 3% 0;
+  margin: 3% auto;
 `;
