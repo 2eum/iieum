@@ -36,11 +36,12 @@ export const QuestionContainer = styled.div`
 `;
 
 export const Question = styled.h2`
-  margin: 0 auto;
+  text-align: center;
 `;
 
 export const QuestionDetails = styled.p`
-  margin: 2% auto;
+  margin: 2% 0;
+  text-align: center;
 `;
 
 export const CreateButtonContainer = styled.div`

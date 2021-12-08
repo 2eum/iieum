@@ -50,9 +50,7 @@ const QuestionCardGrid = ({ currUser, token, userId, list }) => {
   const QuestionCardList = content
     ? content.map((c, i) => {
         return (
-          <S.QuestionCardWrapper 
-            key={i}
-          >
+          <S.QuestionCardWrapper key={i}>
             <QuestionCard
               question={c.question_content}
               date={c.released_date}

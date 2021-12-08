@@ -73,8 +73,8 @@ const MyPage = ({ currUser, token, userId }) => {
           <S.Stat>작성한 이음 {postCount}개</S.Stat>
           <S.Stat>좋아요한 이음 {likeCount}개</S.Stat>
           <S.InfoChangeLink to="/change">
-          <i className="fas fa-user-edit" /> 내 정보 수정
-        </S.InfoChangeLink>
+            <i className="fas fa-user-edit" /> 내 정보 수정
+          </S.InfoChangeLink>
         </S.StatsWrapper>
       </S.MyPageBanner>
 
