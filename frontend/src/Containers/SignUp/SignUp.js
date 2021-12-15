@@ -1,14 +1,14 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import CSRFToken from "../../Components/csrftoken";
-import * as S from "./SignUp.elements";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import CSRFToken from '../../Components/csrftoken';
+import * as S from './SignUp.elements';
 
 const SignUp = () => {
-  const [username, setUsername] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [pwdConfirm, setConfirm] = useState("");
+  const [username, setUsername] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [pwdConfirm, setConfirm] = useState('');
   const [submit, setSubmit] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -22,10 +22,10 @@ const SignUp = () => {
     setSubmit(true);
     if (validateInput()) {
       axios({
-        method: "post",
-        url: "/api/signup",
+        method: 'post',
+        url: '/api/signup',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         data: {
           username: username,
@@ -38,7 +38,7 @@ const SignUp = () => {
         .catch((err) => {
           err.response.status === 400
             ? setRequestReview(
-                "비밀번호가 보안에 취약합니다. 다른 비밀번호를 입력해주세요."
+                '비밀번호가 보안에 취약합니다. 다른 비밀번호를 입력해주세요.',
               )
             : err.response;
           setSubmit(false);
@@ -48,37 +48,39 @@ const SignUp = () => {
             setSent(true);
           }
         });
+    } else {
+      setSubmit(false);
     }
   };
 
   const validateInput = () => {
-    if (username === "" || email === "" || pwd === "" || pwdConfirm === "") {
-      setRequestReview("모든 영역은 필수 입력입니다.");
+    if (username === '' || email === '' || pwd === '' || pwdConfirm === '') {
+      setRequestReview('모든 영역은 필수 입력입니다.');
       return false;
     } else if (!usernameChecked || !nicknameChecked) {
-      setRequestReview("아이디와 필명의 중복 확인이 필요합니다.");
+      setRequestReview('아이디와 필명의 중복 확인이 필요합니다.');
       return false;
     } else if (!pwdMatch) {
-      setRequestReview("비밀번호가 일치하지 않습니다.");
+      setRequestReview('비밀번호가 일치하지 않습니다.');
       return false;
     } else if (pwd.length < 8) {
-      setRequestReview("비밀번호가 너무 짧습니다.");
+      setRequestReview('비밀번호가 너무 짧습니다.');
       return false;
     } else if (pwd.match(/^\d+$/)) {
-      setRequestReview("비밀번호가 숫자로만 이루어져 있습니다.");
+      setRequestReview('비밀번호가 숫자로만 이루어져 있습니다.');
       return false;
     }
     return true;
   };
 
   const checkDuplicate = (type, target, setFunc) => {
-    if (target === "") setFunc(false);
+    if (target === '') setFunc(false);
     else {
       axios({
-        method: "post",
+        method: 'post',
         url: `/api/${type}-check`,
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         data: {
           username: `${target}`,
@@ -100,7 +102,7 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (pwdConfirm === "") setPwdMatch();
+    if (pwdConfirm === '') setPwdMatch();
     else if (pwd === pwdConfirm) setPwdMatch(true);
     else setPwdMatch(false);
   }, [pwdConfirm]);
@@ -124,13 +126,13 @@ const SignUp = () => {
           <S.SignUpFieldset>
             <S.InputContainer>
               <S.InputLabel htmlFor="username">
-                아이디{" "}
+                아이디{' '}
                 {usernameChecked === false ? (
                   <S.DuplicateMessage>
                     해당 아이디는 사용할 수 없습니다.
                   </S.DuplicateMessage>
                 ) : (
-                  ""
+                  ''
                 )}
               </S.InputLabel>
               <S.InputWrapper>
@@ -142,13 +144,13 @@ const SignUp = () => {
                   onChange={(e) => {
                     setUsername(e.target.value);
                     setUsernameCheck();
-                    setRequestReview("");
+                    setRequestReview('');
                   }}
                 />
                 {!usernameChecked ? (
                   <S.DuplicateCheckButton
                     onClick={() => {
-                      checkDuplicate("username", username, setUsernameCheck);
+                      checkDuplicate('username', username, setUsernameCheck);
                     }}
                   >
                     중복 확인
@@ -160,13 +162,13 @@ const SignUp = () => {
             </S.InputContainer>
             <S.InputContainer>
               <S.InputLabel htmlFor="nickname">
-                필명{" "}
+                필명{' '}
                 {nicknameChecked === false ? (
                   <S.DuplicateMessage>
                     해당 필명은 사용할 수 없습니다.
                   </S.DuplicateMessage>
                 ) : (
-                  ""
+                  ''
                 )}
               </S.InputLabel>
               <S.InputWrapper>
@@ -178,13 +180,13 @@ const SignUp = () => {
                   onChange={(e) => {
                     setNickname(e.target.value);
                     setNicknameCheck();
-                    setRequestReview("");
+                    setRequestReview('');
                   }}
                 />
                 {!nicknameChecked ? (
                   <S.DuplicateCheckButton
                     onClick={() => {
-                      checkDuplicate("nickname", nickname, setNicknameCheck);
+                      checkDuplicate('nickname', nickname, setNicknameCheck);
                     }}
                   >
                     중복 확인
@@ -202,7 +204,7 @@ const SignUp = () => {
                 placeholder="ex. example@iieum.com"
                 onChange={(e) => {
                   setEmail(e.target.value);
-                  setRequestReview("");
+                  setRequestReview('');
                 }}
               />
             </S.InputContainer>
@@ -215,7 +217,7 @@ const SignUp = () => {
                 duplicateChecked={pwdMatch}
                 onChange={(e) => {
                   setPwd(e.target.value);
-                  setRequestReview("");
+                  setRequestReview('');
                 }}
               />
             </S.InputContainer>
@@ -227,7 +229,7 @@ const SignUp = () => {
                     비밀번호가 일치하지 않습니다.
                   </S.DuplicateMessage>
                 ) : (
-                  ""
+                  ''
                 )}
               </S.InputLabel>
               <S.SignUpInput
@@ -237,7 +239,7 @@ const SignUp = () => {
                 duplicateChecked={pwdMatch}
                 onChange={(e) => {
                   setConfirm(e.target.value);
-                  setRequestReview("");
+                  setRequestReview('');
                 }}
               />
             </S.InputContainer>
@@ -249,7 +251,7 @@ const SignUp = () => {
                 <br />
               </>
             ) : (
-              ""
+              ''
             )}
             {submit ? (
               <S.SubmitMessage>처리 중입니다...</S.SubmitMessage>
