@@ -1,7 +1,6 @@
-import styled from "styled-components";
-import { ButtonShadow, CustomLink } from "../../styles/globalStyles";
-import * as colors from "../../styles/Colors";
-import { HashLink as Link } from "react-router-hash-link";
+import styled from 'styled-components';
+import { CardShadow, CustomLink } from '../../styles/globalStyles';
+import * as colors from '../../styles/Colors';
 
 export const TodayLeftContainer = styled.div`
   width: 50%;
@@ -78,4 +77,23 @@ export const LoadMoreButtonContainer = styled.div`
 
 export const AnswerButton = styled(CustomLink)`
   margin: 3% 0;
+`;
+
+export const EmptyContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  width: 34rem;
+  height: 15rem;
+  background-color: ${colors.iiBeige};
+  box-shadow: ${CardShadow};
+  border-radius: 8px;
+  border: 1px solid #abaaa6;
+`;
+
+export const EmptyMessage = styled.p`
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 2;
 `;
