@@ -56,15 +56,17 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
   }월 ${today.getDate()}일`;
 
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: `api/question/${questionId}`,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => {
-      setQuestionContent(response.data.question_content);
-    });
+    if (questionId) {
+      axios({
+        method: 'get',
+        url: `api/question/${questionId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((response) => {
+        setQuestionContent(response.data.question_content);
+      });
+    }
   }, [questionId]);
 
   const updateSearchInput = (e) => {

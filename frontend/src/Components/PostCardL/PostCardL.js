@@ -32,29 +32,31 @@ const PostCardL = ({
 
   // get content info from api
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: `/api/post/${postId}`,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        if (response.status > 400) {
-          setPlaceholder('Something went wrong!');
-        }
-        return response.data;
+    if (postId) {
+      axios({
+        method: 'get',
+        url: `/api/post/${postId}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      .then((data) => {
-        setContent(data.post);
-        setNickname(data.post.user.nickname);
-        return data;
-      })
-      .then((data) => {
-        checkLiked(data.liked_user);
-        setLikeCount(data.liked_user ? data.liked_user.length : 0);
-        return data;
-      });
+        .then((response) => {
+          if (response.status > 400) {
+            setPlaceholder('Something went wrong!');
+          }
+          return response.data;
+        })
+        .then((data) => {
+          setContent(data.post);
+          setNickname(data.post.user.nickname);
+          return data;
+        })
+        .then((data) => {
+          checkLiked(data.liked_user);
+          setLikeCount(data.liked_user ? data.liked_user.length : 0);
+          return data;
+        });
+    }
   }, [postId, submitted]);
 
   // set date form

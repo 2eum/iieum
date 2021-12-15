@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { PostCardL, PostCardS } from "../../Components";
-import * as S from "./PostCardList.elements";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { PostCardL, PostCardS } from '../../Components';
+import * as S from './PostCardList.elements';
+import axios from 'axios';
 
 const PostCardList = ({ currUser, token, userId, questionId, list }) => {
   const [cols, setCols] = useState(5);
   const [content, setContent] = useState();
   const [cardLIndex, setCardLIndex] = useState();
   const [isOpened, setIsOpened] = useState(false);
+  const [hasNoContent, setHasNoContent] = useState(false);
 
   useEffect(() => {
     setContent();
@@ -18,23 +19,29 @@ const PostCardList = ({ currUser, token, userId, questionId, list }) => {
 
   // only send axios request when no content is passed in
   useEffect(() => {
-    if (!list) {
-      axios({
-        method: "get",
-        url: `/api/postlist-question/${questionId}/0`,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.status > 400) {
-            setPlaceholder("Something went wrong!");
-          }
-          return response.data;
+    if (questionId) {
+      if (!list) {
+        axios({
+          method: 'get',
+          url: `/api/postlist-question/${questionId}/0`,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
-        .then((data) => {
-          if (Array.isArray(data)) setContent(data);
-        });
+          .then((response) => {
+            if (response.status > 400) {
+              setPlaceholder('Something went wrong!');
+            }
+            return response.data;
+          })
+          .then((data) => {
+            if (Array.isArray(data)) setContent(data);
+          })
+          .then(() => setHasNoContent(false))
+          .catch((error) => {
+            setHasNoContent(true);
+          });
+      }
     }
   }, [cols]);
 
@@ -66,7 +73,7 @@ const PostCardList = ({ currUser, token, userId, questionId, list }) => {
           />
         );
       })
-    : "";
+    : '';
 
   return (
     <>
@@ -86,11 +93,11 @@ const PostCardList = ({ currUser, token, userId, questionId, list }) => {
               />
             </S.PostCardLContainer>
           ) : (
-            ""
+            ''
           )}
         </S.CardListContainer>
       ) : (
-        ""
+        ''
       )}
     </>
   );
