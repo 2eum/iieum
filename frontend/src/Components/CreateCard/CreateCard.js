@@ -84,6 +84,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
   };
 
   const selectMusic = (i) => {
+    console.log(1);
     let preview = searchResult[i].preview || 'null';
     const musicInfo = {
       title: searchResult[i].title,
@@ -114,25 +115,34 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
     );
   });
 
-  const handleSubmit = (e) => {
-    axios({
-      method: 'post',
-      url: 'api/post/',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `jwt ${token}`,
-      },
-      data: {
-        title: title,
-        content: body,
-        track_title: mObject.title,
-        track_artist: mObject.artist,
-        track_album_cover: mObject.img,
-        spotify_link: mObject.url,
-        track_audio: mObject.preview,
-        question: questionId,
-      },
-    }).then(() => setSubmit(true));
+  const handleSubmit = () => {
+    if (isValidInput()) {
+      console.log(isValidInput());
+      axios({
+        method: 'post',
+        url: 'api/post/',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `jwt ${token}`,
+        },
+        data: {
+          title: title,
+          content: body,
+          track_title: mObject.title,
+          track_artist: mObject.artist,
+          track_album_cover: mObject.img,
+          spotify_link: mObject.url,
+          track_audio: mObject.preview,
+          question: questionId,
+        },
+      })
+        .then(() => setSubmit(true))
+        .catch((error) =>
+          alert('글 작성에 문제가 생겼어요... 다시 한 번 시도해주시겠어요?'),
+        );
+    } else {
+      alert('모든 영역을 작성해야 합니다.');
+    }
   };
 
   const resetMusicChoice = () => {
@@ -142,6 +152,10 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
     setSearchReady(false);
   };
 
+  const isValidInput = () => {
+    return title !== '' && mObject !== '' && Object.keys(mObject).length !== 0;
+  };
+
   let history = useHistory();
 
   return (
@@ -149,7 +163,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
       <S.CreateCardArea
         loggedOut={!currUser}
         onClick={
-          !currUser ? () => alert('로그인 후 글 작성이 가능합니다!') : ''
+          !currUser ? () => alert('로그인 후 글 작성이 가능합니다!') : () => {}
         }
       >
         {submitted ? (
@@ -182,6 +196,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
                     : () => alert('로그인 후 글 작성이 가능합니다!')
                   : () => {}
               }
+              onBlur={() => setSearching(false)}
             >
               {selected ? (
                 <S.MusicCardWrapper>
