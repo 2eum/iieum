@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import CSRFToken from '../../Components/csrftoken';
 import * as S from './SignUp.elements';
+import { Redirect } from 'react-router';
 
-const SignUp = () => {
+const SignUp = ({ currUser }) => {
   const [username, setUsername] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -107,7 +108,9 @@ const SignUp = () => {
     else setPwdMatch(false);
   }, [pwdConfirm]);
 
-  return sent ? (
+  return currUser ? (
+    <Redirect to="/" />
+  ) : sent ? (
     <>
       <S.AfterSent>
         <S.SentMessage>

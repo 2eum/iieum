@@ -1,37 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { Calendar } from "../../Components";
-import * as S from "./MyPage.elements";
-import { Redirect } from "react-router";
-import axios from "axios";
-import { PostCardList } from "..";
+import React, { useState, useEffect } from 'react';
+import { Calendar } from '../../Components';
+import * as S from './MyPage.elements';
+import { Redirect } from 'react-router';
+import axios from 'axios';
+import { PostCardList } from '..';
 
 const MyPage = ({ currUser, token, userId }) => {
-  const [view, setView] = useState("list");
   const [postCount, setPostCount] = useState();
   const [likeCount, setLikeCount] = useState();
-  const [selectedList, setSelectedList] = useState("post");
+  const [selectedList, setSelectedList] = useState('post');
   const [postList, setPostList] = useState();
   const [likeList, setLikeList] = useState();
 
   useEffect(() => {
     axios({
-      method: "get",
+      method: 'get',
       url: `api/userinfo/${userId}`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }).then((response) => {
-      setPostCount(response.data["post-count"]);
-      setLikeCount(response.data["like-count"]);
+      setPostCount(response.data['post-count']);
+      setLikeCount(response.data['like-count']);
     });
   }, [selectedList]);
 
   useEffect(() => {
     axios({
-      method: "get",
+      method: 'get',
       url: `api/likelist/${userId}`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }).then((response) => {
       setLikeList(response.data);
@@ -40,10 +39,10 @@ const MyPage = ({ currUser, token, userId }) => {
 
   useEffect(() => {
     axios({
-      method: "get",
+      method: 'get',
       url: `api/postlist-user/${userId}/0`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }).then((response) => {
       setPostList(response.data);
@@ -59,7 +58,7 @@ const MyPage = ({ currUser, token, userId }) => {
     today.getMonth() + 1
   }월 ${today.getDate()}일`;
 
-  return token === "" ? (
+  return !token ? (
     <Redirect to="/" />
   ) : (
     <>
@@ -83,8 +82,8 @@ const MyPage = ({ currUser, token, userId }) => {
           <S.ListSwitchWrapper>
             <S.ListSwitch
               onClick={changeList}
-              isSelected={selectedList === "post"}
-              value={"post"}
+              isSelected={selectedList === 'post'}
+              value={'post'}
             >
               나의 이음
             </S.ListSwitch>
@@ -92,14 +91,14 @@ const MyPage = ({ currUser, token, userId }) => {
           <S.ListSwitchWrapper>
             <S.ListSwitch
               onClick={changeList}
-              isSelected={selectedList === "like"}
-              value={"like"}
+              isSelected={selectedList === 'like'}
+              value={'like'}
             >
               좋아요한 이음
             </S.ListSwitch>
           </S.ListSwitchWrapper>
         </S.ListSwitchContainer>
-        {selectedList === "post" ? (
+        {selectedList === 'post' ? (
           <>
             <S.PostListSection>
               <Calendar token={token} currUser={currUser} userId={userId} />
