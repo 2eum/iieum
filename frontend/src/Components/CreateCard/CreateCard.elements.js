@@ -1,10 +1,6 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import {
-  ButtonShadow,
-  CardShadow,
-  CustomButton,
-} from "../../styles/globalStyles";
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { CardShadow, CustomButton } from '../../styles/globalStyles';
 
 export const CreateCardArea = styled.section`
   width: 34rem;
@@ -18,6 +14,14 @@ export const CreateCardArea = styled.section`
   box-shadow: ${CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
+  position: relative;
+
+  &::after {
+    ${(p) =>
+      p.loggedOut
+        ? "content: ''; height: 100%; width: 100%; position: absolute; z-index: 5;"
+        : ''}
+  }
 `;
 
 export const TopArea = styled.section`
@@ -30,9 +34,9 @@ export const Question = styled.p`
 `;
 
 export const MusicSearchArea = styled.section`
-  height: ${(p) => (p.isSearching ? "70%" : "20%")};
+  height: ${(p) => (p.isSearching ? '70%' : '20%')};
   display: flex;
-  justify-content: ${(p) => (p.isSearching ? "center" : "flex-end")};
+  justify-content: ${(p) => (p.isSearching ? 'center' : 'flex-end')};
   align-items: flex-start;
   transition: all 1s;
   position: relative;
@@ -72,7 +76,7 @@ export const SearchResultContainer = styled.div`
 `;
 
 export const FormArea = styled.section`
-  height: ${(p) => (p.isSearching ? "30%" : "60%")};
+  height: ${(p) => (p.isSearching ? '30%' : '60%')};
   display: flex;
   flex-direction: column;
 `;
@@ -113,7 +117,7 @@ export const BottomArea = styled.section`
 `;
 
 export const Signature = styled.h3`
-  font-family: "Daughter_handwriting";
+  font-family: 'Daughter_handwriting';
   font-size: 2.5rem;
 `;
 

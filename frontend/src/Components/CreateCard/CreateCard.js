@@ -1,31 +1,31 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import * as S from "./CreateCard.elements";
-import { MusicCard, SearchedItem } from "..";
-import { useHistory } from "react-router";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import * as S from './CreateCard.elements';
+import { MusicCard, SearchedItem } from '..';
+import { useHistory } from 'react-router';
 
 const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
   const [questionContent, setQuestionContent] = useState();
   const [isSearching, setSearching] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [selected, setSelected] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [searchReady, setSearchReady] = useState(false);
   const [submitted, setSubmit] = useState(false);
 
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
 
   const [mObject, setMObject] = useState({});
 
   useEffect(() => {
-    if (searchQuery !== "") {
+    if (searchQuery !== '') {
       axios({
-        method: "post",
-        url: "api/spotify/",
+        method: 'post',
+        url: 'api/spotify/',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `jwt ${token}`,
         },
         data: {
@@ -41,7 +41,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
             info.url = m.external_urls.spotify;
             info.title = m.name;
             info.preview = m.preview_url;
-            info.artist = m.artists.map((x) => x.name).join(", ");
+            info.artist = m.artists.map((x) => x.name).join(', ');
             arr.push(info);
           }
           setSearchResult(arr);
@@ -57,10 +57,10 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
 
   useEffect(() => {
     axios({
-      method: "get",
+      method: 'get',
       url: `api/question/${questionId}`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }).then((response) => {
       setQuestionContent(response.data.question_content);
@@ -69,8 +69,8 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
 
   const updateSearchInput = (e) => {
     if (!currUser) {
-      alert("로그인 후 글 작성이 가능합니다!");
-      e.target.value = "";
+      alert('로그인 후 글 작성이 가능합니다!');
+      e.target.value = '';
     } else {
       setSearchCount(searchCount + 1);
       let count = searchCount;
@@ -84,7 +84,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
   };
 
   const selectMusic = (i) => {
-    let preview = searchResult[i].preview || "null";
+    let preview = searchResult[i].preview || 'null';
     const musicInfo = {
       title: searchResult[i].title,
       artist: searchResult[i].artist,
@@ -116,10 +116,10 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
 
   const handleSubmit = (e) => {
     axios({
-      method: "post",
-      url: "api/post/",
+      method: 'post',
+      url: 'api/post/',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `jwt ${token}`,
       },
       data: {
@@ -146,13 +146,18 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
 
   return (
     <>
-      <S.CreateCardArea>
+      <S.CreateCardArea
+        loggedOut={!currUser}
+        onClick={
+          !currUser ? () => alert('로그인 후 글 작성이 가능합니다!') : ''
+        }
+      >
         {submitted ? (
           <S.CompleteContainer>
             <p>글 작성이 완료되었습니다</p>
             <S.RedirectButton
               onClick={() => {
-                if (locationAt === "home") {
+                if (locationAt === 'home') {
                   window.location.reload();
                   window.scrollTo(0, 0);
                 } else {
@@ -174,7 +179,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
                 !selected
                   ? currUser
                     ? () => setSearching(true)
-                    : () => alert("로그인 후 글 작성이 가능합니다!")
+                    : () => alert('로그인 후 글 작성이 가능합니다!')
                   : () => {}
               }
             >
@@ -204,7 +209,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
                       {musicResults}
                     </S.SearchResultContainer>
                   ) : (
-                    ""
+                    ''
                   )}
                 </S.SearchBar>
               )}
@@ -220,7 +225,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
                 onChange={(e) =>
                   currUser
                     ? setTitle(e.target.value)
-                    : alert("로그인 후 글 작성이 가능합니다!")
+                    : alert('로그인 후 글 작성이 가능합니다!')
                 }
               />
               <S.FormBody
@@ -230,7 +235,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
                 onChange={(e) =>
                   currUser
                     ? setBody(e.target.value)
-                    : alert("로그인 후 글 작성이 가능합니다!")
+                    : alert('로그인 후 글 작성이 가능합니다!')
                 }
               />
             </S.FormArea>
@@ -240,7 +245,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
                 onClick={
                   currUser
                     ? () => handleSubmit()
-                    : () => alert("로그인 후 글 작성이 가능합니다!")
+                    : () => alert('로그인 후 글 작성이 가능합니다!')
                 }
               >
                 <i className="fas fa-check" />다 썼어요!
