@@ -36,12 +36,20 @@ const SignUp = ({ currUser }) => {
           password2: pwdConfirm,
         },
       })
-        .catch((err) => {
-          err.response.status === 400
-            ? setRequestReview(
-                '비밀번호가 보안에 취약합니다. 다른 비밀번호를 입력해주세요.',
-              )
-            : err.response;
+        .catch((error) => {
+          if (error.response.status === 400) {
+            error.response.data.password1
+              ? setRequestReview(
+                  '비밀번호가 보안에 취약합니다. 다른 비밀번호를 입력해주세요.',
+                )
+              : error.response.data.email
+              ? setRequestReview(
+                  '현재 해당 이메일로 가입된 사용자가 있습니다. 이메일 주소를 확인해주세요.',
+                )
+              : setRequestReview(
+                  '회원가입 중 오류가 발생했습니다. 다시 한 번 시도해주세요.',
+                );
+          }
           setSubmit(false);
         })
         .then((response) => {
