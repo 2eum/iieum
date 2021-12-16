@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { render } from "react-dom";
+import React, { useEffect, useState } from 'react';
+import { render } from 'react-dom';
 import {
   Navbar,
   Home,
@@ -11,60 +11,77 @@ import {
   Explore,
   Search,
   EmailConfirmed,
-  Change,
-} from "./Containers";
+} from './Containers';
 
 import {
   HashRouter as Router,
   Switch,
   Route,
   useLocation,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import GlobalStyle, { BodyContainer } from "./styles/globalStyles";
-import ScrollToTop from "./Components/ScrollToTop";
-import axios from "axios";
+import GlobalStyle, { BodyContainer } from './styles/globalStyles';
+import ScrollToTop from './Components/ScrollToTop';
+import axios from 'axios';
+import CustomAlert from './Components/CustomAlert/CustomAlert';
 
 const App = () => {
   const [token, setToken] = useState(
-    localStorage.getItem("token") ? localStorage.getItem("token") : null
+    localStorage.getItem('token') ? localStorage.getItem('token') : null,
   );
   const [currUser, setUser] = useState(
-    localStorage.getItem("nickname")
-      ? window.localStorage.getItem("nickname")
-      : null
+    localStorage.getItem('nickname')
+      ? window.localStorage.getItem('nickname')
+      : null,
   );
 
   const [userId, setUserId] = useState(
-    localStorage.getItem("userId")
-      ? window.localStorage.getItem("userId")
-      : null
+    localStorage.getItem('userId')
+      ? window.localStorage.getItem('userId')
+      : null,
   );
 
   const [username, setUsername] = useState(
-    localStorage.getItem("username")
-      ? window.localStorage.getItem("username")
-      : null
+    localStorage.getItem('username')
+      ? window.localStorage.getItem('username')
+      : null,
   );
+
+  // alert modal states
+  const [scroll, setScroll] = useState(0);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  // scroll event listener add on load, remove on unload
+  useEffect(() => {
+    window.addEventListener('scroll', trackScroll);
+    return () => {
+      window.removeEventListener('scroll', trackScroll);
+    };
+  }, []);
+
+  const trackScroll = (e) => {
+    setScroll(e.srcElement.scrollingElement.scrollTop);
+  };
 
   const saveUserData = (token, username, userId) => {
     setUsername(username);
     setToken(token);
     setUserId(userId);
 
-    window.localStorage.setItem("token", token);
+    window.localStorage.setItem('token', token);
 
-    window.localStorage.setItem("username", username);
+    window.localStorage.setItem('username', username);
 
-    window.localStorage.setItem("userId", userId);
+    window.localStorage.setItem('userId', userId);
   };
 
   useEffect(() => {
     axios({
-      method: "get",
+      method: 'get',
       url: `/api/accounts/user`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `jwt ${token}`,
       },
     }).then((response) => {
@@ -74,12 +91,18 @@ const App = () => {
   }, [token]);
 
   const saveNickname = (nickname) => {
-    window.localStorage.setItem("nickname", nickname);
+    window.localStorage.setItem('nickname', nickname);
   };
 
   const handleLogout = () => {
     window.localStorage.clear();
     location.reload();
+  };
+
+  // open alert
+  const handleAlert = (message) => {
+    setAlertOpen(alertOpen ? false : true);
+    setAlertMessage(alertMessage ? '' : message);
   };
 
   // search query function
@@ -94,15 +117,31 @@ const App = () => {
   return (
     <>
       <ScrollToTop />
-      <GlobalStyle />
+      <GlobalStyle alertOpen={alertOpen} />
       <Navbar currUser={currUser} handleLogout={handleLogout} />
+      {alertOpen ? (
+        <CustomAlert
+          scroll={scroll}
+          alertOpen={alertOpen}
+          handleAlert={handleAlert}
+          alertMessage={alertMessage}
+        />
+      ) : (
+        ''
+      )}
+
       <BodyContainer>
         <Switch>
           <Route
             path="/"
             exact
             render={() => (
-              <Home currUser={currUser} token={token} userId={userId} />
+              <Home
+                currUser={currUser}
+                token={token}
+                userId={userId}
+                handleAlert={handleAlert}
+              />
             )}
           />
           <Route
@@ -117,7 +156,7 @@ const App = () => {
             exact
             render={() => (
               <Search
-                word={query.get("q")}
+                word={query.get('q')}
                 currUser={currUser}
                 token={token}
                 userId={userId}
@@ -163,18 +202,6 @@ const App = () => {
             )}
           />
           <Route
-            path="/change"
-            exact
-            render={() => (
-              <Change
-                token={token}
-                saveUserData={saveUserData}
-                currUser={currUser}
-                username={username}
-              />
-            )}
-          />
-          <Route
             path="/email-confirmed"
             exact
             render={() => (
@@ -194,10 +221,10 @@ const App = () => {
 
 export default App;
 
-const container = document.getElementById("app");
+const container = document.getElementById('app');
 render(
   <Router>
     <App />
   </Router>,
-  container
+  container,
 );

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import * as S from "./Home.elements";
+import React, { useState } from 'react';
+import * as S from './Home.elements';
 
-import { TodayQuestion, CreateCard } from "../../Components";
-import { QuestionCardGrid, MusicCardGrid } from "../";
+import { TodayQuestion, CreateCard } from '../../Components';
+import { QuestionCardGrid, MusicCardGrid } from '../';
 
-const Home = ({ currUser, token, userId }) => {
+const Home = ({ currUser, token, userId, handleAlert }) => {
   const [loaded, setLoad] = useState(false);
-  const [placeholder, setPlaceholder] = useState("Loading Content");
+  const [placeholder, setPlaceholder] = useState('Loading Content');
   const [pageQuestion, setPageQuestion] = useState();
 
   return (
@@ -41,6 +41,7 @@ const Home = ({ currUser, token, userId }) => {
           token={token}
           userId={userId}
           questionId={pageQuestion}
+          handleAlert={handleAlert}
           locationAt="home"
         />
         <S.CreateCardRight>

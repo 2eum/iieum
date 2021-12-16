@@ -4,7 +4,14 @@ import * as S from './CreateCard.elements';
 import { MusicCard, SearchedItem } from '..';
 import { useHistory } from 'react-router';
 
-const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
+const CreateCard = ({
+  currUser,
+  token,
+  userId,
+  questionId,
+  locationAt,
+  handleAlert,
+}) => {
   const [questionContent, setQuestionContent] = useState();
   const [isSearching, setSearching] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
@@ -71,7 +78,7 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
 
   const updateSearchInput = (e) => {
     if (!currUser) {
-      alert('로그인 후 글 작성이 가능합니다!');
+      handleAlert('로그인 후 글 작성이 가능합니다!');
       e.target.value = '';
     } else {
       setSearchCount(searchCount + 1);
@@ -140,10 +147,12 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
       })
         .then(() => setSubmit(true))
         .catch((error) =>
-          alert('글 작성에 문제가 생겼어요... 다시 한 번 시도해주시겠어요?'),
+          handleAlert(
+            '글 작성에 문제가 생겼어요... 다시 한 번 시도해주시겠어요?',
+          ),
         );
     } else {
-      alert('모든 영역을 작성해야 합니다.');
+      handleAlert('모든 영역을 작성해야 합니다.');
     }
   };
 
@@ -165,7 +174,9 @@ const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
       <S.CreateCardArea
         loggedOut={!currUser}
         onClick={
-          !currUser ? () => alert('로그인 후 글 작성이 가능합니다!') : () => {}
+          !currUser
+            ? () => handleAlert('로그인 후 글 작성이 가능합니다!')
+            : () => {}
         }
       >
         {submitted ? (
