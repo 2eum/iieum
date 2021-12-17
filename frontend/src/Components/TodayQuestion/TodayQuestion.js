@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import * as S from "./TodayQuestion.elements";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import * as S from './TodayQuestion.elements';
 
-import { PostCardL, PostCardS } from "../../Components";
-import { IndicatorDot } from "../../styles/globalStyles";
+import { PostCardL, PostCardS } from '../../Components';
+import { IndicatorDot } from '../../styles/globalStyles';
 
 const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const [content, setContent] = useState([]);
@@ -15,8 +15,9 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const [contentIdx, setIdx] = useState();
   const [cardLId, setCardLId] = useState();
   const [dayName, setDayName] = useState();
+  const [noContent, setNoContent] = useState(false);
 
-  const dayNames = ["오늘", "어제", "3일 전", "4일 전", "5일 전"];
+  const dayNames = ['오늘', '어제', '3일 전', '4일 전', '5일 전'];
 
   const today = new Date();
   const startingDate = new Date(today);
@@ -24,19 +25,19 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   // on Mount
   useEffect(() => {
     axios({
-      method: "get",
+      method: 'get',
       url: `/api/questionlist/${startingDate.getFullYear()}-${
         startingDate.getMonth() + 1
       }-${startingDate.getDate()}/${today.getFullYear()}-${
         today.getMonth() + 1
       }-${today.getDate()}/0`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((response) => {
         if (response.status > 400) {
-          setPlaceholder("Something went wrong!");
+          setPlaceholder('Something went wrong!');
         }
         return response.data;
       })
@@ -59,23 +60,25 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   useEffect(() => {
     if (questionId) {
       axios({
-        method: "get",
+        method: 'get',
         url: `api/postlist-question/${questionId}/10`,
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       })
         .then((response) => {
-          if (response.status > 400) {
-            setPlaceholder("Something went wrong!");
-          }
+          setContent(response.data);
           return response.data;
         })
-        .then((data) => {
-          setContent(data);
-          return data;
-        })
-        .then((data) => (data[0] ? setCardLId(data[0].id) : ""));
+        .then((data) => (data[0] ? setCardLId(data[0].id) : ''))
+        .catch((error) => {
+          if (error.response.status === 404) {
+            // !! 글 없음 표시하기
+            setNoContent(true);
+          } else {
+            setPlaceholder('Something went wrong!');
+          }
+        });
     }
   }, [questionId]);
 
@@ -94,7 +97,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
           track_album_cover={c.track_album_cover}
           handleCardOpen={switchCardL}
           open={cardLId === c.id}
-        />
+        />,
       );
     }
     setTodayQCards([...arr]);
@@ -156,7 +159,12 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
             token={token}
           />
         ) : (
-          ""
+          <S.EmptyContainer>
+            <S.EmptyMessage>
+              아직 이 질문에 대한 답이 없어요...
+              <br />첫 이음의 작성자가 되어주실래요?
+            </S.EmptyMessage>
+          </S.EmptyContainer>
         )}
       </S.TodayLeftContainer>
       <S.TodayRightContainer>
@@ -174,23 +182,27 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
             </S.AnswerButton>
           </S.TodayQuestion>
         </S.QuestionArea>
-        <S.PostCardSArea>
-          <S.TodaySTop>
-            <S.LoadMoreButtonContainer onClick={() => handleTodayQCard(-1)}>
-              <i className="fas fa-chevron-left" />
-            </S.LoadMoreButtonContainer>
-            <S.PostCardSWrapper>
-              {todayQCards[contentIdx]}
-              {contentIdx + 1 < todayQCards.length
-                ? todayQCards[contentIdx + 1]
-                : ""}
-            </S.PostCardSWrapper>
-            <S.LoadMoreButtonContainer onClick={() => handleTodayQCard(1)}>
-              <i className="fas fa-chevron-right" />
-            </S.LoadMoreButtonContainer>
-          </S.TodaySTop>
-          <S.IndicatorWrapper>{indicators}</S.IndicatorWrapper>
-        </S.PostCardSArea>
+        {content.length ? (
+          <S.PostCardSArea>
+            <S.TodaySTop>
+              <S.LoadMoreButtonContainer onClick={() => handleTodayQCard(-1)}>
+                <i className="fas fa-chevron-left" />
+              </S.LoadMoreButtonContainer>
+              <S.PostCardSWrapper>
+                {todayQCards[contentIdx]}
+                {contentIdx + 1 < todayQCards.length
+                  ? todayQCards[contentIdx + 1]
+                  : ''}
+              </S.PostCardSWrapper>
+              <S.LoadMoreButtonContainer onClick={() => handleTodayQCard(1)}>
+                <i className="fas fa-chevron-right" />
+              </S.LoadMoreButtonContainer>
+            </S.TodaySTop>
+            <S.IndicatorWrapper>{indicators}</S.IndicatorWrapper>
+          </S.PostCardSArea>
+        ) : (
+          ''
+        )}
       </S.TodayRightContainer>
     </>
   );

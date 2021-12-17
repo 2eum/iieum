@@ -1,7 +1,7 @@
-import styled, { createGlobalStyle, keyframes } from "styled-components";
-import * as colors from "./Colors";
-import daughterHandwriting from "./Daughter_handwriting.woff";
-import { HashLink as Link } from "react-router-hash-link";
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
+import * as colors from './Colors';
+import daughterHandwriting from './Daughter_handwriting.woff';
+import { HashLink as Link } from 'react-router-hash-link';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -50,6 +50,8 @@ const GlobalStyle = createGlobalStyle`
 
 body {
   background-color: ${colors.iiBG};
+  position: relative;
+  overflow-y: ${(p) => (p.alertOpen ? 'hidden' : 'scroll')}
 }
 
 li {
@@ -66,8 +68,8 @@ a {
 `;
 
 // default shadows
-export const CardShadow = "8px 8px 8px 1px rgba(0, 0, 0, .15)";
-export const ButtonShadow = "2px 2px 4px 0 rgba(0, 0, 0, .25)";
+export const CardShadow = '8px 8px 8px 1px rgba(0, 0, 0, .15)';
+export const ButtonShadow = '2px 2px 4px 0 rgba(0, 0, 0, .25)';
 
 // text slide animation
 export const slide = keyframes`
@@ -86,7 +88,7 @@ export const IndicatorDot = styled.div`
   background-color: ${(p) =>
     p.selected ? colors.iiPurple : colors.iiPurpleOpacity};
   border-radius: 100%;
-  content: "";
+  content: '';
   cursor: pointer;
 `;
 
