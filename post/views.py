@@ -344,7 +344,7 @@ class Search(APIView):
 
         if query:
             posts = postlist.filter(Q(title__icontains=query)|Q(content__icontains=query))
-            questions = questionlist.filter(Q(question_content__icontains=query)|Q(explain__icontains=query))
+            questions = questionlist.filter(Q(question_content__icontains=query))
             musics = [x for x in musiclist if x[0].lower().find(query.lower())!=-1 or x[1].lower().find(query.lower())!=-1]
 
         if posts or questions or musics:
