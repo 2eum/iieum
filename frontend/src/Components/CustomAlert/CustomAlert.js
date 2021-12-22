@@ -15,7 +15,7 @@ const CustomAlert = ({ scroll, alertOpen, handleAlert, alertMessage }) => {
       alertOpen={alertOpen}
     >
       <S.AlertContainer>
-        <p>{alertMessage}</p>
+        <S.AlertMessage>{alertMessage}</S.AlertMessage>
         <S.AlertCloseButton onClick={handleAlert}>닫기</S.AlertCloseButton>
       </S.AlertContainer>
     </S.ModalContainer>

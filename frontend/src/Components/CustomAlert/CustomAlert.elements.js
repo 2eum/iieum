@@ -16,7 +16,8 @@ export const ModalContainer = styled.div`
 
 export const AlertContainer = styled.div`
   width: 25rem;
-  height: 10rem;
+  height: fit-content;
+  padding: 2rem;
   background-color: ${colors.nearWhite};
   border: solid 1px ${colors.cardStroke};
   border-radius: 5px;
@@ -25,6 +26,11 @@ export const AlertContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+`;
+
+export const AlertMessage = styled.p`
+  max-height: 70vh;
+  overflow-y: scroll;
 `;
 
 export const AlertCloseButton = styled(CustomButton)``;

@@ -196,6 +196,7 @@ const App = () => {
                     token={token}
                     saveUserData={saveUserData}
                     currUser={currUser}
+                    handleAlert={handleAlert}
                   />
                 )}
               />

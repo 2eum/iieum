@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import { CustomButton, CustomButtonInvert } from "../../styles/globalStyles";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { CustomButton, CustomButtonInvert } from '../../styles/globalStyles';
 
 export const AfterSent = styled.section`
   width: 80%;
@@ -85,9 +85,9 @@ export const SignUpInput = styled.input`
   border-bottom: 1px solid
     ${(p) =>
       p.duplicateChecked === false
-        ? "red"
+        ? 'red'
         : p.duplicateChecked === true
-        ? "green"
+        ? 'green'
         : colors.iiBrown};
 
   &:focus {
@@ -121,3 +121,12 @@ export const ToLoginLink = styled(Link)`
 `;
 
 export const SubmitMessage = styled.p``;
+
+export const PolicyMessage = styled.p`
+  margin: 0.5rem;
+`;
+
+export const PolicyLink = styled.span`
+  text-decoration: underline;
+  cursor: pointer;
+`;

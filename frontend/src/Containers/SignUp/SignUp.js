@@ -4,7 +4,7 @@ import CSRFToken from '../../Components/csrftoken';
 import * as S from './SignUp.elements';
 import { Redirect } from 'react-router';
 
-const SignUp = ({ currUser }) => {
+const SignUp = ({ currUser, handleAlert }) => {
   const [username, setUsername] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -101,6 +101,10 @@ const SignUp = ({ currUser }) => {
             setFunc(false);
             return error.response;
           }
+          if (error.response.status === 400) {
+            setFunc(false);
+            return error.response;
+          }
         })
         .then((response) => {
           if (response.status < 400) {
@@ -150,7 +154,7 @@ const SignUp = ({ currUser }) => {
                 <S.SignUpInput
                   type="text"
                   name="username"
-                  placeholder="공백없이 영문, 숫자 포함 6-12자"
+                  placeholder="공백없이 영문, 숫자 포함 4-30자"
                   duplicateChecked={usernameChecked}
                   onChange={(e) => {
                     setUsername(e.target.value);
@@ -268,6 +272,12 @@ const SignUp = ({ currUser }) => {
               <S.SubmitMessage>처리 중입니다...</S.SubmitMessage>
             ) : (
               <>
+                <S.PolicyMessage>
+                  <S.PolicyLink onClick={() => handleAlert(policy)}>
+                    이음의 회원약관
+                  </S.PolicyLink>
+                  에 동의하고
+                </S.PolicyMessage>
                 <S.SignUpBtn onClick={() => onSignUpClick()}>
                   가입하기
                 </S.SignUpBtn>
@@ -281,4 +291,6 @@ const SignUp = ({ currUser }) => {
   );
 };
 
+const policy =
+  'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum deleniti autem velit ad odio voluptatibus ipsum reprehenderit fugiat sequi nemo.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum deleniti autem velit ad odio voluptatibus ipsum reprehenderit fugiat sequi nemo.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum deleniti autem velit ad odio voluptatibus ipsum reprehenderit fugiat sequi nemo.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum deleniti autem velit ad odio voluptatibus ipsum reprehenderit fugiat sequi nemo.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum deleniti autem velit ad odio voluptatibus ipsum reprehenderit fugiat sequi nemo.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum deleniti autem velit ad odio voluptatibus ipsum reprehenderit fugiat sequi nemo.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum deleniti autem velit ad odio voluptatibus ipsum reprehenderit fugiat sequi nemo.';
 export default SignUp;
