@@ -30,7 +30,7 @@ export const AlertContainer = styled.div`
 
 export const AlertMessage = styled.p`
   max-height: 70vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 export const AlertCloseButton = styled(CustomButton)``;

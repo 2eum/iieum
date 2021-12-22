@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
 
 // Container
 export const NavContainer = styled.nav`
@@ -57,6 +57,25 @@ export const SearchBar = styled.input`
 `;
 
 export const SearchButton = styled(Link)`
+  width: 1rem;
+  height: 2rem;
+
+  padding: 0.5rem;
+  cursor: pointer;
+
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  background-color: ${colors.iiBG};
+
+  & i {
+    color: ${colors.iiPurple};
+    opacity: 0.7;
+  }
+`;
+
+export const SearchButtonDisabled = styled.div`
   width: 1rem;
   height: 2rem;
 
