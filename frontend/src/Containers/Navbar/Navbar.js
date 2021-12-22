@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import LogoImg from "./iieum_logo.png";
-import * as S from "./Navbar.elements";
+import React, { useState } from 'react';
+import LogoImg from './iieum_logo.png';
+import * as S from './Navbar.elements';
 
-const Navbar = ({ currUser, handleLogout }) => {
-  const [keyword, setKeyword] = useState("");
+const Navbar = ({ currUser, handleLogout, handleAlert }) => {
+  const [keyword, setKeyword] = useState('');
 
   const searchUrl = `/search?q=${keyword}`;
+
   return (
     <>
       <S.NavContainer>
@@ -20,14 +21,22 @@ const Navbar = ({ currUser, handleLogout }) => {
               setKeyword(e.target.value);
             }}
           />
-          <S.SearchButton to={searchUrl}>
-            <i className="fas fa-search"></i>
-          </S.SearchButton>
+          {keyword.length > 0 ? (
+            <S.SearchButton to={searchUrl}>
+              <i className="fas fa-search"></i>
+            </S.SearchButton>
+          ) : (
+            <S.SearchButtonDisabled
+              onClick={() => handleAlert('검색어를 입력해주세요!')}
+            >
+              <i className="fas fa-search"></i>
+            </S.SearchButtonDisabled>
+          )}
         </S.SearchBarContainer>
         <S.NavLinkContainer>
           <S.GreetMessage>
-            어서오세요 {currUser ? `${currUser}님` : ""} :)   
-            {currUser ? "" : " 글을 작성하려면 로그인해주세요."}
+            어서오세요 {currUser ? `${currUser}님` : ''} :)
+            {currUser ? '' : ' 글을 작성하려면 로그인해주세요.'}
           </S.GreetMessage>
           <S.RightNavLinksWrapper>
             <S.NavLink to="/explore">질문 둘러보기</S.NavLink>

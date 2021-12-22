@@ -128,7 +128,11 @@ const App = () => {
       <GlobalStyle alertOpen={alertOpen} />
       {windowWidth >= 1280 ? (
         <>
-          <Navbar currUser={currUser} handleLogout={handleLogout} />
+          <Navbar
+            currUser={currUser}
+            handleLogout={handleLogout}
+            handleAlert={handleAlert}
+          />
           {alertOpen ? (
             <CustomAlert
               scroll={scroll}
