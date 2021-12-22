@@ -254,8 +254,10 @@ export default App;
 
 const container = document.getElementById('app');
 render(
-  <Router>
-    <App />
-  </Router>,
+  <React.StrictMode>
+    <Router>
+      <App />
+    </Router>
+  </React.StrictMode>,
   container,
 );
