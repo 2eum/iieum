@@ -59,7 +59,9 @@ class NicknameCheck(APIView):
     def post(self, request):
         nickname = request.data['nickname']
         user = User.objects.filter(nickname=nickname).first()
-        if user is None:
+        if len(nickname) < 2:
+            raise CustomValidation('invalid length - too short', 'nickname', status_code=status.HTTP_400_BAD_REQUEST)
+        elif user is None:
             return Response({"detail":"Available nickname"})
         else:
             raise CustomValidation('Duplicate Nickname','nickname', status_code=status.HTTP_409_CONFLICT)
@@ -69,7 +71,9 @@ class UsernameCheck(APIView):
     def post(self, request):
         username = request.data['username']
         user = User.objects.filter(username=username).first()
-        if user is None:
+        if not re.match('^[a-zA-Z0-9_]{4,30}$', username):
+            raise CustomValidation('invalid input', 'username', status_code=status.HTTP_400_BAD_REQUEST)
+        elif user is None:
             return Response({"detail":"Available username"})
         else:
             raise CustomValidation('Duplicate Username','username', status_code=status.HTTP_409_CONFLICT)
