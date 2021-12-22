@@ -11,6 +11,7 @@ import {
   Explore,
   Search,
   EmailConfirmed,
+  Change,
 } from './Containers';
 
 import {
@@ -209,6 +210,18 @@ const App = () => {
                 token={token}
                 saveUserData={saveUserData}
                 currUser={currUser}
+              />
+            )}
+          />
+          <Route
+            path="/change"
+            exact
+            render={() => (
+              <Change
+                token={token}
+                saveUserData={saveUserData}
+                currUser={currUser}
+                username={username}
               />
             )}
           />
