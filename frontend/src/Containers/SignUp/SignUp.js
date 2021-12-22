@@ -101,6 +101,10 @@ const SignUp = ({ currUser }) => {
             setFunc(false);
             return error.response;
           }
+          if (error.response.status === 400) {
+            setFunc(false);
+            return error.response;
+          }
         })
         .then((response) => {
           if (response.status < 400) {
@@ -150,7 +154,7 @@ const SignUp = ({ currUser }) => {
                 <S.SignUpInput
                   type="text"
                   name="username"
-                  placeholder="공백없이 영문, 숫자 포함 6-12자"
+                  placeholder="공백없이 영문, 숫자 포함 4-30자"
                   duplicateChecked={usernameChecked}
                   onChange={(e) => {
                     setUsername(e.target.value);
