@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
-import * as S from "./QuestionCardGrid.elements";
-import { QuestionOpened, QuestionCard } from "../../Components";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import * as S from './QuestionCardGrid.elements';
+import { QuestionOpened, QuestionCard } from '../../Components';
+import axios from 'axios';
 
 const QuestionCardGrid = ({ currUser, token, userId, list }) => {
   const [content, setContent] = useState();
   const [openCard, setOpenCard] = useState(-1);
   const [isOpened, setIsOpened] = useState(false);
+  const today = new Date();
+  const formattedToday = `${today.getFullYear()}-${
+    today.getMonth() + 1
+  }-${today.getDate()}`;
 
   useEffect(() => {
     setContent();
@@ -18,15 +22,15 @@ const QuestionCardGrid = ({ currUser, token, userId, list }) => {
   useEffect(() => {
     if (!list) {
       axios({
-        method: "get",
-        url: `/api/question`,
+        method: 'get',
+        url: `api/questionlist/2021-12-22/${formattedToday}/9`,
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       })
         .then((response) => {
           if (response.status > 400) {
-            setPlaceholder("Something went wrong!");
+            setPlaceholder('Something went wrong!');
           }
           return response.data;
         })
