@@ -25,8 +25,10 @@ import GlobalStyle, { BodyContainer } from './styles/globalStyles';
 import ScrollToTop from './Components/ScrollToTop';
 import axios from 'axios';
 import CustomAlert from './Components/CustomAlert/CustomAlert';
+import ResponsivePlaceholder from './Components/ResponsivePlaceholder';
 
 const App = () => {
+  const [windowWidth, setWindowWidth] = useState(0);
   const [token, setToken] = useState(
     localStorage.getItem('token') ? localStorage.getItem('token') : null,
   );
@@ -53,11 +55,16 @@ const App = () => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
-  // scroll event listener add on load, remove on unload
+  // scroll, size event listener add on load, remove on unload
   useEffect(() => {
+    setWindowWidth(window.innerWidth);
     window.addEventListener('scroll', trackScroll);
+    window.addEventListener('resize', (e) =>
+      setWindowWidth(e.target.innerWidth),
+    );
     return () => {
       window.removeEventListener('scroll', trackScroll);
+      window.removeEventListener('resize', setWindowWidth);
     };
   }, []);
 
@@ -119,115 +126,121 @@ const App = () => {
     <>
       <ScrollToTop />
       <GlobalStyle alertOpen={alertOpen} />
-      <Navbar currUser={currUser} handleLogout={handleLogout} />
-      {alertOpen ? (
-        <CustomAlert
-          scroll={scroll}
-          alertOpen={alertOpen}
-          handleAlert={handleAlert}
-          alertMessage={alertMessage}
-        />
-      ) : (
-        ''
-      )}
+      {windowWidth >= 1280 ? (
+        <>
+          <Navbar currUser={currUser} handleLogout={handleLogout} />
+          {alertOpen ? (
+            <CustomAlert
+              scroll={scroll}
+              alertOpen={alertOpen}
+              handleAlert={handleAlert}
+              alertMessage={alertMessage}
+            />
+          ) : (
+            ''
+          )}
 
-      <BodyContainer>
-        <Switch>
-          <Route
-            path="/"
-            exact
-            render={() => (
-              <Home
-                currUser={currUser}
-                token={token}
-                userId={userId}
-                handleAlert={handleAlert}
+          <BodyContainer>
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={() => (
+                  <Home
+                    currUser={currUser}
+                    token={token}
+                    userId={userId}
+                    handleAlert={handleAlert}
+                  />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/mypage"
-            exact
-            render={() => (
-              <MyPage currUser={currUser} token={token} userId={userId} />
-            )}
-          />
-          <Route
-            path="/search"
-            exact
-            render={() => (
-              <Search
-                word={query.get('q')}
-                currUser={currUser}
-                token={token}
-                userId={userId}
+              <Route
+                path="/mypage"
+                exact
+                render={() => (
+                  <MyPage currUser={currUser} token={token} userId={userId} />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/new/:id"
-            exact
-            render={() => (
-              <New currUser={currUser} token={token} userId={userId} />
-            )}
-          />
-          <Route path="/new" exact render={() => <New token={token} />} />
-          <Route
-            path="/explore"
-            exact
-            render={() => (
-              <Explore currUser={currUser} token={token} userId={userId} />
-            )}
-          />
-          <Route
-            path="/sign-up"
-            exact
-            render={() => (
-              <SignUp
-                token={token}
-                saveUserData={saveUserData}
-                currUser={currUser}
+              <Route
+                path="/search"
+                exact
+                render={() => (
+                  <Search
+                    word={query.get('q')}
+                    currUser={currUser}
+                    token={token}
+                    userId={userId}
+                  />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/login"
-            exact
-            render={() => (
-              <Login
-                token={token}
-                saveUserData={saveUserData}
-                currUser={currUser}
-                saveNickname={saveNickname}
+              <Route
+                path="/new/:id"
+                exact
+                render={() => (
+                  <New currUser={currUser} token={token} userId={userId} />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/email-confirmed"
-            exact
-            render={() => (
-              <EmailConfirmed
-                token={token}
-                saveUserData={saveUserData}
-                currUser={currUser}
+              <Route path="/new" exact render={() => <New token={token} />} />
+              <Route
+                path="/explore"
+                exact
+                render={() => (
+                  <Explore currUser={currUser} token={token} userId={userId} />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/change"
-            exact
-            render={() => (
-              <Change
-                token={token}
-                saveUserData={saveUserData}
-                currUser={currUser}
-                username={username}
+              <Route
+                path="/sign-up"
+                exact
+                render={() => (
+                  <SignUp
+                    token={token}
+                    saveUserData={saveUserData}
+                    currUser={currUser}
+                  />
+                )}
               />
-            )}
-          />
-        </Switch>
-      </BodyContainer>
-      <Footer />
+              <Route
+                path="/login"
+                exact
+                render={() => (
+                  <Login
+                    token={token}
+                    saveUserData={saveUserData}
+                    currUser={currUser}
+                    saveNickname={saveNickname}
+                  />
+                )}
+              />
+              <Route
+                path="/email-confirmed"
+                exact
+                render={() => (
+                  <EmailConfirmed
+                    token={token}
+                    saveUserData={saveUserData}
+                    currUser={currUser}
+                  />
+                )}
+              />
+              <Route
+                path="/change"
+                exact
+                render={() => (
+                  <Change
+                    token={token}
+                    saveUserData={saveUserData}
+                    currUser={currUser}
+                    username={username}
+                  />
+                )}
+              />
+            </Switch>
+          </BodyContainer>
+          <Footer />
+        </>
+      ) : (
+        <ResponsivePlaceholder />
+      )}
     </>
   );
 };
