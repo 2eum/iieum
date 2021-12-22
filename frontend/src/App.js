@@ -181,7 +181,12 @@ const App = () => {
                 path="/new/:id"
                 exact
                 render={() => (
-                  <New currUser={currUser} token={token} userId={userId} />
+                  <New
+                    currUser={currUser}
+                    token={token}
+                    userId={userId}
+                    handleAlert={handleAlert}
+                  />
                 )}
               />
               <Route path="/new" exact render={() => <New token={token} />} />

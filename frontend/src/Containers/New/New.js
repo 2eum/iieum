@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import * as S from "./New.elements";
-import { CreateCard } from "../../Components";
-import { useParams } from "react-router";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import * as S from './New.elements';
+import { CreateCard } from '../../Components';
+import { useParams } from 'react-router';
 
-const New = ({ currUser, token, userId }) => {
+const New = ({ currUser, token, userId, handleAlert }) => {
   let { id } = useParams();
-  const [question, setQuestion] = useState("");
+  const [question, setQuestion] = useState('');
 
   useEffect(() => {
     axios({
-      method: "get",
+      method: 'get',
       url: `api/question/${id}`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }).then((response) => {
       setQuestion(response.data.question_content);
@@ -22,7 +22,7 @@ const New = ({ currUser, token, userId }) => {
 
   return (
     <>
-      <S.Title>{question ? question : ""}</S.Title>
+      <S.Title>{question ? question : ''}</S.Title>
       <S.ReselectButtonWrapper>
         <S.ReselectButton to="/explore">질문 다시 고르기</S.ReselectButton>
       </S.ReselectButtonWrapper>
@@ -33,6 +33,7 @@ const New = ({ currUser, token, userId }) => {
             token={token}
             userId={userId}
             questionId={id}
+            handleAlert={handleAlert}
             locationAt="new"
           />
         </S.CreateCardWrapper>
