@@ -287,7 +287,7 @@ const PostCardL = ({
               <S.PostBottom>
                 <S.Signature>{nickname}</S.Signature>
                 {/* show edit, delete button only when user is post card owner */}
-                {currUser ? (
+                {currUser === nickname ? (
                   <S.BtnArea>
                     <S.EditBtn
                       onClick={(e) => {
