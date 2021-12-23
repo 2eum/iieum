@@ -115,3 +115,11 @@ class Userinfo(APIView):
             return Response(serializer_class.data)
         else:
             raise Http404("User does not exist")
+
+class UserDelete(APIView):
+    authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    @csrf_exempt
+    def get(self, request):
+        request.user.delete()
+        return HttpResponseRedirect(redirect_to="/")

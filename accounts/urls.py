@@ -17,6 +17,8 @@ urlpatterns = [
     path('api/accounts/user', Userinfo.as_view(), name='userinfo_after_login'),
     path('api/accounts/change-password', PasswordChangeView.as_view(), name='rest_password_change'),
     path('api/accounts/change-nickname', UserinfoChangeView.as_view(), name='userinfo_change'),
+    # 탈퇴
+    path('api/accounts/delete', UserDelete.as_view(), name='user_delete'),
 
     path('accounts/', include('allauth.urls')),
     # 이메일 관련 필요
