@@ -49,7 +49,7 @@ const PostCardL = ({
         .then((data) => {
           setContent(data.post);
           setNickname(data.post.user.nickname);
-          return data;
+          return data.post;
         })
         .then((data) => {
           checkLiked(data.liked_user);
@@ -70,7 +70,7 @@ const PostCardL = ({
     const intId = userId * 1;
     if (likeList && likeList.includes(intId)) {
       setIsLiked(true);
-    }
+    } else setIsLiked(false);
   };
 
   // like post request
