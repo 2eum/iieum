@@ -21,7 +21,7 @@ from django.urls import path
 
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
+    url('baro/mingzzang/kkodu/bicycle/admin/', admin.site.urls),
     path('', include('frontend.urls')),
     path('', include('accounts.urls')),
     path('', include('post.urls')),
