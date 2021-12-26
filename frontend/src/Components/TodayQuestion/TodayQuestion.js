@@ -71,6 +71,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
           return response.data;
         })
         .then((data) => (data[0] ? setCardLId(data[0].id) : ''))
+        .then(() => setIdx(0))
         .catch((error) => {
           if (error.response.status === 404) {
             // !! 글 없음 표시하기
@@ -101,7 +102,6 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
       );
     }
     setTodayQCards([...arr]);
-    setIdx(0);
   }, [content, cardLId]);
 
   // when content is updated or idx of CardS has changed
@@ -130,17 +130,19 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
 
   // generate random idx for question
   const randomQuestion = () => {
-    setContent([]);
-    setTodayQCards([]);
-    let qIdx;
-    do {
-      qIdx = Math.floor(Math.random() * 100) % questionList.length;
-    } while (questionList[qIdx].id === questionId);
+    if (questionList.length > 1) {
+      setContent([]);
+      setTodayQCards([]);
+      let qIdx;
+      do {
+        qIdx = Math.floor(Math.random() * 100) % questionList.length;
+      } while (questionList[qIdx].id === questionId);
 
-    setQuestion(questionList[qIdx].question_content);
-    setQuestionId(questionList[qIdx].id);
-    setPageQuestion(questionList[qIdx].id);
-    setDayName(dayNames[qIdx]);
+      setQuestion(questionList[qIdx].question_content);
+      setQuestionId(questionList[qIdx].id);
+      setPageQuestion(questionList[qIdx].id);
+      setDayName(dayNames[qIdx]);
+    }
   };
 
   // CardL switch when CardS clicked
