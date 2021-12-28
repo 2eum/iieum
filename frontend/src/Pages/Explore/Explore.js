@@ -1,5 +1,5 @@
 import React from "react";
-import { QuestionCardGrid } from "../";
+import { QuestionCardGrid } from "../../Containers";
 import * as S from "./Explore.elements";
 
 const Explore = ({ currUser, token, userId }) => {

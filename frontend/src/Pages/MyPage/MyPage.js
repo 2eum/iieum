@@ -3,7 +3,7 @@ import { Calendar } from '../../Components';
 import * as S from './MyPage.elements';
 import { Redirect } from 'react-router';
 import axios from 'axios';
-import { PostCardList } from '..';
+import { PostCardList } from '../../Containers';
 
 const MyPage = ({ currUser, token, userId }) => {
   const [postCount, setPostCount] = useState();

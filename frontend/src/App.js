@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
+import { Navbar, Footer } from './Containers';
 import {
-  Navbar,
+  Change,
+  Explore,
+  EmailConfirmed,
   Home,
-  Footer,
-  SignUp,
   Login,
   MyPage,
   New,
-  Explore,
   Search,
-  EmailConfirmed,
-  Change,
-} from './Containers';
+  SignUp,
+} from './Pages';
 
 import {
   HashRouter as Router,

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as S from './Home.elements';
 
 import { TodayQuestion, CreateCard } from '../../Components';
-import { QuestionCardGrid, MusicCardGrid } from '../';
+import { QuestionCardGrid, MusicCardGrid } from '../../Containers';
 
 const Home = ({ currUser, token, userId, handleAlert }) => {
   const [loaded, setLoad] = useState(false);
