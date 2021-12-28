@@ -22,6 +22,13 @@ export const CreateCardArea = styled.section`
         ? "content: ''; height: 100%; width: 100%; position: absolute; z-index: 5;"
         : ''}
   }
+
+  @media screen and (max-width: 1279px) {
+    width: 20rem;
+    height: 29rem;
+    padding: 5%;
+    margin: auto;
+  }
 `;
 
 export const TopArea = styled.section`
@@ -53,6 +60,10 @@ export const SearchBar = styled.div`
   align-items: center;
   gap: 5%;
   padding: 0.5rem 0;
+
+  @media screen and (max-width: 1279px) {
+    width: 50%;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -73,6 +84,11 @@ export const SearchResultContainer = styled.div`
   height: 23rem;
   overflow-y: scroll;
   box-shadow: ${CardShadow};
+  background-color: ${colors.iiBG};
+
+  @media screen and (max-width: 1279px) {
+    height: 15rem;
+  }
 `;
 
 export const FormArea = styled.section`
@@ -85,6 +101,9 @@ export const PubDate = styled.p`
   color: ${colors.iiBrown};
   margin: 2% 0;
   text-align: left;
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const FormTitle = styled.input`
@@ -93,6 +112,10 @@ export const FormTitle = styled.input`
   font-size: 1.5rem;
   &:focus {
     outline: none;
+  }
+
+  @media screen and (max-width: 1279px) {
+    font-size: 1rem;
   }
 `;
 
@@ -106,6 +129,9 @@ export const FormBody = styled.textarea`
   resize: none;
   &:focus {
     outline: none;
+  }
+  @media screen and (max-width: 1279px) {
+    font-size: 1rem;
   }
 `;
 

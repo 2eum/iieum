@@ -24,19 +24,24 @@ const Home = ({ currUser, token, userId, handleAlert, width }) => {
 
       {/* 2.Create Page */}
       <S.CreatePageSection id="create">
-        <S.CreateCardLeft>
-          <S.HelperLeft>
-            <br />
-            <br />
-            <br />
-            당신의 이야기를 들려주세요.
-            <br />
-            어떤 내용이든 좋아요. <br />
-            사소한 일상부터 깊은 속마음까지,
-            <br />
-            떠오르는 대로 적어볼까요?
-          </S.HelperLeft>
-        </S.CreateCardLeft>
+        {width >= 1280 ? (
+          <S.CreateCardLeft>
+            <S.HelperLeft>
+              <br />
+              <br />
+              <br />
+              당신의 이야기를 들려주세요.
+              <br />
+              어떤 내용이든 좋아요. <br />
+              사소한 일상부터 깊은 속마음까지,
+              <br />
+              떠오르는 대로 적어볼까요?
+            </S.HelperLeft>
+          </S.CreateCardLeft>
+        ) : (
+          ''
+        )}
+
         <CreateCard
           currUser={currUser}
           token={token}
@@ -45,29 +50,33 @@ const Home = ({ currUser, token, userId, handleAlert, width }) => {
           handleAlert={handleAlert}
           locationAt="home"
         />
-        <S.CreateCardRight>
-          <S.HelperQuestionArea>
-            <S.HelperRight>
-              질문을 듣고,
-              <br />
-              떠오르는 음악이나 이야기가 있나요?
-              <br />
-              <br />
-              당신의 이야기에 어울리는 음악을
-              <br />
-              직접 골라주세요.
-            </S.HelperRight>
-          </S.HelperQuestionArea>
-          <S.DoneButtonArea>
-            <S.HelperRight>
-              이제 당신의 이야기를
-              <br />
-              다른 사람들과 나눠보세요!
-              <br />
-              <br />
-            </S.HelperRight>
-          </S.DoneButtonArea>
-        </S.CreateCardRight>
+        {width >= 1280 ? (
+          <S.CreateCardRight>
+            <S.HelperQuestionArea>
+              <S.HelperRight>
+                질문을 듣고,
+                <br />
+                떠오르는 음악이나 이야기가 있나요?
+                <br />
+                <br />
+                당신의 이야기에 어울리는 음악을
+                <br />
+                직접 골라주세요.
+              </S.HelperRight>
+            </S.HelperQuestionArea>
+            <S.DoneButtonArea>
+              <S.HelperRight>
+                이제 당신의 이야기를
+                <br />
+                다른 사람들과 나눠보세요!
+                <br />
+                <br />
+              </S.HelperRight>
+            </S.DoneButtonArea>
+          </S.CreateCardRight>
+        ) : (
+          ''
+        )}
       </S.CreatePageSection>
 
       {/* 3.Question List Page */}
