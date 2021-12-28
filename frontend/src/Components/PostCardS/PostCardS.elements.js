@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import { CardShadow, slide } from "../../styles/globalStyles";
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { CardShadow, slide } from '../../styles/globalStyles';
 
 export const PostCardArea = styled.section`
   width: 13rem;
@@ -15,7 +15,6 @@ export const PostCardArea = styled.section`
   background-color: ${colors.iiBeige};
   box-shadow: ${CardShadow};
   border-radius: 8px;
-  // border: 1px solid #abaaa6;
 
   ${(p) =>
     p.open === true
@@ -25,7 +24,7 @@ export const PostCardArea = styled.section`
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -38,6 +37,12 @@ export const PostCardArea = styled.section`
     border: 1px solid ${colors.iiPurple};
   }
 
+  @media screen and (max-width: 1279px) {
+    width: 8rem;
+    height: 12rem;
+    padding: 0.5rem;
+  }
+
   transition: border 100ms;
 `;
 
@@ -45,7 +50,10 @@ export const TopArea = styled.section``;
 
 export const Author = styled.p`
   font-size: 1.3rem;
-  font-family: "Daughter_handwriting";
+  font-family: 'Daughter_handwriting';
+  @media screen and (max-width: 1279px) {
+    line-height: 0.9rem;
+  }
 `;
 
 export const MusicArea = styled.section`
@@ -56,10 +64,17 @@ export const MusicArea = styled.section`
 export const MusicCover = styled.img`
   width: 80%;
   margin: 1%;
+  @media screen and (max-width: 1279px) {
+    width: 70%;
+  }
 `;
 
 export const MusicInfoArea = styled.div`
   margin-bottom: 2%;
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+    margin-bottom: 1%;
+  }
 `;
 
 export const MusicTitleWrapper = styled.div`
@@ -68,6 +83,9 @@ export const MusicTitleWrapper = styled.div`
   overflow: hidden;
   white-space: nowrap;
   position: relative;
+  @media screen and (max-width: 1279px) {
+    height: 1.5rem;
+  }
 `;
 
 export const MusicTitle = styled.h3`
@@ -77,7 +95,7 @@ export const MusicTitle = styled.h3`
   top: 0;
   left: 0;
   width: 100%;
-  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : '')} 10s linear infinite;
 `;
 
 export const MusicArtistWrapper = styled.div`
@@ -86,6 +104,9 @@ export const MusicArtistWrapper = styled.div`
   overflow: hidden;
   white-space: nowrap;
   position: relative;
+  @media screen and (max-width: 1279px) {
+    height: 1rem;
+  }
 `;
 
 export const MusicArtist = styled.h4`
@@ -96,7 +117,7 @@ export const MusicArtist = styled.h4`
   top: 0;
   left: 0;
   width: 100%;
-  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : '')} 10s linear infinite;
 `;
 
 export const TitleArea = styled.section`
