@@ -50,7 +50,7 @@ export const MusicSearchArea = styled.section`
 `;
 
 export const MusicCardWrapper = styled.div`
-  width: 60%;
+  width: 70%;
 `;
 
 export const SearchBar = styled.div`
