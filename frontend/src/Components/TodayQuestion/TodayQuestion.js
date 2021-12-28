@@ -5,7 +5,7 @@ import * as S from './TodayQuestion.elements';
 import { PostCardL, PostCardS } from '../../Components';
 import { IndicatorDot } from '../../styles/globalStyles';
 
-const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
+const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   const [content, setContent] = useState([]);
   const [questionList, setQList] = useState([]);
   const [question, setQuestion] = useState();
@@ -152,6 +152,28 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
 
   return (
     <>
+      {width < 1280 ? (
+        <S.QuestionArea>
+          <S.QuestionAreaTop>
+            <S.QDate>{dayName}의 질문</S.QDate>
+            <S.ShuffleButton onClick={randomQuestion}>
+              <i className="fas fa-random" />
+              다른 질문 보기
+            </S.ShuffleButton>
+          </S.QuestionAreaTop>
+
+          <S.TodayQuestion>
+            <S.Question>{question}</S.Question>
+            <S.AnswerButton smooth to="/#create">
+              <i className="fa fa-pen" />
+              질문에 답하기
+            </S.AnswerButton>
+          </S.TodayQuestion>
+        </S.QuestionArea>
+      ) : (
+        ''
+      )}
+
       <S.TodayLeftContainer>
         {content.length ? (
           <PostCardL
@@ -170,20 +192,24 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
         )}
       </S.TodayLeftContainer>
       <S.TodayRightContainer>
-        <S.QuestionArea>
-          <S.ShuffleButton onClick={randomQuestion}>
-            <i className="fas fa-random" />
-            다른 질문 보기
-          </S.ShuffleButton>
-          <S.TodayQuestion>
-            <S.QDate>{dayName}의 질문</S.QDate>
-            <S.Question>{question}</S.Question>
-            <S.AnswerButton smooth to="/#create">
-              <i className="fa fa-pen" />
-              질문에 답하기
-            </S.AnswerButton>
-          </S.TodayQuestion>
-        </S.QuestionArea>
+        {width < 1280 ? (
+          ''
+        ) : (
+          <S.QuestionArea>
+            <S.ShuffleButton onClick={randomQuestion}>
+              <i className="fas fa-random" />
+              다른 질문 보기
+            </S.ShuffleButton>
+            <S.TodayQuestion>
+              <S.QDate>{dayName}의 질문</S.QDate>
+              <S.Question>{question}</S.Question>
+              <S.AnswerButton smooth to="/#create">
+                <i className="fa fa-pen" />
+                질문에 답하기
+              </S.AnswerButton>
+            </S.TodayQuestion>
+          </S.QuestionArea>
+        )}
         {content.length ? (
           <S.PostCardSArea>
             <S.TodaySTop>

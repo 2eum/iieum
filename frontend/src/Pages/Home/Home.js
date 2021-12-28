@@ -4,7 +4,7 @@ import * as S from './Home.elements';
 import { TodayQuestion, CreateCard } from '../../Components';
 import { QuestionCardGrid, MusicCardGrid } from '../../Containers';
 
-const Home = ({ currUser, token, userId, handleAlert }) => {
+const Home = ({ currUser, token, userId, handleAlert, width }) => {
   const [loaded, setLoad] = useState(false);
   const [placeholder, setPlaceholder] = useState('Loading Content');
   const [pageQuestion, setPageQuestion] = useState();
@@ -18,6 +18,7 @@ const Home = ({ currUser, token, userId, handleAlert }) => {
           token={token}
           userId={userId}
           setPageQuestion={setPageQuestion}
+          width={width}
         />
       </S.TodayQuestionSection>
 

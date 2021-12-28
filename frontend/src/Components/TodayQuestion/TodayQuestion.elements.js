@@ -4,6 +4,10 @@ import * as colors from '../../styles/Colors';
 
 export const TodayLeftContainer = styled.div`
   width: 50%;
+
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 export const TodayRightContainer = styled.section`
@@ -12,14 +16,23 @@ export const TodayRightContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 export const QuestionArea = styled.section``;
 
+export const QuestionAreaTop = styled.section`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+`;
+
 export const ShuffleButton = styled.p`
   cursor: pointer;
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
   width: max-content;
 
@@ -34,6 +47,14 @@ export const ShuffleButton = styled.p`
 
 export const TodayQuestion = styled.div`
   margin-top: 5%;
+
+  @media screen and (max-width: 1279px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
+  }
 `;
 
 export const QDate = styled.h5`
@@ -42,12 +63,19 @@ export const QDate = styled.h5`
 
 export const Question = styled.h2`
   font-size: 3rem;
+  @media screen and (max-width: 1279px) {
+    font-size: 2rem;
+  }
 `;
 
 export const PostCardSArea = styled.section`
   display: flex;
   flex-direction: column;
   text-align: center;
+
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 export const TodaySTop = styled.div`

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const PageHeader = styled.h3`
   font-size: 3rem;
@@ -18,6 +18,10 @@ export const TodayQuestionSection = styled.section`
   display: flex;
   justify-content: center;
   gap: 5%;
+
+  @media screen and (max-width: 1279px) {
+    flex-direction: column;
+  }
 `;
 
 export const TodayLeftContainer = styled.div`

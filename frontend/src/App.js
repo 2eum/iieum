@@ -168,6 +168,7 @@ const App = () => {
                   token={token}
                   userId={userId}
                   handleAlert={handleAlert}
+                  width={windowWidth}
                 />
               )}
             />
