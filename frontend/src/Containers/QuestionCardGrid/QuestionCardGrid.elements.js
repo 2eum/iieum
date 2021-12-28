@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
 
 export const QuestionGridContainer = styled.div`
   display: grid;
@@ -10,6 +10,12 @@ export const QuestionGridContainer = styled.div`
 
   @media screen and (min-width: 1920px) {
     grid-template-columns: repeat(3, 19vw);
+  }
+
+  @media screen and (max-width: 1279px) {
+    grid-template-columns: repeat(2, 48%);
+    column-gap: 2%;
+    row-gap: 8%;
   }
 `;
 

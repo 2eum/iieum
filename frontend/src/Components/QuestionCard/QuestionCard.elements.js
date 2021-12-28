@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import { CardShadow } from "../../styles/globalStyles";
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { CardShadow } from '../../styles/globalStyles';
 
 export const QuestionCardContainer = styled.div`
   width: 22rem;
@@ -28,6 +28,11 @@ export const QuestionCardContainer = styled.div`
     border: 1px solid ${colors.iiPurple};
   }
 
+  @media screen and (max-width: 1279px) {
+    width: 10rem;
+    height: 5rem;
+  }
+
   transition: border 100ms;
 `;
 
@@ -36,10 +41,18 @@ export const TopContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 2%;
+
+  @media screen and (max-width: 1279px) {
+    height: max-content;
+  }
 `;
 
 export const Qdate = styled.p`
   font-size: 1.3rem;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const CardCorner = styled.div``;
@@ -60,7 +73,7 @@ export const BottomContainer = styled.div`
 
 export const QuestionName = styled.h3`
   text-align: right;
-  width: 70%;
+  width: 80%;
   font-size: 1.5rem;
   word-break: keep-all;
   margin: 2%;
@@ -72,15 +85,28 @@ export const QuestionName = styled.h3`
   word-wrap: break-word;
   line-height: 2rem;
   height: 6rem;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    -webkit-line-clamp: 2;
+    height: 2.5rem;
+  }
 `;
 
 export const OpenListButtonWrapper = styled.div`
   margin: 2%;
   margin-top: 20%;
   margin-bottom: 0;
+  @media screen and (max-width: 1279px) {
+    margin-top: 10%;
+  }
 `;
 
 export const OpenListButtonIcon = styled.i`
   color: ${colors.iiPurple};
   margin-top: 10px;
+  @media screen and (max-width: 1279px) {
+    font-size: 1rem;
+  }
 `;
