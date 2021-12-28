@@ -100,6 +100,10 @@ export const BodyContainer = styled.main`
   @media screen and (min-width: 1920px) {
     padding: 8% 20%;
   }
+  @media screen and (max-width: 1280px) {
+    width: 375px;
+    padding: 5%;
+  }
 `;
 
 export const CustomButton = styled.div`
