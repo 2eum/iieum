@@ -25,9 +25,11 @@ import ScrollToTop from './Components/ScrollToTop';
 import axios from 'axios';
 import CustomAlert from './Components/CustomAlert/CustomAlert';
 import ResponsivePlaceholder from './Components/ResponsivePlaceholder';
+import MobileNavbar from './Containers/MobileNavbar/MobileNavbar';
 
 const App = () => {
   const [windowWidth, setWindowWidth] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
   const [token, setToken] = useState(
     localStorage.getItem('token') ? localStorage.getItem('token') : null,
   );
@@ -53,17 +55,20 @@ const App = () => {
   const [scroll, setScroll] = useState(0);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const setWidthHeight = (e) => {
+    setWindowWidth(e.target.visualViewport.width);
+    setWindowHeight(e.target.visualViewport.height);
+  };
 
   // scroll, size event listener add on load, remove on unload
   useEffect(() => {
-    setWindowWidth(window.innerWidth);
+    setWindowWidth(window.visualViewport.width);
+    setWindowHeight(window.visualViewport.height);
     window.addEventListener('scroll', trackScroll);
-    window.addEventListener('resize', (e) =>
-      setWindowWidth(e.target.innerWidth),
-    );
+    window.addEventListener('resize', setWidthHeight);
     return () => {
       window.removeEventListener('scroll', trackScroll);
-      window.removeEventListener('resize', setWindowWidth);
+      window.removeEventListener('resize', setWidthHeight);
     };
   }, []);
 
@@ -124,14 +129,23 @@ const App = () => {
   return (
     <>
       <ScrollToTop />
-      <GlobalStyle alertOpen={alertOpen} />
+      <GlobalStyle alertOpen={alertOpen} width={windowWidth} />
       {/* {windowWidth >= 1280 ? ( */}
       <>
-        <Navbar
-          currUser={currUser}
-          handleLogout={handleLogout}
-          handleAlert={handleAlert}
-        />
+        {windowWidth >= 1280 ? (
+          <Navbar
+            currUser={currUser}
+            handleLogout={handleLogout}
+            handleAlert={handleAlert}
+          />
+        ) : (
+          <MobileNavbar
+            currUser={currUser}
+            handleLogout={handleLogout}
+            handleAlert={handleAlert}
+          />
+        )}
+
         {alertOpen ? (
           <CustomAlert
             scroll={scroll}
