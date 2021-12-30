@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import { CardShadow } from "../../styles/globalStyles";
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { CardShadow } from '../../styles/globalStyles';
 
 export const MusicListContainer = styled.div`
   width: 100%;
@@ -9,6 +9,26 @@ export const MusicListContainer = styled.div`
   justify-items: center;
   gap: 5%;
   margin: 5% auto;
+
+  @media screen and (max-width: 1279px) {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    height: 6.5rem;
+
+    & > * {
+      flex: 0 0 auto;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
 
 export const MusicCardWrapper = styled.div`
@@ -24,5 +44,14 @@ export const MusicCardWrapper = styled.div`
 
   &:hover {
     border: 1px solid ${colors.iiPurple};
+  }
+
+  @media screen and (max-width: 1279px) {
+    width: 11rem;
+    height: 5.5rem;
+
+    & > * {
+      font-size: 0.9rem;
+    }
   }
 `;
