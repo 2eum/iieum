@@ -3,7 +3,7 @@ import { PostCardL, PostCardS } from '../../Components';
 import * as S from './PostCardList.elements';
 import axios from 'axios';
 
-const PostCardList = ({ currUser, token, userId, questionId, list }) => {
+const PostCardList = ({ currUser, token, userId, questionId, list, width }) => {
   const [cols, setCols] = useState(5);
   const [content, setContent] = useState();
   const [cardLIndex, setCardLIndex] = useState();
@@ -55,6 +55,7 @@ const PostCardList = ({ currUser, token, userId, questionId, list }) => {
   const handleCardClose = () => {
     setCols(5);
     setIsOpened(false);
+    setCardLIndex(null);
   };
 
   // if content is loaded, create post card s list
@@ -79,7 +80,12 @@ const PostCardList = ({ currUser, token, userId, questionId, list }) => {
     <>
       {content ? (
         <S.CardListContainer>
-          <S.GridContainer cols={cols}>{PostCardSItems}</S.GridContainer>
+          {width >= 1280 ? (
+            <S.GridContainer cols={cols}>{PostCardSItems}</S.GridContainer>
+          ) : (
+            <S.FlexContainer>{PostCardSItems}</S.FlexContainer>
+          )}
+
           {/* show post card l if card is selected */}
           {cardLIndex ? (
             <S.PostCardLContainer cols={cols}>

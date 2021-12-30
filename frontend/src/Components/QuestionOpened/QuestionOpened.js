@@ -1,6 +1,6 @@
-import React from "react";
-import * as S from "./QuestionOpened.elements";
-import { PostCardList } from "../../Containers";
+import React from 'react';
+import * as S from './QuestionOpened.elements';
+import { PostCardList } from '../../Containers';
 
 const QuestionOpened = ({
   currUser,
@@ -11,8 +11,9 @@ const QuestionOpened = ({
   detail,
   open,
   cardIndex,
+  width,
 }) => {
-  const gridNum = cardIndex % 3;
+  const gridNum = width >= 1280 ? cardIndex % 3 : cardIndex % 2;
 
   return (
     <>
@@ -34,7 +35,8 @@ const QuestionOpened = ({
           token={token}
           userId={userId}
           questionId={questionId}
-          mode={"question"}
+          mode={'question'}
+          width={width}
         />
       </S.OpenedContainer>
     </>

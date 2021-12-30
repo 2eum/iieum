@@ -3,7 +3,7 @@ import * as S from './QuestionCardGrid.elements';
 import { QuestionOpened, QuestionCard } from '../../Components';
 import axios from 'axios';
 
-const QuestionCardGrid = ({ currUser, token, userId, list }) => {
+const QuestionCardGrid = ({ currUser, token, userId, list, width }) => {
   const [content, setContent] = useState();
   const [openCard, setOpenCard] = useState(-1);
   const [isOpened, setIsOpened] = useState(false);
@@ -71,6 +71,7 @@ const QuestionCardGrid = ({ currUser, token, userId, list }) => {
               detail={c.explain}
               cardIndex={i}
               open={isOpened && openCard === i}
+              width={width}
             />
           </S.QuestionCardWrapper>
         );

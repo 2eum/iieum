@@ -87,7 +87,12 @@ const Home = ({ currUser, token, userId, handleAlert, width }) => {
             모든 질문 보기 &gt;
           </S.ToQuestionListButton>
         </S.PageHeaderContainer>
-        <QuestionCardGrid currUser={currUser} token={token} userId={userId} />
+        <QuestionCardGrid
+          currUser={currUser}
+          token={token}
+          userId={userId}
+          width={width}
+        />
       </S.QuestionListPageSection>
 
       {/* 4. Music List Page*/}

@@ -3,7 +3,7 @@ import { CustomLink } from '../../styles/globalStyles';
 
 export const OpenedContainer = styled.div`
   width: 90vw;
-  height: ${(p) => (p.open ? 'fit-content' : 0)};
+  height: ${(p) => (p.open ? 'max-content' : 0)};
   opacity: ${(p) => (p.open ? 1 : 0)};
   display: ${(p) => (p.open ? `flex` : `none`)};
   position: relative;
@@ -42,6 +42,7 @@ export const QuestionContainer = styled.div`
 
 export const Question = styled.h2`
   text-align: center;
+  width: inherit;
 `;
 
 export const QuestionDetails = styled.p`

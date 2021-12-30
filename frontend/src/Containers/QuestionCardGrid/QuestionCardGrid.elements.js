@@ -15,7 +15,7 @@ export const QuestionGridContainer = styled.div`
   @media screen and (max-width: 1279px) {
     grid-template-columns: repeat(2, 48%);
     column-gap: 2%;
-    row-gap: 8%;
+    row-gap: 2rem;
   }
 `;
 
