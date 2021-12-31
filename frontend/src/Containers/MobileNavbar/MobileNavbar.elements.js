@@ -42,6 +42,8 @@ export const Logo = styled.img`
 // Search Bar
 export const SearchBarContainer = styled.section`
   width: 25%;
+  height: 100%;
+  position: relative;
 
   padding: 0 1rem;
 
@@ -50,26 +52,32 @@ export const SearchBarContainer = styled.section`
 `;
 
 export const SearchBar = styled.input`
-  width: 13rem;
+  width: ${(p) => (p.open ? '10rem' : '0')};
   height: 2rem;
+  position: absolute;
+  left: 4.5rem;
 
   padding: 0.5rem;
 
   font-size: 0.7rem;
 
   border: none;
-
   border-bottom: solid 1px ${colors.cardStroke};
 
+  opacity: ${(p) => (p.open ? 1 : 0)};
   background-color: ${colors.iiBG};
   :focus {
     outline: none;
   }
+
+  transition: all 200ms;
 `;
 
 export const SearchButton = styled(Link)`
-  width: 1rem;
+  width: max-content;
   height: 2rem;
+  position: absolute;
+  left: ${(p) => (p.open ? '14rem' : 0)};
 
   display: flex;
   align-items: center;
@@ -81,16 +89,19 @@ export const SearchButton = styled(Link)`
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 
+  opacity: ${(p) => (p.open ? 1 : 0)};
   background-color: ${colors.iiBG};
 
   & i {
     color: ${colors.iiPurple};
     opacity: 0.7;
   }
+
+  transition: all 200ms;
 `;
 
 export const SearchButtonDisabled = styled.div`
-  width: 1rem;
+  width: max-content;
   height: 2rem;
 
   display: flex;
@@ -128,7 +139,7 @@ export const CustomNavLink = styled(NavLink)`
   cursor: pointer;
   text-align: center;
 
-  background-color: ${colors.iiSunset};
+  background-color: ${(p) => (p.top ? '' : colors.iiSunset)};
 
   &:hover {
     translate: scale(1.05);

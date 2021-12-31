@@ -4,6 +4,7 @@ import * as S from './MobileNavbar.elements';
 
 const MobileNavbar = ({ currUser, handleLogout, handleAlert }) => {
   const [keyword, setKeyword] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const searchUrl = `/search?q=${keyword}`;
 
@@ -12,17 +13,24 @@ const MobileNavbar = ({ currUser, handleLogout, handleAlert }) => {
       <S.NavContainer>
         <S.NavTop>
           <S.SearchBarContainer>
-            {keyword.length > 0 ? (
-              <S.SearchButton to={searchUrl}>
-                검색 <i className="fas fa-search"></i>
-              </S.SearchButton>
-            ) : (
-              <S.SearchButtonDisabled
-                onClick={() => handleAlert('검색어를 입력해주세요!')}
-              >
-                검색 <i className="fas fa-search"></i>
-              </S.SearchButtonDisabled>
-            )}
+            <p onClick={() => setSearchOpen(!searchOpen)}>검색</p>
+            <S.SearchBar
+              open={searchOpen}
+              placeholder="찾고 싶은 이야기가 있나요?"
+              onChange={(e) => {
+                setKeyword(e.target.value);
+              }}
+            />
+            <S.SearchButton
+              to={searchUrl}
+              open={searchOpen}
+              onClick={() => {
+                setKeyword('');
+                setSearchOpen(!searchOpen);
+              }}
+            >
+              <i className="fas fa-search"></i>
+            </S.SearchButton>
           </S.SearchBarContainer>
           <S.LogoContainer to="/">
             <S.Logo src={LogoImg} />
