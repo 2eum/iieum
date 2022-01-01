@@ -154,6 +154,12 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
     width < 1280 ? scrollToRef(cardContainer) : '';
   };
 
+  const scrollWithOffset = (ele) => {
+    const yCoordinate = ele.getBoundingClientRect().top + window.pageYOffset;
+    const yOffset = -140;
+    window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+  };
+
   return (
     <>
       {width < 1280 ? (
@@ -168,7 +174,11 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
 
           <S.TodayQuestion>
             <S.Question>{question}</S.Question>
-            <S.AnswerButton smooth to="/#create">
+            <S.AnswerButton
+              smooth
+              to="/#create"
+              scroll={(ele) => scrollWithOffset(ele)}
+            >
               <i className="fa fa-pen" />
               질문에 답하기
             </S.AnswerButton>
