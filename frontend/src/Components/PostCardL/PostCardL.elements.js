@@ -190,6 +190,10 @@ export const Signature = styled.h3`
   justify-self: flex-end;
   font-family: 'Daughter_handwriting';
   font-size: 2.5rem;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 2rem;
+  }
 `;
 
 export const MusicSearchArea = styled.section`
@@ -264,6 +268,12 @@ export const FormBody = styled.textarea`
 
 export const SubmitButton = styled(CustomButton)`
   margin-top: 1rem;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+    margin-top: 0.5rem;
+  }
 `;
 
 export const ResetChoiceButton = styled.p`
@@ -277,6 +287,10 @@ export const ResetChoiceButton = styled.p`
 export const EditMessage = styled.p`
   color: green;
   justify-self: flex-start;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const EditBtnsWrapper = styled.div`
