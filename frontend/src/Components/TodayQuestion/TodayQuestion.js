@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import * as S from './TodayQuestion.elements';
 
@@ -18,6 +18,9 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   const [noContent, setNoContent] = useState(false);
 
   const dayNames = ['오늘', '어제', '3일 전', '4일 전', '5일 전'];
+
+  const cardContainer = useRef(null);
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop - 140);
 
   const today = new Date();
   const startingDate = new Date(today);
@@ -148,6 +151,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   // CardL switch when CardS clicked
   const switchCardL = (id) => {
     setCardLId(id);
+    width < 1280 ? scrollToRef(cardContainer) : '';
   };
 
   return (
@@ -174,7 +178,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
         ''
       )}
 
-      <S.TodayLeftContainer>
+      <S.TodayLeftContainer ref={cardContainer}>
         {content.length ? (
           <PostCardL
             postId={cardLId}

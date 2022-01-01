@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import * as S from "./MusicCardGrid.elements";
-import { MusicCard, MusicCardOpened } from "../../Components";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from 'react';
+import * as S from './MusicCardGrid.elements';
+import { MusicCard, MusicCardOpened } from '../../Components';
+import axios from 'axios';
 
 const MusicCardGrid = ({ currUser, token, userId, list }) => {
   const [content, setContent] = useState(null);
@@ -17,26 +17,27 @@ const MusicCardGrid = ({ currUser, token, userId, list }) => {
   useEffect(() => {
     if (!list) {
       axios({
-        method: "get",
+        method: 'get',
         url: `/api/recentmusic/6`,
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       })
         .then((response) => {
           if (response.status > 400) {
-            setPlaceholder("Something went wrong!");
+            setPlaceholder('Something went wrong!');
           }
           return response.data;
         })
         .then((data) => {
-          setContent(data["music list"]);
+          setContent(data['music list']);
         });
     }
   }, []);
 
   const handleClick = (clickedCard) => {
     setOpenCard(clickedCard);
+    scrollToRef(cardContainer);
   };
 
   const MusicCardList = content
@@ -62,25 +63,30 @@ const MusicCardGrid = ({ currUser, token, userId, list }) => {
       })
     : [];
 
+  const cardContainer = useRef(null);
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
   return (
     <>
       {content ? (
         <>
-          <S.MusicListContainer>{MusicCardList}</S.MusicListContainer>
+          <S.MusicListContainer ref={cardContainer}>
+            {MusicCardList}
+          </S.MusicListContainer>
           <MusicCardOpened
             currUser={currUser}
             token={token}
             userId={userId}
             cardIndex={openCard}
-            title={content[openCard] ? content[openCard][0] : ""}
-            artist={content[openCard] ? content[openCard][1] : ""}
-            cover={content[openCard] ? content[openCard][2] : ""}
-            source={content[openCard] ? content[openCard][3] : ""}
-            link={content[openCard] ? content[openCard][4] : ""}
+            title={content[openCard] ? content[openCard][0] : ''}
+            artist={content[openCard] ? content[openCard][1] : ''}
+            cover={content[openCard] ? content[openCard][2] : ''}
+            source={content[openCard] ? content[openCard][3] : ''}
+            link={content[openCard] ? content[openCard][4] : ''}
           />
         </>
       ) : (
-        ""
+        ''
       )}
     </>
   );

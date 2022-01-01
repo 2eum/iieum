@@ -46,12 +46,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
   word-break: keep-all;
+  
+  @media screen and (max-width: 1279px) {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
   background-color: ${colors.iiBG};
   position: relative;
   overflow-y: ${(p) => (p.alertOpen ? 'hidden' : '')}
+  
 }
 
 li {

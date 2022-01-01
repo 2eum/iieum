@@ -6,7 +6,7 @@ export const OpenedContainer = styled.div`
   height: ${(p) => (p.open ? 'max-content' : 0)};
   opacity: ${(p) => (p.open ? 1 : 0)};
   display: ${(p) => (p.open ? `flex` : `none`)};
-  position: relative;
+  /* position: relative; */
   margin-top: 5vw;
   flex-direction: column;
   justify-content: center;
