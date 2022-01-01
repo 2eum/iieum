@@ -148,7 +148,7 @@ export const CustomNavLink = styled(NavLink)`
 
   &.active {
     background-color: ${colors.iiBG};
-    box-shadow: 0px -3px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: ${(p) => (p.top ? '' : '0px -3px 4px rgba(0, 0, 0, 0.1)')};
     z-index: 20;
   }
 
