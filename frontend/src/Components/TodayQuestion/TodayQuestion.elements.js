@@ -118,6 +118,12 @@ export const EmptyContainer = styled.div`
   box-shadow: ${CardShadow};
   border-radius: 8px;
   border: 1px solid #abaaa6;
+
+  @media screen and (max-width: 1279px) {
+    width: 20rem;
+    height: 10rem;
+    padding: 2%;
+  }
 `;
 
 export const EmptyMessage = styled.p`
