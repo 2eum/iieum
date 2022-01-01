@@ -38,7 +38,7 @@ const MobileNavbar = ({ currUser, handleLogout, handleAlert }) => {
           {currUser ? (
             <S.LogoutLink onClick={() => handleLogout()}>로그아웃</S.LogoutLink>
           ) : (
-            <S.CustomNavLink top={true} to="/login">
+            <S.CustomNavLink top="true" to="/login">
               로그인
             </S.CustomNavLink>
           )}
