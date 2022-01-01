@@ -176,7 +176,12 @@ const App = () => {
               path="/mypage"
               exact
               render={() => (
-                <MyPage currUser={currUser} token={token} userId={userId} />
+                <MyPage
+                  currUser={currUser}
+                  token={token}
+                  userId={userId}
+                  width={windowWidth}
+                />
               )}
             />
             <Route

@@ -1,19 +1,29 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import { IndicatorDot } from "../../styles/globalStyles";
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { IndicatorDot } from '../../styles/globalStyles';
 
 export const CalendarSection = styled.section`
   width: 100%;
   margin: auto;
   display: flex;
   justify-content: space-between;
-  height: 55rem;
+  height: max-content;
+
+  @media screen and (max-width: 1279px) {
+    flex-direction: column-reverse;
+    align-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
 `;
 
 export const CardContainer = styled.div`
   width: 50%;
   position: relative;
   overflow: hidden;
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 export const CardFlexSlider = styled.div`
@@ -22,6 +32,12 @@ export const CardFlexSlider = styled.div`
   transform: translateX(-${(p) => p.index * 39}rem);
 
   transition: transform 1s ease-in-out;
+
+  @media screen and (max-width: 1279px) {
+    margin-left: 0.5rem;
+    gap: 3rem;
+    transform: translateX(-${(p) => p.index * 23}rem);
+  }
 `;
 
 export const CardWrapper = styled.div`
@@ -58,6 +74,9 @@ export const CalendarContainer = styled.div`
   background-color: ${colors.iiBeige};
   border: 1px solid ${colors.cardStroke};
   border-radius: 5px;
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 export const Month = styled.p`
@@ -65,7 +84,7 @@ export const Month = styled.p`
 
   text-align: center;
   font-size: 1.5rem;
-  font-family: "Noto Serif KR", serif;
+  font-family: 'Noto Serif KR', serif;
   font-weight: 500;
   color: ${colors.iiPurple};
 `;
@@ -113,6 +132,10 @@ export const DatesArea = styled.div`
   grid-template-rows: repeat(${(props) => props.rows}, 7rem);
   background-color: ${colors.iiSunset};
   border: 1px solid ${colors.cardStroke};
+
+  @media screen and (max-width: 1279px) {
+    grid-template-rows: repeat(${(props) => props.rows}, 4rem);
+  }
 `;
 
 export const DateItem = styled.div`
@@ -121,12 +144,12 @@ export const DateItem = styled.div`
 
   padding: 10%;
 
-  opacity: ${(props) => (props.curr === "curr" ? 1 : 0.7)};
+  opacity: ${(props) => (props.curr === 'curr' ? 1 : 0.7)};
 
   position: relative;
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -140,7 +163,7 @@ export const DateNum = styled.p`
   width: 100%;
   margin-bottom: 5%;
   color: ${(props) =>
-    props.day === 0 ? "#FF8D8D" : props.day === 6 ? "#56A4FF" : colors.iiBrown};
+    props.day === 0 ? '#FF8D8D' : props.day === 6 ? '#56A4FF' : colors.iiBrown};
   text-align: center;
 `;
 
