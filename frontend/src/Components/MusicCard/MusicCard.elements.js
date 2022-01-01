@@ -5,6 +5,10 @@ import { slide } from '../../styles/globalStyles';
 export const Wrapper = styled.section`
   display: flex;
   padding: 1vw;
+
+  @media screen and (max-width: 1279px) {
+    padding: 5%;
+  }
 `;
 
 export const Cover = styled.img`

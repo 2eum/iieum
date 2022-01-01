@@ -47,7 +47,7 @@ export const MusicCardWrapper = styled.div`
   }
 
   @media screen and (max-width: 1279px) {
-    width: 11rem;
+    width: 13rem;
     height: 5.5rem;
 
     & > * {
