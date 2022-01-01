@@ -30,7 +30,7 @@ export const PostCardArea = styled.section`
 `;
 
 export const HeaderArea = styled.section`
-  height: 10%;
+  height: max-content;
 `;
 
 export const CloseBtnArea = styled.section`
@@ -38,6 +38,10 @@ export const CloseBtnArea = styled.section`
   margin: 2%;
   display: flex;
   justify-content: flex-end;
+
+  @media screen and (max-width: 1279px) {
+    margin: 0.5rem;
+  }
 `;
 
 export const CloseBtn = styled.p`
