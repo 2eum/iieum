@@ -208,7 +208,12 @@ const App = () => {
               path="/explore"
               exact
               render={() => (
-                <Explore currUser={currUser} token={token} userId={userId} />
+                <Explore
+                  currUser={currUser}
+                  token={token}
+                  userId={userId}
+                  width={windowWidth}
+                />
               )}
             />
             <Route
