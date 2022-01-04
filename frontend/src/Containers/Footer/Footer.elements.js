@@ -11,6 +11,11 @@ export const FooterContainer = styled.section`
 
   text-align: center;
   font-size: 0.9rem;
+
+  @media screen and (max-width: 1279px) {
+    width: 375px;
+    margin: auto;
+  }
 `;
 
 export const CopyRight = styled.p`
