@@ -30,7 +30,7 @@ export const OpenedContainer = styled.div`
   }
 
   @media screen and (max-width: 1279px) {
-    width: 90vw;
+    width: 200%;
     ${(p) => (p.gridNum === 0 ? '' : `transform: translateX(-50%);`)}
   }
 `;

@@ -108,7 +108,8 @@ export const BodyContainer = styled.main`
   @media screen and (max-width: 1279px) {
     width: 375px;
     overflow: hidden;
-    padding: 5%;
+    padding: 18.75px;
+    margin: auto;
   }
 `;
 

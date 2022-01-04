@@ -29,8 +29,8 @@ export const QuestionCardContainer = styled.div`
   }
 
   @media screen and (max-width: 1279px) {
-    width: 10rem;
-    height: 5rem;
+    width: 100%;
+    height: max-content;
   }
 
   transition: border 100ms;
