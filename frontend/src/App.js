@@ -56,14 +56,14 @@ const App = () => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const setWidthHeight = (e) => {
-    setWindowWidth(e.target.visualViewport.width);
-    setWindowHeight(e.target.visualViewport.height);
+    setWindowWidth(e.target.innerWidth);
+    setWindowHeight(e.target.innerHeight);
   };
 
   // scroll, size event listener add on load, remove on unload
   useEffect(() => {
-    setWindowWidth(window.visualViewport.width);
-    setWindowHeight(window.visualViewport.height);
+    setWindowWidth(window.innerWidth);
+    setWindowHeight(window.innerHeight);
     window.addEventListener('scroll', trackScroll);
     window.addEventListener('resize', setWidthHeight);
     return () => {
