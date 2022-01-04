@@ -25,8 +25,11 @@ const MobileNavbar = ({ currUser, handleLogout, handleAlert }) => {
               to={searchUrl}
               open={searchOpen}
               onClick={() => {
-                setKeyword('');
-                setSearchOpen(!searchOpen);
+                if (keyword === '') handleAlert('검색어를 입력해주세요!');
+                else {
+                  setKeyword('');
+                  setSearchOpen(!searchOpen);
+                }
               }}
             >
               <i className="fas fa-search"></i>
