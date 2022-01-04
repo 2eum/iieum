@@ -18,11 +18,13 @@ const Calendar = ({ currUser, token, userId }) => {
 
   const calendarRef = useRef(null);
   const scrollToRefEnd = (ref) => {
-    const refComponent = ref.current;
-    window.scrollTo(
-      0,
-      refComponent.offsetTop + refComponent.offsetHeight - 135,
-    );
+    if (window.innerWidth < 1280) {
+      const refComponent = ref.current;
+      window.scrollTo(
+        0,
+        refComponent.offsetTop + refComponent.offsetHeight - 135,
+      );
+    }
   };
 
   // date info set for retrieving content from last, next months

@@ -37,7 +37,7 @@ const MusicCardGrid = ({ currUser, token, userId, list }) => {
 
   const handleClick = (clickedCard) => {
     setOpenCard(clickedCard);
-    scrollToRef(cardContainer);
+    if (window.innerWidth < 1280) scrollToRef(cardContainer);
   };
 
   const MusicCardList = content
