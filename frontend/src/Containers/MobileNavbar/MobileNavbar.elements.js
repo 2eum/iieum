@@ -55,7 +55,7 @@ export const SearchBar = styled.input`
   width: ${(p) => (p.open ? '10rem' : '0')};
   height: 2rem;
   position: absolute;
-  left: 4.5rem;
+  left: 3rem;
 
   padding: 0.5rem;
 
@@ -77,7 +77,7 @@ export const SearchButton = styled(Link)`
   width: max-content;
   height: 2rem;
   position: absolute;
-  left: ${(p) => (p.open ? '14rem' : 0)};
+  left: ${(p) => (p.open ? '13rem' : 0)};
 
   display: flex;
   align-items: center;

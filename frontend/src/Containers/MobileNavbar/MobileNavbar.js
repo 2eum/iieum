@@ -13,7 +13,9 @@ const MobileNavbar = ({ currUser, handleLogout, handleAlert }) => {
       <S.NavContainer>
         <S.NavTop>
           <S.SearchBarContainer>
-            <p onClick={() => setSearchOpen(!searchOpen)}>검색</p>
+            <p onClick={() => setSearchOpen(!searchOpen)}>
+              {searchOpen ? <i className="fas fa-times" /> : '검색'}
+            </p>
             <S.SearchBar
               open={searchOpen}
               placeholder="찾고 싶은 이야기가 있나요?"
@@ -24,11 +26,17 @@ const MobileNavbar = ({ currUser, handleLogout, handleAlert }) => {
             <S.SearchButton
               to={searchUrl}
               open={searchOpen}
-              onClick={() => {
-                if (keyword === '') handleAlert('검색어를 입력해주세요!');
-                else {
-                  setKeyword('');
-                  setSearchOpen(!searchOpen);
+              onClick={(e) => {
+                if (searchOpen) {
+                  if (keyword === '') {
+                    e.preventDefault();
+                    handleAlert('검색어를 입력해주세요!');
+                  } else {
+                    setKeyword('');
+                    setSearchOpen(!searchOpen);
+                  }
+                } else {
+                  e.preventDefault();
                 }
               }}
             >
