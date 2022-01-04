@@ -1,10 +1,14 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import { slide } from "../../styles/globalStyles";
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { slide } from '../../styles/globalStyles';
 
 export const Wrapper = styled.section`
   display: flex;
   padding: 1vw;
+
+  @media screen and (max-width: 1279px) {
+    padding: 5%;
+  }
 `;
 
 export const Cover = styled.img`
@@ -39,7 +43,7 @@ export const Title = styled.p`
   width: 100%;
 
   //slide animation
-  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : '')} 10s linear infinite;
 `;
 
 export const MiddleWrapper = styled.div`
@@ -66,7 +70,7 @@ export const Artist = styled.p`
   font-size: 0.8rem;
   opacity: 0.8;
   //slide animation
-  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : '')} 10s linear infinite;
 `;
 
 export const SourceLink = styled.a`

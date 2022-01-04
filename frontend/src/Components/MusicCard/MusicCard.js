@@ -1,13 +1,24 @@
-import React from "react";
-import * as S from "./MusicCard.elements";
-import { MusicPlayer } from "..";
-import spotifyIcon from "../../Components/SearchedItem/Spotify_Icon.png";
+import React from 'react';
+import * as S from './MusicCard.elements';
+import { MusicPlayer } from '..';
+import spotifyIcon from '../../Components/SearchedItem/Spotify_Icon.png';
 
-const MusicCard = ({ title, artist, source, link, cover, cardIndex, handleClick, open, postId, cols }) => {
+const MusicCard = ({
+  title,
+  artist,
+  source,
+  link,
+  cover,
+  cardIndex,
+  handleClick,
+  open,
+  postId,
+  cols,
+}) => {
   return (
     <>
       <S.Wrapper onClick={() => handleClick(cardIndex)}>
-      {/* <S.Wrapper> */}
+        {/* <S.Wrapper> */}
         <S.Info>
           <S.TitleWrapper>
             {/* if title is longer than 10 letters, set slide animation to true */}
@@ -24,10 +35,10 @@ const MusicCard = ({ title, artist, source, link, cover, cardIndex, handleClick,
             </S.ArtistWrapper>
           </S.MiddleWrapper>
           {/* if no preview music, show message */}
-          {source !== "null" || !source ? (
+          {source !== 'null' || !source ? (
             <MusicPlayer source={source} postId={postId} cols={cols} />
           ) : (
-            <S.NoPreviewSrc>미리듣기 음원이 없습니다</S.NoPreviewSrc>
+            <S.NoPreviewSrc>음원이 없습니다</S.NoPreviewSrc>
           )}
         </S.Info>
         <S.Cover src={cover} />

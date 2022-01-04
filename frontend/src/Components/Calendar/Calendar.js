@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 
-import * as S from "./Calendar.elements";
-import { PostCardL } from "..";
+import * as S from './Calendar.elements';
+import { PostCardL } from '..';
 
 const Calendar = ({ currUser, token, userId }) => {
   const today = new Date();
@@ -16,6 +16,17 @@ const Calendar = ({ currUser, token, userId }) => {
   const [showPostId, setPostId] = useState([]);
   const [cardIndex, setCardIndex] = useState(0);
 
+  const calendarRef = useRef(null);
+  const scrollToRefEnd = (ref) => {
+    if (window.innerWidth < 1280) {
+      const refComponent = ref.current;
+      window.scrollTo(
+        0,
+        refComponent.offsetTop + refComponent.offsetHeight - 135,
+      );
+    }
+  };
+
   // date info set for retrieving content from last, next months
   const prevMonthSearch = new Date(viewMonth.year, viewMonth.month - 1, 23);
   const nextMonthSearch = new Date(viewMonth.year, viewMonth.month + 1, 6);
@@ -23,14 +34,14 @@ const Calendar = ({ currUser, token, userId }) => {
   useEffect(() => {
     // get all music diary data
     axios({
-      method: "get",
+      method: 'get',
       url: `api/postlist-user-date/${userId}/${prevMonthSearch.getFullYear()}-${
         prevMonthSearch.getMonth() + 1
       }-23/${nextMonthSearch.getFullYear()}-${
         nextMonthSearch.getMonth() + 1
       }-6/0`, // range - 6 days from prev month ~ 6 days from next month
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `jwt ${token}`,
       },
     })
@@ -87,7 +98,7 @@ const Calendar = ({ currUser, token, userId }) => {
     let nextDate = new Date(
       viewMonth.year,
       viewMonth.month,
-      lastDate.getDate() + i
+      lastDate.getDate() + i,
     );
     viewDates.push(nextDate);
   }
@@ -96,6 +107,7 @@ const Calendar = ({ currUser, token, userId }) => {
   const handleDatePick = (date) => {
     let ids = content[date].map((d) => d.id);
     setPostId(ids);
+    scrollToRefEnd(calendarRef);
   };
 
   // create date items
@@ -107,7 +119,7 @@ const Calendar = ({ currUser, token, userId }) => {
       return (
         <S.DateItem
           key={date}
-          curr={d.getMonth() === viewMonth.month ? "curr" : ""}
+          curr={d.getMonth() === viewMonth.month ? 'curr' : ''}
           onClick={() => handleDatePick(date)}
         >
           <S.DateNum day={d.getDay()}>{d.getDate()}</S.DateNum>
@@ -124,7 +136,7 @@ const Calendar = ({ currUser, token, userId }) => {
       return (
         <S.DateItem
           key={date}
-          curr={d.getMonth() === viewMonth.month ? "curr" : ""}
+          curr={d.getMonth() === viewMonth.month ? 'curr' : ''}
         >
           <S.DateNum day={d.getDay()}>{d.getDate()}</S.DateNum>
           <S.DateImgWrapper></S.DateImgWrapper>
@@ -200,10 +212,10 @@ const Calendar = ({ currUser, token, userId }) => {
             </S.CardSwitchButton>
           </S.CardSwitchButtonWrapper>
         ) : (
-          ""
+          ''
         )}
       </S.CardContainer>
-      <S.CalendarContainer>
+      <S.CalendarContainer ref={calendarRef}>
         <S.MonthChangeArea>
           <S.MonthChangeButton onClick={() => toPrevMonth()}>
             <i className="fas fa-chevron-left" />

@@ -46,12 +46,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
   word-break: keep-all;
+  
+  @media screen and (max-width: 1279px) {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
   background-color: ${colors.iiBG};
   position: relative;
-  overflow-y: ${(p) => (p.alertOpen ? 'hidden' : 'scroll')}
+  overflow-y: ${(p) => (p.alertOpen ? 'hidden' : '')}
+  
 }
 
 li {
@@ -99,6 +104,12 @@ export const BodyContainer = styled.main`
 
   @media screen and (min-width: 1920px) {
     padding: 8% 20%;
+  }
+  @media screen and (max-width: 1279px) {
+    width: 375px;
+    overflow: hidden;
+    padding: 18.75px;
+    margin: auto;
   }
 `;
 

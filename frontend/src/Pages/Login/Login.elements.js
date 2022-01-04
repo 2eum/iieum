@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import { CustomButton } from "../../styles/globalStyles";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { CustomButton } from '../../styles/globalStyles';
 
 export const LoginSection = styled.main`
   width: 80%;
@@ -10,6 +10,10 @@ export const LoginSection = styled.main`
   margin-top: 4rem;
 
   text-align: center;
+
+  @media screen and (max-width: 1279px) {
+    margin-bottom: 4rem;
+  }
 `;
 
 export const LoginForm = styled.div`
@@ -20,7 +24,10 @@ export const LoginForm = styled.div`
   text-align: center;
 
   background-color: ${colors.iiBG};
-  // box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
+
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 export const LoginFieldset = styled.fieldset`
