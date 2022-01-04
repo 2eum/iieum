@@ -26,6 +26,10 @@ export const SignUpSection = styled.main`
   @media screen and (min-width: 1920px) {
     margin-top: 4rem;
   }
+
+  @media screen and (max-width: 1279px) {
+    margin-bottom: 4rem;
+  }
 `;
 
 export const SignUpForm = styled.div`
@@ -33,6 +37,10 @@ export const SignUpForm = styled.div`
   margin: 5% auto;
 
   text-align: center;
+
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 export const SignUpFieldset = styled.fieldset`
@@ -61,6 +69,10 @@ export const InputContainer = styled.div`
   flex-direction: column;
 
   margin-bottom: 5%;
+
+  @media screen and (min-width: 1920px) {
+    width: 100%;
+  }
 `;
 
 export const InputLabel = styled.label`
@@ -81,7 +93,6 @@ export const SignUpInput = styled.input`
   padding: 0.5rem;
   background-color: ${colors.iiBG};
   border: none;
-  // border-radius: 5px;
   border-bottom: 1px solid
     ${(p) =>
       p.duplicateChecked === false
@@ -92,6 +103,10 @@ export const SignUpInput = styled.input`
 
   &:focus {
     outline: none;
+  }
+
+  @media screen and (max-width: 1279px) {
+    font-size: 0.7rem;
   }
 `;
 
@@ -104,7 +119,11 @@ export const DuplicateConfirm = styled.p`
   color: green;
 `;
 
-export const DuplicateCheckButton = styled(CustomButtonInvert)``;
+export const DuplicateCheckButton = styled(CustomButtonInvert)`
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+  }
+`;
 
 export const SignUpBtnContainer = styled.div`
   display: flex;

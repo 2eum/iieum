@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import { NavLink } from "react-router-dom";
-import { CustomButton, CustomButtonInvert } from "../../styles/globalStyles";
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { NavLink } from 'react-router-dom';
+import { CustomButton, CustomButtonInvert } from '../../styles/globalStyles';
 
 export const ValidateSection = styled.section`
   margin-top: 10vh;
@@ -9,10 +9,15 @@ export const ValidateSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: 1279px) {
+    margin-bottom: 140px;
+  }
 `;
 
 export const ValidateTitle = styled.h1`
   margin: 2rem;
+  text-align: center;
 `;
 
 export const PasswordInput = styled.input`
@@ -42,6 +47,13 @@ export const ChangeSection = styled.section`
   justify-content: center;
   margin-top: 10vh;
   height: 50vh;
+
+  @media screen and (max-width: 1279px) {
+    margin-top: 140px;
+    margin-bottom: 140px;
+    flex-direction: column;
+    gap: 3rem;
+  }
 `;
 
 export const ContainerTitle = styled.h2`
@@ -71,6 +83,12 @@ export const NicknameChangeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: 1279px) {
+    width: 80%;
+    margin: auto;
+    border-right: none;
+  }
 `;
 
 export const NicknameInputWrapper = styled.div`
@@ -91,6 +109,11 @@ export const PasswordChangeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: 1279px) {
+    width: 80%;
+    margin: auto;
+  }
 `;
 
 export const PasswordInputWrapper = styled.div`

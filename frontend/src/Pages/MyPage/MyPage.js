@@ -3,9 +3,9 @@ import { Calendar } from '../../Components';
 import * as S from './MyPage.elements';
 import { Redirect } from 'react-router';
 import axios from 'axios';
-import { PostCardList } from '..';
+import { PostCardList } from '../../Containers';
 
-const MyPage = ({ currUser, token, userId }) => {
+const MyPage = ({ currUser, token, userId, width }) => {
   const [postCount, setPostCount] = useState();
   const [likeCount, setLikeCount] = useState();
   const [selectedList, setSelectedList] = useState('post');
@@ -104,11 +104,13 @@ const MyPage = ({ currUser, token, userId }) => {
               <Calendar token={token} currUser={currUser} userId={userId} />
             </S.PostListSection>
             <S.OverviewSection>
+              <S.Title>모든 이음 모아보기</S.Title>
               <PostCardList
                 currUser={currUser}
                 token={token}
                 userId={userId}
                 list={postList}
+                width={width}
               />
             </S.OverviewSection>
           </>
@@ -120,6 +122,7 @@ const MyPage = ({ currUser, token, userId }) => {
                 token={token}
                 userId={userId}
                 list={likeList}
+                width={width}
               />
             </S.LikeListSection>
           </>

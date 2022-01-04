@@ -1,14 +1,20 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const PageHeader = styled.h3`
   font-size: 3rem;
+  @media screen and (max-width: 1279px) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const PageHeaderContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 1279px) {
+    flex-direction: column;
+  }
 `;
 
 //1. Today Question Page
@@ -18,6 +24,10 @@ export const TodayQuestionSection = styled.section`
   display: flex;
   justify-content: center;
   gap: 5%;
+
+  @media screen and (max-width: 1279px) {
+    flex-direction: column;
+  }
 `;
 
 export const TodayLeftContainer = styled.div`
@@ -156,6 +166,11 @@ export const QuestionListPageSection = styled.section`
 export const ToQuestionListButton = styled(Link)`
   margin: 2%;
   font-size: 1.2rem;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 1rem;
+    width: max-content;
+  }
 `;
 
 export const QuestionListContainer = styled.div`
