@@ -47,22 +47,15 @@ const PostCardList = ({ currUser, token, userId, questionId, list, width }) => {
 
   const cardListCardContainer = useRef(null);
   const scrollToCardL = (ref) =>
-    window.scrollTo(
-      0,
-      cardListCardContainer.current.offsetParent.offsetTop + 210,
-    );
+    window.scrollTo(0, ref.current.offsetParent.offsetTop + 210);
   const scrollToCardS = (ref) =>
-    window.scrollTo(
-      0,
-      cardListCardContainer.current.offsetParent.offsetTop - 140,
-    );
+    window.scrollTo(0, ref.current.offsetParent.offsetTop - 140);
 
   // card open, close functions
   const handleCardOpen = (id) => {
     if (cols === 5) setCols(2);
     setCardLIndex(id);
     setIsOpened(true);
-    console.log(cardListCardContainer.current.offsetParent.offsetTop);
     width < 1280 ? scrollToCardL(cardListCardContainer) : '';
   };
 
