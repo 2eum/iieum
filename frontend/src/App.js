@@ -26,6 +26,7 @@ import axios from 'axios';
 import CustomAlert from './Components/CustomAlert/CustomAlert';
 import ResponsivePlaceholder from './Components/ResponsivePlaceholder';
 import MobileNavbar from './Containers/MobileNavbar/MobileNavbar';
+import Feedback from './Pages/Feedback';
 
 const App = () => {
   const [windowWidth, setWindowWidth] = useState(0);
@@ -130,7 +131,6 @@ const App = () => {
     <>
       <ScrollToTop />
       <GlobalStyle alertOpen={alertOpen} width={windowWidth} />
-      {/* {windowWidth >= 1280 ? ( */}
       <>
         {windowWidth >= 1280 ? (
           <Navbar
@@ -268,6 +268,7 @@ const App = () => {
                 />
               )}
             />
+            <Route path="/feedback" exact render={() => <Feedback />} />
           </Switch>
         </BodyContainer>
         <Footer />
