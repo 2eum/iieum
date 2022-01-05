@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import * as S from './TodayQuestion.elements';
 
 import { PostCardL, PostCardS } from '../../Components';
 import { IndicatorDot } from '../../styles/globalStyles';
 
-const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
+const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   const [content, setContent] = useState([]);
   const [questionList, setQList] = useState([]);
   const [question, setQuestion] = useState();
@@ -18,6 +18,9 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   const [noContent, setNoContent] = useState(false);
 
   const dayNames = ['오늘', '어제', '3일 전', '4일 전', '5일 전'];
+
+  const cardContainer = useRef(null);
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop - 140);
 
   const today = new Date();
   const startingDate = new Date(today);
@@ -148,11 +151,44 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
   // CardL switch when CardS clicked
   const switchCardL = (id) => {
     setCardLId(id);
+    width < 1280 ? scrollToRef(cardContainer) : '';
+  };
+
+  const scrollWithOffset = (ele) => {
+    const yCoordinate = ele.getBoundingClientRect().top + window.pageYOffset;
+    const yOffset = -140;
+    window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
   };
 
   return (
     <>
-      <S.TodayLeftContainer>
+      {width < 1280 ? (
+        <S.QuestionArea>
+          <S.QuestionAreaTop>
+            <S.QDate>{dayName}의 질문</S.QDate>
+            <S.ShuffleButton onClick={randomQuestion}>
+              <i className="fas fa-random" />
+              다른 질문 보기
+            </S.ShuffleButton>
+          </S.QuestionAreaTop>
+
+          <S.TodayQuestion>
+            <S.Question>{question}</S.Question>
+            <S.AnswerButton
+              smooth
+              to="/#create"
+              scroll={(ele) => scrollWithOffset(ele)}
+            >
+              <i className="fa fa-pen" />
+              질문에 답하기
+            </S.AnswerButton>
+          </S.TodayQuestion>
+        </S.QuestionArea>
+      ) : (
+        ''
+      )}
+
+      <S.TodayLeftContainer ref={cardContainer}>
         {content.length ? (
           <PostCardL
             postId={cardLId}
@@ -170,20 +206,24 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion }) => {
         )}
       </S.TodayLeftContainer>
       <S.TodayRightContainer>
-        <S.QuestionArea>
-          <S.ShuffleButton onClick={randomQuestion}>
-            <i className="fas fa-random" />
-            다른 질문 보기
-          </S.ShuffleButton>
-          <S.TodayQuestion>
-            <S.QDate>{dayName}의 질문</S.QDate>
-            <S.Question>{question}</S.Question>
-            <S.AnswerButton smooth to="/#create">
-              <i className="fa fa-pen" />
-              질문에 답하기
-            </S.AnswerButton>
-          </S.TodayQuestion>
-        </S.QuestionArea>
+        {width < 1280 ? (
+          ''
+        ) : (
+          <S.QuestionArea>
+            <S.ShuffleButton onClick={randomQuestion}>
+              <i className="fas fa-random" />
+              다른 질문 보기
+            </S.ShuffleButton>
+            <S.TodayQuestion>
+              <S.QDate>{dayName}의 질문</S.QDate>
+              <S.Question>{question}</S.Question>
+              <S.AnswerButton smooth to="/#create">
+                <i className="fa fa-pen" />
+                질문에 답하기
+              </S.AnswerButton>
+            </S.TodayQuestion>
+          </S.QuestionArea>
+        )}
         {content.length ? (
           <S.PostCardSArea>
             <S.TodaySTop>

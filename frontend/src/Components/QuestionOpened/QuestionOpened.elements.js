@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import { CustomLink } from "../../styles/globalStyles";
+import styled from 'styled-components';
+import { CustomLink } from '../../styles/globalStyles';
 
 export const OpenedContainer = styled.div`
   width: 90vw;
-  height: ${(p) => (p.open ? "fit-content" : 0)};
+  height: ${(p) => (p.open ? 'max-content' : 0)};
   opacity: ${(p) => (p.open ? 1 : 0)};
   display: ${(p) => (p.open ? `flex` : `none`)};
-  position: relative;
+  /* position: relative; */
   margin-top: 5vw;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +14,7 @@ export const OpenedContainer = styled.div`
 
   ${(p) =>
     p.gridNum === 0
-      ? ""
+      ? ''
       : p.gridNum === 1
       ? `transform: translateX(-30.5vw);`
       : `transform: translateX(-61vw);`}
@@ -23,10 +23,18 @@ export const OpenedContainer = styled.div`
     width: 60vw;
     ${(p) =>
       p.gridNum === 0
-        ? ""
+        ? ''
         : p.gridNum === 1
         ? `transform: translateX(-20.5vw);`
         : `transform: translateX(-41vw);`}
+  }
+
+  @media screen and (max-width: 1279px) {
+    width: 200%;
+    ${(p) =>
+      p.gridNum === 0
+        ? 'transform: translateX(0%);'
+        : 'transform: translateX(-50%);'}
   }
 `;
 
@@ -37,6 +45,7 @@ export const QuestionContainer = styled.div`
 
 export const Question = styled.h2`
   text-align: center;
+  width: inherit;
 `;
 
 export const QuestionDetails = styled.p`
@@ -47,11 +56,20 @@ export const QuestionDetails = styled.p`
 export const CreateButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+
+  @media screen and (max-width: 1279px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const CreateButtonWrapper = styled.div`
   width: 15%;
   margin: 2%;
+
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+    margin: auto;
+  }
 `;
 
 export const CardListContainer = styled.div`

@@ -1,15 +1,5 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-
-export const KeyWordContainer = styled.div`
-  margin: 5%;
-`;
-export const KeywordResult = styled.p`
-  margin: 0 auto;
-  font-size: 1.7rem;
-  display: flex;
-  flex-direction: column;
-`;
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
 
 // Search Bar
 export const SearchBarContainer = styled.div`
@@ -20,6 +10,10 @@ export const SearchBarContainer = styled.div`
 
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 1279px) {
+    width: 80%;
+  }
 `;
 
 export const SearchBar = styled.input`
@@ -40,6 +34,11 @@ export const SearchBar = styled.input`
 
   :focus {
     outline: none;
+  }
+
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+    font-size: 1.2rem;
   }
 `;
 
@@ -69,7 +68,9 @@ export const Keyword = styled.span`
 
 export const ResultTitle = styled.h1`
   margin: 7% 0 2% 1%;
-  // color: ${colors.iiPurple};
+  @media screen and (max-width: 1279px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const NoResultWrapper = styled.div`

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { PostCardList } from "..";
-import * as S from "./Search.elements";
-import { MusicCardGrid, QuestionCardGrid } from "../";
+import React, { useState, useEffect } from 'react';
+import * as S from './Search.elements';
+import axios from 'axios';
+import { PostCardList } from '../../Containers';
+import { MusicCardGrid, QuestionCardGrid } from '../../Containers';
 
 const Search = ({ currUser, token, userId, word }) => {
   const [postResult, setPostResult] = useState([]);
@@ -15,15 +15,15 @@ const Search = ({ currUser, token, userId, word }) => {
     setQuestionResult([]);
     setMusicResult([]);
     axios({
-      method: "get",
+      method: 'get',
       url: `/api/search/${keyword}`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((response) => {
         if (response.status > 400) {
-          setPlaceholder("Something went wrong!");
+          setPlaceholder('Something went wrong!');
         }
         return response.data;
       })
@@ -41,15 +41,15 @@ const Search = ({ currUser, token, userId, word }) => {
     setMusicResult([]);
     setKeyword(word);
     axios({
-      method: "get",
+      method: 'get',
       url: `/api/search/${word}`,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((response) => {
         if (response.status > 400) {
-          setPlaceholder("Something went wrong!");
+          setPlaceholder('Something went wrong!');
         }
         return response.data;
       })

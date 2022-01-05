@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import * as colors from "../../styles/Colors";
-import { NavLink } from "react-router-dom";
+import styled from 'styled-components';
+import * as colors from '../../styles/Colors';
+import { NavLink } from 'react-router-dom';
 
 export const MyPageBanner = styled.section`
   width: 100%;
@@ -17,6 +17,11 @@ export const InfoChangeLink = styled(NavLink)`
       color: ${colors.iiPurple};
     }
   }
+
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
+  }
 `;
 
 export const User = styled.span`
@@ -31,6 +36,11 @@ export const Message = styled.p`
 
   font-size: 2.5rem;
   line-height: 4.5rem;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 1rem;
+    line-height: 2rem;
+  }
 `;
 
 // Banner section
@@ -42,6 +52,11 @@ export const Date = styled.p`
 
   color: ${colors.iiBrown};
   opacity: 80%;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
+  }
 `;
 
 export const StatsWrapper = styled.div`
@@ -56,6 +71,11 @@ export const Stat = styled.p`
 
   color: ${colors.iiBrown};
   opacity: 80%;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+    margin: 0.2rem 0;
+  }
 `;
 
 export const PostListSection = styled.section`
@@ -93,6 +113,10 @@ export const ListSwitch = styled.button`
     color: ${colors.iiPurple};
   }
 
+  @media screen and (max-width: 1279px) {
+    font-size: 1rem;
+  }
+
   transition: all 100ms;
 `;
 
@@ -101,4 +125,10 @@ export const LikeListSection = styled.section``;
 export const MainContentContainer = styled.section`
   width: 100%;
   text-align: center;
+`;
+
+export const Title = styled.h1`
+  text-align: left;
+  margin: 1rem 0;
+  font-size: 1.5rem;
 `;

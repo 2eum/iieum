@@ -26,6 +26,9 @@ export const AlertContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  @media screen and (max-width: 1279px) {
+    width: 20rem;
+  }
 `;
 
 export const AlertMessage = styled.p`

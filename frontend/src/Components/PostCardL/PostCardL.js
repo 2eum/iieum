@@ -295,10 +295,10 @@ const PostCardL = ({
                         setSubmit(false);
                       }}
                     >
-                      <i className="fa fa-pen fa-lg" /> 수정하기
+                      <i className="fa fa-pen fa-lg" /> 수정
                     </S.EditBtn>
                     <S.DeleteBtn onClick={handleDelete}>
-                      <i className="fa fa-trash fa-lg" /> 삭제하기
+                      <i className="fa fa-trash fa-lg" /> 삭제
                     </S.DeleteBtn>
                   </S.BtnArea>
                 ) : (
