@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import * as S from './PostCardL.elements';
-import { MusicCard, SearchedItem } from '..';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import * as S from "./PostCardL.elements";
+import { MusicCard, SearchedItem } from "..";
+import axios from "axios";
 
 const PostCardL = ({
   currUser,
@@ -19,14 +19,14 @@ const PostCardL = ({
   const [editMode, setEditMode] = useState(false);
   const [isSearching, setSearching] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [selected, setSelected] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [searchReady, setSearchReady] = useState(false);
   const [submitted, setSubmit] = useState(false);
 
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
 
   const [mObject, setMObject] = useState({});
 
@@ -34,15 +34,15 @@ const PostCardL = ({
   useEffect(() => {
     if (postId) {
       axios({
-        method: 'get',
+        method: "get",
         url: `/api/post/${postId}`,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
         .then((response) => {
           if (response.status > 400) {
-            setPlaceholder('Something went wrong!');
+            setPlaceholder("Something went wrong!");
           }
           return response.data;
         })
@@ -60,7 +60,7 @@ const PostCardL = ({
   }, [postId, submitted]);
 
   // set date form
-  const pubDateObj = new Date(content ? content.pub_date : '');
+  const pubDateObj = new Date(content ? content.pub_date : "");
   let formattedDate = `${pubDateObj.getFullYear()}년
   ${pubDateObj.getMonth() + 1}월
   ${pubDateObj.getDate()}일`;
@@ -76,7 +76,7 @@ const PostCardL = ({
   // like post request
   const postLike = (e) => {
     axios({
-      method: 'post',
+      method: "post",
       url: `/api/like/${postId}/`,
       headers: {
         Authorization: `jwt ${token}`,
@@ -94,21 +94,21 @@ const PostCardL = ({
   // delete request
   const handleDelete = () => {
     axios({
-      method: 'delete',
+      method: "delete",
       url: `/api/post/${postId}/`,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `jwt ${token}`,
       },
     })
       .then((response) => {
         if (response.status > 400) {
-          setPlaceholder('Something went wrong!');
+          setPlaceholder("Something went wrong!");
         }
         return response.data;
       })
       .then(() => {
-        alert('글 삭제가 완료되었습니다.');
+        alert("글 삭제가 완료되었습니다.");
         window.location.reload();
       })
       .then(() => {
@@ -117,12 +117,12 @@ const PostCardL = ({
   };
 
   useEffect(() => {
-    if (searchQuery !== '') {
+    if (searchQuery !== "") {
       axios({
-        method: 'post',
-        url: 'api/spotify/',
+        method: "post",
+        url: "api/spotify/",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `jwt ${token}`,
         },
         data: {
@@ -138,7 +138,7 @@ const PostCardL = ({
             info.url = m.external_urls.spotify;
             info.title = m.name;
             info.preview = m.preview_url;
-            info.artist = m.artists.map((x) => x.name).join(', ');
+            info.artist = m.artists.map((x) => x.name).join(", ");
             arr.push(info);
           }
           setSearchResult(arr);
@@ -159,7 +159,7 @@ const PostCardL = ({
   };
 
   const selectMusic = (i) => {
-    let preview = searchResult[i].preview || 'null';
+    let preview = searchResult[i].preview || "null";
     const musicInfo = {
       title: searchResult[i].title,
       artist: searchResult[i].artist,
@@ -191,10 +191,10 @@ const PostCardL = ({
 
   const handleSubmit = (e) => {
     axios({
-      method: 'patch',
+      method: "patch",
       url: `api/post/${postId}/`,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `jwt ${token}`,
       },
       data: {
@@ -237,7 +237,7 @@ const PostCardL = ({
     <>
       {/* load only if content is loaded */}
       {content && postId ? (
-        <S.PostCardArea order={order}>
+        <S.PostCardArea order={order} editMode={editMode}>
           {!editMode || submitted ? (
             <>
               <S.HeaderArea>
@@ -246,7 +246,7 @@ const PostCardL = ({
                   {handleCardClose ? (
                     <S.CloseBtn onClick={handleCardClose}>닫기</S.CloseBtn>
                   ) : (
-                    ''
+                    ""
                   )}
                 </S.CloseBtnArea>
                 <S.PostTop>
@@ -302,7 +302,7 @@ const PostCardL = ({
                     </S.DeleteBtn>
                   </S.BtnArea>
                 ) : (
-                  ''
+                  ""
                 )}
               </S.PostBottom>
             </>
@@ -346,7 +346,7 @@ const PostCardL = ({
                           {musicResults}
                         </S.SearchResultContainer>
                       ) : (
-                        ''
+                        ""
                       )}
                     </S.SearchBar>
                   )}
@@ -372,10 +372,12 @@ const PostCardL = ({
                 </S.FormArea>
               </S.MiddleArea>
               <S.PostBottom editMode={editMode}>
-                <S.Signature>{currUser}</S.Signature>
+                <S.Signature editMode={editMode}>
+                  <S.EditMessage>글을 수정하고 있어요</S.EditMessage>
+                  {currUser}
+                </S.Signature>
                 <S.EditBtnsWrapper>
                   <S.EditLeftWrapper>
-                    <S.EditMessage>글을 수정하고 있어요</S.EditMessage>
                     <S.SubmitButton onClick={(e) => setEditMode(false)}>
                       <i className="fas fa-times" />
                       수정 취소
@@ -391,7 +393,7 @@ const PostCardL = ({
           )}
         </S.PostCardArea>
       ) : (
-        ''
+        ""
       )}
     </>
   );
