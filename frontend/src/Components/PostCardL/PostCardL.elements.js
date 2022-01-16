@@ -17,7 +17,8 @@ export const PostCardArea = styled.section`
   background-color: ${colors.iiBeige};
   box-shadow: ${CardShadow};
   border-radius: 8px;
-  border: 1px solid #abaaa6;
+  border: 1px solid
+    ${(p) => (p.editMode ? colors.cardEditStroke : colors.cardStroke)};
 
   // if card is stacked, set z-index according to order
   z-index: ${(p) => p.order * -1};
@@ -89,7 +90,7 @@ export const Question = styled.p`
 `;
 
 export const MiddleArea = styled.section`
-  height: ${(p) => (p.editMode ? "60%" : "70%")};
+  height: ${(p) => (p.editMode ? "100%" : "70%")};
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5%;
@@ -121,7 +122,7 @@ export const ContentArea = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 70%;
+  height: 100%;
 
   @media screen and (max-width: 1279px) {
     justify-content: flex-start;
@@ -214,13 +215,13 @@ export const Signature = styled.h3`
   justify-self: flex-end;
   font-family: "Daughter_handwriting";
   font-size: 2.5rem;
+  ${(p) =>
+    p.editMode
+      ? "display: flex; justify-content: space-between; align-items:center; width: 100%;"
+      : ""}
 
   @media screen and (max-width: 1279px) {
     font-size: 2rem;
-    ${(p) =>
-      p.editMode
-        ? "display: flex; justify-content: space-between; align-items:center; width: 100%"
-        : ""}
   }
 `;
 
@@ -267,7 +268,7 @@ export const SearchResultContainer = styled.div`
 `;
 
 export const FormArea = styled.section`
-  height: ${(p) => (p.isSearching ? "30%" : "60%")};
+  height: ${(p) => (p.isSearching ? "30%" : "100%")};
   display: flex;
   flex-direction: column;
   @media screen and (max-width: 1279px) {
@@ -295,6 +296,7 @@ export const FormBody = styled.textarea`
   &:focus {
     outline: none;
   }
+  line-height: 1.8;
 `;
 
 export const SubmitButton = styled(CustomButton)`
@@ -318,10 +320,7 @@ export const ResetChoiceButton = styled.p`
 export const EditMessage = styled.span`
   color: green;
   justify-self: flex-start;
-
-  @media screen and (max-width: 1279px) {
-    font-size: 0.8rem;
-  }
+  font-size: 0.8rem;
 `;
 
 export const EditBtnsWrapper = styled.div`

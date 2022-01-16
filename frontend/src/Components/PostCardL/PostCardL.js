@@ -237,7 +237,7 @@ const PostCardL = ({
     <>
       {/* load only if content is loaded */}
       {content && postId ? (
-        <S.PostCardArea order={order}>
+        <S.PostCardArea order={order} editMode={editMode}>
           {!editMode || submitted ? (
             <>
               <S.HeaderArea>
