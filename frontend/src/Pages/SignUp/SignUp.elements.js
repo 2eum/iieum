@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import * as colors from '../../styles/Colors';
-import { CustomButton, CustomButtonInvert } from '../../styles/globalStyles';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import * as colors from "../../styles/Colors";
+import { CustomButton, CustomButtonInvert } from "../../styles/globalStyles";
 
 export const AfterSent = styled.section`
   width: 80%;
@@ -96,9 +96,9 @@ export const SignUpInput = styled.input`
   border-bottom: 1px solid
     ${(p) =>
       p.duplicateChecked === false
-        ? 'red'
+        ? "red"
         : p.duplicateChecked === true
-        ? 'green'
+        ? "green"
         : colors.iiBrown};
 
   &:focus {
@@ -117,6 +117,9 @@ export const DuplicateMessage = styled.span`
 
 export const DuplicateConfirm = styled.p`
   color: green;
+  @media screen and (max-width: 1279px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const DuplicateCheckButton = styled(CustomButtonInvert)`
