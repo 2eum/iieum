@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import * as colors from '../../styles/Colors';
-import { CustomButton } from '../../styles/globalStyles';
+import styled from "styled-components";
+import * as colors from "../../styles/Colors";
+import { CustomButton } from "../../styles/globalStyles";
 
 export const ModalContainer = styled.div`
-  display: ${(p) => (p.alertOpen ? 'flex' : 'hidden')};
+  display: ${(p) => (p.alertOpen ? "flex" : "hidden")};
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -12,6 +12,9 @@ export const ModalContainer = styled.div`
   background-color: ${`${colors.iiBG}99`};
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 1279px) {
+    width: 90%;
+  }
 `;
 
 export const AlertContainer = styled.div`
@@ -34,6 +37,11 @@ export const AlertContainer = styled.div`
 export const AlertMessage = styled.p`
   max-height: 70vh;
   overflow-y: auto;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1rem;
 `;
 
 export const AlertCloseButton = styled(CustomButton)``;
