@@ -12,9 +12,6 @@ export const ModalContainer = styled.div`
   background-color: ${`${colors.iiBG}99`};
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1279px) {
-    width: 90%;
-  }
 `;
 
 export const AlertContainer = styled.div`
