@@ -24,6 +24,9 @@ export const PlayerButton = styled.div`
   i {
     color: ${colors.iiPurple};
     font-size: 1.5rem;
+    @media screen and (max-width: 1279px) {
+      font-size: 1rem;
+    }
   }
 `;
 

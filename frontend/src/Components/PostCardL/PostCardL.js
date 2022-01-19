@@ -269,7 +269,7 @@ const PostCardL = ({
 
       {/* load only if content is loaded */}
       {content && postId ? (
-        <S.PostCardArea order={order}>
+        <S.PostCardArea order={order} editMode={editMode}>
           {!editMode || submitted ? (
             <>
               <S.HeaderArea>
@@ -404,10 +404,12 @@ const PostCardL = ({
                 </S.FormArea>
               </S.MiddleArea>
               <S.PostBottom editMode={editMode}>
-                <S.Signature>{currUser}</S.Signature>
+                <S.Signature editMode={editMode}>
+                  <S.EditMessage>글을 수정하고 있어요</S.EditMessage>
+                  {currUser}
+                </S.Signature>
                 <S.EditBtnsWrapper>
                   <S.EditLeftWrapper>
-                    <S.EditMessage>글을 수정하고 있어요</S.EditMessage>
                     <S.SubmitButton onClick={(e) => setEditMode(false)}>
                       <i className="fas fa-times" />
                       수정 취소
