@@ -225,7 +225,9 @@ const PostCardL = ({
         track_audio: mObject.preview,
         question: content.question.id,
       },
-    }).then(() => setSubmit(true));
+    })
+      .then(() => setSubmit(true))
+      .then(() => setEditMode(false));
   };
 
   const resetMusicChoice = () => {
