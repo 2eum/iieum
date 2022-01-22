@@ -42,6 +42,8 @@ export const MusicCardWrapper = styled.div`
   box-shadow: ${CardShadow};
   border: 1px solid ${(p) => (p.open ? colors.iiPurple : colors.cardStroke)};
 
+  padding: 1rem;
+
   &:hover {
     border: 1px solid ${colors.iiPurple};
   }

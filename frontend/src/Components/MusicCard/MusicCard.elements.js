@@ -4,7 +4,8 @@ import { slide } from "../../styles/globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
-  padding: 1vw;
+  justify-content: flex-end;
+  height: max-content;
 
   @media screen and (max-width: 1279px) {
     padding: 0;
@@ -12,9 +13,7 @@ export const Wrapper = styled.section`
 `;
 
 export const Cover = styled.img`
-  width: 35%;
-
-  margin: auto;
+  width: 30%;
 
   filter: drop-shadow(3psx 3px 3px #000);
 `;

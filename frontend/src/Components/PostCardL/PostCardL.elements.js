@@ -10,7 +10,7 @@ export const PostCardArea = styled.section`
   width: 34rem;
   height: 50rem;
   margin: auto;
-  padding: 5%;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -40,7 +40,7 @@ export const PostCardArea = styled.section`
 `;
 
 export const HeaderArea = styled.section`
-  height: max-content;
+  height: 15%;
 `;
 
 export const CloseBtnArea = styled.section`
@@ -90,7 +90,7 @@ export const Question = styled.p`
 `;
 
 export const MiddleArea = styled.section`
-  height: ${(p) => (p.editMode ? "100%" : "70%")};
+  height: ${(p) => (p.editMode ? "100%" : "75%")};
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5%;
@@ -107,6 +107,7 @@ export const MiddleArea = styled.section`
 
 export const MusicArea = styled.section`
   width: 20vw;
+  height: max-content;
   text-align: right;
   display: flex;
   justify-content: flex-end;
@@ -122,7 +123,7 @@ export const ContentArea = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 80%;
 
   @media screen and (max-width: 1279px) {
     justify-content: flex-start;
@@ -142,7 +143,7 @@ export const PubDate = styled.p`
 
 export const BodyWrapper = styled.div`
   overflow-y: scroll;
-  height: 20vw;
+  height: 16vw;
   @media screen and (max-width: 1279px) {
     height: 70%;
   }
