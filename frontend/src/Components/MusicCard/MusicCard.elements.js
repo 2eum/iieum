@@ -1,20 +1,19 @@
-import styled from 'styled-components';
-import * as colors from '../../styles/Colors';
-import { slide } from '../../styles/globalStyles';
+import styled from "styled-components";
+import * as colors from "../../styles/Colors";
+import { slide } from "../../styles/globalStyles";
 
 export const Wrapper = styled.section`
   display: flex;
-  padding: 1vw;
+  justify-content: flex-end;
+  height: max-content;
 
   @media screen and (max-width: 1279px) {
-    padding: 5%;
+    padding: 0;
   }
 `;
 
 export const Cover = styled.img`
-  width: 35%;
-
-  margin: auto;
+  width: 30%;
 
   filter: drop-shadow(3psx 3px 3px #000);
 `;
@@ -32,6 +31,9 @@ export const TitleWrapper = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
+  @media screen and (max-width: 1279px) {
+    height: 1rem;
+  }
 `;
 
 export const Title = styled.p`
@@ -43,7 +45,10 @@ export const Title = styled.p`
   width: 100%;
 
   //slide animation
-  animation: ${(p) => (p.slide ? slide : '')} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
+  @media screen and (max-width: 1279px) {
+    font-size: 0.7rem;
+  }
 `;
 
 export const MiddleWrapper = styled.div`
@@ -57,6 +62,10 @@ export const ArtistWrapper = styled.div`
   width: 65%;
   position: relative;
   overflow: hidden;
+  @media screen and (max-width: 1279px) {
+    height: 1rem;
+    font-size: 0.7rem;
+  }
 `;
 
 export const Artist = styled.p`
@@ -70,7 +79,7 @@ export const Artist = styled.p`
   font-size: 0.8rem;
   opacity: 0.8;
   //slide animation
-  animation: ${(p) => (p.slide ? slide : '')} 10s linear infinite;
+  animation: ${(p) => (p.slide ? slide : "")} 10s linear infinite;
 `;
 
 export const SourceLink = styled.a`

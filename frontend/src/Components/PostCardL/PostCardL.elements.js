@@ -1,23 +1,24 @@
-import styled from 'styled-components';
-import * as colors from '../../styles/Colors';
+import styled from "styled-components";
+import * as colors from "../../styles/Colors";
 import {
   ButtonShadow,
   CardShadow,
   CustomButton,
-} from '../../styles/globalStyles';
+} from "../../styles/globalStyles";
 
 export const PostCardArea = styled.section`
   width: 34rem;
   height: 50rem;
   margin: auto;
-  padding: 5%;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   background-color: ${colors.iiBeige};
   box-shadow: ${CardShadow};
   border-radius: 8px;
-  border: 1px solid #abaaa6;
+  border: 1px solid
+    ${(p) => (p.editMode ? colors.cardEditStroke : colors.cardStroke)};
 
   // if card is stacked, set z-index according to order
   z-index: ${(p) => p.order * -1};
@@ -26,11 +27,20 @@ export const PostCardArea = styled.section`
     width: 20rem;
     height: 29rem;
     margin: auto;
+    padding: 3%;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  & > * {
+    @media screen and (max-width: 1279px) {
+      margin: 0;
+    }
   }
 `;
 
 export const HeaderArea = styled.section`
-  height: max-content;
+  height: 15%;
 `;
 
 export const CloseBtnArea = styled.section`
@@ -50,7 +60,7 @@ export const CloseBtn = styled.p`
 
 export const PostTop = styled.section`
   display: flex;
-  justify-content: ${(p) => (p.editMode ? 'flex-end' : 'space-between')};
+  justify-content: ${(p) => (p.editMode ? "flex-end" : "space-between")};
   align-items: center;
   margin: 2%;
 `;
@@ -80,17 +90,24 @@ export const Question = styled.p`
 `;
 
 export const MiddleArea = styled.section`
-  height: ${(p) => (p.editMode ? '60%' : '70%')};
+  height: ${(p) => (p.editMode ? "100%" : "75%")};
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  @media screen and (max-width: 1279px) {
+    height: 70%;
+    margin-bottom: 0%;
+    width: 100%;
+  }
 `;
 
 export const MusicArea = styled.section`
   width: 20vw;
+  height: max-content;
   text-align: right;
   display: flex;
   justify-content: flex-end;
@@ -106,10 +123,11 @@ export const ContentArea = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 70%;
+  height: 80%;
 
   @media screen and (max-width: 1279px) {
     justify-content: flex-start;
+    height: 85%;
   }
 `;
 
@@ -125,9 +143,9 @@ export const PubDate = styled.p`
 
 export const BodyWrapper = styled.div`
   overflow-y: scroll;
-  height: 20vw;
+  height: 16vw;
   @media screen and (max-width: 1279px) {
-    height: 60%;
+    height: 70%;
   }
 `;
 
@@ -140,9 +158,13 @@ export const PostBottom = styled.section`
   display: flex;
   ${(p) =>
     p.editMode
-      ? 'flex-direction: column; align-items: flex-end; height: 20%;'
-      : 'flex-direction: row-reverse; justify-content: space-between; align-items: center; height: 10%;'}
+      ? "flex-direction: column; align-items: flex-end; height: 20%;"
+      : "flex-direction: row-reverse; justify-content: space-between; align-items: center; height: 10%;"}
   margin: 2%;
+
+  @media screen and (max-width: 1279px) {
+    margin: 0;
+  }
 `;
 
 export const BtnArea = styled.div`
@@ -192,8 +214,12 @@ export const DeleteBtn = styled.div`
 export const Signature = styled.h3`
   margin: 1%;
   justify-self: flex-end;
-  font-family: 'Daughter_handwriting';
+  font-family: "Daughter_handwriting";
   font-size: 2.5rem;
+  ${(p) =>
+    p.editMode
+      ? "display: flex; justify-content: space-between; align-items:center; width: 100%;"
+      : ""}
 
   @media screen and (max-width: 1279px) {
     font-size: 2rem;
@@ -201,9 +227,9 @@ export const Signature = styled.h3`
 `;
 
 export const MusicSearchArea = styled.section`
-  height: ${(p) => (p.isSearching ? '70%' : '20%')};
+  height: ${(p) => (p.isSearching ? "70%" : "20%")};
   display: flex;
-  justify-content: ${(p) => (p.isSearching ? 'center' : 'flex-end')};
+  justify-content: ${(p) => (p.isSearching ? "center" : "flex-end")};
   align-items: flex-start;
   transition: all 1s;
   position: relative;
@@ -243,9 +269,12 @@ export const SearchResultContainer = styled.div`
 `;
 
 export const FormArea = styled.section`
-  height: ${(p) => (p.isSearching ? '30%' : '60%')};
+  height: ${(p) => (p.isSearching ? "30%" : "100%")};
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1279px) {
+    height: ${(p) => (p.isSearching ? "30%" : "100%")};
+  }
 `;
 
 export const FormTitle = styled.input`
@@ -268,6 +297,7 @@ export const FormBody = styled.textarea`
   &:focus {
     outline: none;
   }
+  line-height: 1.8;
 `;
 
 export const SubmitButton = styled(CustomButton)`
@@ -288,13 +318,10 @@ export const ResetChoiceButton = styled.p`
   text-align: right;
 `;
 
-export const EditMessage = styled.p`
+export const EditMessage = styled.span`
   color: green;
   justify-self: flex-start;
-
-  @media screen and (max-width: 1279px) {
-    font-size: 0.8rem;
-  }
+  font-size: 0.8rem;
 `;
 
 export const EditBtnsWrapper = styled.div`

@@ -1,38 +1,35 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import * as S from './CreateCard.elements';
-import { MusicCard, SearchedItem } from '..';
-import { useHistory } from 'react-router';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import * as S from "./CreateCard.elements";
+import { MusicCard, SearchedItem } from "..";
+import { useHistory } from "react-router";
+import CustomAlert from "../CustomAlert/CustomAlert";
 
-const CreateCard = ({
-  currUser,
-  token,
-  userId,
-  questionId,
-  locationAt,
-  handleAlert,
-}) => {
+const CreateCard = ({ currUser, token, userId, questionId, locationAt }) => {
   const [questionContent, setQuestionContent] = useState();
   const [isSearching, setSearching] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [selected, setSelected] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [searchReady, setSearchReady] = useState(false);
   const [submitted, setSubmit] = useState(false);
 
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
 
   const [mObject, setMObject] = useState({});
 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("글 작성이 완료되었습니다.");
+
   useEffect(() => {
-    if (searchQuery !== '') {
+    if (searchQuery !== "") {
       axios({
-        method: 'post',
-        url: 'api/spotify/',
+        method: "post",
+        url: "api/spotify/",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `jwt ${token}`,
         },
         data: {
@@ -48,7 +45,7 @@ const CreateCard = ({
             info.url = m.external_urls.spotify;
             info.title = m.name;
             info.preview = m.preview_url;
-            info.artist = m.artists.map((x) => x.name).join(', ');
+            info.artist = m.artists.map((x) => x.name).join(", ");
             arr.push(info);
           }
           setSearchResult(arr);
@@ -65,10 +62,10 @@ const CreateCard = ({
   useEffect(() => {
     if (questionId) {
       axios({
-        method: 'get',
+        method: "get",
         url: `api/question/${questionId}`,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }).then((response) => {
         setQuestionContent(response.data.question_content);
@@ -78,8 +75,8 @@ const CreateCard = ({
 
   const updateSearchInput = (e) => {
     if (!currUser) {
-      handleAlert('로그인 후 글 작성이 가능합니다!');
-      e.target.value = '';
+      handleAlert("로그인 후 글 작성이 가능합니다!");
+      e.target.value = "";
     } else {
       setSearchCount(searchCount + 1);
       let count = searchCount;
@@ -93,8 +90,7 @@ const CreateCard = ({
   };
 
   const selectMusic = (i) => {
-    console.log(1);
-    let preview = searchResult[i].preview || 'null';
+    let preview = searchResult[i].preview || "null";
     const musicInfo = {
       title: searchResult[i].title,
       artist: searchResult[i].artist,
@@ -126,12 +122,11 @@ const CreateCard = ({
 
   const handleSubmit = () => {
     if (isValidInput()) {
-      console.log(isValidInput());
       axios({
-        method: 'post',
-        url: 'api/post/',
+        method: "post",
+        url: "api/post/",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `jwt ${token}`,
         },
         data: {
@@ -145,14 +140,14 @@ const CreateCard = ({
           question: questionId,
         },
       })
-        .then(() => setSubmit(true))
+        .then(() => setAlertOpen(true))
         .catch((error) =>
           handleAlert(
-            '글 작성에 문제가 생겼어요... 다시 한 번 시도해주시겠어요?',
-          ),
+            "글 작성에 문제가 생겼어요... 다시 한 번 시도해주시겠어요?"
+          )
         );
     } else {
-      handleAlert('모든 영역을 작성해야 합니다.');
+      handleAlert("모든 영역을 작성해야 합니다.");
     }
   };
 
@@ -164,123 +159,126 @@ const CreateCard = ({
   };
 
   const isValidInput = () => {
-    return title !== '' && mObject !== '' && Object.keys(mObject).length !== 0;
+    return title !== "" && mObject !== "" && Object.keys(mObject).length !== 0;
   };
 
   let history = useHistory();
 
+  const handleAfterSubmit = () => {
+    if (locationAt === "home") {
+      window.location.reload();
+      window.scrollTo(0, 0);
+    } else {
+      history.goBack();
+    }
+  };
+
+  const handleAlert = () => {
+    setAlertOpen(false);
+    handleAfterSubmit();
+  };
+
   return (
     <>
+      {alertOpen && (
+        <CustomAlert
+          handleAlert={handleAlert}
+          alertOpen={alertOpen}
+          alertMessage={alertMessage}
+        />
+      )}
       <S.CreateCardArea
         loggedOut={!currUser}
         onClick={
           !currUser
-            ? () => handleAlert('로그인 후 글 작성이 가능합니다!')
+            ? () => handleAlert("로그인 후 글 작성이 가능합니다!")
             : () => {}
         }
       >
-        {submitted ? (
-          <S.CompleteContainer>
-            <p>글 작성이 완료되었습니다</p>
-            <S.RedirectButton
-              onClick={() => {
-                if (locationAt === 'home') {
-                  window.location.reload();
-                  window.scrollTo(0, 0);
-                } else {
-                  history.goBack();
-                }
-              }}
-            >
-              확인
-            </S.RedirectButton>
-          </S.CompleteContainer>
-        ) : (
-          <>
-            <S.TopArea>
-              <S.Question>{questionContent}</S.Question>
-            </S.TopArea>
-            <S.MusicSearchArea
-              isSearching={isSearching}
-              onClick={
-                !selected
-                  ? currUser
-                    ? () => setSearching(true)
-                    : () => alert('로그인 후 글 작성이 가능합니다!')
-                  : () => {}
+        <>
+          <S.TopArea>
+            <S.Question>{questionContent}</S.Question>
+          </S.TopArea>
+          <S.MusicSearchArea
+            isSearching={isSearching}
+            onClick={
+              !selected
+                ? currUser
+                  ? () => setSearching(true)
+                  : () => alert("로그인 후 글 작성이 가능합니다!")
+                : () => {}
+            }
+            onBlur={() => setSearching(false)}
+          >
+            {selected ? (
+              <S.MusicCardWrapper>
+                <MusicCard
+                  title={mObject.title}
+                  artist={mObject.artist}
+                  cover={mObject.img}
+                  link={mObject.url}
+                  source={mObject.preview}
+                />
+                <S.ResetChoiceButton onClick={resetMusicChoice}>
+                  음악 변경
+                </S.ResetChoiceButton>
+              </S.MusicCardWrapper>
+            ) : (
+              <S.SearchBar>
+                <i className="fa fa-search" />
+                <S.SearchInput
+                  placeholder="음악 검색"
+                  type="text"
+                  onChange={(e) => updateSearchInput(e)}
+                />
+                {searchReady ? (
+                  <S.SearchResultContainer>
+                    {musicResults}
+                  </S.SearchResultContainer>
+                ) : (
+                  ""
+                )}
+              </S.SearchBar>
+            )}
+          </S.MusicSearchArea>
+          <S.FormArea isSearching={isSearching}>
+            <S.PubDate>{formatToday}</S.PubDate>
+            <S.FormTitle
+              type="text"
+              name="title"
+              placeholder="제목을 입력하세요"
+              maxLength={120}
+              autoComplete="off"
+              onChange={(e) =>
+                currUser
+                  ? setTitle(e.target.value)
+                  : alert("로그인 후 글 작성이 가능합니다!")
               }
-              onBlur={() => setSearching(false)}
+            />
+            <S.FormBody
+              placeholder="당신의 이야기를 들려주세요 :)"
+              name="body"
+              autoComplete="off"
+              onChange={(e) =>
+                currUser
+                  ? setBody(e.target.value)
+                  : alert("로그인 후 글 작성이 가능합니다!")
+              }
+            />
+          </S.FormArea>
+          <S.BottomArea>
+            <S.Signature>{currUser}</S.Signature>
+            <S.SubmitButton
+              onClick={
+                currUser
+                  ? () => handleSubmit()
+                  : () => alert("로그인 후 글 작성이 가능합니다!")
+              }
             >
-              {selected ? (
-                <S.MusicCardWrapper>
-                  <MusicCard
-                    title={mObject.title}
-                    artist={mObject.artist}
-                    cover={mObject.img}
-                    link={mObject.url}
-                    source={mObject.preview}
-                  />
-                  <S.ResetChoiceButton onClick={resetMusicChoice}>
-                    음악 변경
-                  </S.ResetChoiceButton>
-                </S.MusicCardWrapper>
-              ) : (
-                <S.SearchBar>
-                  <i className="fa fa-search" />
-                  <S.SearchInput
-                    placeholder="음악 검색"
-                    type="text"
-                    onChange={(e) => updateSearchInput(e)}
-                  />
-                  {searchReady ? (
-                    <S.SearchResultContainer>
-                      {musicResults}
-                    </S.SearchResultContainer>
-                  ) : (
-                    ''
-                  )}
-                </S.SearchBar>
-              )}
-            </S.MusicSearchArea>
-            <S.FormArea isSearching={isSearching}>
-              <S.PubDate>{formatToday}</S.PubDate>
-              <S.FormTitle
-                type="text"
-                name="title"
-                placeholder="제목을 입력하세요"
-                maxLength={120}
-                autoComplete="off"
-                onChange={(e) =>
-                  currUser
-                    ? setTitle(e.target.value)
-                    : alert('로그인 후 글 작성이 가능합니다!')
-                }
-              />
-              <S.FormBody
-                placeholder="당신의 이야기를 들려주세요 :)"
-                name="body"
-                autoComplete="off"
-                onChange={(e) =>
-                  currUser
-                    ? setBody(e.target.value)
-                    : alert('로그인 후 글 작성이 가능합니다!')
-                }
-              />
-            </S.FormArea>
-            <S.BottomArea>
-              <S.Signature>{currUser}</S.Signature>
-              <S.SubmitButton
-                onClick={
-                  currUser
-                    ? () => handleSubmit()
-                    : () => alert('로그인 후 글 작성이 가능합니다!')
-                }
-              >
-                <i className="fas fa-check" />다 썼어요!
-              </S.SubmitButton>
-            </S.BottomArea>
-          </>
-        )}
+              <i className="fas fa-check" />다 썼어요!
+            </S.SubmitButton>
+          </S.BottomArea>
+        </>
       </S.CreateCardArea>
     </>
   );

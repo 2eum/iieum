@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import * as colors from '../../styles/Colors';
-import { CardShadow } from '../../styles/globalStyles';
+import styled from "styled-components";
+import * as colors from "../../styles/Colors";
+import { CardShadow } from "../../styles/globalStyles";
 
 export const MusicListContainer = styled.div`
   width: 100%;
@@ -42,6 +42,8 @@ export const MusicCardWrapper = styled.div`
   box-shadow: ${CardShadow};
   border: 1px solid ${(p) => (p.open ? colors.iiPurple : colors.cardStroke)};
 
+  padding: 1rem;
+
   &:hover {
     border: 1px solid ${colors.iiPurple};
   }
@@ -49,6 +51,7 @@ export const MusicCardWrapper = styled.div`
   @media screen and (max-width: 1279px) {
     width: 13rem;
     height: 5.5rem;
+    padding: 0.5rem;
 
     & > * {
       font-size: 0.9rem;

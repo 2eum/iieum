@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 
 export const CreateCardWrapper = styled.div`
   margin: 0 20%;
+
+  @media screen and (max-width: 1279px) {
+    margin: 0;
+  }
 `;
 
 export const Title = styled.h3`
@@ -25,4 +29,7 @@ export const ContentContainer = styled.div`
   width: 100%;
   margin: 4%;
   text-align: center;
+  @media screen and (max-width: 1279px) {
+    margin: 0;
+  }
 `;
