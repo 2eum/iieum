@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path,os
+from pathlib import Path, os
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -144,6 +144,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -157,7 +158,7 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
         'rest_framework.permissions.IsAuthenticated',
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES':[
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
@@ -201,27 +202,28 @@ SITE_ID = 1
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smtp.gmail.com' # 메일 호스트 서버
+EMAIL_HOST = 'smtp.gmail.com'  # 메일 호스트 서버
 
-EMAIL_PORT = '587' # gmail과 통신하는 포트
+EMAIL_PORT = '587'  # gmail과 통신하는 포트
 
-EMAIL_HOST_USER = 'iieum.ms.official@gmail.com' # 발신할 이메일
+EMAIL_HOST_USER = 'iieum.ms.official@gmail.com'  # 발신할 이메일
 
-EMAIL_HOST_PASSWORD = os.environ["EMAIL_PWD"] # 발신할 메일의 비밀번호
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_PWD"]  # 발신할 메일의 비밀번호
 
-EMAIL_USE_TLS = True # TLS 보안 방법
+EMAIL_USE_TLS = True  # TLS 보안 방법
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-URL_FRONT = 'http://iieum.com' # 공개적인 웹페이지가 있다면 등록
+URL_FRONT = 'http://iieum.com'  # 공개적인 웹페이지가 있다면 등록
 
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True # 유저가 받은 링크를 클릭하면 회원가입 완료되게끔
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True  # 유저가 받은 링크를 클릭하면 회원가입 완료되게끔
 ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # ACCOUNT_EMAIL_VERIFICATION = "none"
 
-EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/' # 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
+# 사이트와 관련한 자동응답을 받을 이메일 주소,'webmaster@localhost'
+EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
 
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
