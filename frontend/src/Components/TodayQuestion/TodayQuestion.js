@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import * as S from './TodayQuestion.elements';
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import * as S from "./TodayQuestion.elements";
 
-import { PostCardL, PostCardS } from '../../Components';
-import { IndicatorDot } from '../../styles/globalStyles';
+import { PostCardL, PostCardS } from "../../Components";
+import { IndicatorDot } from "../../styles/globalStyles";
 
 const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   const [content, setContent] = useState([]);
   const [questionList, setQList] = useState([]);
   const [question, setQuestion] = useState();
+  const [questionDescription, setQuestionDescription] = useState();
   const [questionId, setQuestionId] = useState();
   const [todayQCards, setTodayQCards] = useState([]);
   const [indicators, setIndicators] = useState([]);
@@ -17,7 +18,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   const [dayName, setDayName] = useState();
   const [noContent, setNoContent] = useState(false);
 
-  const dayNames = ['오늘', '어제', '3일 전', '4일 전', '5일 전'];
+  const dayNames = ["오늘", "어제", "3일 전", "4일 전", "5일 전"];
 
   const cardContainer = useRef(null);
   const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop - 140);
@@ -28,19 +29,19 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   // on Mount
   useEffect(() => {
     axios({
-      method: 'get',
+      method: "get",
       url: `/api/questionlist/${startingDate.getFullYear()}-${
         startingDate.getMonth() + 1
       }-${startingDate.getDate()}/${today.getFullYear()}-${
         today.getMonth() + 1
       }-${today.getDate()}/0`,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then((response) => {
         if (response.status > 400) {
-          setPlaceholder('Something went wrong!');
+          setPlaceholder("Something went wrong!");
         }
         return response.data;
       })
@@ -53,6 +54,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   useEffect(() => {
     if (questionList[0]) {
       setQuestion(questionList[0].question_content);
+      setQuestionDescription(questionList[0].explain);
       setQuestionId(questionList[0].id);
       setPageQuestion(questionList[0].id);
       setDayName(dayNames[0]);
@@ -63,24 +65,24 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   useEffect(() => {
     if (questionId) {
       axios({
-        method: 'get',
+        method: "get",
         url: `api/postlist-question/${questionId}/10`,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
         .then((response) => {
           setContent(response.data);
           return response.data;
         })
-        .then((data) => (data[0] ? setCardLId(data[0].id) : ''))
+        .then((data) => (data[0] ? setCardLId(data[0].id) : ""))
         .then(() => setIdx(0))
         .catch((error) => {
           if (error.response.status === 404) {
             // !! 글 없음 표시하기
             setNoContent(true);
           } else {
-            setPlaceholder('Something went wrong!');
+            setPlaceholder("Something went wrong!");
           }
         });
     }
@@ -101,7 +103,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
           track_album_cover={c.track_album_cover}
           handleCardOpen={switchCardL}
           open={cardLId === c.id}
-        />,
+        />
       );
     }
     setTodayQCards([...arr]);
@@ -151,13 +153,13 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
   // CardL switch when CardS clicked
   const switchCardL = (id) => {
     setCardLId(id);
-    width < 1280 ? scrollToRef(cardContainer) : '';
+    width < 1280 ? scrollToRef(cardContainer) : "";
   };
 
   const scrollWithOffset = (ele) => {
     const yCoordinate = ele.getBoundingClientRect().top + window.pageYOffset;
     const yOffset = -140;
-    window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+    window.scrollTo({ top: yCoordinate + yOffset, behavior: "smooth" });
   };
 
   return (
@@ -174,6 +176,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
 
           <S.TodayQuestion>
             <S.Question>{question}</S.Question>
+            <S.QuestionDescription>{questionDescription}</S.QuestionDescription>
             <S.AnswerButton
               smooth
               to="/#create"
@@ -185,7 +188,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
           </S.TodayQuestion>
         </S.QuestionArea>
       ) : (
-        ''
+        ""
       )}
 
       <S.TodayLeftContainer ref={cardContainer}>
@@ -207,7 +210,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
       </S.TodayLeftContainer>
       <S.TodayRightContainer>
         {width < 1280 ? (
-          ''
+          ""
         ) : (
           <S.QuestionArea>
             <S.ShuffleButton onClick={randomQuestion}>
@@ -217,6 +220,9 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
             <S.TodayQuestion>
               <S.QDate>{dayName}의 질문</S.QDate>
               <S.Question>{question}</S.Question>
+              <S.QuestionDescription>
+                {questionDescription}
+              </S.QuestionDescription>
               <S.AnswerButton smooth to="/#create">
                 <i className="fa fa-pen" />
                 질문에 답하기
@@ -234,7 +240,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
                 {todayQCards[contentIdx]}
                 {contentIdx + 1 < todayQCards.length
                   ? todayQCards[contentIdx + 1]
-                  : ''}
+                  : ""}
               </S.PostCardSWrapper>
               <S.LoadMoreButtonContainer onClick={() => handleTodayQCard(1)}>
                 <i className="fas fa-chevron-right" />
@@ -243,7 +249,7 @@ const TodayQuestion = ({ currUser, token, userId, setPageQuestion, width }) => {
             <S.IndicatorWrapper>{indicators}</S.IndicatorWrapper>
           </S.PostCardSArea>
         ) : (
-          ''
+          ""
         )}
       </S.TodayRightContainer>
     </>
