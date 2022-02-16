@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { CardShadow, CustomLink } from '../../styles/globalStyles';
-import * as colors from '../../styles/Colors';
+import styled from "styled-components";
+import { CardShadow, CustomLink } from "../../styles/globalStyles";
+import * as colors from "../../styles/Colors";
 
 export const TodayLeftContainer = styled.div`
   width: 50%;
@@ -54,6 +54,7 @@ export const TodayQuestion = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 5%;
+    gap: 10px;
   }
 `;
 
@@ -65,6 +66,14 @@ export const Question = styled.h2`
   font-size: 3rem;
   @media screen and (max-width: 1279px) {
     font-size: 2rem;
+  }
+`;
+
+export const QuestionDescription = styled.p`
+  font-size: 1.5rem;
+  @media screen and (max-width: 1279px) {
+    font-size: 1rem;
+    text-align: center;
   }
 `;
 
