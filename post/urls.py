@@ -6,6 +6,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register('api/post', PostViewSet)
 router.register('api/question', QuestionViewSet)
+router.register('api/post-page', PagePostViewSet)
 
 urlpatterns = [
     url('', include(router.urls)),
