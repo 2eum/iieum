@@ -18,7 +18,7 @@ from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from django.db.models import Q
-from .pagination import PostPageNumberPagination
+from .pagination import PostPageNumberPagination, QuestionPageNumberPagination
 
 # 전체 글
 class PostViewSet(viewsets.ModelViewSet): 
@@ -357,9 +357,18 @@ class Search(APIView):
         else:
             raise Http404("No search result")
 
+# 전체 post 10개씩 페이지네이션(개수 수정은 pagination.py에서)
 class PagePostViewSet(viewsets.ModelViewSet): 
     authentication_classes = [JSONWebTokenAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     queryset = Post.objects.all().order_by('-pub_date')
     serializer_class = PostSerializer
     pagination_class = PostPageNumberPagination
+
+# 전체 질문 9개씩 페이지네이션(개수 수정은 pagination.py에서)
+class QuestionViewSet(viewsets.ModelViewSet): 
+    authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = (IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly)
+    queryset = Question.objects.all() 
+    serializer_class = QuestionSerializer
+    pagination_class = QuestionPageNumberPagination
