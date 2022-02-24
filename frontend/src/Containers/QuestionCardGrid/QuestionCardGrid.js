@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import * as S from './QuestionCardGrid.elements';
-import { QuestionOpened, QuestionCard } from '../../Components';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import * as S from "./QuestionCardGrid.elements";
+import { QuestionOpened, QuestionCard } from "../../Components";
+import axios from "axios";
+import InfiniteScroll from "react-infinite-scroller";
 
-const QuestionCardGrid = ({ currUser, token, userId, list, width }) => {
+const QuestionCardGrid = ({
+  currUser,
+  token,
+  userId,
+  list,
+  width,
+  isExplore,
+}) => {
   const [content, setContent] = useState();
   const [openCard, setOpenCard] = useState(-1);
   const [isOpened, setIsOpened] = useState(false);
-  const today = new Date();
-  const formattedToday = `${today.getFullYear()}-${
-    today.getMonth() + 1
-  }-${today.getDate()}`;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
     setContent();
@@ -19,26 +25,37 @@ const QuestionCardGrid = ({ currUser, token, userId, list, width }) => {
     }
   }, [list]);
 
-  useEffect(() => {
+  const getNextQuestionPage = () => {
+    if (!isExplore) {
+      setIsLastPage(true);
+    }
     if (!list) {
       axios({
-        method: 'get',
-        url: `api/questionlist/2021-12-22/${formattedToday}/9`,
+        method: "get",
+        url: `api/question-page/?page=${currentPage}`,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
         .then((response) => {
           if (response.status > 400) {
-            setPlaceholder('Something went wrong!');
+            setPlaceholder("Something went wrong!");
           }
           return response.data;
         })
         .then((data) => {
-          setContent(data);
+          const current = content ? [...content] : [];
+          setContent([...current, ...data.results]);
+          return data;
+        })
+        .then((data) => {
+          if (!data.next) {
+            setIsLastPage(true);
+          }
+          setCurrentPage(currentPage + 1);
         });
     }
-  }, []);
+  };
 
   const handleClick = (clickedCard) => {
     if (clickedCard === openCard) {
@@ -78,7 +95,21 @@ const QuestionCardGrid = ({ currUser, token, userId, list, width }) => {
       })
     : [];
 
-  return <S.QuestionGridContainer>{QuestionCardList}</S.QuestionGridContainer>;
+  return (
+    <InfiniteScroll
+      pageStart={0}
+      loadMore={getNextQuestionPage}
+      hasMore={!isLastPage}
+      loader={
+        <div className="loader" key={0}>
+          Loading ...
+        </div>
+      }
+      threshold={30}
+    >
+      <S.QuestionGridContainer>{QuestionCardList}</S.QuestionGridContainer>
+    </InfiniteScroll>
+  );
 };
 
 export default QuestionCardGrid;

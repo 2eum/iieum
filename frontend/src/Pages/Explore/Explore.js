@@ -1,6 +1,6 @@
-import React from 'react';
-import { QuestionCardGrid } from '../../Containers';
-import * as S from './Explore.elements';
+import React from "react";
+import { QuestionCardGrid } from "../../Containers";
+import * as S from "./Explore.elements";
 
 const Explore = ({ currUser, token, userId, width }) => {
   return (
@@ -12,6 +12,7 @@ const Explore = ({ currUser, token, userId, width }) => {
           token={token}
           userId={userId}
           width={width}
+          isExplore={true}
         />
       </S.QuestionListWrapper>
     </>
