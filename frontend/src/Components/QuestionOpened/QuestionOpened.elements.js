@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { CustomLink } from '../../styles/globalStyles';
+import styled from "styled-components";
+import { CustomLink } from "../../styles/globalStyles";
 
 export const OpenedContainer = styled.div`
   width: 90vw;
-  height: ${(p) => (p.open ? 'max-content' : 0)};
+  height: ${(p) => (p.open ? "max-content" : 0)};
   opacity: ${(p) => (p.open ? 1 : 0)};
   display: ${(p) => (p.open ? `flex` : `none`)};
   /* position: relative; */
@@ -14,7 +14,7 @@ export const OpenedContainer = styled.div`
 
   ${(p) =>
     p.gridNum === 0
-      ? ''
+      ? ""
       : p.gridNum === 1
       ? `transform: translateX(-30.5vw);`
       : `transform: translateX(-61vw);`}
@@ -23,7 +23,7 @@ export const OpenedContainer = styled.div`
     width: 60vw;
     ${(p) =>
       p.gridNum === 0
-        ? ''
+        ? ""
         : p.gridNum === 1
         ? `transform: translateX(-20.5vw);`
         : `transform: translateX(-41vw);`}
@@ -33,8 +33,8 @@ export const OpenedContainer = styled.div`
     width: 200%;
     ${(p) =>
       p.gridNum === 0
-        ? 'transform: translateX(0%);'
-        : 'transform: translateX(-50%);'}
+        ? "transform: translateX(0%);"
+        : "transform: translateX(-50%);"}
   }
 `;
 
@@ -64,7 +64,8 @@ export const CreateButtonContainer = styled.div`
 
 export const CreateButtonWrapper = styled.div`
   width: 15%;
-  margin: 2%;
+  /* margin: 2%; */
+  height: 5rem;
 
   @media screen and (max-width: 1279px) {
     width: 100%;
@@ -77,5 +78,6 @@ export const CardListContainer = styled.div`
 `;
 
 export const AnswerButton = styled(CustomLink)`
-  margin: 3% auto;
+  /* margin: 3% auto; */
+  position: absolute;
 `;
