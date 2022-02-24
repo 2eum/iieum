@@ -6,6 +6,8 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register('api/post', PostViewSet)
 router.register('api/question', QuestionViewSet)
+router.register('api/post-page', PagePostViewSet) # 전체 포스트 페이지네이션(size=10)
+router.register('api/question-page', QuestionViewSet) # 전체 질문 페이지네이션(size=9)
 
 urlpatterns = [
     url('', include(router.urls)),
